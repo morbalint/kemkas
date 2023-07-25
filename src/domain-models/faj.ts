@@ -22,32 +22,6 @@ export enum Faj {
     Torpe = 'f_torpe',
 }
 
-export enum Osztaly {
-    Harcos = 'o_harcos',
-    Ijjasz = 'o_ijjasz',
-    Amazon = 'o_amazon',
-    Kaloz = 'o_kaloz',
-    Barbar = 'o_barbar',
-    Pap = 'o_pap',
-    Tolvaj = 'o_tolvaj',
-    Varazslo = 'o_varazslo',
-    Illuzionista = 'o_illuzionista',
-}
-
-export function OsztalyLabel(osztaly: Osztaly) : string {
-    switch (osztaly) {
-        case Osztaly.Amazon: return 'Amazon';
-        case Osztaly.Barbar: return 'Barbár';
-        case Osztaly.Pap: return 'Pap';
-        case Osztaly.Illuzionista: return 'Illúzionista';
-        case Osztaly.Varazslo: return 'Varázsló';
-        case Osztaly.Harcos: return 'Harcos';
-        case Osztaly.Ijjasz: return 'Íjjász';
-        case Osztaly.Kaloz: return 'Kalóz';
-        case Osztaly.Tolvaj: return 'Tolvaj'
-    }
-}
-
 export function FajLabel(faj: Faj) : string {
     switch (faj) {
         case Faj.Ember: return 'Ember';
@@ -145,4 +119,3 @@ export function FajSpecials(faj : Faj) : string[] {
     }
     return [];
 }
-
