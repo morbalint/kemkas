@@ -1,11 +1,4 @@
-export enum Tulajdonsag {
-    Ero = 't_ero',
-    Ugyesseg = 't_ugy',
-    Egeszseg = 't_egs',
-    Intelligencia = 't_int',
-    Bolcsesseg = 't_bol',
-    Karizma = 't_kar',
-}
+
 
 export enum Faj {
     Ember = 'f_ember',

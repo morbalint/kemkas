@@ -1,7 +1,8 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 import './CreateCharacter.css'
 import {useForm} from "react-hook-form";
-import {Faj, FajDescription, FajLabel, FajSpecials, Tulajdonsag} from "../domain-models/faj";
+import {Faj, FajDescription, FajLabel, FajSpecials} from "../domain-models/faj";
+import {RollAllAbilities, Tulajdonsag, TulajdonsagModositokFajokra} from "../domain-models/tulajdonsag";
 import {
     Osztaly,
     OsztalyDescription,
@@ -9,90 +10,13 @@ import {
     OsztalyProperties,
     OsztalySpecialSkills
 } from "../domain-models/osztaly"
-
-function getRandomInt(max: number) {
-    return Math.floor(Math.random() * max) + 1;
-}
-
-function rollAbility() {
-    let min = 6;
-    let sum = 0;
-    let rolls: number[] = []
-    for (let i = 0; i < 4; i++) {
-        const roll = getRandomInt(6);
-        if (roll < min) {
-            min = roll;
-        }
-        sum += roll;
-        rolls = [...rolls, roll]
-    }
-    const result = sum - min;
-    console.log("Rolled: " + rolls + " got: " + result)
-    return result;
-}
-
-const modifier = (val : number) => Math.floor(val / 3) - 3
-
-const fajiEroModosito = (faj: Faj) => [Faj.Felork, Faj.Osember, Faj.Eszaki].includes(faj) ? +1 : [Faj.Gnom, Faj.Felszerzet].includes(faj) ? -1 : 0
-
-const fajiUgyModosito = (faj: Faj) => [Faj.Elf, Faj.Felszerzet].includes(faj) ? +1 : 0
-
-const fajiEgsModosito = (faj: Faj) => [Faj.Etuniai, Faj.Osember, Faj.Felork, Faj.Torpe].includes(faj) ? +1 :
-    [Faj.Birodalmi, Faj.Elf].includes(faj) ? -1 : 0
-
-const fajiIntModosito = (faj: Faj) => [Faj.Gnom, Faj.Birodalmi].includes(faj) ? +1 :
-    [Faj.Osember].includes(faj) ? -1 : 0
-
-const fajiBolModosito = (faj: Faj) => [Faj.Osember, Faj.Eszaki, Faj.Etuniai].includes(faj) ? -1 : 0
-
-const fajiKarModosito = (faj: Faj) => [Faj.Torpe].includes(faj) ? -1 :
-    [Faj.Felork].includes(faj) ? -2 : 0
-
-function signedNumberToText(val: number) : string {
-    return val > 0 ? '+'+val : val.toString()
-}
-
-function fajiModositoText(faj: Faj, szamolas: (f: Faj) => number) : string {
-    const mod = szamolas(faj)
-    return (mod !== 0) ? signedNumberToText(mod) + ' (' + FajLabel(faj) + ')' : ''
-}
-
-function rollAllAbilities(setValue: (ability: string, value: number) => void) {
-    setValue(Tulajdonsag.Ero, rollAbility())
-    setValue(Tulajdonsag.Ugyesseg, rollAbility())
-    setValue(Tulajdonsag.Egeszseg, rollAbility())
-    setValue(Tulajdonsag.Intelligencia, rollAbility())
-    setValue(Tulajdonsag.Bolcsesseg, rollAbility())
-    setValue(Tulajdonsag.Karizma, rollAbility())
-}
+import TulajdonsagInput from "../components/TulajdonsagInput";
 
 const tulajdonsagDefaultOptions = {
     required: true,
     min: 3,
     max: 18,
 };
-
-function displayAbilityInput(tulajdonsag: string, currentFaj : () => Faj, fajiModosito: (faj: Faj) => number, register: () => any, getCurrentValue: () => number) : ReactNode {
-    return (<div className='row m-2'>
-        <label className='col-lg-1 col-sm-2 col-form-label'>{tulajdonsag}</label>
-        <div className='col-md-1 col-sm-2 m-2'>
-            <input className='form-control' defaultValue={10} type='number' {...register()} />
-        </div>
-        <span className='col-sm-2 m-2'>
-                            {fajiModositoText(currentFaj(), fajiModosito)}
-                        </span>
-        <span className='col-sm-2 m-2'>
-                            Összesen: { (getCurrentValue() + (fajiModosito(currentFaj()))).toString() }
-                        </span>
-        <span className='col-sm-2 m-2'>
-                            Módosító: { signedNumberToText(modifier(getCurrentValue() + fajiModosito(currentFaj()))) }
-                        </span>
-        {getCurrentValue() < 3 && (
-            <span className='form-field-error'>Túl gyenge vagy, nem bírtad felemelni a kezed a jelentkezéshez!</span>)}
-        {getCurrentValue() > 18 && (
-            <span className='form-field-error'>Szét szakadtak az izmaid!</span>)}
-    </div>)
-}
 
 function CreateCharacterPage() {
     const {
@@ -162,52 +86,52 @@ function CreateCharacterPage() {
                         <h5 className='col-lg-2 col-sm-4 align-self-center'>Tulajdonságok</h5>
                         <div className='col-sm-2 m-2'>
                             <button className='btn btn-dark' type='button'
-                                    onClick={() => rollAllAbilities(setValue)}>Dobás
+                                    onClick={() => RollAllAbilities(setValue)}>Dobás
                             </button>
                         </div>
                     </div>
-                    {displayAbilityInput(
-                        'Erő',
-                        currentFaj,
-                        fajiEroModosito,
-                        () => register(Tulajdonsag.Ero, tulajdonsagDefaultOptions),
-                        () => Number(watch(Tulajdonsag.Ero, 10))
-                    )}
-                    {displayAbilityInput(
-                        'Ügyesség',
-                        currentFaj,
-                        fajiUgyModosito,
-                        () => register(Tulajdonsag.Ugyesseg, tulajdonsagDefaultOptions),
-                        () => Number(watch(Tulajdonsag.Ugyesseg, 10))
-                    )}
-                    {displayAbilityInput(
-                        'Egészség',
-                        currentFaj,
-                        fajiEgsModosito,
-                        () => register(Tulajdonsag.Egeszseg, tulajdonsagDefaultOptions),
-                        () => Number(watch(Tulajdonsag.Egeszseg, 10))
-                    )}
-                    {displayAbilityInput(
-                        'Intelligencia',
-                        currentFaj,
-                        fajiIntModosito,
-                        () => register(Tulajdonsag.Intelligencia, tulajdonsagDefaultOptions),
-                        () => Number(watch(Tulajdonsag.Intelligencia, 10))
-                    )}
-                    {displayAbilityInput(
-                        'Bölcsesség',
-                        currentFaj,
-                        fajiBolModosito,
-                        () => register(Tulajdonsag.Bolcsesseg, tulajdonsagDefaultOptions),
-                        () => Number(watch(Tulajdonsag.Bolcsesseg, 10))
-                    )}
-                    {displayAbilityInput(
-                        'Karizma',
-                        currentFaj,
-                        fajiKarModosito,
-                        () => register(Tulajdonsag.Karizma, tulajdonsagDefaultOptions),
-                        () => Number(watch(Tulajdonsag.Karizma, 10))
-                    )}
+                    <TulajdonsagInput
+                        tulajdonsag='Erő'
+                        getCurrentValue={() => Number(watch(Tulajdonsag.Ero, 10))}
+                        currentFaj={currentFaj}
+                        fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag.Ero)}
+                        register={() => register(Tulajdonsag.Ero, tulajdonsagDefaultOptions)}
+                    />
+                    <TulajdonsagInput
+                        tulajdonsag='Ügyesség'
+                        getCurrentValue={() => Number(watch(Tulajdonsag.Ugyesseg, 10))}
+                        currentFaj={currentFaj}
+                        fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag.Ugyesseg)}
+                        register={() => register(Tulajdonsag.Ugyesseg, tulajdonsagDefaultOptions)}
+                    />
+                    <TulajdonsagInput
+                        tulajdonsag='Egészség'
+                        getCurrentValue={() => Number(watch(Tulajdonsag.Egeszseg, 10))}
+                        currentFaj={currentFaj}
+                        fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag.Egeszseg)}
+                        register={() => register(Tulajdonsag.Egeszseg, tulajdonsagDefaultOptions)}
+                    />
+                    <TulajdonsagInput
+                        tulajdonsag='Intelligencia'
+                        getCurrentValue={() => Number(watch(Tulajdonsag.Intelligencia, 10))}
+                        currentFaj={currentFaj}
+                        fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag.Intelligencia)}
+                        register={() => register(Tulajdonsag.Intelligencia, tulajdonsagDefaultOptions)}
+                    />
+                    <TulajdonsagInput
+                        tulajdonsag='Bölcsesség'
+                        getCurrentValue={() => Number(watch(Tulajdonsag.Bolcsesseg, 10))}
+                        currentFaj={currentFaj}
+                        fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag.Bolcsesseg)}
+                        register={() => register(Tulajdonsag.Bolcsesseg, tulajdonsagDefaultOptions)}
+                    />
+                    <TulajdonsagInput
+                        tulajdonsag='Karizma'
+                        getCurrentValue={() => Number(watch(Tulajdonsag.Karizma, 10))}
+                        currentFaj={currentFaj}
+                        fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag.Karizma)}
+                        register={() => register(Tulajdonsag.Karizma, tulajdonsagDefaultOptions)}
+                    />
                     <hr />
                     <div className='row'>
                         <h5 className='col-lg-2 col-sm-4 align-self-center'>Tanult</h5>
@@ -216,20 +140,19 @@ function CreateCharacterPage() {
                         <label className='col-lg-1 col-sm-2 col-form-label'>Osztály</label>
                         <select className="col form-select" defaultValue={Osztaly.Harcos} {...register('osztaly', {required: true})}>
                             <optgroup label='Harcos'>
-                                <option key={Osztaly.Harcos} value={Osztaly.Harcos}>{OsztalyLabel(Osztaly.Harcos)}</option>
+                                <option value={Osztaly.Harcos}>{OsztalyLabel(Osztaly.Harcos)}</option>
                                 {currentFaj() === Faj.Amazon && (
-                                    <option key={Osztaly.Amazon}  value={Osztaly.Amazon}>{OsztalyLabel(Osztaly.Amazon)}</option>) }
-                                <option key={Osztaly.Barbar} value={Osztaly.Barbar}>{OsztalyLabel(Osztaly.Barbar)}</option>
-                                <option key={Osztaly.Ijasz} value={Osztaly.Ijasz}>{OsztalyLabel(Osztaly.Ijasz)}</option>
-                                <option key={Osztaly.Kaloz} value={Osztaly.Kaloz}>{OsztalyLabel(Osztaly.Kaloz)}</option>
+                                    <option value={Osztaly.Amazon}>{OsztalyLabel(Osztaly.Amazon)}</option>) }
+                                <option value={Osztaly.Barbar}>{OsztalyLabel(Osztaly.Barbar)}</option>
+                                <option value={Osztaly.Ijasz}>{OsztalyLabel(Osztaly.Ijasz)}</option>
+                                <option value={Osztaly.Kaloz}>{OsztalyLabel(Osztaly.Kaloz)}</option>
                             </optgroup>
-                            <option key={Osztaly.Pap} value={Osztaly.Pap}>{OsztalyLabel(Osztaly.Pap)}</option>
-                            {currentFaj() !== Faj.Amazon && (<option key={Osztaly.Tolvaj}
-                                                                     value={Osztaly.Tolvaj}>{OsztalyLabel(Osztaly.Tolvaj)}</option>)}
+                            <option value={Osztaly.Pap}>{OsztalyLabel(Osztaly.Pap)}</option>
+                            {currentFaj() !== Faj.Amazon && (<option value={Osztaly.Tolvaj}>{OsztalyLabel(Osztaly.Tolvaj)}</option>)}
                             {![Faj.Osember, Faj.Amazon].includes(currentFaj()) && (
                                 <optgroup label='Varázsló'>
-                                    <option key={Osztaly.Varazslo} value={Osztaly.Varazslo}>{OsztalyLabel(Osztaly.Varazslo)}</option>
-                                    <option key={Osztaly.Illuzionista} value={Osztaly.Illuzionista}>{OsztalyLabel(Osztaly.Illuzionista)}</option>
+                                    <option value={Osztaly.Varazslo}>{OsztalyLabel(Osztaly.Varazslo)}</option>
+                                    <option value={Osztaly.Illuzionista}>{OsztalyLabel(Osztaly.Illuzionista)}</option>
                                 </optgroup>
                             )}
                         </select>
@@ -268,8 +191,8 @@ function CreateCharacterPage() {
                         </div>
                     </div>
 
-                    <div>
-                        <button className='btn btn-danger' type='submit'>Létrehozás</button>
+                    <div className='d-grid gap-2'>
+                        <button className='btn btn-danger btn-lg' type='submit'>Létrehozás</button>
                     </div>
                 </form>
             </div>
