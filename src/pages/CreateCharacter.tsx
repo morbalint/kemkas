@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import './CreateCharacter.css'
 import {useForm} from "react-hook-form";
-import {Faj, FajDescription, FajLabel, FajSpecials} from "../domain-models/faj";
+import {Faj, FajDescription, FajLabel, FajSpecials, Tulajdonsag} from "../domain-models/faj";
 import {Osztaly, OsztalyDescription, OsztalyLabel, OsztalyProperties} from "../domain-models/osztaly"
 
 function getRandomInt(max: number) {
@@ -52,12 +52,40 @@ function fajiModositoText(faj: Faj, szamolas: (f: Faj) => number) : string {
 }
 
 function rollAllAbilities(setValue: (ability: string, value: number) => void) {
-    setValue('ero', rollAbility())
-    setValue('ugy', rollAbility())
-    setValue('egs', rollAbility())
-    setValue('int', rollAbility())
-    setValue('bol', rollAbility())
-    setValue('kar', rollAbility())
+    setValue(Tulajdonsag.Ero, rollAbility())
+    setValue(Tulajdonsag.Ugyesseg, rollAbility())
+    setValue(Tulajdonsag.Egeszseg, rollAbility())
+    setValue(Tulajdonsag.Intelligencia, rollAbility())
+    setValue(Tulajdonsag.Bolcsesseg, rollAbility())
+    setValue(Tulajdonsag.Karizma, rollAbility())
+}
+
+const tulajdonsagDefaultOptions = {
+    required: true,
+    min: 3,
+    max: 18,
+};
+
+function displayAbilityInput(tulajdonsag: string, currentFaj : () => Faj, fajiModosito: (faj: Faj) => number, register: () => any, getCurrentValue: () => number) : ReactNode {
+    return (<div className='row m-2'>
+        <label className='col-lg-1 col-sm-2 col-form-label'>{tulajdonsag}</label>
+        <div className='col-md-1 col-sm-2 m-2'>
+            <input className='form-control' defaultValue={10} type='number' {...register()} />
+        </div>
+        <span className='col-sm-2 m-2'>
+                            {fajiModositoText(currentFaj(), fajiModosito)}
+                        </span>
+        <span className='col-sm-2 m-2'>
+                            Összesen: { (getCurrentValue() + (fajiModosito(currentFaj()))).toString() }
+                        </span>
+        <span className='col-sm-2 m-2'>
+                            Módosító: { signedNumberToText(modifier(getCurrentValue() + fajiModosito(currentFaj()))) }
+                        </span>
+        {getCurrentValue() < 3 && (
+            <span className='form-field-error'>Túl gyenge vagy, nem bírtad felemelni a kezed a jelentkezéshez!</span>)}
+        {getCurrentValue() > 18 && (
+            <span className='form-field-error'>Szét szakadtak az izmaid!</span>)}
+    </div>)
 }
 
 function CreateCharacterPage() {
@@ -129,132 +157,48 @@ function CreateCharacterPage() {
                             </button>
                         </div>
                     </div>
-                    <div className='row m-2'>
-                        <label className='col-lg-1 col-sm-2'>Erő</label>
-                        <input className='col-md-1 col-sm-2 m-2' defaultValue={10} type='number' {...register('ero', {
-                            required: true,
-                            min: 3,
-                            max: 18,
-                        })} />
-                        <span className='col-sm-2 m-2'>
-                            {fajiModositoText(currentFaj(), fajiEroModosito)}
-                        </span>
-                        <span className='col-sm-2 m-2'>
-                            Összesen: { (Number((watch('ero') || 10)) + (fajiEroModosito(currentFaj()))).toString() }
-                        </span>
-                        <span className='col-sm-2 m-2'>
-                            Módosító: { signedNumberToText(modifier(Number((watch('ero') || 10)) + fajiEroModosito(currentFaj()))) }
-                        </span>
-                        {Number(watch('ero')) < 3 && (
-                            <span className='form-field-error'>Túl gyenge vagy, nem bírtad felemelni a kezed a jelentkezéshez!</span>)}
-                        {Number(watch('ero')) > 18 && (
-                            <span className='form-field-error'>Szét szakadtak az izmaid!</span>)}
-                    </div>
-                    <div className='row m-2'>
-                        <label className='col-lg-1 col-sm-2'>Ügyesség</label>
-                        <input className='col-sm-1 m-2' defaultValue={10} type='number' {...register('ugy', {
-                            required: true,
-                            min: 3,
-                            max: 18,
-                        })} />
-                        <span className='col-sm-2 m-2'>
-                            {fajiModositoText(currentFaj(), fajiUgyModosito)}
-                        </span>
-                        <span className='col-sm-2 m-2'>
-                            Összesen: { (Number((watch('ugy') || 10)) + (fajiUgyModosito(currentFaj()))).toString() }
-                        </span>
-                        <span className='col-sm-2 m-2'>
-                            Módosító: { signedNumberToText(modifier(Number((watch('ugy') || 10)) + fajiUgyModosito(currentFaj()))) }
-                        </span>
-                        {errors.ugy && Number(watch('ugy')) < 3 && (
-                            <span className='form-field-error'>Orrabuktál jelentkezés helyett!</span>)}
-                        {errors.ugy && Number(watch('ugy')) > 18 && (
-                            <span className='form-field-error'>Emberfeletti zsonglörködésedre záptojással válaszoltak a helyiek!</span>)}
-                    </div>
-                    <div className='row m-2'>
-                        <label className='col-lg-1 col-sm-2'>Egészség</label>
-                        <input className='col-sm-1 m-2' defaultValue={10} type='number' {...register('egs', {
-                            required: true,
-                            min: 3,
-                            max: 18
-                        })} />
-                        <span className='col-sm-2 m-2'>
-                            {fajiModositoText(currentFaj(), fajiEgsModosito)}
-                        </span>
-                        <span className='col-sm-2 m-2'>
-                            Összesen: { (Number((watch('egs') || 10)) + (fajiEgsModosito(currentFaj()))).toString() }
-                        </span>
-                        <span className='col-sm-2 m-2'>
-                            Módosító: { signedNumberToText(modifier(Number((watch('egs') || 10)) + fajiEgsModosito(currentFaj()))) }
-                        </span>
-                        {errors.egs && Number(watch('egs')) < 3 && (
-                            <span className='form-field-error'>Túl beteg vagy ahhoz, hogy kalandozni menj!</span>)}
-                        {errors.egs && Number(watch('egs')) > 18 && (
-                            <span className='form-field-error'>Kicsattanó egészségedet csak a diambroid állíthatja meg, minő véletlen, hogy pont az arcodba robbant...</span>)}
-                    </div>
-                    <div className='row m-2'>
-                        <label className='col-lg-1 col-sm-2'>Intelligencia</label>
-                        <input className='col-sm-1 m-2' defaultValue={10} type='number' {...register('int', {
-                            required: true,
-                            min: 3,
-                            max: 18
-                        })} />
-                        <span className='col-sm-2 m-2'>
-                            {fajiModositoText(currentFaj(), fajiIntModosito)}
-                        </span>
-                        <span className='col-sm-2 m-2'>
-                            Összesen: { (Number((watch('int') || 10)) + (fajiIntModosito(currentFaj()))).toString() }
-                        </span>
-                        <span className='col-sm-2 m-2'>
-                            Módosító: { signedNumberToText(modifier(Number((watch('int') || 10)) + fajiIntModosito(currentFaj()))) }
-                        </span>
-                        {errors.int && Number(watch('int')) < 3 && (
-                                <span className='form-field-error'>Elfelejtetted, hogy mikor is kéne kalandozni indulni!</span>)}
-                        {errors.int && Number(watch('int')) > 18 && (
-                            <span className='form-field-error'>Ilyen tudás és logika birtokában mi szükséged van új információkra? Mindent le tudsz vezetni a már meglévő ismereteidből, és ezt azonnal beláttad.</span>)}
-                    </div>
-                    <div className='row m-2'>
-                        <label className='col-lg-1 col-sm-2'>Bölcsesség</label>
-                        <input className='col-sm-1 m-2' defaultValue={10} type='number' {...register('bol', {
-                            required: true,
-                            min: 3,
-                            max: 18
-                        })} />
-                        <span className='col-sm-2 m-2'>
-                            {fajiModositoText(currentFaj(), fajiBolModosito)}
-                        </span>
-                        <span className='col-sm-2 m-2'>
-                            Összesen: { (Number((watch('bol') || 10)) + (fajiBolModosito(currentFaj()))).toString() }
-                        </span>
-                        <span className='col-sm-2 m-2'>
-                            Módosító: { signedNumberToText(modifier(Number((watch('bol') || 10)) + fajiBolModosito(currentFaj()))) }
-                        </span>
-                        {errors.bol && Number(watch('bol')) < 3 && (
-                            <span className='form-field-error'>Nem bírtál ellenállni a kíváncsiságodnak, hogy közelebbről is megvizsgáld a tőr hegyét, nagyon közelről...</span>)}
-                        {errors.bol && Number(watch('bol')) > 18 && (
-                            <span className='form-field-error'>Hatalmas bölcsességedben beláttad a kalandozás veszélyeit és inkább más tevékenységbe fogtál.</span>)}
-                    </div>
-                    <div className='row m-2'>
-                        <label className='col-lg-1 col-sm-2'>Karizma</label>
-                        <input className='col-sm-1 m-2' defaultValue={10} type='number' {...register('kar', {
-                            required: true,
-                            min: 3,
-                            max: 18,
-                        })} />
-                        <span className='col-sm-2 m-2'>
-                            {fajiModositoText(currentFaj(), fajiKarModosito)}
-                        </span>
-                        <span className='col-sm-2 m-2'>
-                            Összesen: { (Number((watch('kar') || 10)) + (fajiKarModosito(currentFaj()))).toString() }
-                        </span>
-                        <span className='col-sm-2 m-2'>
-                            Módosító: { signedNumberToText(modifier(Number((watch('kar') || 10)) + fajiKarModosito(currentFaj()))) }
-                        </span>
-                        {errors.kar && Number(watch('kar')) < 3 && (
-                            <span className='form-field-error'>Mintha taszítanád az embereket, sose sikerült kalandozó csapatot találnod.</span>)}
-                        {errors.kar && Number(watch('kar')) > 18 && (
-                            <span className='form-field-error'>Az ellenkező nem tagjai nem engedték, hogy útnak indulj.</span>)}
-                    </div>
+                    {displayAbilityInput(
+                        'Erő',
+                        currentFaj,
+                        fajiEroModosito,
+                        () => register(Tulajdonsag.Ero, tulajdonsagDefaultOptions),
+                        () => Number(watch(Tulajdonsag.Ero, 10))
+                    )}
+                    {displayAbilityInput(
+                        'Ügyesség',
+                        currentFaj,
+                        fajiUgyModosito,
+                        () => register(Tulajdonsag.Ugyesseg, tulajdonsagDefaultOptions),
+                        () => Number(watch(Tulajdonsag.Ugyesseg, 10))
+                    )}
+                    {displayAbilityInput(
+                        'Egészség',
+                        currentFaj,
+                        fajiEgsModosito,
+                        () => register(Tulajdonsag.Egeszseg, tulajdonsagDefaultOptions),
+                        () => Number(watch(Tulajdonsag.Egeszseg, 10))
+                    )}
+                    {displayAbilityInput(
+                        'Intelligencia',
+                        currentFaj,
+                        fajiIntModosito,
+                        () => register(Tulajdonsag.Intelligencia, tulajdonsagDefaultOptions),
+                        () => Number(watch(Tulajdonsag.Intelligencia, 10))
+                    )}
+                    {displayAbilityInput(
+                        'Bölcsesség',
+                        currentFaj,
+                        fajiBolModosito,
+                        () => register(Tulajdonsag.Bolcsesseg, tulajdonsagDefaultOptions),
+                        () => Number(watch(Tulajdonsag.Bolcsesseg, 10))
+                    )}
+                    {displayAbilityInput(
+                        'Karizma',
+                        currentFaj,
+                        fajiKarModosito,
+                        () => register(Tulajdonsag.Karizma, tulajdonsagDefaultOptions),
+                        () => Number(watch(Tulajdonsag.Karizma, 10))
+                    )}
                     <hr />
                     <div className='row m-2'>
                         <label className='col-lg-1 col-sm-2 col-form-label'>Osztály</label>
