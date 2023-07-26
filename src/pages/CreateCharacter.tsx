@@ -2,7 +2,6 @@ import React from 'react';
 import './CreateCharacter.css'
 import {useForm} from "react-hook-form";
 import {Faj, FajDescription, FajLabel, FajSpecials} from "../domain-models/faj";
-import {RollAllAbilities, Tulajdonsag, TulajdonsagModositokFajokra} from "../domain-models/tulajdonsag";
 import {
     Osztaly,
     OsztalyDescription,
@@ -10,13 +9,8 @@ import {
     OsztalyProperties,
     OsztalySpecialSkills
 } from "../domain-models/osztaly"
-import TulajdonsagInput from "../components/TulajdonsagInput";
-
-const tulajdonsagDefaultOptions = {
-    required: true,
-    min: 3,
-    max: 18,
-};
+import FajSelector from "../components/FajSelector";
+import Tulajdonsagok from "../components/Tulajdonsagok";
 
 function CreateCharacterPage() {
     const {
@@ -48,28 +42,7 @@ function CreateCharacterPage() {
                                defaultValue='Névtelen Kalandozó' {...register('nev', {required: true})} />
                         {errors.nev && <span className='form-field-error'>A karaktered nem mászkálhat névtelenül a világban!</span>}
                     </div>
-                    <div className='row m-2'>
-                        <label className='col-lg-1 col-sm-2 col-form-label'>Faj</label>
-                            <select className='col form-select' defaultValue={Faj.Ember} {...register('faj', {required: true})}>
-                                <option key={Faj.Ember} value={Faj.Ember}>{FajLabel(Faj.Ember)}</option>
-                                <optgroup label='más emberi népek'>
-                                    <option key={Faj.Amazon} value={Faj.Amazon}>{FajLabel(Faj.Amazon)}</option>
-                                    <option key={Faj.Birodalmi} value={Faj.Birodalmi}>{FajLabel(Faj.Birodalmi)}</option>
-                                    <option key={Faj.Eszaki} value={Faj.Eszaki}>{FajLabel(Faj.Eszaki)}</option>
-                                    <option key={Faj.Etuniai} value={Faj.Etuniai}>{FajLabel(Faj.Etuniai)}</option>
-                                    <option key={Faj.Osember} value={Faj.Osember}>{FajLabel(Faj.Osember)}</option>
-                                </optgroup>
-                                <optgroup label='nem emberi fajok'>
-                                    <option key={Faj.Elf} value={Faj.Elf}>{FajLabel(Faj.Elf)}</option>
-                                    <option key={Faj.Felelf} value={Faj.Felelf}>{FajLabel(Faj.Felelf)}</option>
-                                    <option key={Faj.Felork} value={Faj.Felork}>{FajLabel(Faj.Felork)}</option>
-                                    <option key={Faj.Felszerzet}
-                                            value={Faj.Felszerzet}>{FajLabel(Faj.Felszerzet)}</option>
-                                    <option key={Faj.Gnom} value={Faj.Gnom}>{FajLabel(Faj.Gnom)}</option>
-                                    <option key={Faj.Torpe} value={Faj.Torpe}>{FajLabel(Faj.Torpe)}</option>
-                                </optgroup>
-                            </select>
-                    </div>
+                    <FajSelector register={() => register('faj', {required: true})} />
                     <div className='row m-2'>
                         <label className='col-lg-1 col-sm-2 form-label'></label>
                         <div className='col'>
@@ -82,56 +55,7 @@ function CreateCharacterPage() {
                         </div>
                     </div>
                     <hr/>
-                    <div className='row'>
-                        <h5 className='col-lg-2 col-sm-4 align-self-center'>Tulajdonságok</h5>
-                        <div className='col-sm-2 m-2'>
-                            <button className='btn btn-dark' type='button'
-                                    onClick={() => RollAllAbilities(setValue)}>Dobás
-                            </button>
-                        </div>
-                    </div>
-                    <TulajdonsagInput
-                        tulajdonsag='Erő'
-                        getCurrentValue={() => Number(watch(Tulajdonsag.Ero, 10))}
-                        currentFaj={currentFaj}
-                        fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag.Ero)}
-                        register={() => register(Tulajdonsag.Ero, tulajdonsagDefaultOptions)}
-                    />
-                    <TulajdonsagInput
-                        tulajdonsag='Ügyesség'
-                        getCurrentValue={() => Number(watch(Tulajdonsag.Ugyesseg, 10))}
-                        currentFaj={currentFaj}
-                        fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag.Ugyesseg)}
-                        register={() => register(Tulajdonsag.Ugyesseg, tulajdonsagDefaultOptions)}
-                    />
-                    <TulajdonsagInput
-                        tulajdonsag='Egészség'
-                        getCurrentValue={() => Number(watch(Tulajdonsag.Egeszseg, 10))}
-                        currentFaj={currentFaj}
-                        fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag.Egeszseg)}
-                        register={() => register(Tulajdonsag.Egeszseg, tulajdonsagDefaultOptions)}
-                    />
-                    <TulajdonsagInput
-                        tulajdonsag='Intelligencia'
-                        getCurrentValue={() => Number(watch(Tulajdonsag.Intelligencia, 10))}
-                        currentFaj={currentFaj}
-                        fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag.Intelligencia)}
-                        register={() => register(Tulajdonsag.Intelligencia, tulajdonsagDefaultOptions)}
-                    />
-                    <TulajdonsagInput
-                        tulajdonsag='Bölcsesség'
-                        getCurrentValue={() => Number(watch(Tulajdonsag.Bolcsesseg, 10))}
-                        currentFaj={currentFaj}
-                        fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag.Bolcsesseg)}
-                        register={() => register(Tulajdonsag.Bolcsesseg, tulajdonsagDefaultOptions)}
-                    />
-                    <TulajdonsagInput
-                        tulajdonsag='Karizma'
-                        getCurrentValue={() => Number(watch(Tulajdonsag.Karizma, 10))}
-                        currentFaj={currentFaj}
-                        fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag.Karizma)}
-                        register={() => register(Tulajdonsag.Karizma, tulajdonsagDefaultOptions)}
-                    />
+                    <Tulajdonsagok currentFaj={currentFaj} watch={watch} setValue={setValue} register={register} />
                     <hr />
                     <div className='row'>
                         <h5 className='col-lg-2 col-sm-4 align-self-center'>Tanult</h5>
