@@ -2,7 +2,13 @@ import React, {ReactNode} from 'react';
 import './CreateCharacter.css'
 import {useForm} from "react-hook-form";
 import {Faj, FajDescription, FajLabel, FajSpecials, Tulajdonsag} from "../domain-models/faj";
-import {Osztaly, OsztalyDescription, OsztalyLabel, OsztalyProperties} from "../domain-models/osztaly"
+import {
+    Osztaly,
+    OsztalyDescription,
+    OsztalyLabel,
+    OsztalyProperties,
+    OsztalySpecialSkills
+} from "../domain-models/osztaly"
 
 function getRandomInt(max: number) {
     return Math.floor(Math.random() * max) + 1;
@@ -109,6 +115,9 @@ function CreateCharacterPage() {
             </div>
             <div className='p-3'>
                 <form onSubmit={handleSubmit(sendForm)} className='col-12'>
+                    <div className='row'>
+                        <h5 className='col-lg-2 col-sm-4 align-self-center'>Származás</h5>
+                    </div>
                     <div className='row m-2'>
                         <label className='col-lg-1 col-sm-2 col-form-label' >Név</label>
                         <input className='col form-control'
@@ -117,8 +126,8 @@ function CreateCharacterPage() {
                     </div>
                     <div className='row m-2'>
                         <label className='col-lg-1 col-sm-2 col-form-label'>Faj</label>
-                            <select className='col form-select' {...register('faj', {required: true})}>
-                                <option key={Faj.Ember} selected={true} value={Faj.Ember}>{FajLabel(Faj.Ember)}</option>
+                            <select className='col form-select' defaultValue={Faj.Ember} {...register('faj', {required: true})}>
+                                <option key={Faj.Ember} value={Faj.Ember}>{FajLabel(Faj.Ember)}</option>
                                 <optgroup label='más emberi népek'>
                                     <option key={Faj.Amazon} value={Faj.Amazon}>{FajLabel(Faj.Amazon)}</option>
                                     <option key={Faj.Birodalmi} value={Faj.Birodalmi}>{FajLabel(Faj.Birodalmi)}</option>
@@ -144,13 +153,13 @@ function CreateCharacterPage() {
                                 {FajDescription(currentFaj())}
                             </p>
                             <ul>
-                                {FajSpecials(currentFaj()).map(((special) => (<li>{special}</li>)))}
+                                {FajSpecials(currentFaj()).map(((special, i) => (<li key={currentFaj()+i}>{special}</li>)))}
                             </ul>
                         </div>
                     </div>
                     <hr/>
                     <div className='row'>
-                        <h5 className='col-lg-2 col-sm-4 text-center align-self-center'>Tulajdonságok</h5>
+                        <h5 className='col-lg-2 col-sm-4 align-self-center'>Tulajdonságok</h5>
                         <div className='col-sm-2 m-2'>
                             <button className='btn btn-dark' type='button'
                                     onClick={() => rollAllAbilities(setValue)}>Dobás
@@ -200,15 +209,18 @@ function CreateCharacterPage() {
                         () => Number(watch(Tulajdonsag.Karizma, 10))
                     )}
                     <hr />
+                    <div className='row'>
+                        <h5 className='col-lg-2 col-sm-4 align-self-center'>Tanult</h5>
+                    </div>
                     <div className='row m-2'>
                         <label className='col-lg-1 col-sm-2 col-form-label'>Osztály</label>
                         <select className="col form-select" defaultValue={Osztaly.Harcos} {...register('osztaly', {required: true})}>
                             <optgroup label='Harcos'>
-                                <option key={Osztaly.Harcos} selected={true} value={Osztaly.Harcos}>{OsztalyLabel(Osztaly.Harcos)}</option>
+                                <option key={Osztaly.Harcos} value={Osztaly.Harcos}>{OsztalyLabel(Osztaly.Harcos)}</option>
                                 {currentFaj() === Faj.Amazon && (
                                     <option key={Osztaly.Amazon}  value={Osztaly.Amazon}>{OsztalyLabel(Osztaly.Amazon)}</option>) }
                                 <option key={Osztaly.Barbar} value={Osztaly.Barbar}>{OsztalyLabel(Osztaly.Barbar)}</option>
-                                <option key={Osztaly.Ijjasz} value={Osztaly.Ijjasz}>{OsztalyLabel(Osztaly.Ijjasz)}</option>
+                                <option key={Osztaly.Ijasz} value={Osztaly.Ijasz}>{OsztalyLabel(Osztaly.Ijasz)}</option>
                                 <option key={Osztaly.Kaloz} value={Osztaly.Kaloz}>{OsztalyLabel(Osztaly.Kaloz)}</option>
                             </optgroup>
                             <option key={Osztaly.Pap} value={Osztaly.Pap}>{OsztalyLabel(Osztaly.Pap)}</option>
@@ -229,8 +241,30 @@ function CreateCharacterPage() {
                                 {OsztalyDescription(currentOsztaly())}
                             </p>
                             <ul>
-                                {OsztalyProperties(currentOsztaly()).map(((special) => (<li>{special}</li>)))}
+                                {OsztalyProperties(currentOsztaly()).map(((special, i) => (<li key={currentOsztaly() + i}>{special}</li>)))}
                             </ul>
+                            <p className='d-inline-flex gap-1'>
+                            {OsztalySpecialSkills(currentOsztaly()).map(skill => (
+                                <button
+                                    key={'btn' + skill.Id}
+                                    className='btn btn-outline-dark'
+                                    type='button'
+                                    data-bs-toggle="collapse"
+                                    data-bs-target={"#collapse-"+skill.Id}
+                                    aria-expanded="false"
+                                    aria-controls="collapseExample"
+                                >
+                                    {skill.Name}
+                                </button>
+                            ))}
+                            </p>
+                            {OsztalySpecialSkills(currentOsztaly()).map(skill => (
+                                <div key={'collapse'+skill.Id} className="collapse" id={'collapse-' + skill.Id}>
+                                    <div className="card card-body">
+                                        {skill.Description}
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
