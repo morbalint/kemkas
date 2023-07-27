@@ -43,28 +43,45 @@ function OsztalySelector(props: {currentFaj: () => Faj, currentOsztaly: () => Os
                 <ul>
                     {OsztalyProperties(currentOsztaly()).map(((special, i) => (<li key={currentOsztaly() + i}>{special}</li>)))}
                 </ul>
-                <p className='d-inline-flex gap-1'>
-                    {OsztalySpecialSkills(currentOsztaly()).map(skill => (
-                        <button
-                            key={'btn' + skill.Id}
-                            className='btn btn-outline-dark'
-                            type='button'
-                            data-bs-toggle="collapse"
-                            data-bs-target={"#collapse-"+skill.Id}
-                            aria-expanded="false"
-                            aria-controls="collapseExample"
-                        >
-                            {skill.Name}
-                        </button>
-                    ))}
-                </p>
-                {OsztalySpecialSkills(currentOsztaly()).map(skill => (
-                    <div key={'collapse'+skill.Id} className="collapse" id={'collapse-' + skill.Id}>
-                        <div className="card card-body">
+                <div className='col'>
+                    {OsztalySpecialSkills(currentOsztaly()).map(skill =>
+                        <p key={skill.Id} >
+                            <strong className='d-inline'>
+                                {skill.Name}
+                            </strong>
+                            {' '}
                             {skill.Description}
-                        </div>
-                    </div>
-                ))}
+                            {skill.ExtendedDescription && (
+                                <ul>
+                                    {skill.ExtendedDescription.map((ext, i) =>
+                                        (<li key={skill.Id + '-' + i}>{ext}</li>))}
+                                </ul>
+                            )}
+                        </p>
+                    )}
+                </div>
+                {/*<p className='d-inline-flex gap-1'>*/}
+                {/*    {OsztalySpecialSkills(currentOsztaly()).map(skill => (*/}
+                {/*        <button*/}
+                {/*            key={'btn' + skill.Id}*/}
+                {/*            className='btn btn-outline-dark'*/}
+                {/*            type='button'*/}
+                {/*            data-bs-toggle="collapse"*/}
+                {/*            data-bs-target={"#collapse-"+skill.Id}*/}
+                {/*            aria-expanded="false"*/}
+                {/*            aria-controls="collapseExample"*/}
+                {/*        >*/}
+                {/*            {skill.Name}*/}
+                {/*        </button>*/}
+                {/*    ))}*/}
+                {/*</p>*/}
+                {/*{OsztalySpecialSkills(currentOsztaly()).map(skill => (*/}
+                {/*    <div key={'collapse'+skill.Id} className="collapse" id={'collapse-' + skill.Id}>*/}
+                {/*        <div className="card card-body">*/}
+                {/*            {skill.Description}*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*))}*/}
             </div>
         </div>
     </>
