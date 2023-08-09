@@ -14,7 +14,7 @@ function OsztalySelector(props: {currentFaj: () => Faj, currentOsztaly: () => Os
 
     return <>
         <div className='row m-2'>
-            <label className='col-lg-1 col-sm-2 col-form-label'>Osztály</label>
+            <label className='col-md-2 col-sm-3 col-form-label'>Osztály</label>
             <select className="col form-select" defaultValue={Osztaly.Harcos} {...register()}>
                 <optgroup label='Harcos'>
                     <option value={Osztaly.Harcos}>{OsztalyLabel(Osztaly.Harcos)}</option>
@@ -35,7 +35,7 @@ function OsztalySelector(props: {currentFaj: () => Faj, currentOsztaly: () => Os
             </select>
         </div>
         <div className='row m-2'>
-            <label className='col-lg-1 col-sm-2 form-label'></label>
+            <label className='col-md-2 col-sm-3 form-label'></label>
             <div className='col' >
                 <p className='row pt-2'>
                     {OsztalyDescription(currentOsztaly())}

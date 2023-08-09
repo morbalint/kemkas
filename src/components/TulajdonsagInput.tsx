@@ -32,8 +32,8 @@ function TulajdonsagInput(props: {
     } = props;
     return (<div className='row m-2'>
         <label className='col-lg-1 col-sm-2 col-form-label'>{tulajdonsag}</label>
-        <div className='col-md-1 col-sm-2 m-2'>
-            <input className='form-control' defaultValue={10} type='number' {...register()} />
+        <div className='col-lg-1 col-sm-2 m-2'>
+            <input className='form-control' maxLength={2} defaultValue={10} type='number' {...register()} />
         </div>
         <span className='col-sm-2 m-2'>
                             {fajiModositoText(currentFaj(), fajiModosito)}

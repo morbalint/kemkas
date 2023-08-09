@@ -6,7 +6,7 @@ function FajSelector(props: { register: () => UseFormRegisterReturn, currentFaj:
     const {register, currentFaj} = props
     return <>
         <div className='row m-2'>
-            <label className='col-lg-1 col-sm-2 col-form-label'>Faj</label>
+            <label className='col-md-2 col-sm-3 col-form-label'>Faj</label>
             <select className='col form-select' defaultValue={Faj.Ember} {...register()}>
                 <option key={Faj.Ember} value={Faj.Ember}>{FajLabel(Faj.Ember)}</option>
                 <optgroup label='más emberi népek'>
@@ -28,7 +28,7 @@ function FajSelector(props: { register: () => UseFormRegisterReturn, currentFaj:
             </select>
         </div>
         <div className='row m-2'>
-            <label className='col-lg-1 col-sm-2 form-label'></label>
+            <label className='col-md-2 col-sm-3 form-label'></label>
             <div className='col'>
                 <p className='row pt-2'>
                     {FajDescription(currentFaj())}

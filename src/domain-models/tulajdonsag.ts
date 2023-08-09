@@ -10,6 +10,16 @@ export enum Tulajdonsag {
     Karizma = 't_kar',
 }
 
+export function TulajdonsagLabel(tul: Tulajdonsag) : string {
+    switch (tul) {
+        case Tulajdonsag.Bolcsesseg: return 'Bölcsesség';
+        case Tulajdonsag.Ero: return 'Erő';
+        case Tulajdonsag.Ugyesseg: return 'Ügyesség';
+        case Tulajdonsag.Egeszseg: return 'Egészség';
+        case Tulajdonsag.Intelligencia: return 'Intelligencia';
+        case Tulajdonsag.Karizma: return 'Karizma';
+    }
+}
 
 function rollAbility() {
     let min = 6;
