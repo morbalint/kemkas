@@ -10,6 +10,8 @@ export enum Tulajdonsag {
     Karizma = 't_kar',
 }
 
+export type KarakterTulajdonsagok = Record<Tulajdonsag, number>
+
 export function TulajdonsagLabel(tul: Tulajdonsag) : string {
     switch (tul) {
         case Tulajdonsag.Bolcsesseg: return 'Bölcsesség';

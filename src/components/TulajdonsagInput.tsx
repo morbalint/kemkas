@@ -2,10 +2,8 @@ import React from "react";
 
 import {Faj, FajLabel} from "../domain-models/faj";
 import {Modifier} from "../domain-models/tulajdonsag";
+import {SignedNumberToText} from "./Helpers";
 
-export function SignedNumberToText(val: number) : string {
-    return val > 0 ? '+'+val : val.toString()
-}
 
 function fajiModositoText(faj: Faj, szamolas: (f: Faj) => number) : string {
     const mod = szamolas(faj)

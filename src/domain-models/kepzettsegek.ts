@@ -205,3 +205,7 @@ export const Kepzettsegek: Record<KepzettsegId, Kepzettseg> =
     KepzettsegLista.reduce(
         (acc: Record<KepzettsegId, Kepzettseg>, k) => { acc[k.Id] = k; return acc; },
         {} as Record<KepzettsegId, Kepzettseg>);
+
+export function AvailableKezpettsegList(osztaly: Osztaly): Kepzettseg[] {
+    return KepzettsegLista.filter(k => k.Osztalyok == null || k.Osztalyok.includes(osztaly))
+}

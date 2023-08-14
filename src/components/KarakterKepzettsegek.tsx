@@ -2,7 +2,13 @@ import React from "react";
 import KepzettsegSelector from "./KepzettsegSelector";
 import {Osztaly} from "../domain-models/osztaly";
 import {UseFormRegisterReturn} from "react-hook-form";
-import {Kepzettseg, Kepzettsegek, KepzettsegId, KepzettsegLista} from "../domain-models/kepzettsegek";
+import {
+    AvailableKezpettsegList,
+    Kepzettseg,
+    Kepzettsegek,
+    KepzettsegId,
+    KepzettsegLista
+} from "../domain-models/kepzettsegek";
 import {Modifier} from "../domain-models/tulajdonsag";
 import {Faj} from "../domain-models/faj";
 
@@ -42,7 +48,7 @@ function KarakterKepzettsegek (props: {
 }) {
     const { faj, osztaly, t_int, register, watch } = props
 
-    const availableKepzettsegList = KepzettsegLista.filter(k => k.Osztalyok == null || k.Osztalyok.includes(osztaly))
+    const availableKepzettsegList = AvailableKezpettsegList(osztaly)
 
     let numberOfKepzettseg = 3 + Modifier(t_int) + (faj === Faj.Ember ? 1 : 0)
     console.log('Raw Number of Kepzetsegek = ', numberOfKepzettseg)
@@ -74,7 +80,7 @@ function KarakterKepzettsegek (props: {
     }
 
     const tolvajKepzettsegek =  KepzettsegLista.filter(k => k.Osztalyok != null && k.Osztalyok.includes(Osztaly.Tolvaj))
-    const getTolvajKepzettsegN = (n: number) => Kepzettsegek[watch('tolvaj_kep_'+n, tolvajKepzettsegek[n].Id) as KepzettsegId]
+    const getTolvajKepzettsegN = (n: number) => Kepzettsegek[watch('tolvaj_kepzettseg.'+n, tolvajKepzettsegek[n].Id) as KepzettsegId]
 
     const getTolvajKepzettsegListaN = (n: number) => {
         let response = tolvajKepzettsegek;
@@ -98,7 +104,7 @@ function KarakterKepzettsegek (props: {
             numberOfKepzettseg={numberOfKepzettseg}
             availableKepzettsegList={availableKepzettsegList}
             getKepzettsegListaN={getKepzettsegListaN}
-            register={(n: number) => register('kep_' + n)}
+            register={(n: number) => register('kepzettseg.' + n)}
             getKepzettsegN={getKepzettsegN} />
         {osztaly === Osztaly.Tolvaj &&
             <InternalKepzettsegekSelector
@@ -106,7 +112,7 @@ function KarakterKepzettsegek (props: {
                 numberOfKepzettseg={4}
                 availableKepzettsegList={tolvajKepzettsegek}
                 getKepzettsegListaN={getTolvajKepzettsegListaN}
-                register={(n: number) => register('tolvaj_kep_' + n)}
+                register={(n: number) => register('tolvaj_kepzettseg.' + n)}
                 getKepzettsegN={getTolvajKepzettsegN} />}
     </>
 }
