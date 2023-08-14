@@ -8,6 +8,7 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
+RUN ./compile-less.sh
 RUN yarn build
 
 FROM nginx as proxy
