@@ -7,11 +7,20 @@ import FajSelector from "../components/FajSelector";
 import Tulajdonsagok from "../components/Tulajdonsagok";
 import OsztalySelector from "../components/OsztalySelector";
 import KarakterKepzettsegek from "../components/KarakterKepzettsegek";
-import {Tulajdonsag} from "../domain-models/tulajdonsag";
+import {KarakterTulajdonsagok, Tulajdonsag} from "../domain-models/tulajdonsag";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
 
 const FAJ_FIELD_NAME = 'faj'
 const OSZTALY_FIELD_NAME = 'osztaly'
+
+const tulajdonsagDefaults: KarakterTulajdonsagok = {
+    t_ero: 10,
+    t_ugy: 10,
+    t_egs: 10,
+    t_int: 10,
+    t_bol: 10,
+    t_kar: 10,
+}
 
 function CreateCharacterPage() {
     const {
@@ -72,7 +81,7 @@ function CreateCharacterPage() {
                     />
 
                     <hr />
-                    <MasodlagosErtekek osztaly={currentOsztaly()} tulajdonsagok={() => watch('tul', {})} />
+                    <MasodlagosErtekek osztaly={currentOsztaly()} tulajdonsagok={() => watch('tul', tulajdonsagDefaults)} />
 
                     <div className='d-grid gap-2 m-5'>
                         <button className='btn btn-danger btn-lg' type='submit'>Létrehozás</button>
