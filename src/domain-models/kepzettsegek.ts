@@ -201,6 +201,8 @@ export const KepzettsegLista: Kepzettseg[] = [
     },
 ]
 
+export const TolvajKepzettsegList = KepzettsegLista.filter(x => x.Osztalyok?.includes(Osztaly.Tolvaj))
+
 export const Kepzettsegek: Record<KepzettsegId, Kepzettseg> =
     KepzettsegLista.reduce(
         (acc: Record<KepzettsegId, Kepzettseg>, k) => { acc[k.Id] = k; return acc; },

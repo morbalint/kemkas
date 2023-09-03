@@ -6,9 +6,9 @@ import FajSelector from "../components/FajSelector";
 import Tulajdonsagok from "../components/Tulajdonsagok";
 import OsztalySelector from "../components/OsztalySelector";
 import KarakterKepzettsegek from "../components/KarakterKepzettsegek";
-import {KarakterTulajdonsagok} from "../domain-models/tulajdonsag";
+import {KarakterTulajdonsagok, Modifier} from "../domain-models/tulajdonsag";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
-import {KepzettsegId} from "../domain-models/kepzettsegek";
+import {AvailableKezpettsegList, KepzettsegId, TolvajKepzettsegList} from "../domain-models/kepzettsegek";
 
 const tulajdonsagDefaults: KarakterTulajdonsagok = {
     t_ero: 10,
@@ -19,6 +19,20 @@ const tulajdonsagDefaults: KarakterTulajdonsagok = {
     t_kar: 10,
 }
 
+function getNumberOfKepzettsegek(t_int: number, faj: Faj, max: number) {
+    let numberOfKepzettseg = 3 + Modifier(t_int) + (faj === Faj.Ember ? 1 : 0)
+    console.log('Raw Number of Kepzetsegek = ', numberOfKepzettseg)
+
+    if (numberOfKepzettseg < 1) {
+        numberOfKepzettseg = 1
+    }
+    if (numberOfKepzettseg > max) {
+        numberOfKepzettseg = max
+    }
+    console.log('Adjusted Number of Kepzetsegek = ', numberOfKepzettseg)
+    return numberOfKepzettseg;
+}
+
 function CreateCharacterPage() {
 
     let [name, changeName] = useState<string>("Névtelen kanadozó")
@@ -26,6 +40,18 @@ function CreateCharacterPage() {
     let [tulajdonsagok, changeTulajdonsagok] = useState(tulajdonsagDefaults)
     let [currentOsztaly, changeOsztaly] = useState<Osztaly>(Osztaly.Harcos)
     let [kepzettsegek, changeKepzettsegek] = useState<KepzettsegId[]>([])
+    let [tolvajKepzettsegek, changeTolvajKepzettsegek] = useState<KepzettsegId[]>([])
+
+    const availableKepzettsegList = AvailableKezpettsegList(currentOsztaly)
+
+    if (currentOsztaly !== Osztaly.Tolvaj && tolvajKepzettsegek.length > 0) {
+        tolvajKepzettsegek = []
+        changeTolvajKepzettsegek([])
+    }
+    if (currentOsztaly === Osztaly.Tolvaj && tolvajKepzettsegek.length === 0) {
+        tolvajKepzettsegek = TolvajKepzettsegList.slice(0, 4).map(x => x.Id)
+        changeTolvajKepzettsegek(tolvajKepzettsegek)
+    }
 
     return (
         <div>
@@ -33,7 +59,7 @@ function CreateCharacterPage() {
                 <h1>Karakter létrehozása</h1>
             </div>
             <div className='p-3'>
-                <form>
+                <form onSubmit={() => console.log("Character created!")}>
                     <div className='row'>
                         <h5 className='col align-self-center'>Származás</h5>
                     </div>
@@ -64,11 +90,12 @@ function CreateCharacterPage() {
                         changeOsztaly={changeOsztaly}
                     />
                     <KarakterKepzettsegek
-                        faj={faj}
-                        osztaly={currentOsztaly}
-                        t_int={tulajdonsagok.t_int}
+                        availableKepzettsegList={availableKepzettsegList}
+                        numberOfKepzettsegek={getNumberOfKepzettsegek(tulajdonsagok.t_int, faj, availableKepzettsegList.length)}
                         kepzettsegek={kepzettsegek}
                         changeKepzettsegek={changeKepzettsegek}
+                        tolvajKepzettsegek={tolvajKepzettsegek}
+                        changeTolvajKepzettsegek={changeTolvajKepzettsegek}
                     />
 
                     <hr />

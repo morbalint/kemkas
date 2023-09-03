@@ -1,15 +1,11 @@
 import React from "react";
 import KepzettsegSelector from "./KepzettsegSelector";
-import {Osztaly} from "../domain-models/osztaly";
 import {
-    AvailableKezpettsegList,
     Kepzettseg,
     Kepzettsegek,
     KepzettsegId,
+    TolvajKepzettsegList,
 } from "../domain-models/kepzettsegek";
-import {Modifier} from "../domain-models/tulajdonsag";
-import {Faj} from "../domain-models/faj";
-
 
 function InternalKepzettsegekSelector(props: {title: string, numberOfKepzettseg: number, getKepzettsegListaN: (n: number) => Kepzettseg[], kepzettsegek: KepzettsegId[], changeKepzettsegek: (newKepzettsegek: KepzettsegId[]) => void}) {
     const {title, numberOfKepzettseg, getKepzettsegListaN, kepzettsegek, changeKepzettsegek} = props
@@ -38,7 +34,7 @@ function InternalKepzettsegekSelector(props: {title: string, numberOfKepzettseg:
                 <label className='col-form-label text-body-emphasis'>{title}</label>
             </div>
             <div className='col'>
-                {klist.map((idx) =>
+                {klist.filter(i => i < preCalculated.length && preCalculated[i].selected != null).map((idx) =>
                     <KepzettsegSelector
                         key={title+idx}
                         kepzettsegek={preCalculated[idx].kepzettsegek}
@@ -52,43 +48,56 @@ function InternalKepzettsegekSelector(props: {title: string, numberOfKepzettseg:
 
 }
 
+
 function KarakterKepzettsegek (props: {
-    faj: Faj
-    osztaly: Osztaly,
-    t_int: number,
+    availableKepzettsegList: Kepzettseg[],
+    numberOfKepzettsegek: number
     kepzettsegek: KepzettsegId[],
     changeKepzettsegek: (newKepzettsegek: KepzettsegId[]) => void
+    tolvajKepzettsegek: KepzettsegId[],
+    changeTolvajKepzettsegek: (newKepzettsegek: KepzettsegId[]) => void
 }) {
-    const { faj, osztaly, t_int, kepzettsegek, changeKepzettsegek} = props
-
-    const availableKepzettsegList = AvailableKezpettsegList(osztaly)
-
-    let numberOfKepzettseg = 3 + Modifier(t_int) + (faj === Faj.Ember ? 1 : 0)
-    console.log('Raw Number of Kepzetsegek = ', numberOfKepzettseg)
-
-    if (numberOfKepzettseg < 1) {
-        numberOfKepzettseg = 1
-    }
-    if (numberOfKepzettseg > availableKepzettsegList.length){
-        numberOfKepzettseg = availableKepzettsegList.length
-    }
-    console.log('Adjusted Number of Kepzetsegek = ', numberOfKepzettseg)
+    const { numberOfKepzettsegek, availableKepzettsegList, changeKepzettsegek, tolvajKepzettsegek, changeTolvajKepzettsegek} = props
+    let kepzettsegek = props.kepzettsegek
 
     const getKepzettsegListaN = (n: number) => {
-        let response = availableKepzettsegList;
-        for (let i = 0; i < numberOfKepzettseg; i++) {
-            response = response.filter(x => i === n || x.Id !== kepzettsegek[i])
+        const kepzettsegekWithoutN = [...kepzettsegek.slice(0, n), ...kepzettsegek.slice(n+1)]
+        return availableKepzettsegList.filter(x => !kepzettsegekWithoutN.includes(x.Id) && !tolvajKepzettsegek.includes(x.Id))
+    }
+
+    if (kepzettsegek.length < numberOfKepzettsegek) {
+        for (let i = kepzettsegek.length; i < numberOfKepzettsegek; i++) {
+            const kepzettsegLista = getKepzettsegListaN(i)
+            if (kepzettsegLista.length > 0) {
+                kepzettsegek.push(kepzettsegLista[0].Id)
+            }
         }
-        return response
+        changeKepzettsegek(kepzettsegek)
+    }
+    if (kepzettsegek.length > numberOfKepzettsegek){
+        kepzettsegek = kepzettsegek.slice(0, numberOfKepzettsegek)
+        changeKepzettsegek(kepzettsegek)
+    }
+
+    const getTolvajKepzettsegListaN = (n: number) : Kepzettseg[] => {
+        const tolvajKepzettsegekWithoutN = [...tolvajKepzettsegek.slice(0, n), ...tolvajKepzettsegek.slice(n+1)]
+        return TolvajKepzettsegList.filter(x => !kepzettsegek.includes(x.Id) && !tolvajKepzettsegekWithoutN.includes(x.Id))
     }
 
     return <>
         <InternalKepzettsegekSelector
             title="Képzettségek"
-            numberOfKepzettseg={numberOfKepzettseg}
+            numberOfKepzettseg={numberOfKepzettsegek}
             getKepzettsegListaN={getKepzettsegListaN}
             changeKepzettsegek={changeKepzettsegek}
             kepzettsegek={kepzettsegek} />
+
+        {tolvajKepzettsegek.length > 0 && <InternalKepzettsegekSelector
+            title="Tolvaj képzettségek"
+            numberOfKepzettseg={4}
+            getKepzettsegListaN={getTolvajKepzettsegListaN}
+            changeKepzettsegek={changeTolvajKepzettsegek}
+            kepzettsegek={tolvajKepzettsegek} />}
     </>
 }
 
