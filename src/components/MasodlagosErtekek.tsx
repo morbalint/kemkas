@@ -103,7 +103,7 @@ function AkarateroMento(osztaly: Osztaly) : number {
     }
 }
 
-function MasodlagosErtekek(props: {osztaly: Osztaly, tulajdonsagok: () => KarakterTulajdonsagok}) {
+function MasodlagosErtekek(props: {osztaly: Osztaly, tulajdonsagok: KarakterTulajdonsagok}) {
 
     const { osztaly, tulajdonsagok } = props;
 
@@ -125,33 +125,33 @@ function MasodlagosErtekek(props: {osztaly: Osztaly, tulajdonsagok: () => Karakt
                                 <span>(HP)</span>
                             </OverlayTrigger>
                         </label>
-                    <p className='col'>{HP(osztaly, tulajdonsagok().t_egs)}</p>
+                    <p className='col'>{HP(osztaly, tulajdonsagok.t_egs)}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Védekezési Osztály (VO)</label>
-                    <p className='col'>{10+Modifier(tulajdonsagok().t_ugy)}</p>
+                    <p className='col'>{10+Modifier(tulajdonsagok.t_ugy)}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Közelharci támadás</label>
-                    <p className='col'>{SignedNumberToText(KozelharciTB(osztaly, tulajdonsagok()))}</p>
+                    <p className='col'>{SignedNumberToText(KozelharciTB(osztaly, tulajdonsagok))}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Célzó támadás</label>
-                    <p className='col'>{SignedNumberToText(TamadasBonusz(osztaly) + Modifier(tulajdonsagok().t_ugy))}</p>
+                    <p className='col'>{SignedNumberToText(TamadasBonusz(osztaly) + Modifier(tulajdonsagok.t_ugy))}</p>
                 </div>
             </div>
             <div className='col-lg-6'>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Kitartás mentő</label>
-                    <p className='col'>{SignedNumberToText(KitartasMento(osztaly) + Modifier(tulajdonsagok().t_egs))}</p>
+                    <p className='col'>{SignedNumberToText(KitartasMento(osztaly) + Modifier(tulajdonsagok.t_egs))}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Reflex mentő</label>
-                    <p className='col'>{SignedNumberToText(ReflexMento(osztaly) + Modifier(tulajdonsagok().t_ugy))}</p>
+                    <p className='col'>{SignedNumberToText(ReflexMento(osztaly) + Modifier(tulajdonsagok.t_ugy))}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Akaraterő mentő </label>
-                    <p className='col'>{SignedNumberToText(AkarateroMento(osztaly) + Modifier(tulajdonsagok().t_bol))}</p>
+                    <p className='col'>{SignedNumberToText(AkarateroMento(osztaly) + Modifier(tulajdonsagok.t_bol))}</p>
                 </div>
             </div>
         </div>

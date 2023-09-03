@@ -12,18 +12,18 @@ function fajiModositoText(faj: Faj, szamolas: (f: Faj) => number) : string {
 
 function TulajdonsagInput(props: {
     tulajdonsag: string,
-    currentFaj : () => Faj,
+    currentFaj : Faj,
     fajiModosito: (faj: Faj) => number,
-    register: () => any,
-    getCurrentValue: () => number
+    changeValue: (val: number) => void
+    currentValue: number
     tooLowError: string,
     tooHighError: string
 }) {
     const {
         tulajdonsag,
-        register,
+        changeValue,
         currentFaj,
-        getCurrentValue,
+        currentValue,
         fajiModosito,
         tooLowError,
         tooHighError,
@@ -31,20 +31,20 @@ function TulajdonsagInput(props: {
     return (<div className='row m-2'>
         <label className='col-lg-1 col-sm-2 col-form-label'>{tulajdonsag}</label>
         <div className='col-lg-1 col-sm-2 m-2'>
-            <input className='form-control' maxLength={2} defaultValue={10} type='number' {...register()} />
+            <input className='form-control' maxLength={2} defaultValue={10} type='number' value={currentValue} onChange={e => changeValue(Number(e.target.value))} />
         </div>
         <span className='col-sm-2 m-2'>
-                            {fajiModositoText(currentFaj(), fajiModosito)}
+                            {fajiModositoText(currentFaj, fajiModosito)}
                         </span>
         <span className='col-sm-2 m-2'>
-                            Összesen: { (getCurrentValue() + (fajiModosito(currentFaj()))).toString() }
+                            Összesen: { (currentValue + (fajiModosito(currentFaj))).toString() }
                         </span>
         <span className='col-sm-2 m-2'>
-                            Módosító: { SignedNumberToText(Modifier(getCurrentValue() + fajiModosito(currentFaj()))) }
+                            Módosító: { SignedNumberToText(Modifier(currentValue + fajiModosito(currentFaj))) }
                         </span>
-        {getCurrentValue() < 3 && (
+        {currentValue < 3 && (
             <span className='form-field-error'>{tooLowError}</span>)}
-        {getCurrentValue() > 18 && (
+        {currentValue > 18 && (
             <span className='form-field-error'>{tooHighError}</span>)}
     </div>)
 }

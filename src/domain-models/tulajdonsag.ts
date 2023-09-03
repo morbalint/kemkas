@@ -40,13 +40,15 @@ function rollAbility() {
     return result;
 }
 
-export function RollAllAbilities(setValue: (ability: string, value: number) => void) {
-    setValue(Tulajdonsag.Ero, rollAbility())
-    setValue(Tulajdonsag.Ugyesseg, rollAbility())
-    setValue(Tulajdonsag.Egeszseg, rollAbility())
-    setValue(Tulajdonsag.Intelligencia, rollAbility())
-    setValue(Tulajdonsag.Bolcsesseg, rollAbility())
-    setValue(Tulajdonsag.Karizma, rollAbility())
+export function RollAllAbilities(setValue: (newValue: KarakterTulajdonsagok) => void) {
+    setValue({
+        t_ero: rollAbility(),
+        t_ugy: rollAbility(),
+        t_egs: rollAbility(),
+        t_int: rollAbility(),
+        t_bol: rollAbility(),
+        t_kar: rollAbility(),
+    })
 }
 
 export const Modifier = (val : number) => Math.floor(val / 3) - 3

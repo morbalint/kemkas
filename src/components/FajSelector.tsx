@@ -1,13 +1,12 @@
 import React from "react";
 import {Faj, FajDescription, FajLabel, FajSpecials} from "../domain-models/faj";
-import {UseFormRegisterReturn} from "react-hook-form";
 
-function FajSelector(props: { register: () => UseFormRegisterReturn, currentFaj: () => Faj }) {
-    const {register, currentFaj} = props
+function FajSelector(props: { faj: Faj, changeFaj: (val: Faj) => void }) {
+    const {faj, changeFaj} = props
     return <>
         <div className='row m-2'>
             <label className='col-md-2 col-sm-3 col-form-label'>Faj</label>
-            <select className='col form-select' defaultValue={Faj.Ember} {...register()}>
+            <select className='col form-select' defaultValue={Faj.Ember} value={faj} onChange={e => changeFaj(e.target.value as Faj)}>
                 <option key={Faj.Ember} value={Faj.Ember}>{FajLabel(Faj.Ember)}</option>
                 <optgroup label='más emberi népek'>
                     <option key={Faj.Amazon} value={Faj.Amazon}>{FajLabel(Faj.Amazon)}</option>
@@ -31,10 +30,10 @@ function FajSelector(props: { register: () => UseFormRegisterReturn, currentFaj:
             <label className='col-md-2 col-sm-3 form-label'></label>
             <div className='col'>
                 <p className='row pt-2'>
-                    {FajDescription(currentFaj())}
+                    {FajDescription(faj)}
                 </p>
                 <ul>
-                    {FajSpecials(currentFaj()).map(((special, i) => (<li key={currentFaj() + i}>{special}</li>)))}
+                    {FajSpecials(faj).map(((special, i) => (<li key={faj + i}>{special}</li>)))}
                 </ul>
             </div>
         </div>

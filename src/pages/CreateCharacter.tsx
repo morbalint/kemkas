@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './CreateCharacter.css'
-import {useForm} from "react-hook-form";
 import {Faj} from "../domain-models/faj";
 import {Osztaly} from "../domain-models/osztaly"
 import FajSelector from "../components/FajSelector";
@@ -9,9 +8,7 @@ import OsztalySelector from "../components/OsztalySelector";
 import KarakterKepzettsegek from "../components/KarakterKepzettsegek";
 import {KarakterTulajdonsagok} from "../domain-models/tulajdonsag";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
-
-const FAJ_FIELD_NAME = 'faj'
-const OSZTALY_FIELD_NAME = 'osztaly'
+import {KepzettsegId} from "../domain-models/kepzettsegek";
 
 const tulajdonsagDefaults: KarakterTulajdonsagok = {
     t_ero: 10,
@@ -23,18 +20,12 @@ const tulajdonsagDefaults: KarakterTulajdonsagok = {
 }
 
 function CreateCharacterPage() {
-    const {
-        register,
-        handleSubmit,
-        setValue,
-        watch,
-        formState: {errors}
-    } = useForm()
-    const sendForm = (data: any) => console.log(data)
 
-    const currentFaj = () => watch(FAJ_FIELD_NAME, Faj.Ember)
-
-    const currentOsztaly = () => watch(OSZTALY_FIELD_NAME, Osztaly.Harcos)
+    let [name, changeName] = useState<string>("Névtelen kanadozó")
+    let [faj, changeFaj] = useState(Faj.Ember)
+    let [tulajdonsagok, changeTulajdonsagok] = useState(tulajdonsagDefaults)
+    let [currentOsztaly, changeOsztaly] = useState<Osztaly>(Osztaly.Harcos)
+    let [kepzettsegek, changeKepzettsegek] = useState<KepzettsegId[]>([])
 
     return (
         <div>
@@ -42,46 +33,46 @@ function CreateCharacterPage() {
                 <h1>Karakter létrehozása</h1>
             </div>
             <div className='p-3'>
-                <form onSubmit={handleSubmit(sendForm)}>
+                <form>
                     <div className='row'>
                         <h5 className='col align-self-center'>Származás</h5>
                     </div>
                     <div className='row m-2'>
                         <label className='col-md-2 col-sm-3 col-form-label' >Név</label>
                         <input className='col form-control'
-                               defaultValue='Névtelen Kalandozó' {...register('nev', {required: true})} />
-                        {errors.nev && <span className='form-field-error'>A karaktered nem mászkálhat névtelenül a világban!</span>}
+                               value={name}
+                               onChange={(e) => changeName(e.target.value)}/>
+                        {!name && <span className='form-field-error'>A karaktered nem mászkálhat névtelenül a világban!</span>}
                     </div>
                     <FajSelector
-                        register={() => register(FAJ_FIELD_NAME, {required: true})}
-                        currentFaj={currentFaj}
+                        changeFaj={changeFaj}
+                        faj={faj}
                     />
                     <hr/>
                     <Tulajdonsagok
-                        currentFaj={currentFaj}
-                        watch={watch}
-                        setValue={setValue}
-                        register={register}
+                        currentFaj={faj}
+                        tulajdonsagok={tulajdonsagok}
+                        changeTulajdonsagok={changeTulajdonsagok}
                     />
                     <hr />
                     <div className='row'>
                         <h5 className='col align-self-center'>Tanult</h5>
                     </div>
                     <OsztalySelector
-                        currentFaj={currentFaj}
+                        currentFaj={faj}
                         currentOsztaly={currentOsztaly}
-                        register={() => register(OSZTALY_FIELD_NAME, {required: true})}
+                        changeOsztaly={changeOsztaly}
                     />
                     <KarakterKepzettsegek
-                        faj={currentFaj()}
-                        osztaly={currentOsztaly()}
-                        t_int={watch('tul', tulajdonsagDefaults).t_int}
-                        register={(fieldName: string) => register(fieldName, {required: true})}
-                        watch={watch}
+                        faj={faj}
+                        osztaly={currentOsztaly}
+                        t_int={tulajdonsagok.t_int}
+                        kepzettsegek={kepzettsegek}
+                        changeKepzettsegek={changeKepzettsegek}
                     />
 
                     <hr />
-                    <MasodlagosErtekek osztaly={currentOsztaly()} tulajdonsagok={() => watch('tul', tulajdonsagDefaults)} />
+                    <MasodlagosErtekek osztaly={currentOsztaly} tulajdonsagok={tulajdonsagok} />
 
                     <div className='d-grid gap-2 m-5'>
                         <button className='btn btn-danger btn-lg' type='submit'>Létrehozás</button>
