@@ -18,6 +18,22 @@ function InternalKepzettsegekSelector(props: {title: string, numberOfKepzettseg:
 
     const klist = Array.from(new Array(numberOfKepzettseg).keys())
 
+    const preCalculated: {
+        kepzettsegek: Kepzettseg[],
+        registration: UseFormRegisterReturn,
+        selected: Kepzettseg,
+    }[] = [];
+
+    for (let i = 0; i < numberOfKepzettseg; i++) {
+        preCalculated.push({
+            kepzettsegek: getKepzettsegListaN(i),
+            registration: register(i),
+            selected: getKepzettsegN(i)
+        })
+    }
+
+    console.log(preCalculated)
+
     return <>
         <div className='row'>
             <div className='col-lg-2 col-md-12'>
@@ -26,11 +42,10 @@ function InternalKepzettsegekSelector(props: {title: string, numberOfKepzettseg:
             <div className='col'>
                 {klist.map((idx) =>
                     <KepzettsegSelector
-                        key={idx}
-                        kepzettsegek={getKepzettsegListaN(idx)}
-                        fieldRegistration={register(idx)}
-                        defaultValue={availableKepzettsegList[idx]}
-                        selected={getKepzettsegN(idx)}
+                        key={title+idx}
+                        kepzettsegek={preCalculated[idx].kepzettsegek}
+                        fieldRegistration={preCalculated[idx].registration}
+                        selected={preCalculated[idx].selected}
                     />)
                 }
             </div>
@@ -61,15 +76,12 @@ function KarakterKepzettsegek (props: {
     }
     console.log('Adjusted Number of Kepzetsegek = ', numberOfKepzettseg)
 
-    const getKepzettsegN = (n: number) => Kepzettsegek[watch('kep_'+n, availableKepzettsegList[n].Id) as KepzettsegId]
+    const getKepzettsegN = (n: number) => Kepzettsegek[watch('kepzettseg.'+n, availableKepzettsegList[n].Id) as KepzettsegId]
 
     const getKepzettsegListaN = (n: number) => {
         let response = availableKepzettsegList;
         for (let i = 0; i < numberOfKepzettseg; i++) {
-            if (i === n) {
-                continue;
-            }
-            response = response.filter(x => x.Id !== getKepzettsegN(i).Id)
+            response = response.filter(x => i === n || x.Id !== getKepzettsegN(i).Id)
         }
         if (osztaly === Osztaly.Tolvaj) {
             for (let i = 0; i < 4; i++) {
@@ -90,10 +102,7 @@ function KarakterKepzettsegek (props: {
         }
         // filter out selected tolvaj kepzettsegek
         for (let i = 0; i < 4; i++) {
-            if (i === n) {
-                continue;
-            }
-            response = response.filter(x => x.Id !== getTolvajKepzettsegN(i).Id)
+            response = response.filter(x => i === n || x.Id !== getTolvajKepzettsegN(i).Id)
         }
         return response
     }

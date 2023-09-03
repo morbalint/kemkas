@@ -7,7 +7,7 @@ import FajSelector from "../components/FajSelector";
 import Tulajdonsagok from "../components/Tulajdonsagok";
 import OsztalySelector from "../components/OsztalySelector";
 import KarakterKepzettsegek from "../components/KarakterKepzettsegek";
-import {KarakterTulajdonsagok, Tulajdonsag} from "../domain-models/tulajdonsag";
+import {KarakterTulajdonsagok} from "../domain-models/tulajdonsag";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
 
 const FAJ_FIELD_NAME = 'faj'
@@ -75,7 +75,7 @@ function CreateCharacterPage() {
                     <KarakterKepzettsegek
                         faj={currentFaj()}
                         osztaly={currentOsztaly()}
-                        t_int={watch(Tulajdonsag.Intelligencia, 10)}
+                        t_int={watch('tul', tulajdonsagDefaults).t_int}
                         register={(fieldName: string) => register(fieldName, {required: true})}
                         watch={watch}
                     />
