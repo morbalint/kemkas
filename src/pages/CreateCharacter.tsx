@@ -106,13 +106,7 @@ function CreateCharacterPage() {
                 <h1>Karakter létrehozása</h1>
             </div>
             <div className='p-3'>
-                <form onSubmit={ async (event) => { event.preventDefault(); await createPDF({
-                    Name: name,
-                    Faj: faj,
-                    MasodlagosErtekek: CalculateMasodlagosErtekek(osztaly, tulajdonsagok),
-                    Osztaly: osztaly,
-                    Tulajdonsagok: tulajdonsagok
-                })} }>
+                <form onSubmit={ async (event) => event.preventDefault() }>
                     <div className='row'>
                         <h5 className='col align-self-center'>Származás</h5>
                     </div>
@@ -155,7 +149,13 @@ function CreateCharacterPage() {
                     <MasodlagosErtekek ertekek={CalculateMasodlagosErtekek(osztaly, tulajdonsagok)} />
 
                     <div className='d-grid gap-2 m-5'>
-                        <button className='btn btn-danger btn-lg' type='submit'>Létrehozás</button>
+                        <button className='btn btn-danger btn-lg' type='button' onClick={async () =>  await createPDF({
+                            Name: name,
+                            Faj: faj,
+                            MasodlagosErtekek: CalculateMasodlagosErtekek(osztaly, tulajdonsagok),
+                            Osztaly: osztaly,
+                            Tulajdonsagok: tulajdonsagok
+                        })}>Létrehozás</button>
                     </div>
                 </form>
             </div>
