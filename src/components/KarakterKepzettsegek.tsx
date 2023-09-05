@@ -7,7 +7,20 @@ import {
     TolvajKepzettsegList,
 } from "../domain-models/kepzettsegek";
 
-function InternalKepzettsegekSelector(props: {title: string, numberOfKepzettseg: number, getKepzettsegListaN: (n: number) => Kepzettseg[], kepzettsegek: KepzettsegId[], changeKepzettsegek: (newKepzettsegek: KepzettsegId[]) => void}) {
+function arraySetN<T>(array: T[], n: number, elem: T): T[] {
+    if (array.length < n || n < 0) {
+        return array
+    }
+    return [...array.slice(0, n), elem, ...array.slice(n+1)]
+}
+
+function InternalKepzettsegekSelector(props: {
+    title: string,
+    numberOfKepzettseg: number,
+    getKepzettsegListaN: (n: number) => Kepzettseg[],
+    kepzettsegek: KepzettsegId[],
+    changeKepzettsegek: (newKepzettsegek: KepzettsegId[]) => void
+}) {
     const {title, numberOfKepzettseg, getKepzettsegListaN, kepzettsegek, changeKepzettsegek} = props
 
     const klist = Array.from(new Array(numberOfKepzettseg).keys())
@@ -22,7 +35,7 @@ function InternalKepzettsegekSelector(props: {title: string, numberOfKepzettseg:
         preCalculated.push({
             kepzettsegek: getKepzettsegListaN(i),
             selected: Kepzettsegek[kepzettsegek[i]],
-            changeKepzettseg: (newKepzettseg: KepzettsegId) => { changeKepzettsegek([...kepzettsegek.slice(0, i), newKepzettseg, ...kepzettsegek.slice(i+1)]) }
+            changeKepzettseg: (newKepzettseg: KepzettsegId) => changeKepzettsegek(arraySetN(kepzettsegek, i, newKepzettseg))
         })
     }
 
@@ -34,7 +47,7 @@ function InternalKepzettsegekSelector(props: {title: string, numberOfKepzettseg:
                 <label className='col-form-label text-body-emphasis'>{title}</label>
             </div>
             <div className='col'>
-                {klist.filter(i => i < preCalculated.length && preCalculated[i].selected != null).map((idx) =>
+                {klist.map((idx) =>
                     <KepzettsegSelector
                         key={title+idx}
                         kepzettsegek={preCalculated[idx].kepzettsegek}

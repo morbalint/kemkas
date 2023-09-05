@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './CreateCharacter.css'
-import {Faj} from "../domain-models/faj";
-import {Osztaly} from "../domain-models/osztaly"
+import {Faj, FajLabel} from "../domain-models/faj";
+import {Osztaly, OsztalyLabel} from "../domain-models/osztaly"
 import FajSelector from "../components/FajSelector";
 import Tulajdonsagok from "../components/Tulajdonsagok";
 import OsztalySelector from "../components/OsztalySelector";
@@ -9,6 +9,10 @@ import KarakterKepzettsegek from "../components/KarakterKepzettsegek";
 import {KarakterTulajdonsagok, Modifier} from "../domain-models/tulajdonsag";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
 import {AvailableKezpettsegList, KepzettsegId, TolvajKepzettsegList} from "../domain-models/kepzettsegek";
+import {PDFDocument, rgb, StandardFonts} from 'pdf-lib'
+import download from 'downloadjs'
+import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
+import {Karakter} from "../domain-models/karakter";
 
 const tulajdonsagDefaults: KarakterTulajdonsagok = {
     t_ero: 10,
@@ -33,22 +37,65 @@ function getNumberOfKepzettsegek(t_int: number, faj: Faj, max: number) {
     return numberOfKepzettseg;
 }
 
+async function createPDF(karakter: Karakter) {
+
+    const existingPdfBytes = await fetch('/km_karakterlap_hysteria_1.2.pdf').then(res => res.arrayBuffer())
+    const pdfDoc = await PDFDocument.load(existingPdfBytes)
+
+    const timesRomanFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
+
+    const page = pdfDoc.getPage(0)
+    const fontSize = 12
+    page.drawText(karakter.Name, {
+        x: 60,
+        y: 710,
+        size: fontSize,
+        font: timesRomanFont,
+        color: rgb(0, 0, 0),
+    })
+    page.drawText(OsztalyLabel(karakter.Osztaly), {
+        x: 60,
+        y: 672,
+        size: fontSize,
+        font: timesRomanFont,
+        color: rgb(0, 0, 0),
+    })
+    page.drawText('1', {
+        x: 264,
+        y: 682,
+        size: fontSize * 3,
+        font: timesRomanFont,
+        color: rgb(0, 0, 0),
+    })
+    page.drawText(FajLabel(karakter.Faj), {
+        x: 304,
+        y: 710,
+        size: fontSize,
+        font: timesRomanFont,
+        color: rgb(0, 0, 0),
+    })
+
+
+    const pdfBytes = await pdfDoc.save();
+    download(pdfBytes, "karakter.pdf", "application/pdf");
+}
+
 function CreateCharacterPage() {
 
-    let [name, changeName] = useState<string>("Névtelen kanadozó")
+    let [name, changeName] = useState<string>("Névtelen kalandozó")
     let [faj, changeFaj] = useState(Faj.Ember)
     let [tulajdonsagok, changeTulajdonsagok] = useState(tulajdonsagDefaults)
-    let [currentOsztaly, changeOsztaly] = useState<Osztaly>(Osztaly.Harcos)
+    let [osztaly, changeOsztaly] = useState<Osztaly>(Osztaly.Harcos)
     let [kepzettsegek, changeKepzettsegek] = useState<KepzettsegId[]>([])
     let [tolvajKepzettsegek, changeTolvajKepzettsegek] = useState<KepzettsegId[]>([])
 
-    const availableKepzettsegList = AvailableKezpettsegList(currentOsztaly)
+    const availableKepzettsegList = AvailableKezpettsegList(osztaly)
 
-    if (currentOsztaly !== Osztaly.Tolvaj && tolvajKepzettsegek.length > 0) {
+    if (osztaly !== Osztaly.Tolvaj && tolvajKepzettsegek.length > 0) {
         tolvajKepzettsegek = []
         changeTolvajKepzettsegek([])
     }
-    if (currentOsztaly === Osztaly.Tolvaj && tolvajKepzettsegek.length === 0) {
+    if (osztaly === Osztaly.Tolvaj && tolvajKepzettsegek.length === 0) {
         tolvajKepzettsegek = TolvajKepzettsegList.slice(0, 4).map(x => x.Id)
         changeTolvajKepzettsegek(tolvajKepzettsegek)
     }
@@ -59,7 +106,13 @@ function CreateCharacterPage() {
                 <h1>Karakter létrehozása</h1>
             </div>
             <div className='p-3'>
-                <form onSubmit={() => console.log("Character created!")}>
+                <form onSubmit={ async (event) => { event.preventDefault(); await createPDF({
+                    Name: name,
+                    Faj: faj,
+                    MasodlagosErtekek: CalculateMasodlagosErtekek(osztaly, tulajdonsagok),
+                    Osztaly: osztaly,
+                    Tulajdonsagok: tulajdonsagok
+                })} }>
                     <div className='row'>
                         <h5 className='col align-self-center'>Származás</h5>
                     </div>
@@ -86,7 +139,7 @@ function CreateCharacterPage() {
                     </div>
                     <OsztalySelector
                         currentFaj={faj}
-                        currentOsztaly={currentOsztaly}
+                        currentOsztaly={osztaly}
                         changeOsztaly={changeOsztaly}
                     />
                     <KarakterKepzettsegek
@@ -99,7 +152,7 @@ function CreateCharacterPage() {
                     />
 
                     <hr />
-                    <MasodlagosErtekek osztaly={currentOsztaly} tulajdonsagok={tulajdonsagok} />
+                    <MasodlagosErtekek ertekek={CalculateMasodlagosErtekek(osztaly, tulajdonsagok)} />
 
                     <div className='d-grid gap-2 m-5'>
                         <button className='btn btn-danger btn-lg' type='submit'>Létrehozás</button>
