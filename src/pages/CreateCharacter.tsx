@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './CreateCharacter.css'
-import {Faj, FajLabel} from "../domain-models/faj";
-import {Osztaly, OsztalyLabel} from "../domain-models/osztaly"
+import {Faj} from "../domain-models/faj";
+import {Osztaly} from "../domain-models/osztaly"
 import FajSelector from "../components/FajSelector";
 import Tulajdonsagok from "../components/Tulajdonsagok";
 import OsztalySelector from "../components/OsztalySelector";
@@ -9,10 +9,9 @@ import KarakterKepzettsegek from "../components/KarakterKepzettsegek";
 import {KarakterTulajdonsagok, Modifier} from "../domain-models/tulajdonsag";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
 import {AvailableKezpettsegList, KepzettsegId, TolvajKepzettsegList} from "../domain-models/kepzettsegek";
-import {PDFDocument, rgb, StandardFonts} from 'pdf-lib'
-import download from 'downloadjs'
 import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
-import {Karakter} from "../domain-models/karakter";
+import {CreatePDF} from "../pdf/character.pdf";
+import {KarakterClass} from "../domain-models/karakter";
 
 const tulajdonsagDefaults: KarakterTulajdonsagok = {
     t_ero: 10,
@@ -35,49 +34,6 @@ function getNumberOfKepzettsegek(t_int: number, faj: Faj, max: number) {
     }
     console.log('Adjusted Number of Kepzetsegek = ', numberOfKepzettseg)
     return numberOfKepzettseg;
-}
-
-async function createPDF(karakter: Karakter) {
-
-    const existingPdfBytes = await fetch('/km_karakterlap_hysteria_1.2.pdf').then(res => res.arrayBuffer())
-    const pdfDoc = await PDFDocument.load(existingPdfBytes)
-
-    const timesRomanFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
-
-    const page = pdfDoc.getPage(0)
-    const fontSize = 12
-    page.drawText(karakter.Name, {
-        x: 60,
-        y: 710,
-        size: fontSize,
-        font: timesRomanFont,
-        color: rgb(0, 0, 0),
-    })
-    page.drawText(OsztalyLabel(karakter.Osztaly), {
-        x: 60,
-        y: 672,
-        size: fontSize,
-        font: timesRomanFont,
-        color: rgb(0, 0, 0),
-    })
-    page.drawText('1', {
-        x: 264,
-        y: 682,
-        size: fontSize * 3,
-        font: timesRomanFont,
-        color: rgb(0, 0, 0),
-    })
-    page.drawText(FajLabel(karakter.Faj), {
-        x: 304,
-        y: 710,
-        size: fontSize,
-        font: timesRomanFont,
-        color: rgb(0, 0, 0),
-    })
-
-
-    const pdfBytes = await pdfDoc.save();
-    download(pdfBytes, "karakter.pdf", "application/pdf");
 }
 
 function CreateCharacterPage() {
@@ -149,13 +105,7 @@ function CreateCharacterPage() {
                     <MasodlagosErtekek ertekek={CalculateMasodlagosErtekek(osztaly, tulajdonsagok)} />
 
                     <div className='d-grid gap-2 m-5'>
-                        <button className='btn btn-danger btn-lg' type='button' onClick={async () =>  await createPDF({
-                            Name: name,
-                            Faj: faj,
-                            MasodlagosErtekek: CalculateMasodlagosErtekek(osztaly, tulajdonsagok),
-                            Osztaly: osztaly,
-                            Tulajdonsagok: tulajdonsagok
-                        })}>Létrehozás</button>
+                        <button className='btn btn-danger btn-lg' type='button' onClick={async () =>  await CreatePDF(new KarakterClass(name, faj, osztaly, tulajdonsagok))}>Létrehozás</button>
                     </div>
                 </form>
             </div>
