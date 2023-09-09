@@ -6,6 +6,9 @@ import {Kepzettseg} from "./kepzettsegek";
 
 export interface Karakter {
     Name: string
+    Nem: string
+    Kor: number
+    Isten: string
     Faj: Faj
     Osztaly: Osztaly
     Tulajdonsagok: KarakterTulajdonsagok,
@@ -27,6 +30,9 @@ export interface Karakter {
 export class KarakterClass implements Karakter {
 
     public Name : string
+    public Nem : string
+    public Kor : number
+    public Isten : string
     public Faj : Faj
     public Osztaly : Osztaly
     public Tulajdonsagok : KarakterTulajdonsagok
@@ -37,6 +43,9 @@ export class KarakterClass implements Karakter {
 
     constructor(
         name: string,
+        nem: string,
+        kor: number,
+        isten: string,
         faj: Faj,
         osztaly: Osztaly,
         tulajdonsagok: KarakterTulajdonsagok,
@@ -44,6 +53,9 @@ export class KarakterClass implements Karakter {
         tolvajKepzettsegek: Kepzettseg[] = []
     ) {
         this.Name = name
+        this.Nem = nem
+        this.Kor = kor
+        this.Isten = isten
         this.Faj = faj
         this.Osztaly = osztaly
         this.Tulajdonsagok = tulajdonsagok

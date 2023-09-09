@@ -39,6 +39,9 @@ function getNumberOfKepzettsegek(t_int: number, faj: Faj, max: number) {
 function CreateCharacterPage() {
 
     let [name, changeName] = useState<string>("Névtelen kalandozó")
+    let [nem, changeNem] = useState<string>("")
+    let [kor, changeKor] = useState<number>(20)
+    let [isten, changeIsten] = useState<string>("")
     let [faj, changeFaj] = useState(Faj.Ember)
     let [tulajdonsagok, changeTulajdonsagok] = useState(tulajdonsagDefaults)
     let [osztaly, changeOsztaly] = useState<Osztaly>(Osztaly.Harcos)
@@ -58,6 +61,9 @@ function CreateCharacterPage() {
 
     const karakter = () => new KarakterClass(
         name,
+        nem,
+        kor,
+        isten,
         faj,
         osztaly,
         tulajdonsagok,
@@ -81,6 +87,25 @@ function CreateCharacterPage() {
                                value={name}
                                onChange={(e) => changeName(e.target.value)}/>
                         {!name && <span className='form-field-error'>A karaktered nem mászkálhat névtelenül a világban!</span>}
+                    </div>
+                    <div className='row m-2'>
+                        <label className='col-md-2 col-sm-3 col-form-label' >Nem</label>
+                        <input className='col form-control'
+                               value={nem}
+                               onChange={(e) => changeNem(e.target.value)}/>
+                    </div>
+                    <div className='row m-2'>
+                        <label className='col-md-2 col-sm-3 col-form-label' >Kor</label>
+                        <input className='col form-control'
+                               value={kor}
+                               type={"number"}
+                               onChange={(e) => changeKor(Number(e.target.value))}/>
+                    </div>
+                    <div className='row m-2'>
+                        <label className='col-md-2 col-sm-3 col-form-label' >Választott istenség</label>
+                        <input className='col form-control'
+                               value={isten}
+                               onChange={(e) => changeIsten(e.target.value)}/>
                     </div>
                     <FajSelector
                         changeFaj={changeFaj}

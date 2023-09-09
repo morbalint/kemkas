@@ -1,184 +1,101 @@
 import {Karakter} from "../domain-models/karakter";
-import {PDFDocument, rgb} from "pdf-lib";
+import {PDFDocument, PDFFont, PDFPage, rgb} from "pdf-lib";
 import fontkit from '@pdf-lib/fontkit'
 import {OsztalyLabel} from "../domain-models/osztaly";
 import {FajLabel} from "../domain-models/faj";
 import {SignedNumberToText} from "../components/Helpers";
-import {Modifier} from "../domain-models/tulajdonsag";
+import {KarakterTulajdonsagok, Modifier} from "../domain-models/tulajdonsag";
 import download from "downloadjs";
 import {Kepzettseg} from "../domain-models/kepzettsegek";
 
-export async function CreatePDF(karakter: Karakter) {
-
-    const existingPdfBytes = await fetch('/km_karakterlap_hysteria_1.2.pdf').then(res => res.arrayBuffer())
-    const pdfDoc = await PDFDocument.load(existingPdfBytes)
-    pdfDoc.registerFontkit(fontkit)
-
-    const fontBytes = await fetch('/Merienda-Regular.ttf').then(res => res.arrayBuffer())
-    const pdfFont = await pdfDoc.embedFont(fontBytes)
-    // const pdfFont = await pdfDoc.embedFont(StandardFonts.TimesNewRoman)
-    const fontSizeBase = 12
-
-    const page = pdfDoc.getPage(0)
-
-    page.drawText(karakter.Name, {
-        x: 60,
-        y: 710,
-        size: fontSizeBase,
-        font: pdfFont,
-        color: rgb(0, 0, 0),
-    })
-    page.drawText(OsztalyLabel(karakter.Osztaly), {
-        x: 60,
-        y: 672,
-        size: fontSizeBase,
-        font: pdfFont,
-        color: rgb(0, 0, 0),
-    })
-    page.drawText(karakter.Szint.toString(), {
-        x: 264,
-        y: 682,
-        size: fontSizeBase * 3,
-        font: pdfFont,
-        color: rgb(0, 0, 0),
-    })
-    page.drawText(FajLabel(karakter.Faj), {
-        x: 304,
-        y: 710,
-        size: fontSizeBase,
-        font: pdfFont,
-        color: rgb(0, 0, 0),
-    })
-    page.drawText(karakter.Tulajdonsagok.t_ero.toString(), {
+function drawTulajdonsagok(page: PDFPage, tulajdonsagok: KarakterTulajdonsagok, fontSizeBase: number, pdfFont: PDFFont) {
+    page.drawText(tulajdonsagok.t_ero.toString(), {
         x: 130,
         y: 613,
         size: fontSizeBase * 2,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(SignedNumberToText(Modifier(karakter.Tulajdonsagok.t_ero)), {
+    page.drawText(SignedNumberToText(Modifier(tulajdonsagok.t_ero)), {
         x: 176,
         y: 613,
         size: fontSizeBase * 2,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(karakter.Tulajdonsagok.t_ugy.toString(), {
+    page.drawText(tulajdonsagok.t_ugy.toString(), {
         x: 130,
         y: 580,
         size: fontSizeBase * 2,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(SignedNumberToText(Modifier(karakter.Tulajdonsagok.t_ugy)), {
+    page.drawText(SignedNumberToText(Modifier(tulajdonsagok.t_ugy)), {
         x: 176,
         y: 580,
         size: fontSizeBase * 2,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(karakter.Tulajdonsagok.t_egs.toString(), {
+    page.drawText(tulajdonsagok.t_egs.toString(), {
         x: 130,
         y: 547,
         size: fontSizeBase * 2,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(SignedNumberToText(Modifier(karakter.Tulajdonsagok.t_egs)), {
+    page.drawText(SignedNumberToText(Modifier(tulajdonsagok.t_egs)), {
         x: 176,
         y: 547,
         size: fontSizeBase * 2,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(karakter.Tulajdonsagok.t_int.toString(), {
+    page.drawText(tulajdonsagok.t_int.toString(), {
         x: 130,
         y: 515,
         size: fontSizeBase * 2,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(SignedNumberToText(Modifier(karakter.Tulajdonsagok.t_int)), {
+    page.drawText(SignedNumberToText(Modifier(tulajdonsagok.t_int)), {
         x: 176,
         y: 515,
         size: fontSizeBase * 2,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(karakter.Tulajdonsagok.t_bol.toString(), {
+    page.drawText(tulajdonsagok.t_bol.toString(), {
         x: 130,
         y: 482,
         size: fontSizeBase * 2,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(SignedNumberToText(Modifier(karakter.Tulajdonsagok.t_bol)), {
+    page.drawText(SignedNumberToText(Modifier(tulajdonsagok.t_bol)), {
         x: 176,
         y: 482,
         size: fontSizeBase * 2,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(karakter.Tulajdonsagok.t_kar.toString(), {
+    page.drawText(tulajdonsagok.t_kar.toString(), {
         x: 130,
         y: 449,
         size: fontSizeBase * 2,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(SignedNumberToText(Modifier(karakter.Tulajdonsagok.t_kar)), {
+    page.drawText(SignedNumberToText(Modifier(tulajdonsagok.t_kar)), {
         x: 176,
         y: 449,
         size: fontSizeBase * 2,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
+}
 
-    page.drawText(karakter.Mozgas().toString(), {
-        x: 162,
-        y: 416,
-        size: fontSizeBase * 2,
-        font: pdfFont,
-        color: rgb(0, 0, 0),
-    })
-    page.drawText(SignedNumberToText(karakter.Kezdemenyezes()), {
-        x: 505,
-        y: 416,
-        size: fontSizeBase * 2,
-        font: pdfFont,
-        color: rgb(0, 0, 0),
-    })
-    page.drawText(karakter.HP().toString(), {
-        x: 318,
-        y: 517,
-        size: fontSizeBase * 1.5,
-        font: pdfFont,
-        color: rgb(0, 0, 0),
-    })
-    page.drawText(karakter.VO().toString(), {
-        x: 368,
-        y: 495,
-        size: fontSizeBase * 3,
-        font: pdfFont,
-        color: rgb(0.5, 0.5, 0.5),
-    })
-    const kozelharciTB = SignedNumberToText(karakter.KozelharciTB())
-    page.drawText(kozelharciTB, {
-        x: 258,
-        y: 382,
-        size: kozelharciTB.length > 2 ? (fontSizeBase * 1.5) : fontSizeBase * 2,
-        font: pdfFont,
-        color: rgb(0, 0, 0),
-    })
-    const celzoTB = SignedNumberToText(karakter.CelzoTB())
-    page.drawText(celzoTB, {
-        x: 347,
-        y: 382,
-        size: celzoTB.length > 2 ? (fontSizeBase * 1.5) : fontSizeBase * 2,
-        font: pdfFont,
-        color: rgb(0, 0, 0),
-    })
-
+function drawMentok(page: PDFPage, karakter: Karakter, fontSizeBase: number, pdfFont: PDFFont) {
     page.drawText(SignedNumberToText(karakter.KitartasMentoAlap()), {
         x: 435,
         y: 613,
@@ -242,37 +159,122 @@ export async function CreatePDF(karakter: Karakter) {
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
+}
 
-    function DrawKepzettsegek(kepzettsegek: Kepzettseg[], startFrom: number) {
-        for (let i = 0; i < kepzettsegek.length; i++) {
-            let kepzettseg = kepzettsegek[i]
-            page.drawText(kepzettseg.Name, {
-                x: 60,
-                y: startFrom - (i * 18),
-                size: fontSizeBase,
-                font: pdfFont,
-                color: rgb(0, 0, 0),
-            })
-            const tulajdonsagErtek = kepzettseg.Tulajdonsag.reduce((maxTulajdonsagErtek, currentTulajdonsag) =>
-                (karakter.Tulajdonsagok[currentTulajdonsag] > maxTulajdonsagErtek)
-                    ? karakter.Tulajdonsagok[kepzettseg.Tulajdonsag[i]]
+function drawBaseInfo(karakter: Karakter, draw: (text: string, x : number ,y: number, scale: number) => void) {
+    draw(karakter.Name, 60, 710, 1)
+    draw(karakter.Nem, 454, 710, 1)
+    draw(karakter.Kor.toString(), 454, 690, 1)
+    draw(karakter.Isten, 454, 670, 1)
+    draw(OsztalyLabel(karakter.Osztaly), 60, 672, 1)
+    draw(karakter.Szint.toString(), 264, 682, 3)
+    draw(FajLabel(karakter.Faj), 304, 710, 1)
+}
+
+function DrawKepzettsegek(page: PDFPage, fontSizeBase: number, pdfFont: PDFFont, kepzettsegek: Kepzettseg[], tulajdonsagok: KarakterTulajdonsagok, szint: number, startFrom: number) {
+    for (let i = 0; i < kepzettsegek.length; i++) {
+        let kepzettseg = kepzettsegek[i]
+        page.drawText(kepzettseg.Name, {
+            x: 60,
+            y: startFrom - (i * 18),
+            size: fontSizeBase,
+            font: pdfFont,
+            color: rgb(0, 0, 0),
+        })
+        const tulajdonsagErtek = kepzettseg.Tulajdonsag.reduce((maxTulajdonsagErtek, currentTulajdonsag) =>
+                (tulajdonsagok[currentTulajdonsag] > maxTulajdonsagErtek)
+                    ? tulajdonsagok[kepzettseg.Tulajdonsag[i]]
                     : maxTulajdonsagErtek,
-                karakter.Tulajdonsagok[kepzettseg.Tulajdonsag[0]])
+            tulajdonsagok[kepzettseg.Tulajdonsag[0]])
 
-            const kepzettsegModifier = SignedNumberToText(Modifier(tulajdonsagErtek) + karakter.Szint)
-            page.drawText(kepzettsegModifier, {
-                x: kepzettsegModifier.length > 2 ? 172 : 175,
-                y: startFrom - (i * 18),
-                size: fontSizeBase,
-                font: pdfFont,
-                color: rgb(0, 0, 0),
-            })
-        }
+        const kepzettsegModifier = SignedNumberToText(Modifier(tulajdonsagErtek) + szint)
+        page.drawText(kepzettsegModifier, {
+            x: kepzettsegModifier.length > 2 ? 172 : 175,
+            y: startFrom - (i * 18),
+            size: fontSizeBase,
+            font: pdfFont,
+            color: rgb(0, 0, 0),
+        })
+    }
+}
+
+export async function CreatePDF(karakter: Karakter) {
+
+    const existingPdfBytes = await fetch('/km_karakterlap_hysteria_1.2.pdf').then(res => res.arrayBuffer())
+    const pdfDoc = await PDFDocument.load(existingPdfBytes)
+    pdfDoc.registerFontkit(fontkit)
+
+    const fontBytes = await fetch('/Merienda-Regular.ttf').then(res => res.arrayBuffer())
+    const pdfFont = await pdfDoc.embedFont(fontBytes)
+    // const pdfFont = await pdfDoc.embedFont(StandardFonts.TimesNewRoman)
+    const fontSizeBase = 12
+
+    const page = pdfDoc.getPage(0)
+
+    function drawText(text: string, x: number, y: number, fontScale = 1, shade = 0) {
+        page.drawText(text, {
+            x: x,
+            y: y,
+            size: fontSizeBase * fontScale,
+            font: pdfFont,
+            color: rgb(shade, shade, shade),
+        })
     }
 
-    DrawKepzettsegek(karakter.Kepzettsegek, 337);
+    drawBaseInfo(karakter, drawText);
+
+    drawTulajdonsagok(page, karakter.Tulajdonsagok, fontSizeBase, pdfFont);
+
+    page.drawText(karakter.Mozgas().toString(), {
+        x: 162,
+        y: 416,
+        size: fontSizeBase * 2,
+        font: pdfFont,
+        color: rgb(0, 0, 0),
+    })
+    page.drawText(SignedNumberToText(karakter.Kezdemenyezes()), {
+        x: 505,
+        y: 416,
+        size: fontSizeBase * 2,
+        font: pdfFont,
+        color: rgb(0, 0, 0),
+    })
+    page.drawText(karakter.HP().toString(), {
+        x: 318,
+        y: 517,
+        size: fontSizeBase * 1.5,
+        font: pdfFont,
+        color: rgb(0, 0, 0),
+    })
+    page.drawText(karakter.VO().toString(), {
+        x: 368,
+        y: 495,
+        size: fontSizeBase * 3,
+        font: pdfFont,
+        color: rgb(0.75, 0.75, 0.75),
+    })
+    const kozelharciTB = SignedNumberToText(karakter.KozelharciTB())
+    page.drawText(kozelharciTB, {
+        x: 258,
+        y: 382,
+        size: kozelharciTB.length > 2 ? (fontSizeBase * 1.5) : fontSizeBase * 2,
+        font: pdfFont,
+        color: rgb(0, 0, 0),
+    })
+    const celzoTB = SignedNumberToText(karakter.CelzoTB())
+    page.drawText(celzoTB, {
+        x: 347,
+        y: 382,
+        size: celzoTB.length > 2 ? (fontSizeBase * 1.5) : fontSizeBase * 2,
+        font: pdfFont,
+        color: rgb(0, 0, 0),
+    })
+
+    drawMentok(page, karakter, fontSizeBase, pdfFont);
+
+    DrawKepzettsegek(page, fontSizeBase, pdfFont, karakter.Kepzettsegek, karakter.Tulajdonsagok, karakter.Szint, 337);
     const nextKepzettsegFrom = 337 - (karakter.Kepzettsegek.length * 18)
-    DrawKepzettsegek(karakter.TolvajKepzettsegek, nextKepzettsegFrom)
+    DrawKepzettsegek(page, fontSizeBase, pdfFont, karakter.TolvajKepzettsegek, karakter.Tulajdonsagok, karakter.Szint, nextKepzettsegFrom)
 
     const pdfBytes = await pdfDoc.save();
     download(pdfBytes, karakter.Name + ".pdf", "application/pdf");
