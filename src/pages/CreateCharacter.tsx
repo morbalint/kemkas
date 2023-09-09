@@ -8,7 +8,7 @@ import OsztalySelector from "../components/OsztalySelector";
 import KarakterKepzettsegek from "../components/KarakterKepzettsegek";
 import {KarakterTulajdonsagok, Modifier} from "../domain-models/tulajdonsag";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
-import {AvailableKezpettsegList, KepzettsegId, TolvajKepzettsegList} from "../domain-models/kepzettsegek";
+import {AvailableKezpettsegList, Kepzettsegek, KepzettsegId, TolvajKepzettsegList} from "../domain-models/kepzettsegek";
 import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
 import {CreatePDF} from "../pdf/character.pdf";
 import {KarakterClass} from "../domain-models/karakter";
@@ -55,6 +55,15 @@ function CreateCharacterPage() {
         tolvajKepzettsegek = TolvajKepzettsegList.slice(0, 4).map(x => x.Id)
         changeTolvajKepzettsegek(tolvajKepzettsegek)
     }
+
+    const karakter = () => new KarakterClass(
+        name,
+        faj,
+        osztaly,
+        tulajdonsagok,
+        kepzettsegek.map(k => Kepzettsegek[k]),
+        osztaly === Osztaly.Tolvaj ? tolvajKepzettsegek.map(k => Kepzettsegek[k]) : []
+    )
 
     return (
         <div>
@@ -105,7 +114,7 @@ function CreateCharacterPage() {
                     <MasodlagosErtekek ertekek={CalculateMasodlagosErtekek(osztaly, tulajdonsagok)} />
 
                     <div className='d-grid gap-2 m-5'>
-                        <button className='btn btn-danger btn-lg' type='button' onClick={async () =>  await CreatePDF(new KarakterClass(name, faj, osztaly, tulajdonsagok))}>Létrehozás</button>
+                        <button className='btn btn-danger btn-lg' type='button' onClick={async () =>  await CreatePDF(karakter())}>Létrehozás</button>
                     </div>
                 </form>
             </div>

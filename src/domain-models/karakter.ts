@@ -2,12 +2,14 @@ import {Faj} from "./faj";
 import {Osztaly} from "./osztaly";
 import {KarakterTulajdonsagok, Modifier} from "./tulajdonsag";
 import {CalculateMasodlagosErtekek, KarakterMasodlagosErtekek} from "./masodlagos_ertekek";
+import {Kepzettseg} from "./kepzettsegek";
 
 export interface Karakter {
     Name: string
     Faj: Faj
     Osztaly: Osztaly
     Tulajdonsagok: KarakterTulajdonsagok,
+    Szint: number
     MasodlagosErtekek: KarakterMasodlagosErtekek
     HP: () => number
     VO: () => number
@@ -18,6 +20,8 @@ export interface Karakter {
     KitartasMentoAlap: () => number
     ReflexMentoAlap: () => number
     AkarateroMentoAlap: () => number
+    Kepzettsegek: Kepzettseg[]
+    TolvajKepzettsegek: Kepzettseg[]
 }
 
 export class KarakterClass implements Karakter {
@@ -26,14 +30,26 @@ export class KarakterClass implements Karakter {
     public Faj : Faj
     public Osztaly : Osztaly
     public Tulajdonsagok : KarakterTulajdonsagok
+    public Szint : number = 1
     public MasodlagosErtekek : KarakterMasodlagosErtekek
+    public Kepzettsegek: Kepzettseg[]
+    public TolvajKepzettsegek: Kepzettseg[]
 
-    constructor(name: string, faj: Faj, osztaly: Osztaly, tulajdonsagok: KarakterTulajdonsagok) {
+    constructor(
+        name: string,
+        faj: Faj,
+        osztaly: Osztaly,
+        tulajdonsagok: KarakterTulajdonsagok,
+        kepzettsegek: Kepzettseg[],
+        tolvajKepzettsegek: Kepzettseg[] = []
+    ) {
         this.Name = name
         this.Faj = faj
         this.Osztaly = osztaly
         this.Tulajdonsagok = tulajdonsagok
         this.MasodlagosErtekek = CalculateMasodlagosErtekek(osztaly, tulajdonsagok)
+        this.Kepzettsegek = kepzettsegek
+        this.TolvajKepzettsegek = tolvajKepzettsegek
     }
 
     public HP = () => this.MasodlagosErtekek.HP

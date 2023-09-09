@@ -34,7 +34,7 @@ export const KepzettsegLista: Kepzettseg[] = [
     },
     {
         Id: 'k_csapdak',
-        Name: 'Csapdák állítása/eltávolítása',
+        Name: 'Csapdák állítása',
         Description: 'A karakter a rendelkezésre álló idő és alapanyagok függvényében készíthet szimpla vagy komplex csapdákat. Ha egy csapda eltávolítására tett próba sikertelen, az bizonyos eséllyel kisülhet és veszélybe sodorhatja az óvatlan próbálkozót.',
         Tulajdonsag: [Tulajdonsag.Ugyesseg],
         Osztalyok: [Osztaly.Tolvaj],
