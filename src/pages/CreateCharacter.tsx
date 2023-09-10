@@ -8,10 +8,11 @@ import OsztalySelector from "../components/OsztalySelector";
 import KarakterKepzettsegek from "../components/KarakterKepzettsegek";
 import {KarakterTulajdonsagok, Modifier} from "../domain-models/tulajdonsag";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
-import {AvailableKezpettsegList, Kepzettsegek, KepzettsegId, TolvajKepzettsegList} from "../domain-models/kepzettsegek";
+import {AvailableKezpettsegList, TolvajKepzettsegList} from "../domain-models/kepzettsegek";
 import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
 import {CreatePDF} from "../pdf/character.pdf";
-import {KarakterClass} from "../domain-models/karakter";
+import {KarakterClass, KarakterInputs} from "../domain-models/karakter";
+import Level2 from "../components/Level2";
 
 const tulajdonsagDefaults: KarakterTulajdonsagok = {
     t_ero: 10,
@@ -20,6 +21,17 @@ const tulajdonsagDefaults: KarakterTulajdonsagok = {
     t_int: 10,
     t_bol: 10,
     t_kar: 10,
+}
+
+const karakterDefaults: KarakterInputs = {
+    name: "Névtelen Kalandozó",
+    faj: Faj.Ember,
+    kor: 20,
+    tulajdonsagok: tulajdonsagDefaults,
+    osztaly: Osztaly.Harcos,
+    kepzettsegek: [],
+    szint: 1,
+    HProlls: [],
 }
 
 function getNumberOfKepzettsegek(t_int: number, faj: Faj, max: number) {
@@ -38,38 +50,25 @@ function getNumberOfKepzettsegek(t_int: number, faj: Faj, max: number) {
 
 function CreateCharacterPage() {
 
-    let [name, changeName] = useState<string>("Névtelen kalandozó")
-    let [nem, changeNem] = useState<string>("")
-    let [kor, changeKor] = useState<number>(20)
-    let [isten, changeIsten] = useState<string>("")
-    let [faj, changeFaj] = useState(Faj.Ember)
-    let [tulajdonsagok, changeTulajdonsagok] = useState(tulajdonsagDefaults)
-    let [osztaly, changeOsztaly] = useState<Osztaly>(Osztaly.Harcos)
-    let [kepzettsegek, changeKepzettsegek] = useState<KepzettsegId[]>([])
-    let [tolvajKepzettsegek, changeTolvajKepzettsegek] = useState<KepzettsegId[]>([])
+    let [karakter, changeKarakter] = useState(karakterDefaults)
 
-    const availableKepzettsegList = AvailableKezpettsegList(osztaly)
+    const availableKepzettsegList = AvailableKezpettsegList(karakter.osztaly)
 
-    if (osztaly !== Osztaly.Tolvaj && tolvajKepzettsegek.length > 0) {
-        tolvajKepzettsegek = []
-        changeTolvajKepzettsegek([])
+    if (karakter.osztaly !== Osztaly.Tolvaj && karakter.tolvajKepzettsegek != null) {
+        changeKarakter({...karakter, tolvajKepzettsegek: undefined})
     }
-    if (osztaly === Osztaly.Tolvaj && tolvajKepzettsegek.length === 0) {
-        tolvajKepzettsegek = TolvajKepzettsegList.slice(0, 4).map(x => x.Id)
-        changeTolvajKepzettsegek(tolvajKepzettsegek)
+    if (karakter.osztaly === Osztaly.Tolvaj && (karakter.tolvajKepzettsegek == null || karakter.tolvajKepzettsegek.length === 0)) {
+        const tolvajKepzettsegek = TolvajKepzettsegList.slice(0, 4).map(x => x.Id)
+        changeKarakter({...karakter, tolvajKepzettsegek: tolvajKepzettsegek})
     }
 
-    const karakter = () => new KarakterClass(
-        name,
-        nem,
-        kor,
-        isten,
-        faj,
-        osztaly,
-        tulajdonsagok,
-        kepzettsegek.map(k => Kepzettsegek[k]),
-        osztaly === Osztaly.Tolvaj ? tolvajKepzettsegek.map(k => Kepzettsegek[k]) : []
-    )
+    function levelUp() {
+        changeKarakter({...karakter, szint: karakter.szint + 1, HProlls: [...karakter.HProlls, 1]})
+    }
+
+    function levelDown() {
+        changeKarakter({...karakter, szint: karakter.szint - 1, HProlls: karakter.HProlls.slice(0, karakter.HProlls.length - 1)})
+    }
 
     return (
         <div>
@@ -84,62 +83,69 @@ function CreateCharacterPage() {
                     <div className='row m-2'>
                         <label className='col-md-2 col-sm-3 col-form-label' >Név</label>
                         <input className='col form-control'
-                               value={name}
-                               onChange={(e) => changeName(e.target.value)}/>
-                        {!name && <span className='form-field-error'>A karaktered nem mászkálhat névtelenül a világban!</span>}
+                               value={karakter.name}
+                               onChange={(e) => changeKarakter({...karakter, name: e.target.value})}/>
+                        {!karakter.name && <span className='form-field-error'>A karaktered nem mászkálhat névtelenül a világban!</span>}
                     </div>
                     <div className='row m-2'>
                         <label className='col-md-2 col-sm-3 col-form-label' >Nem</label>
                         <input className='col form-control'
-                               value={nem}
-                               onChange={(e) => changeNem(e.target.value)}/>
+                               value={karakter.nem}
+                               onChange={(e) => changeKarakter({...karakter, nem: e.target.value})}/>
                     </div>
                     <div className='row m-2'>
                         <label className='col-md-2 col-sm-3 col-form-label' >Kor</label>
                         <input className='col form-control'
-                               value={kor}
+                               value={karakter.kor}
                                type={"number"}
-                               onChange={(e) => changeKor(Number(e.target.value))}/>
+                               onChange={(e) => changeKarakter({...karakter, kor: Number(e.target.value)})}/>
                     </div>
                     <div className='row m-2'>
                         <label className='col-md-2 col-sm-3 col-form-label' >Választott istenség</label>
                         <input className='col form-control'
-                               value={isten}
-                               onChange={(e) => changeIsten(e.target.value)}/>
+                               value={karakter.isten}
+                               onChange={(e) => changeKarakter({...karakter, isten: e.target.value})}/>
                     </div>
                     <FajSelector
-                        changeFaj={changeFaj}
-                        faj={faj}
+                        changeFaj={(faj: Faj) => changeKarakter({...karakter, faj: faj})}
+                        faj={karakter.faj}
                     />
                     <hr/>
                     <Tulajdonsagok
-                        currentFaj={faj}
-                        tulajdonsagok={tulajdonsagok}
-                        changeTulajdonsagok={changeTulajdonsagok}
+                        currentFaj={karakter.faj}
+                        tulajdonsagok={karakter.tulajdonsagok}
+                        changeTulajdonsagok={(tul: KarakterTulajdonsagok) => changeKarakter({...karakter, tulajdonsagok: tul})}
                     />
                     <hr />
                     <div className='row'>
                         <h5 className='col align-self-center'>Tanult</h5>
                     </div>
                     <OsztalySelector
-                        currentFaj={faj}
-                        currentOsztaly={osztaly}
-                        changeOsztaly={changeOsztaly}
+                        currentFaj={karakter.faj}
+                        currentOsztaly={karakter.osztaly}
+                        changeOsztaly={(o: Osztaly) => changeKarakter({...karakter, osztaly: o})}
                     />
                     <KarakterKepzettsegek
                         availableKepzettsegList={availableKepzettsegList}
-                        numberOfKepzettsegek={getNumberOfKepzettsegek(tulajdonsagok.t_int, faj, availableKepzettsegList.length)}
-                        kepzettsegek={kepzettsegek}
-                        changeKepzettsegek={changeKepzettsegek}
-                        tolvajKepzettsegek={tolvajKepzettsegek}
-                        changeTolvajKepzettsegek={changeTolvajKepzettsegek}
+                        numberOfKepzettsegek={getNumberOfKepzettsegek(karakter.tulajdonsagok.t_int, karakter.faj, availableKepzettsegList.length)}
+                        kepzettsegek={karakter.kepzettsegek}
+                        changeKepzettsegek={(ks) => changeKarakter({...karakter, kepzettsegek: ks}) }
+                        tolvajKepzettsegek={karakter.tolvajKepzettsegek || []}
+                        changeTolvajKepzettsegek={(tks) => changeKarakter({...karakter, tolvajKepzettsegek: tks})}
                     />
 
                     <hr />
-                    <MasodlagosErtekek ertekek={CalculateMasodlagosErtekek(osztaly, tulajdonsagok)} />
+                    <MasodlagosErtekek ertekek={CalculateMasodlagosErtekek(karakter.osztaly, karakter.tulajdonsagok)} />
+
+                    {karakter.szint > 1 && <Level2 osztaly={karakter.osztaly} rolledHP={karakter.HProlls[0]} t_egs={karakter.tulajdonsagok.t_egs} /> }
 
                     <div className='d-grid gap-2 m-5'>
-                        <button className='btn btn-danger btn-lg' type='button' onClick={async () =>  await CreatePDF(karakter())}>Létrehozás</button>
+                        {karakter.szint < 2 && <button className='btn btn-dark btn-lg' type='button' onClick={levelUp}>Szintlépés! ⇧</button> }
+                        {karakter.szint > 1 && <button className='btn btn-dark btn-lg' type='button' onClick={levelDown}>Visszalépés! ⇩</button> }
+                    </div>
+
+                    <div className='d-grid gap-2 m-5'>
+                        <button className='btn btn-danger btn-lg' type='button' onClick={async () =>  await CreatePDF(new KarakterClass(karakter))}>Létrehozás</button>
                     </div>
                 </form>
             </div>

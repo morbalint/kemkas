@@ -26,33 +26,33 @@ function MasodlagosErtekek(props: {ertekek: KarakterMasodlagosErtekek}) {
                                 <span>(HP)</span>
                             </OverlayTrigger>
                         </label>
-                    <p className='col'>{ertekek.HP}</p>
+                    <p className='col col-form-label'>{ertekek.HP}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Védekezési Osztály (VO)</label>
-                    <p className='col'>{ertekek.VO}</p>
+                    <p className='col col-form-label'>{ertekek.VO}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Közelharci támadás</label>
-                    <p className='col'>{SignedNumberToText(ertekek.KozelHarciTB)}</p>
+                    <p className='col col-form-label'>{SignedNumberToText(ertekek.KozelHarciTB)}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Célzó támadás</label>
-                    <p className='col'>{SignedNumberToText(ertekek.CelzoTB)}</p>
+                    <p className='col col-form-label'>{SignedNumberToText(ertekek.CelzoTB)}</p>
                 </div>
             </div>
             <div className='col-lg-6'>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Kitartás mentő</label>
-                    <p className='col'>{SignedNumberToText(ertekek.KitartasMento)}</p>
+                    <p className='col col-form-label'>{SignedNumberToText(ertekek.KitartasMento)}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Reflex mentő</label>
-                    <p className='col'>{SignedNumberToText(ertekek.ReflexMento)}</p>
+                    <p className='col col-form-label'>{SignedNumberToText(ertekek.ReflexMento)}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Akaraterő mentő </label>
-                    <p className='col'>{SignedNumberToText(ertekek.AkarateroMento)}</p>
+                    <p className='col col-form-label'>{SignedNumberToText(ertekek.AkarateroMento)}</p>
                 </div>
             </div>
         </div>
