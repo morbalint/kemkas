@@ -3,6 +3,7 @@ import {Osztaly} from "./osztaly";
 import {KarakterTulajdonsagok, Modifier} from "./tulajdonsag";
 import {CalculateMasodlagosErtekek, KarakterMasodlagosErtekek} from "./masodlagos_ertekek";
 import {Kepzettseg, Kepzettsegek, KepzettsegId} from "./kepzettsegek";
+import TamadasBonuszTabla from './tamadas_bonus_tabla.json';
 
 export interface Karakter {
     Name: string
@@ -17,8 +18,8 @@ export interface Karakter {
     VO: () => number
     Mozgas: () => number
     Kezdemenyezes: () => number
-    KozelharciTB: () => number
-    CelzoTB: () => number
+    KozelharciTB: () => number[]
+    CelzoTB: () => number[]
     KitartasMentoAlap: () => number
     ReflexMentoAlap: () => number
     AkarateroMentoAlap: () => number
@@ -54,6 +55,7 @@ export class KarakterClass implements Karakter {
     public TolvajKepzettsegek: Kepzettseg[]
 
     private MasodlagosErtekek : KarakterMasodlagosErtekek
+    private HProlls: number[]
 
     constructor(inputs: KarakterInputs) {
         this.Name = inputs.name
@@ -66,10 +68,14 @@ export class KarakterClass implements Karakter {
         this.MasodlagosErtekek = CalculateMasodlagosErtekek(inputs.osztaly, inputs.tulajdonsagok)
         this.Kepzettsegek = inputs.kepzettsegek.map(k => Kepzettsegek[k])
         this.TolvajKepzettsegek = (inputs.tolvajKepzettsegek || []).map(k => Kepzettsegek[k])
-        this.Szint = inputs.szint
+        this.Szint = Math.min(Math.max(1,inputs.szint), 20)
+        this.HProlls = inputs.HProlls
     }
 
-    public HP = () => this.MasodlagosErtekek.HP
+    public HP = () => this.baseHP() + Modifier(this.Tulajdonsagok.t_egs) + this.HProlls
+            // https://lfg.hu/forum/topic/15079-kard-es-magia/page/219/#comment-2218333
+            .map(hp => Math.max(1, hp + Modifier(this.Tulajdonsagok.t_egs)))
+            .reduce((sum, val) => sum + val, 0)
 
     public VO = () => this.MasodlagosErtekek.VO
 
@@ -79,32 +85,42 @@ export class KarakterClass implements Karakter {
         return Modifier(this.Tulajdonsagok.t_ugy) + (this.Osztaly === Osztaly.Tolvaj ? 4 : 0)
     }
 
-    public TamadasBonusz() : number {
+    public TamadasBonusz() : number[] {
+        let base = []
         switch (this.Osztaly){
             case Osztaly.Barbar:
             case Osztaly.Amazon:
             case Osztaly.Ijasz:
             case Osztaly.Kaloz:
             case Osztaly.Harcos:
-                return 2;
+                base = TamadasBonuszTabla['elsodleges'];
+                break;
             case Osztaly.Pap:
             case Osztaly.Tolvaj:
-                return 0;
+                base = TamadasBonuszTabla['ketharmados'];
+                break;
             case Osztaly.Varazslo:
             case Osztaly.Illuzionista:
-                return 0;
+                base = TamadasBonuszTabla['feles'];
+                break;
         }
+        return base[this.Szint-1]
     }
 
-    public KozelharciTB(): number {
+    public KozelharciTB(): number[] {
         const base = this.TamadasBonusz();
+        let modifier = Modifier(this.Tulajdonsagok.t_ero)
         if (this.Osztaly === Osztaly.Kaloz && this.Tulajdonsagok.t_ugy > this.Tulajdonsagok.t_ero) {
-            return base + Modifier(this.Tulajdonsagok.t_ugy)
+            modifier = Modifier(this.Tulajdonsagok.t_ugy)
         }
-        return base + Modifier(this.Tulajdonsagok.t_ero)
+        return base.map(v => v + modifier)
     }
-    public CelzoTB(): number {
-        return this.TamadasBonusz() + Modifier(this.Tulajdonsagok.t_ugy)
+    public CelzoTB(): number[] {
+        let base = this.TamadasBonusz()
+        if (this.Osztaly === Osztaly.Ijasz) {
+            base = [base[0], ...base]
+        }
+        return base.map(v => v + Modifier(this.Tulajdonsagok.t_ugy))
     }
 
     public KitartasMentoAlap() : number {
@@ -153,5 +169,31 @@ export class KarakterClass implements Karakter {
             case Osztaly.Harcos:
                 return 0;
         }
+    }
+
+    public baseHP() {
+        let base = 4;
+        switch (this.Osztaly){
+            case Osztaly.Barbar:
+                base = 12
+                break;
+            case Osztaly.Amazon:
+            case Osztaly.Ijasz:
+            case Osztaly.Kaloz:
+            case Osztaly.Harcos:
+                base = 10;
+                break
+            case Osztaly.Pap:
+                base = 8;
+                break;
+            case Osztaly.Tolvaj:
+                base = 6;
+                break;
+            case Osztaly.Varazslo:
+            case Osztaly.Illuzionista:
+                base = 4;
+                break;
+        }
+        return base
     }
 }

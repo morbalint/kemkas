@@ -14,7 +14,7 @@ function OsztalySelector(props: {currentFaj: Faj, currentOsztaly: Osztaly, chang
     return <>
         <div className='row m-2'>
             <label className='col-md-2 col-sm-3 col-form-label'>Osztály</label>
-            <select className="col form-select" defaultValue={Osztaly.Harcos} value={currentOsztaly} onChange={(e) => changeOsztaly(e.target.value as Osztaly)} >
+            <select className="col form-select" value={currentOsztaly} onChange={(e) => changeOsztaly(e.target.value as Osztaly)} >
                 <optgroup label='Harcos'>
                     <option value={Osztaly.Harcos}>{OsztalyLabel(Osztaly.Harcos)}</option>
                     {currentFaj === Faj.Amazon && (

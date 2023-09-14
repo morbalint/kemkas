@@ -13,6 +13,7 @@ import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
 import {CreatePDF} from "../pdf/character.pdf";
 import {KarakterClass, KarakterInputs} from "../domain-models/karakter";
 import Level2 from "../components/Level2";
+import {getRandomInt} from "../domain-models/kockak";
 
 const tulajdonsagDefaults: KarakterTulajdonsagok = {
     t_ero: 10,
@@ -63,11 +64,19 @@ function CreateCharacterPage() {
     }
 
     function levelUp() {
-        changeKarakter({...karakter, szint: karakter.szint + 1, HProlls: [...karakter.HProlls, 1]})
+        const dice = new KarakterClass(karakter).baseHP()
+        const roll = getRandomInt(dice)
+        console.log(`Level 2 HP roll on d${dice} is: ${roll}`)
+        changeKarakter({...karakter, szint: karakter.szint + 1, HProlls: [...karakter.HProlls, roll]})
     }
 
     function levelDown() {
-        changeKarakter({...karakter, szint: karakter.szint - 1, HProlls: karakter.HProlls.slice(0, karakter.HProlls.length - 1)})
+        changeKarakter({...karakter, szint: karakter.szint - 1, HProlls: karakter.HProlls.slice(0, -1)})
+    }
+
+    function chageLevel2HProll(newHProll: number) {
+        changeKarakter({...karakter, HProlls: [newHProll, ...karakter.HProlls.slice(1)]})
+        console.log(karakter)
     }
 
     return (
@@ -137,7 +146,7 @@ function CreateCharacterPage() {
                     <hr />
                     <MasodlagosErtekek ertekek={CalculateMasodlagosErtekek(karakter.osztaly, karakter.tulajdonsagok)} />
 
-                    {karakter.szint > 1 && <Level2 osztaly={karakter.osztaly} rolledHP={karakter.HProlls[0]} t_egs={karakter.tulajdonsagok.t_egs} /> }
+                    {karakter.szint > 1 && <Level2 karakter={{...karakter}} rolledHP={karakter.HProlls[0]} changeRolledHP={chageLevel2HProll} /> }
 
                     <div className='d-grid gap-2 m-5'>
                         {karakter.szint < 2 && <button className='btn btn-dark btn-lg' type='button' onClick={levelUp}>Szintlépés! ⇧</button> }

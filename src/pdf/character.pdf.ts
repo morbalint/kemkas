@@ -253,19 +253,19 @@ export async function CreatePDF(karakter: Karakter) {
         font: pdfFont,
         color: rgb(0.75, 0.75, 0.75),
     })
-    const kozelharciTB = SignedNumberToText(karakter.KozelharciTB())
+    const kozelharciTB = karakter.KozelharciTB().map(SignedNumberToText).join("/")
     page.drawText(kozelharciTB, {
-        x: 258,
-        y: 382,
-        size: kozelharciTB.length > 2 ? (fontSizeBase * 1.5) : fontSizeBase * 2,
+        x: 254,
+        y: kozelharciTB.length > 2 ? 386 : 382,
+        size: kozelharciTB.length > 2 ? fontSizeBase : fontSizeBase * 2,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    const celzoTB = SignedNumberToText(karakter.CelzoTB())
+    const celzoTB = karakter.CelzoTB().map(SignedNumberToText).join("/")
     page.drawText(celzoTB, {
-        x: 347,
-        y: 382,
-        size: celzoTB.length > 2 ? (fontSizeBase * 1.5) : fontSizeBase * 2,
+        x: 344,
+        y: celzoTB.length > 2 ? 386 : 382,
+        size: celzoTB.length > 5 ? fontSizeBase * 0.5 : celzoTB.length > 2 ? fontSizeBase : fontSizeBase * 2,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })

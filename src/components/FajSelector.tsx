@@ -6,7 +6,7 @@ function FajSelector(props: { faj: Faj, changeFaj: (val: Faj) => void }) {
     return <>
         <div className='row m-2'>
             <label className='col-md-2 col-sm-3 col-form-label'>Faj</label>
-            <select className='col form-select' defaultValue={Faj.Ember} value={faj} onChange={e => changeFaj(e.target.value as Faj)}>
+            <select className='col form-select' value={faj} onChange={e => changeFaj(e.target.value as Faj)}>
                 <option key={Faj.Ember} value={Faj.Ember}>{FajLabel(Faj.Ember)}</option>
                 <optgroup label='más emberi népek'>
                     <option key={Faj.Amazon} value={Faj.Amazon}>{FajLabel(Faj.Amazon)}</option>
