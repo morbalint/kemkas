@@ -96,21 +96,22 @@ function drawTulajdonsagok(page: PDFPage, tulajdonsagok: KarakterTulajdonsagok, 
 }
 
 function drawMentok(page: PDFPage, karakter: Karakter, fontSizeBase: number, pdfFont: PDFFont) {
-    page.drawText(SignedNumberToText(karakter.KitartasMentoAlap()), {
+    const mentokAlap = karakter.MentokAlap()
+    page.drawText(SignedNumberToText(mentokAlap.kitartas), {
         x: 435,
         y: 613,
         size: fontSizeBase,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(SignedNumberToText(karakter.ReflexMentoAlap()), {
+    page.drawText(SignedNumberToText(mentokAlap.reflex), {
         x: 435,
         y: 580,
         size: fontSizeBase,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(SignedNumberToText(karakter.AkarateroMentoAlap()), {
+    page.drawText(SignedNumberToText(mentokAlap.akaratero), {
         x: 435,
         y: 547,
         size: fontSizeBase,
@@ -138,21 +139,22 @@ function drawMentok(page: PDFPage, karakter: Karakter, fontSizeBase: number, pdf
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(SignedNumberToText(karakter.KitartasMentoAlap() + Modifier(karakter.Tulajdonsagok.t_egs)), {
+    const mentok = karakter.MentokTulajdonsaggal()
+    page.drawText(SignedNumberToText(mentok.kitartas), {
         x: 515,
         y: 613,
         size: fontSizeBase,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(SignedNumberToText(karakter.ReflexMentoAlap() + Modifier(karakter.Tulajdonsagok.t_ugy)), {
+    page.drawText(SignedNumberToText(mentok.reflex), {
         x: 515,
         y: 580,
         size: fontSizeBase,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(SignedNumberToText(karakter.AkarateroMentoAlap() + Modifier(karakter.Tulajdonsagok.t_bol)), {
+    page.drawText(SignedNumberToText(mentok.akaratero), {
         x: 515,
         y: 547,
         size: fontSizeBase,

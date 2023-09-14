@@ -9,7 +9,6 @@ import KarakterKepzettsegek from "../components/KarakterKepzettsegek";
 import {KarakterTulajdonsagok, Modifier} from "../domain-models/tulajdonsag";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
 import {AvailableKezpettsegList, TolvajKepzettsegList} from "../domain-models/kepzettsegek";
-import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
 import {CreatePDF} from "../pdf/character.pdf";
 import {KarakterClass, KarakterInputs} from "../domain-models/karakter";
 import Level2 from "../components/Level2";
@@ -52,6 +51,7 @@ function getNumberOfKepzettsegek(t_int: number, faj: Faj, max: number) {
 function CreateCharacterPage() {
 
     let [karakter, changeKarakter] = useState(karakterDefaults)
+    const karakterClass = new KarakterClass(karakter)
 
     const availableKepzettsegList = AvailableKezpettsegList(karakter.osztaly)
 
@@ -64,7 +64,7 @@ function CreateCharacterPage() {
     }
 
     function levelUp() {
-        const dice = new KarakterClass(karakter).baseHP()
+        const dice = karakterClass.baseHP()
         const roll = getRandomInt(dice)
         console.log(`Level 2 HP roll on d${dice} is: ${roll}`)
         changeKarakter({...karakter, szint: karakter.szint + 1, HProlls: [...karakter.HProlls, roll]})
@@ -144,7 +144,7 @@ function CreateCharacterPage() {
                     />
 
                     <hr />
-                    <MasodlagosErtekek ertekek={CalculateMasodlagosErtekek(karakter.osztaly, karakter.tulajdonsagok)} />
+                    <MasodlagosErtekek karakter={karakterClass} />
 
                     {karakter.szint > 1 && <Level2 karakter={{...karakter}} rolledHP={karakter.HProlls[0]} changeRolledHP={chageLevel2HProll} /> }
 
@@ -154,7 +154,7 @@ function CreateCharacterPage() {
                     </div>
 
                     <div className='d-grid gap-2 m-5'>
-                        <button className='btn btn-danger btn-lg' type='button' onClick={async () =>  await CreatePDF(new KarakterClass(karakter))}>Létrehozás</button>
+                        <button className='btn btn-danger btn-lg' type='button' onClick={async () =>  await CreatePDF(karakterClass)}>Létrehozás</button>
                     </div>
                 </form>
             </div>

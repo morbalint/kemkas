@@ -1,9 +1,9 @@
 import {Faj} from "./faj";
 import {Osztaly} from "./osztaly";
 import {KarakterTulajdonsagok, Modifier} from "./tulajdonsag";
-import {CalculateMasodlagosErtekek, KarakterMasodlagosErtekek} from "./masodlagos_ertekek";
 import {Kepzettseg, Kepzettsegek, KepzettsegId} from "./kepzettsegek";
 import TamadasBonuszTabla from './tamadas_bonus_tabla.json';
+import {ElsodlegesMento, MasodlagosMento, Mentok, MentoTipus} from "./mentok";
 
 export interface Karakter {
     Name: string
@@ -18,11 +18,11 @@ export interface Karakter {
     VO: () => number
     Mozgas: () => number
     Kezdemenyezes: () => number
-    KozelharciTB: () => number[]
-    CelzoTB: () => number[]
-    KitartasMentoAlap: () => number
-    ReflexMentoAlap: () => number
-    AkarateroMentoAlap: () => number
+    KozelharciTB: (szint?: number) => number[]
+    CelzoTB: (szint?: number) => number[]
+    ElsodlegesMentok: () => MentoTipus[]
+    MentokAlap: (szint?: number) => Mentok
+    MentokTulajdonsaggal: (szint?: number) => Mentok
     Kepzettsegek: Kepzettseg[]
     TolvajKepzettsegek: Kepzettseg[]
 }
@@ -54,7 +54,6 @@ export class KarakterClass implements Karakter {
     public Kepzettsegek: Kepzettseg[]
     public TolvajKepzettsegek: Kepzettseg[]
 
-    private MasodlagosErtekek : KarakterMasodlagosErtekek
     private HProlls: number[]
 
     constructor(inputs: KarakterInputs) {
@@ -65,7 +64,6 @@ export class KarakterClass implements Karakter {
         this.Faj = inputs.faj
         this.Osztaly = inputs.osztaly
         this.Tulajdonsagok = inputs.tulajdonsagok
-        this.MasodlagosErtekek = CalculateMasodlagosErtekek(inputs.osztaly, inputs.tulajdonsagok)
         this.Kepzettsegek = inputs.kepzettsegek.map(k => Kepzettsegek[k])
         this.TolvajKepzettsegek = (inputs.tolvajKepzettsegek || []).map(k => Kepzettsegek[k])
         this.Szint = Math.min(Math.max(1,inputs.szint), 20)
@@ -77,7 +75,7 @@ export class KarakterClass implements Karakter {
             .map(hp => Math.max(1, hp + Modifier(this.Tulajdonsagok.t_egs)))
             .reduce((sum, val) => sum + val, 0)
 
-    public VO = () => this.MasodlagosErtekek.VO
+    public VO = () => 10 + Modifier(this.Tulajdonsagok.t_ugy)
 
     public Mozgas = () => this.Faj === Faj.Torpe ? 20 : 30
 
@@ -85,7 +83,7 @@ export class KarakterClass implements Karakter {
         return Modifier(this.Tulajdonsagok.t_ugy) + (this.Osztaly === Osztaly.Tolvaj ? 4 : 0)
     }
 
-    public TamadasBonusz() : number[] {
+    public TamadasBonusz(szint: number = this.Szint) : number[] {
         let base = []
         switch (this.Osztaly){
             case Osztaly.Barbar:
@@ -104,70 +102,64 @@ export class KarakterClass implements Karakter {
                 base = TamadasBonuszTabla['feles'];
                 break;
         }
-        return base[this.Szint-1]
+        return base[szint-1]
     }
 
-    public KozelharciTB(): number[] {
-        const base = this.TamadasBonusz();
+    public KozelharciTB(szint: number = this.Szint): number[] {
+        const base = this.TamadasBonusz(szint);
         let modifier = Modifier(this.Tulajdonsagok.t_ero)
         if (this.Osztaly === Osztaly.Kaloz && this.Tulajdonsagok.t_ugy > this.Tulajdonsagok.t_ero) {
             modifier = Modifier(this.Tulajdonsagok.t_ugy)
         }
         return base.map(v => v + modifier)
     }
-    public CelzoTB(): number[] {
-        let base = this.TamadasBonusz()
+    public CelzoTB(szint: number = this.Szint): number[] {
+        let base = this.TamadasBonusz(szint)
         if (this.Osztaly === Osztaly.Ijasz) {
             base = [base[0], ...base]
         }
         return base.map(v => v + Modifier(this.Tulajdonsagok.t_ugy))
     }
 
-    public KitartasMentoAlap() : number {
+    public ElsodlegesMentok() : MentoTipus[] {
+        let t: MentoTipus[] = []
         switch (this.Osztaly){
             case Osztaly.Barbar:
             case Osztaly.Amazon:
             case Osztaly.Ijasz:
             case Osztaly.Kaloz:
             case Osztaly.Harcos:
+                t = ['kitartas'];
+                break;
             case Osztaly.Pap:
-                return 2;
+                t = ['kitartas', 'akaratero'];
+                break;
             case Osztaly.Tolvaj:
+                t = ['reflex'];
+                break;
             case Osztaly.Varazslo:
             case Osztaly.Illuzionista:
-                return 0;
+                t = ['akaratero']
+                break;
+        }
+        return t
+    }
+
+    public MentokAlap(szint: number = this.Szint) {
+        const elsodlegesek = this.ElsodlegesMentok()
+        return {
+            kitartas: elsodlegesek.includes('kitartas') ? ElsodlegesMento(szint) : MasodlagosMento(szint),
+            reflex: elsodlegesek.includes('reflex') ? ElsodlegesMento(szint) : MasodlagosMento(szint),
+            akaratero: elsodlegesek.includes('akaratero') ? ElsodlegesMento(szint) : MasodlagosMento(szint),
         }
     }
 
-    public ReflexMentoAlap() : number {
-        switch (this.Osztaly){
-            case Osztaly.Tolvaj:
-                return 2;
-            case Osztaly.Barbar:
-            case Osztaly.Amazon:
-            case Osztaly.Ijasz:
-            case Osztaly.Kaloz:
-            case Osztaly.Harcos:
-            case Osztaly.Pap:
-            case Osztaly.Varazslo:
-            case Osztaly.Illuzionista:
-                return 0;
-        }
-    }
-
-    public AkarateroMentoAlap() : number {
-        switch (this.Osztaly){
-            case Osztaly.Pap:
-            case Osztaly.Varazslo:
-            case Osztaly.Illuzionista:
-                return 2;
-            case Osztaly.Tolvaj:
-            case Osztaly.Barbar:
-            case Osztaly.Amazon:
-            case Osztaly.Ijasz:
-            case Osztaly.Kaloz:
-            case Osztaly.Harcos:
-                return 0;
+    public MentokTulajdonsaggal(szint: number = this.Szint) {
+        const mentok = this.MentokAlap(szint)
+        return {
+            kitartas: mentok.kitartas + Modifier(this.Tulajdonsagok.t_egs),
+            reflex: mentok.reflex + Modifier(this.Tulajdonsagok.t_ugy),
+            akaratero: mentok.akaratero + Modifier(this.Tulajdonsagok.t_bol),
         }
     }
 

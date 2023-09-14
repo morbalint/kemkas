@@ -1,18 +1,19 @@
 import React from "react";
 import {OverlayTrigger, Tooltip} from "react-bootstrap";
 import {SignedNumberToText} from "./Helpers";
-import {KarakterMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
+import {Karakter} from "../domain-models/karakter";
 
 
-function MasodlagosErtekek(props: {ertekek: KarakterMasodlagosErtekek}) {
+function MasodlagosErtekek(props: {karakter: Karakter}) {
 
-    const { ertekek } = props
+    const { karakter } = props
 
     const tooltip = (
         <Tooltip id="tooltip">
             <strong>Hentelési Potenciál</strong>
         </Tooltip>
     );
+    const mentok = karakter.MentokTulajdonsaggal(1)
 
     return <>
         <div className='row'>
@@ -26,33 +27,33 @@ function MasodlagosErtekek(props: {ertekek: KarakterMasodlagosErtekek}) {
                                 <span>(HP)</span>
                             </OverlayTrigger>
                         </label>
-                    <p className='col col-form-label'>{ertekek.HP}</p>
+                    <p className='col col-form-label'>{karakter.HP()}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Védekezési Osztály (VO)</label>
-                    <p className='col col-form-label'>{ertekek.VO}</p>
+                    <p className='col col-form-label'>{karakter.VO()}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Közelharci támadás</label>
-                    <p className='col col-form-label'>{SignedNumberToText(ertekek.KozelHarciTB)}</p>
+                    <p className='col col-form-label'>{SignedNumberToText(karakter.KozelharciTB(1)[0])}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Célzó támadás</label>
-                    <p className='col col-form-label'>{SignedNumberToText(ertekek.CelzoTB)}</p>
+                    <p className='col col-form-label'>{SignedNumberToText(karakter.CelzoTB(1)[0])}</p>
                 </div>
             </div>
             <div className='col-lg-6'>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Kitartás mentő</label>
-                    <p className='col col-form-label'>{SignedNumberToText(ertekek.KitartasMento)}</p>
+                    <p className='col col-form-label'>{SignedNumberToText(mentok.kitartas)}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Reflex mentő</label>
-                    <p className='col col-form-label'>{SignedNumberToText(ertekek.ReflexMento)}</p>
+                    <p className='col col-form-label'>{SignedNumberToText(mentok.reflex)}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Akaraterő mentő </label>
-                    <p className='col col-form-label'>{SignedNumberToText(ertekek.AkarateroMento)}</p>
+                    <p className='col col-form-label'>{SignedNumberToText(mentok.akaratero)}</p>
                 </div>
             </div>
         </div>
