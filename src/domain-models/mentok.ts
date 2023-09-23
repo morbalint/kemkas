@@ -54,6 +54,7 @@ export function ElsodlegesMentok(osztaly: Osztaly) : MentoTipus[] {
 
 export function MentokAlap(osztaly: Osztaly, szint: number = 1) {
     const elsodlegesek = ElsodlegesMentok(osztaly)
+    console.log(elsodlegesek)
     return {
         kitartas: elsodlegesek.includes('kitartas') ? ElsodlegesMento(szint) : MasodlagosMento(szint),
         reflex: elsodlegesek.includes('reflex') ? ElsodlegesMento(szint) : MasodlagosMento(szint),
@@ -74,7 +75,7 @@ export function MentokTotal(karakter: Pick<KarakterInputs, 'osztaly' | 'szint' |
     const modositok = MentoModositok(TulajdonsagModosito(karakter.tulajdonsagok))
     return {
         kitartas: alap.kitartas + modositok.kitartas,
-        reflex: alap.kitartas + modositok.kitartas,
+        reflex: alap.reflex + modositok.reflex,
         akaratero: alap.akaratero + modositok.akaratero,
     }
 }

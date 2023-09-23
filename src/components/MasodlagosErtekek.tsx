@@ -12,7 +12,8 @@ function MasodlagosErtekek(props: MasodlagosErtekekView) {
             <strong>Hentelési Potenciál</strong>
         </Tooltip>
     );
-    //const mentok = karakter.MentokTulajdonsaggal(1)
+
+    console.log(Mentok)
 
     return <>
         <div className='row'>

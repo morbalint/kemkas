@@ -216,15 +216,15 @@ export function AvailableKezpettsegList(osztaly: Osztaly): Kepzettseg[] {
 
 export function GetNumberOfKepzettsegek(t_int: number, faj: Faj, max: number) {
     let numberOfKepzettseg = 3 + Modifier(t_int) + (faj === Faj.Ember ? 1 : 0)
-    console.log('Raw Number of Kepzetsegek = ', numberOfKepzettseg)
 
     if (numberOfKepzettseg < 1) {
         numberOfKepzettseg = 1
+        console.log('Adjusted Number of Kepzetsegek = ', numberOfKepzettseg)
     }
     if (numberOfKepzettseg > max) {
         numberOfKepzettseg = max
+        console.log('Adjusted Number of Kepzetsegek = ', numberOfKepzettseg)
     }
-    console.log('Adjusted Number of Kepzetsegek = ', numberOfKepzettseg)
     return numberOfKepzettseg;
 }
 

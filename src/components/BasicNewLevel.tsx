@@ -27,18 +27,26 @@ function UjMento(props : {tipus: MentoTipus, ujMentok: Mentok, regiMentok: Mento
     </div>;
 }
 
-function Level2(props: {
+function BasicNewLevel(props: {
     karakter: KarakterInputs
-    rolledHP: number
+    szint: number
     changeRolledHP: (hp: number) => void,
 }) {
-    const {karakter, changeRolledHP} = props
-    const regiMentok = MentokTotal({...karakter, szint: karakter.szint - 1})
-    const ujMentok = MentokTotal(karakter)
+    const {karakter, szint, changeRolledHP} = props
+    const regiMentok = MentokTotal({...karakter, szint: szint - 1})
+    const ujMentok = MentokTotal({...karakter, szint: szint})
+
+    const regiTB = TamadasBonusz(karakter.osztaly, szint-1)
+    const ujTB = TamadasBonusz(karakter.osztaly, szint)
+    if (regiTB.length < ujTB.length) {
+        regiTB.push(0)
+    }
+    const TBdiff = ujTB.map((x, i) => x - regiTB[i])
+    const isTBincreased = TBdiff.some(x => x > 0)
 
     return <>
         <div className='row'>
-            <h5 className='col align-self-center'>2. Szint</h5>
+            <h5 className='col align-self-center'>{szint}. Szint</h5>
         </div>
         <div className='row'>
             <div className='col-lg-6'>
@@ -49,16 +57,16 @@ function Level2(props: {
                             className='form-control'
                             maxLength={2}
                             type='number'
-                            value={karakter.HProlls[0]}
+                            value={karakter.HProlls[szint-2] || 1}
                             min={1}
                             max={12}
                             onChange={e => changeRolledHP(Number(e.target.value))} />
                     </div>
                 </div>
-                <div className='row m-2'>
+                { isTBincreased && <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label'>Támadás bónusz növekedés{' '}</label>
-                    <span className='col col-form-label'>+1</span>
-                </div>
+                    <span className='col col-form-label'>{TBdiff.map(SignedNumberToText).join(" / ")}</span>
+                </div>}
                 <MentoNovekedes tipus={'kitartas'} ujMentok={ujMentok} regiMentok={regiMentok} />
                 <MentoNovekedes tipus={'reflex'} ujMentok={ujMentok} regiMentok={regiMentok} />
                 <MentoNovekedes tipus={'akaratero'} ujMentok={ujMentok} regiMentok={regiMentok} />
@@ -66,12 +74,12 @@ function Level2(props: {
             <div className='col-lg-6'>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label'>Új HP{' '}</label>
-                    <span className='col col-form-label'>{HP(karakter)}</span>
+                    <span className='col col-form-label'>{HP({...karakter, HProlls: karakter.HProlls.slice(0, szint-1)})}</span>
                 </div>
-                <div className='row m-2'>
+                {isTBincreased && <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label'>Új Támadás bónusz{' '}</label>
-                    <span className='col col-form-label'>{TamadasBonusz(karakter.osztaly, karakter.szint).map(SignedNumberToText).join("/")}</span>
-                </div>
+                    <span className='col col-form-label'>{ujTB.map(SignedNumberToText).join(" / ")}</span>
+                </div>}
                 <UjMento tipus={'kitartas'} ujMentok={ujMentok} regiMentok={regiMentok} />
                 <UjMento tipus={'reflex'} ujMentok={ujMentok} regiMentok={regiMentok} />
                 <UjMento tipus={'akaratero'} ujMentok={ujMentok} regiMentok={regiMentok} />
@@ -80,4 +88,4 @@ function Level2(props: {
     </>
 }
 
-export default Level2
+export default BasicNewLevel

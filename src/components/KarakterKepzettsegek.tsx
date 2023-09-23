@@ -6,13 +6,8 @@ import {
     KepzettsegId,
     TolvajKepzettsegList,
 } from "../domain-models/kepzettsegek";
+import {arraySetN} from "../util";
 
-function arraySetN<T>(array: T[], n: number, elem: T): T[] {
-    if (array.length < n || n < 0) {
-        return array
-    }
-    return [...array.slice(0, n), elem, ...array.slice(n+1)]
-}
 
 function InternalKepzettsegekSelector(props: {
     title: string,
@@ -39,8 +34,6 @@ function InternalKepzettsegekSelector(props: {
         })
     }
 
-    console.log(preCalculated)
-
     return <>
         <div className='row'>
             <div className='col-lg-2 col-md-12'>
@@ -60,7 +53,6 @@ function InternalKepzettsegekSelector(props: {
     </>
 
 }
-
 
 function KarakterKepzettsegek (props: {
     availableKepzettsegList: Kepzettseg[],

@@ -15,10 +15,11 @@ import {
 } from "../domain-models/kepzettsegek";
 import {CreatePDF} from "../pdf/character.pdf";
 import {KarakterDefaults} from "../domain-models/karakter";
-import Level2 from "../components/Level2";
+import BasicNewLevel from "../components/BasicNewLevel";
 import {dAny} from "../domain-models/kockak";
 import {BaseHP, CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
 import {KarakterInputToPdfView} from "../pdf/karakter_pdf_view";
+import {arraySetN} from "../util";
 
 function CreateCharacterPage() {
 
@@ -44,12 +45,10 @@ function CreateCharacterPage() {
         changeKarakter({...karakter, szint: karakter.szint - 1, HProlls: karakter.HProlls.slice(0, -1)})
     }
 
-    function chageLevel2HProll(newHProll: number) {
-        changeKarakter({...karakter, HProlls: [newHProll, ...karakter.HProlls.slice(1)]})
+    const changeHProllAtSzint = (szint: number) => (newHProll: number) => {
+        changeKarakter({...karakter, HProlls: arraySetN(karakter.HProlls, szint-2, newHProll)})
         console.log(karakter)
     }
-
-    const masodlagosErtekek = CalculateMasodlagosErtekek({...karakter, szint: 1, HProlls: []})
 
     return (
         <div>
@@ -116,12 +115,14 @@ function CreateCharacterPage() {
                     />
 
                     <hr />
-                    <MasodlagosErtekek {...masodlagosErtekek} />
+                    <MasodlagosErtekek {...CalculateMasodlagosErtekek({...karakter, szint: 1, HProlls: []})} />
 
-                    {karakter.szint > 1 && <Level2 karakter={{...karakter}} rolledHP={karakter.HProlls[0]} changeRolledHP={chageLevel2HProll} /> }
+                    {karakter.szint > 1 && <BasicNewLevel karakter={{...karakter}} szint={2} key='level-2' changeRolledHP={changeHProllAtSzint(2)} /> }
+
+                    {karakter.szint > 2 && <BasicNewLevel karakter={{...karakter}} szint={3} key='level-3' changeRolledHP={changeHProllAtSzint(3)} /> }
 
                     <div className='d-grid gap-2 m-5'>
-                        {karakter.szint < 2 && <button className='btn btn-dark btn-lg' type='button' onClick={levelUp}>Szintlépés! ⇧</button> }
+                        {karakter.szint < 3 && <button className='btn btn-dark btn-lg' type='button' onClick={levelUp}>Szintlépés! ⇧</button> }
                         {karakter.szint > 1 && <button className='btn btn-dark btn-lg' type='button' onClick={levelDown}>Visszalépés! ⇩</button> }
                     </div>
 

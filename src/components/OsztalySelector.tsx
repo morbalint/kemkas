@@ -44,7 +44,7 @@ function OsztalySelector(props: {currentFaj: Faj, currentOsztaly: Osztaly, chang
                 </ul>
                 <div className='col'>
                     {OsztalySpecialSkills(currentOsztaly).map(skill =>
-                        <p key={skill.Id} >
+                        <div key={skill.Id} >
                             <strong className='d-inline'>
                                 {skill.Name}
                             </strong>
@@ -56,7 +56,7 @@ function OsztalySelector(props: {currentFaj: Faj, currentOsztaly: Osztaly, chang
                                         (<li key={skill.Id + '-' + i}>{ext}</li>))}
                                 </ul>
                             )}
-                        </p>
+                        </div>
                     )}
                 </div>
             </div>
