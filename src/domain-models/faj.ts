@@ -110,5 +110,4 @@ export function FajSpecials(faj : Faj) : string[] {
             "Szintkorlátok: Harcos 9, Pap 9, Tolvaj 6, Varázsló 4",
         ];
     }
-    return [];
 }

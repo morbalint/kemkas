@@ -53,7 +53,16 @@ export function RollAllAbilities(setValue: (newValue: KarakterTulajdonsagok) => 
 
 export const Modifier = (val : number) => Math.floor(val / 3) - 3
 
-/* eslint-disable */ /* tslint:disable */
+export function TulajdonsagModosito(tulajdonsagok: KarakterTulajdonsagok): KarakterTulajdonsagok {
+    let response: KarakterTulajdonsagok = { ...tulajdonsagok }
+    const keys = Object.keys(tulajdonsagok) as (keyof KarakterTulajdonsagok)[]
+    for (const key of keys) {
+        response[key] = Modifier(tulajdonsagok[key])
+    }
+    return response
+}
+
+// noinspection OverlyComplexFunctionJS,FunctionTooLongJS
 function tulajdonsagModositokPerFaj(tul: Tulajdonsag, faj: Faj) : number {
     switch (faj) {
         case Faj.Birodalmi: switch (tul) {

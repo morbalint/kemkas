@@ -1,4 +1,4 @@
-import {Karakter} from "../domain-models/karakter";
+import {KarakterPdfView} from "../domain-models/karakter";
 import {PDFDocument, PDFFont, PDFPage, rgb} from "pdf-lib";
 import fontkit from '@pdf-lib/fontkit'
 import {OsztalyLabel} from "../domain-models/osztaly";
@@ -95,8 +95,8 @@ function drawTulajdonsagok(page: PDFPage, tulajdonsagok: KarakterTulajdonsagok, 
     })
 }
 
-function drawMentok(page: PDFPage, karakter: Karakter, fontSizeBase: number, pdfFont: PDFFont) {
-    const mentokAlap = karakter.MentokAlap()
+function drawMentok(page: PDFPage, karakter: KarakterPdfView, fontSizeBase: number, pdfFont: PDFFont) {
+    const mentokAlap = karakter.MentokAlap
     page.drawText(SignedNumberToText(mentokAlap.kitartas), {
         x: 435,
         y: 613,
@@ -139,7 +139,7 @@ function drawMentok(page: PDFPage, karakter: Karakter, fontSizeBase: number, pdf
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    const mentok = karakter.MentokTulajdonsaggal()
+    const mentok = karakter.MentokModositokkal
     page.drawText(SignedNumberToText(mentok.kitartas), {
         x: 515,
         y: 613,
@@ -163,7 +163,7 @@ function drawMentok(page: PDFPage, karakter: Karakter, fontSizeBase: number, pdf
     })
 }
 
-function drawBaseInfo(karakter: Karakter, draw: (text: string, x : number ,y: number, scale: number) => void) {
+function drawBaseInfo(karakter: KarakterPdfView, draw: (text: string, x : number ,y: number, scale: number) => void) {
     draw(karakter.Name, 60, 710, 1)
     draw(karakter.Nem, 454, 710, 1)
     draw(karakter.Kor.toString(), 454, 690, 1)
@@ -200,7 +200,7 @@ function DrawKepzettsegek(page: PDFPage, fontSizeBase: number, pdfFont: PDFFont,
     }
 }
 
-export async function CreatePDF(karakter: Karakter) {
+export async function CreatePDF(karakter: KarakterPdfView) {
 
     const existingPdfBytes = await fetch('/km_karakterlap_hysteria_1.2.pdf').then(res => res.arrayBuffer())
     const pdfDoc = await PDFDocument.load(existingPdfBytes)
@@ -227,35 +227,35 @@ export async function CreatePDF(karakter: Karakter) {
 
     drawTulajdonsagok(page, karakter.Tulajdonsagok, fontSizeBase, pdfFont);
 
-    page.drawText(karakter.Mozgas().toString(), {
+    page.drawText(karakter.Mozgas.toString(), {
         x: 162,
         y: 416,
         size: fontSizeBase * 2,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(SignedNumberToText(karakter.Kezdemenyezes()), {
+    page.drawText(SignedNumberToText(karakter.Kezdemenyezes), {
         x: 505,
         y: 416,
         size: fontSizeBase * 2,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(karakter.HP().toString(), {
+    page.drawText(karakter.HP.toString(), {
         x: 318,
         y: 517,
         size: fontSizeBase * 1.5,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    page.drawText(karakter.VO().toString(), {
+    page.drawText(karakter.VO.toString(), {
         x: 368,
         y: 495,
         size: fontSizeBase * 3,
         font: pdfFont,
         color: rgb(0.75, 0.75, 0.75),
     })
-    const kozelharciTB = karakter.KozelharciTB().map(SignedNumberToText).join("/")
+    const kozelharciTB = karakter.KozelharciTB.map(SignedNumberToText).join("/")
     page.drawText(kozelharciTB, {
         x: 254,
         y: kozelharciTB.length > 2 ? 386 : 382,
@@ -263,7 +263,7 @@ export async function CreatePDF(karakter: Karakter) {
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
-    const celzoTB = karakter.CelzoTB().map(SignedNumberToText).join("/")
+    const celzoTB = karakter.CelzoTB.map(SignedNumberToText).join("/")
     page.drawText(celzoTB, {
         x: 344,
         y: celzoTB.length > 2 ? 386 : 382,

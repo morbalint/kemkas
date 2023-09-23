@@ -42,7 +42,7 @@ function Level2(props: {
         <div className='row'>
             <div className='col-lg-6'>
                 <div className='row m-2'>
-                    <label className='col-sm-6 col-8 col-form-label'>Plusz dobott HP{' '}</label>
+                    <label className='col-sm-6 col-8 col-form-label'>Plusz dobott HP (d{karakterClass.baseHP()}){' '}</label>
                     <div className='col-sm-2 col'>
                         <input
                             className='form-control'

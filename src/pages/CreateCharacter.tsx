@@ -10,9 +10,9 @@ import {KarakterTulajdonsagok, Modifier} from "../domain-models/tulajdonsag";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
 import {AvailableKezpettsegList, TolvajKepzettsegList} from "../domain-models/kepzettsegek";
 import {CreatePDF} from "../pdf/character.pdf";
-import {KarakterClass, KarakterInputs} from "../domain-models/karakter";
+import {KarakterClass, KarakterInputs, KarakterInputToPdfView} from "../domain-models/karakter";
 import Level2 from "../components/Level2";
-import {getRandomInt} from "../domain-models/kockak";
+import {dAny} from "../domain-models/kockak";
 
 const tulajdonsagDefaults: KarakterTulajdonsagok = {
     t_ero: 10,
@@ -65,7 +65,7 @@ function CreateCharacterPage() {
 
     function levelUp() {
         const dice = karakterClass.baseHP()
-        const roll = getRandomInt(dice)
+        const roll = dAny(dice)
         console.log(`Level 2 HP roll on d${dice} is: ${roll}`)
         changeKarakter({...karakter, szint: karakter.szint + 1, HProlls: [...karakter.HProlls, roll]})
     }
@@ -154,7 +154,7 @@ function CreateCharacterPage() {
                     </div>
 
                     <div className='d-grid gap-2 m-5'>
-                        <button className='btn btn-danger btn-lg' type='button' onClick={async () =>  await CreatePDF(karakterClass)}>Létrehozás</button>
+                        <button className='btn btn-danger btn-lg' type='button' onClick={async () =>  await CreatePDF(KarakterInputToPdfView(karakter))}>Létrehozás</button>
                     </div>
                 </form>
             </div>

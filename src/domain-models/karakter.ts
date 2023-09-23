@@ -1,9 +1,10 @@
 import {Faj} from "./faj";
 import {Osztaly} from "./osztaly";
-import {KarakterTulajdonsagok, Modifier} from "./tulajdonsag";
+import {KarakterTulajdonsagok, Modifier, TulajdonsagModosito} from "./tulajdonsag";
 import {Kepzettseg, Kepzettsegek, KepzettsegId} from "./kepzettsegek";
 import TamadasBonuszTabla from './tamadas_bonus_tabla.json';
-import {ElsodlegesMento, MasodlagosMento, Mentok, MentoTipus} from "./mentok";
+import {ElsodlegesMento, MasodlagosMento, Mentok, MentokAlap, MentoModositok, MentoTipus} from "./mentok";
+import {CelzoTB, KozelharciTB} from "./tamadas_bonusz";
 
 export interface Karakter {
     Name: string
@@ -27,6 +28,29 @@ export interface Karakter {
     TolvajKepzettsegek: Kepzettseg[]
 }
 
+export interface KarakterPdfView {
+    Name: string
+    Nem: string
+    Kor: number
+    Isten: string
+    Faj: Faj
+    Osztaly: Osztaly
+    Tulajdonsagok: KarakterTulajdonsagok,
+    TulajdonsagModositok: KarakterTulajdonsagok,
+    Szint: number
+    HP: number
+    VO: number
+    Mozgas: number
+    Kezdemenyezes: number
+    KozelharciTB: number[]
+    CelzoTB: number[]
+    MentokAlap: Mentok
+    MentoModositok: Mentok
+    MentokModositokkal: Mentok
+    Kepzettsegek: Kepzettseg[]
+    TolvajKepzettsegek: Kepzettseg[]
+}
+
 export interface KarakterInputs {
     name: string,
     nem?: string,
@@ -41,6 +65,81 @@ export interface KarakterInputs {
     HProlls: number[],
 }
 
+function BaseHP(osztaly: Osztaly) {
+    let base = 4;
+    switch (osztaly){
+        case Osztaly.Barbar:
+            base = 12
+            break;
+        case Osztaly.Amazon:
+        case Osztaly.Ijasz:
+        case Osztaly.Kaloz:
+        case Osztaly.Harcos:
+            base = 10;
+            break
+        case Osztaly.Pap:
+            base = 8;
+            break;
+        case Osztaly.Tolvaj:
+            base = 6;
+            break;
+        case Osztaly.Varazslo:
+        case Osztaly.Illuzionista:
+            base = 4;
+            break;
+    }
+    return base
+}
+
+export function HP(osztaly: Osztaly, egeszsegModifier: number, hpRolls: number[]): number {
+    return BaseHP(osztaly) + egeszsegModifier + hpRolls
+        // https://lfg.hu/forum/topic/15079-kard-es-magia/page/219/#comment-2218333
+        .map(hp => Math.max(1, hp + egeszsegModifier))
+        .reduce((sum, val) => sum + val, 0)
+}
+
+
+export function KarakterInputToPdfView(input: KarakterInputs): KarakterPdfView {
+    const tulajdonsagModositok = TulajdonsagModosito(input.tulajdonsagok)
+    const hp = HP(input.osztaly, tulajdonsagModositok.t_egs, input.HProlls)
+    const vo = 10 + tulajdonsagModositok.t_ugy // TODO: kaloz, amazon!
+    const mozgas = input.faj === Faj.Torpe ? 20 : 30
+    const kezdemenyezes = tulajdonsagModositok.t_ugy + (input.osztaly === Osztaly.Tolvaj ? 4 : 0)
+
+    const mentok = MentokAlap(input.osztaly, input.szint)
+    const mentoModositok = MentoModositok(tulajdonsagModositok)
+
+    return {
+        Faj: input.faj,
+        Isten: input.isten || "",
+        Kor: input.kor,
+        Name: input.name,
+        Nem: input.nem || "",
+        Tulajdonsagok: input.tulajdonsagok,
+        Osztaly: input.osztaly,
+        Szint: input.szint,
+        Kepzettsegek: input.kepzettsegek.map(id => Kepzettsegek[id]),
+        TolvajKepzettsegek: input.tolvajKepzettsegek?.map(id => Kepzettsegek[id]) || [],
+        TulajdonsagModositok: tulajdonsagModositok,
+
+        HP: hp,
+        VO: vo,
+        Mozgas: mozgas,
+        Kezdemenyezes: kezdemenyezes,
+        KozelharciTB: KozelharciTB(input),
+        CelzoTB: CelzoTB(input),
+
+        MentoModositok: mentoModositok,
+        MentokAlap: mentok,
+        MentokModositokkal: {
+            kitartas: mentok.kitartas + mentoModositok.kitartas,
+            akaratero: mentok.akaratero + mentoModositok.akaratero,
+            reflex: mentok.reflex + mentoModositok.reflex,
+        }
+    }
+}
+
+/// deprecated
 export class KarakterClass implements Karakter {
 
     public Name : string
