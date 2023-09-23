@@ -24,8 +24,11 @@ function CreateCharacterPage() {
 
     let [karakter, changeKarakter] = useState(KarakterDefaults)
 
-    SetDefaultTolvajKepzettsegek(karakter, (tk) => changeKarakter({...karakter, tolvajKepzettsegek: tk}))
-    SetDefaultKepzettsegek(karakter, (k: KepzettsegId[]) => changeKarakter({...karakter, kepzettsegek: k}))
+    const changeKepzettseg = (k: KepzettsegId[]) => changeKarakter({...karakter, kepzettsegek: k})
+    const changeTolvajKepzettseg = (tk?: KepzettsegId[]) => changeKarakter({...karakter, tolvajKepzettsegek: tk})
+
+    SetDefaultTolvajKepzettsegek(karakter, changeTolvajKepzettseg)
+    SetDefaultKepzettsegek(karakter, changeKepzettseg)
 
     const availableKepzettsegList = AvailableKezpettsegList(karakter.osztaly)
 
@@ -107,9 +110,9 @@ function CreateCharacterPage() {
                         availableKepzettsegList={availableKepzettsegList}
                         numberOfKepzettsegek={GetNumberOfKepzettsegek(karakter.tulajdonsagok.t_int, karakter.faj, availableKepzettsegList.length)}
                         kepzettsegek={karakter.kepzettsegek}
-                        changeKepzettsegek={(ks) => changeKarakter({...karakter, kepzettsegek: ks}) }
+                        changeKepzettsegek={changeKepzettseg}
                         tolvajKepzettsegek={karakter.tolvajKepzettsegek || []}
-                        changeTolvajKepzettsegek={(tks) => changeKarakter({...karakter, tolvajKepzettsegek: tks})}
+                        changeTolvajKepzettsegek={changeTolvajKepzettseg}
                     />
 
                     <hr />

@@ -70,8 +70,7 @@ function KarakterKepzettsegek (props: {
     tolvajKepzettsegek: KepzettsegId[],
     changeTolvajKepzettsegek: (newKepzettsegek: KepzettsegId[]) => void
 }) {
-    const { numberOfKepzettsegek, availableKepzettsegList, changeKepzettsegek, tolvajKepzettsegek, changeTolvajKepzettsegek} = props
-    let kepzettsegek = [ ...props.kepzettsegek]
+    const { kepzettsegek, numberOfKepzettsegek, availableKepzettsegList, changeKepzettsegek, tolvajKepzettsegek, changeTolvajKepzettsegek} = props
 
     // TODO: Eszakinak es Kaloznak hajozas, Birodalminak Alikmia, vagy Meregkeveres, Etuniainak Lovaglas
 

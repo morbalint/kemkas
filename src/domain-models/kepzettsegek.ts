@@ -2,8 +2,6 @@ import {Modifier, Tulajdonsag} from "./tulajdonsag";
 import {Osztaly} from "./osztaly";
 import {Faj} from "./faj";
 import {KarakterInputs} from "./karakter";
-import karakterKepzettsegek from "../components/KarakterKepzettsegek";
-import tulajdonsagok from "../components/Tulajdonsagok";
 
 export type KepzettsegId = 'k_alkimia' | 'k_alcazas' | 'k_allatidomitas' | 'k_csapdak' | 'k_csillagjoslas' | 'k_egyensulyozas' | 'k_eloadas' | 'k_ertekbecsles' | 'k_gyogyitas' | 'k_hajozas' | 'k_hallgatozas' | 'k_hamisitas' | 'k_jelek_olvasasa' | 'k_koncentracio' | 'k_lovaglas' | 'k_maszas' | 'k_megfigyeles' | 'k_meregkeveres' | 'k_mesterseg' | 'k_nyomkereses' | 'k_osonas' | 'k_rejtozes' | 'k_szabadulomuveszet' | 'k_tudas' | 'k_ugras' | 'k_uszas' | 'k_varazslatismeret' | 'k_zarnyitas' | 'k_zsebmetszes'
 
