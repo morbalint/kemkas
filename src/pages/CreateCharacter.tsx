@@ -117,12 +117,12 @@ function CreateCharacterPage() {
                     <hr />
                     <MasodlagosErtekek {...CalculateMasodlagosErtekek({...karakter, szint: 1, HProlls: []})} />
 
-                    {karakter.szint > 1 && <BasicNewLevel karakter={{...karakter}} szint={2} key='level-2' changeRolledHP={changeHProllAtSzint(2)} /> }
-
-                    {karakter.szint > 2 && <BasicNewLevel karakter={{...karakter}} szint={3} key='level-3' changeRolledHP={changeHProllAtSzint(3)} /> }
+                    {karakter.HProlls.map((_, i) => (
+                        <BasicNewLevel karakter={{...karakter}} szint={i + 2} key={'level-'+(i+2)} changeRolledHP={changeHProllAtSzint(i+2)} />)
+                    )}
 
                     <div className='d-grid gap-2 m-5'>
-                        {karakter.szint < 3 && <button className='btn btn-dark btn-lg' type='button' onClick={levelUp}>Szintlépés! ⇧</button> }
+                        {karakter.szint < 10 && <button className='btn btn-dark btn-lg' type='button' onClick={levelUp}>Szintlépés! ⇧</button> }
                         {karakter.szint > 1 && <button className='btn btn-dark btn-lg' type='button' onClick={levelDown}>Visszalépés! ⇩</button> }
                     </div>
 

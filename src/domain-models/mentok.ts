@@ -54,7 +54,6 @@ export function ElsodlegesMentok(osztaly: Osztaly) : MentoTipus[] {
 
 export function MentokAlap(osztaly: Osztaly, szint: number = 1) {
     const elsodlegesek = ElsodlegesMentok(osztaly)
-    console.log(elsodlegesek)
     return {
         kitartas: elsodlegesek.includes('kitartas') ? ElsodlegesMento(szint) : MasodlagosMento(szint),
         reflex: elsodlegesek.includes('reflex') ? ElsodlegesMento(szint) : MasodlagosMento(szint),

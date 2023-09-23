@@ -42,7 +42,7 @@ function BasicNewLevel(props: {
         regiTB.push(0)
     }
     const TBdiff = ujTB.map((x, i) => x - regiTB[i])
-    const isTBincreased = TBdiff.some(x => x > 0)
+    const isTBincreased = TBdiff.length > 0 && TBdiff.some(x => x > 0)
 
     return <>
         <div className='row'>

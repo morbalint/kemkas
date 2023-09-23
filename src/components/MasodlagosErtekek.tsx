@@ -13,8 +13,6 @@ function MasodlagosErtekek(props: MasodlagosErtekekView) {
         </Tooltip>
     );
 
-    console.log(Mentok)
-
     return <>
         <div className='row'>
             <h5 className='col align-self-center'>Másodlagos értékek</h5>

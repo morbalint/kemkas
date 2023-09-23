@@ -22,7 +22,7 @@ export function TamadasBonusz(osztaly: Osztaly, szint: number = 1) : number[] {
             base = TamadasBonuszTabla['feles'];
             break;
     }
-    return base[szint-1]
+    return [...base[szint-1]]
 }
 
 export function KozelharciTB(karakter : Pick<KarakterInputs, 'szint' | 'tulajdonsagok' | 'osztaly'>): number[] {
