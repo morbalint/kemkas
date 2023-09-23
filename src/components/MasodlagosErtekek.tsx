@@ -1,19 +1,18 @@
 import React from "react";
 import {OverlayTrigger, Tooltip} from "react-bootstrap";
 import {SignedNumberToText} from "./Helpers";
-import {Karakter} from "../domain-models/karakter";
+import {MasodlagosErtekekView} from "../domain-models/masodlagos_ertekek";
 
+function MasodlagosErtekek(props: MasodlagosErtekekView) {
 
-function MasodlagosErtekek(props: {karakter: Karakter}) {
-
-    const { karakter } = props
+    const { HP, VO, CelzoTB, Mentok, KozelharciTB } = props
 
     const tooltip = (
         <Tooltip id="tooltip">
             <strong>Hentelési Potenciál</strong>
         </Tooltip>
     );
-    const mentok = karakter.MentokTulajdonsaggal(1)
+    //const mentok = karakter.MentokTulajdonsaggal(1)
 
     return <>
         <div className='row'>
@@ -27,33 +26,33 @@ function MasodlagosErtekek(props: {karakter: Karakter}) {
                                 <span>(HP)</span>
                             </OverlayTrigger>
                         </label>
-                    <p className='col col-form-label'>{karakter.HP()}</p>
+                    <p className='col col-form-label'>{HP}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Védekezési Osztály (VO)</label>
-                    <p className='col col-form-label'>{karakter.VO()}</p>
+                    <p className='col col-form-label'>{VO}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Közelharci támadás</label>
-                    <p className='col col-form-label'>{SignedNumberToText(karakter.KozelharciTB(1)[0])}</p>
+                    <p className='col col-form-label'>{KozelharciTB.map(SignedNumberToText).join(" / ")}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Célzó támadás</label>
-                    <p className='col col-form-label'>{SignedNumberToText(karakter.CelzoTB(1)[0])}</p>
+                    <p className='col col-form-label'>{CelzoTB.map(SignedNumberToText).join(" / ")}</p>
                 </div>
             </div>
             <div className='col-lg-6'>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Kitartás mentő</label>
-                    <p className='col col-form-label'>{SignedNumberToText(mentok.kitartas)}</p>
+                    <p className='col col-form-label'>{SignedNumberToText(Mentok.kitartas)}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Reflex mentő</label>
-                    <p className='col col-form-label'>{SignedNumberToText(mentok.reflex)}</p>
+                    <p className='col col-form-label'>{SignedNumberToText(Mentok.reflex)}</p>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label' >Akaraterő mentő </label>
-                    <p className='col col-form-label'>{SignedNumberToText(mentok.akaratero)}</p>
+                    <p className='col col-form-label'>{SignedNumberToText(Mentok.akaratero)}</p>
                 </div>
             </div>
         </div>

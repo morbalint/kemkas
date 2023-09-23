@@ -1,4 +1,4 @@
-import {KarakterPdfView} from "../domain-models/karakter";
+import {KarakterPdfView} from "./karakter_pdf_view";
 import {PDFDocument, PDFFont, PDFPage, rgb} from "pdf-lib";
 import fontkit from '@pdf-lib/fontkit'
 import {OsztalyLabel} from "../domain-models/osztaly";

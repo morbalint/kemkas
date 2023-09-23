@@ -1,7 +1,9 @@
 import React from "react";
-import {KarakterClass, KarakterInputs} from "../domain-models/karakter";
+import {KarakterInputs} from "../domain-models/karakter";
 import {SignedNumberToText} from "./Helpers";
-import {Mentok, MentoTipus, MentoTipusLabel} from "../domain-models/mentok";
+import {Mentok, MentoTipus, MentoTipusLabel, MentokTotal} from "../domain-models/mentok";
+import {BaseHP, HP} from "../domain-models/masodlagos_ertekek";
+import {TamadasBonusz} from "../domain-models/tamadas_bonusz";
 
 function MentoNovekedes(props : {tipus: MentoTipus, ujMentok: Mentok, regiMentok: Mentok}) {
     const {tipus, ujMentok, regiMentok} = props
@@ -30,10 +32,9 @@ function Level2(props: {
     rolledHP: number
     changeRolledHP: (hp: number) => void,
 }) {
-    const {karakter, rolledHP, changeRolledHP} = props
-    const karakterClass = new KarakterClass(karakter)
-    const regiMentok = karakterClass.MentokTulajdonsaggal(karakter.szint - 1)
-    const ujMentok = karakterClass.MentokTulajdonsaggal(karakter.szint)
+    const {karakter, changeRolledHP} = props
+    const regiMentok = MentokTotal({...karakter, szint: karakter.szint - 1})
+    const ujMentok = MentokTotal(karakter)
 
     return <>
         <div className='row'>
@@ -42,13 +43,13 @@ function Level2(props: {
         <div className='row'>
             <div className='col-lg-6'>
                 <div className='row m-2'>
-                    <label className='col-sm-6 col-8 col-form-label'>Plusz dobott HP (d{karakterClass.baseHP()}){' '}</label>
+                    <label className='col-sm-6 col-8 col-form-label'>Plusz dobott HP (d{BaseHP(karakter.osztaly)}){' '}</label>
                     <div className='col-sm-2 col'>
                         <input
                             className='form-control'
                             maxLength={2}
                             type='number'
-                            value={rolledHP}
+                            value={karakter.HProlls[0]}
                             min={1}
                             max={12}
                             onChange={e => changeRolledHP(Number(e.target.value))} />
@@ -65,11 +66,11 @@ function Level2(props: {
             <div className='col-lg-6'>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label'>Új HP{' '}</label>
-                    <span className='col col-form-label'>{karakterClass.HP()}</span>
+                    <span className='col col-form-label'>{HP(karakter)}</span>
                 </div>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label'>Új Támadás bónusz{' '}</label>
-                    <span className='col col-form-label'>{karakterClass.TamadasBonusz().map(SignedNumberToText).join("/")}</span>
+                    <span className='col col-form-label'>{TamadasBonusz(karakter.osztaly, karakter.szint).map(SignedNumberToText).join("/")}</span>
                 </div>
                 <UjMento tipus={'kitartas'} ujMentok={ujMentok} regiMentok={regiMentok} />
                 <UjMento tipus={'reflex'} ujMentok={ujMentok} regiMentok={regiMentok} />

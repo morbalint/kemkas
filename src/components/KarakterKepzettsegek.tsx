@@ -71,25 +71,13 @@ function KarakterKepzettsegek (props: {
     changeTolvajKepzettsegek: (newKepzettsegek: KepzettsegId[]) => void
 }) {
     const { numberOfKepzettsegek, availableKepzettsegList, changeKepzettsegek, tolvajKepzettsegek, changeTolvajKepzettsegek} = props
-    let kepzettsegek = props.kepzettsegek
+    let kepzettsegek = [ ...props.kepzettsegek]
+
+    // TODO: Eszakinak es Kaloznak hajozas, Birodalminak Alikmia, vagy Meregkeveres, Etuniainak Lovaglas
 
     const getKepzettsegListaN = (n: number) => {
         const kepzettsegekWithoutN = [...kepzettsegek.slice(0, n), ...kepzettsegek.slice(n+1)]
         return availableKepzettsegList.filter(x => !kepzettsegekWithoutN.includes(x.Id) && !tolvajKepzettsegek.includes(x.Id))
-    }
-
-    if (kepzettsegek.length < numberOfKepzettsegek) {
-        for (let i = kepzettsegek.length; i < numberOfKepzettsegek; i++) {
-            const kepzettsegLista = getKepzettsegListaN(i)
-            if (kepzettsegLista.length > 0) {
-                kepzettsegek.push(kepzettsegLista[0].Id)
-            }
-        }
-        changeKepzettsegek(kepzettsegek)
-    }
-    if (kepzettsegek.length > numberOfKepzettsegek){
-        kepzettsegek = kepzettsegek.slice(0, numberOfKepzettsegek)
-        changeKepzettsegek(kepzettsegek)
     }
 
     const getTolvajKepzettsegListaN = (n: number) : Kepzettseg[] => {

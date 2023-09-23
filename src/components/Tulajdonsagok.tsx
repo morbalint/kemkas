@@ -19,7 +19,7 @@ function Tulajdonsagok(props: {
             <h5 className='col-lg-2 col-sm-4 align-self-center'>Tulajdonságok</h5>
             <div className='col-sm-2 m-2'>
                 <button className='btn btn-dark' type='button'
-                        onClick={() => RollAllAbilities(changeTulajdonsagok)}>Dobás
+                        onClick={() => changeTulajdonsagok(RollAllAbilities())}>Dobás
                 </button>
             </div>
         </div>

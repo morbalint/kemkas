@@ -1,5 +1,9 @@
-import {Tulajdonsag} from "./tulajdonsag";
+import {Modifier, Tulajdonsag} from "./tulajdonsag";
 import {Osztaly} from "./osztaly";
+import {Faj} from "./faj";
+import {KarakterInputs} from "./karakter";
+import karakterKepzettsegek from "../components/KarakterKepzettsegek";
+import tulajdonsagok from "../components/Tulajdonsagok";
 
 export type KepzettsegId = 'k_alkimia' | 'k_alcazas' | 'k_allatidomitas' | 'k_csapdak' | 'k_csillagjoslas' | 'k_egyensulyozas' | 'k_eloadas' | 'k_ertekbecsles' | 'k_gyogyitas' | 'k_hajozas' | 'k_hallgatozas' | 'k_hamisitas' | 'k_jelek_olvasasa' | 'k_koncentracio' | 'k_lovaglas' | 'k_maszas' | 'k_megfigyeles' | 'k_meregkeveres' | 'k_mesterseg' | 'k_nyomkereses' | 'k_osonas' | 'k_rejtozes' | 'k_szabadulomuveszet' | 'k_tudas' | 'k_ugras' | 'k_uszas' | 'k_varazslatismeret' | 'k_zarnyitas' | 'k_zsebmetszes'
 
@@ -210,4 +214,51 @@ export const Kepzettsegek: Record<KepzettsegId, Kepzettseg> =
 
 export function AvailableKezpettsegList(osztaly: Osztaly): Kepzettseg[] {
     return KepzettsegLista.filter(k => k.Osztalyok == null || k.Osztalyok.includes(osztaly))
+}
+
+export function GetNumberOfKepzettsegek(t_int: number, faj: Faj, max: number) {
+    let numberOfKepzettseg = 3 + Modifier(t_int) + (faj === Faj.Ember ? 1 : 0)
+    console.log('Raw Number of Kepzetsegek = ', numberOfKepzettseg)
+
+    if (numberOfKepzettseg < 1) {
+        numberOfKepzettseg = 1
+    }
+    if (numberOfKepzettseg > max) {
+        numberOfKepzettseg = max
+    }
+    console.log('Adjusted Number of Kepzetsegek = ', numberOfKepzettseg)
+    return numberOfKepzettseg;
+}
+
+export function SetDefaultTolvajKepzettsegek(karakter: Pick<KarakterInputs, 'osztaly' | 'tolvajKepzettsegek'>, changeTolvajKepzettsegek: (tolvajKepzettsegek?: KepzettsegId[]) => void) {
+    if (karakter.osztaly !== Osztaly.Tolvaj && karakter.tolvajKepzettsegek != null) {
+        changeTolvajKepzettsegek(undefined)
+    }
+    if (karakter.osztaly === Osztaly.Tolvaj && (karakter.tolvajKepzettsegek == null || karakter.tolvajKepzettsegek.length === 0)) {
+        const tolvajKepzettsegek = TolvajKepzettsegList.slice(0, 4).map(x => x.Id)
+        changeTolvajKepzettsegek(tolvajKepzettsegek)
+    }
+}
+
+export function SetDefaultKepzettsegek(karakter: Pick<KarakterInputs, 'osztaly' | 'faj' | 'tulajdonsagok' | 'kepzettsegek' | 'tolvajKepzettsegek'>, changeKepzettsegek: (k: KepzettsegId[]) => void) {
+    const availableKepzettsegList = AvailableKezpettsegList(karakter.osztaly)
+    const numberOfKepzettsegek = GetNumberOfKepzettsegek(karakter.tulajdonsagok.t_int, karakter.faj, availableKepzettsegList.length)
+    let kepzettsegek = karakter.kepzettsegek
+    const getKepzettsegListaN = (n: number) => {
+        const kepzettsegekWithoutN = [...kepzettsegek.slice(0, n), ...kepzettsegek.slice(n+1)]
+        return availableKepzettsegList.filter(x => !kepzettsegekWithoutN.includes(x.Id) && !karakter.tolvajKepzettsegek?.includes(x.Id))
+    }
+    if (kepzettsegek.length < numberOfKepzettsegek) {
+        for (let i = kepzettsegek.length; i < numberOfKepzettsegek; i++) {
+            const kepzettsegLista = getKepzettsegListaN(i)
+            if (kepzettsegLista.length > 0) {
+                kepzettsegek.push(kepzettsegLista[0].Id)
+            }
+        }
+        changeKepzettsegek(kepzettsegek)
+    }
+    if (kepzettsegek.length > numberOfKepzettsegek){
+        kepzettsegek = kepzettsegek.slice(0, numberOfKepzettsegek)
+        changeKepzettsegek(kepzettsegek)
+    }
 }

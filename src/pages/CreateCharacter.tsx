@@ -6,68 +6,35 @@ import FajSelector from "../components/FajSelector";
 import Tulajdonsagok from "../components/Tulajdonsagok";
 import OsztalySelector from "../components/OsztalySelector";
 import KarakterKepzettsegek from "../components/KarakterKepzettsegek";
-import {KarakterTulajdonsagok, Modifier} from "../domain-models/tulajdonsag";
+import {KarakterTulajdonsagok} from "../domain-models/tulajdonsag";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
-import {AvailableKezpettsegList, TolvajKepzettsegList} from "../domain-models/kepzettsegek";
+import {
+    AvailableKezpettsegList,
+    GetNumberOfKepzettsegek, KepzettsegId, SetDefaultKepzettsegek,
+    SetDefaultTolvajKepzettsegek,
+} from "../domain-models/kepzettsegek";
 import {CreatePDF} from "../pdf/character.pdf";
-import {KarakterClass, KarakterInputs, KarakterInputToPdfView} from "../domain-models/karakter";
+import {KarakterDefaults} from "../domain-models/karakter";
 import Level2 from "../components/Level2";
 import {dAny} from "../domain-models/kockak";
-
-const tulajdonsagDefaults: KarakterTulajdonsagok = {
-    t_ero: 10,
-    t_ugy: 10,
-    t_egs: 10,
-    t_int: 10,
-    t_bol: 10,
-    t_kar: 10,
-}
-
-const karakterDefaults: KarakterInputs = {
-    name: "Névtelen Kalandozó",
-    faj: Faj.Ember,
-    kor: 20,
-    tulajdonsagok: tulajdonsagDefaults,
-    osztaly: Osztaly.Harcos,
-    kepzettsegek: [],
-    szint: 1,
-    HProlls: [],
-}
-
-function getNumberOfKepzettsegek(t_int: number, faj: Faj, max: number) {
-    let numberOfKepzettseg = 3 + Modifier(t_int) + (faj === Faj.Ember ? 1 : 0)
-    console.log('Raw Number of Kepzetsegek = ', numberOfKepzettseg)
-
-    if (numberOfKepzettseg < 1) {
-        numberOfKepzettseg = 1
-    }
-    if (numberOfKepzettseg > max) {
-        numberOfKepzettseg = max
-    }
-    console.log('Adjusted Number of Kepzetsegek = ', numberOfKepzettseg)
-    return numberOfKepzettseg;
-}
+import {BaseHP, CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
+import {KarakterInputToPdfView} from "../pdf/karakter_pdf_view";
 
 function CreateCharacterPage() {
 
-    let [karakter, changeKarakter] = useState(karakterDefaults)
-    const karakterClass = new KarakterClass(karakter)
+    let [karakter, changeKarakter] = useState(KarakterDefaults)
+
+    SetDefaultTolvajKepzettsegek(karakter, (tk) => changeKarakter({...karakter, tolvajKepzettsegek: tk}))
+    SetDefaultKepzettsegek(karakter, (k: KepzettsegId[]) => changeKarakter({...karakter, kepzettsegek: k}))
 
     const availableKepzettsegList = AvailableKezpettsegList(karakter.osztaly)
 
-    if (karakter.osztaly !== Osztaly.Tolvaj && karakter.tolvajKepzettsegek != null) {
-        changeKarakter({...karakter, tolvajKepzettsegek: undefined})
-    }
-    if (karakter.osztaly === Osztaly.Tolvaj && (karakter.tolvajKepzettsegek == null || karakter.tolvajKepzettsegek.length === 0)) {
-        const tolvajKepzettsegek = TolvajKepzettsegList.slice(0, 4).map(x => x.Id)
-        changeKarakter({...karakter, tolvajKepzettsegek: tolvajKepzettsegek})
-    }
-
     function levelUp() {
-        const dice = karakterClass.baseHP()
+        const szint = karakter.szint + 1
+        const dice = BaseHP(karakter.osztaly)
         const roll = dAny(dice)
-        console.log(`Level 2 HP roll on d${dice} is: ${roll}`)
-        changeKarakter({...karakter, szint: karakter.szint + 1, HProlls: [...karakter.HProlls, roll]})
+        console.log(`Level ${szint} HP roll on d${dice} is: ${roll}`)
+        changeKarakter({...karakter, szint: szint, HProlls: [...karakter.HProlls, roll]})
     }
 
     function levelDown() {
@@ -78,6 +45,8 @@ function CreateCharacterPage() {
         changeKarakter({...karakter, HProlls: [newHProll, ...karakter.HProlls.slice(1)]})
         console.log(karakter)
     }
+
+    const masodlagosErtekek = CalculateMasodlagosErtekek({...karakter, szint: 1, HProlls: []})
 
     return (
         <div>
@@ -136,7 +105,7 @@ function CreateCharacterPage() {
                     />
                     <KarakterKepzettsegek
                         availableKepzettsegList={availableKepzettsegList}
-                        numberOfKepzettsegek={getNumberOfKepzettsegek(karakter.tulajdonsagok.t_int, karakter.faj, availableKepzettsegList.length)}
+                        numberOfKepzettsegek={GetNumberOfKepzettsegek(karakter.tulajdonsagok.t_int, karakter.faj, availableKepzettsegList.length)}
                         kepzettsegek={karakter.kepzettsegek}
                         changeKepzettsegek={(ks) => changeKarakter({...karakter, kepzettsegek: ks}) }
                         tolvajKepzettsegek={karakter.tolvajKepzettsegek || []}
@@ -144,7 +113,7 @@ function CreateCharacterPage() {
                     />
 
                     <hr />
-                    <MasodlagosErtekek karakter={karakterClass} />
+                    <MasodlagosErtekek {...masodlagosErtekek} />
 
                     {karakter.szint > 1 && <Level2 karakter={{...karakter}} rolledHP={karakter.HProlls[0]} changeRolledHP={chageLevel2HProll} /> }
 

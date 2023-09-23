@@ -81,12 +81,12 @@ export function FajSpecials(faj : Faj) : string[] {
         case Faj.Elf: return [
             "+1 Ügy, -1 Egs",
             "Immunisak az altató mágiára, +2 mentődobás bűbáj ellen",
-            "Automatikusan képzettek az íjak és a hoszszúkard használatában akkor is, ha osztályuk ezt nem adná meg nekik",
+            "Automatikusan képzettek az íjak és a hosszúkard használatában akkor is, ha osztályuk ezt nem adná meg nekik",
             "Nem támaszthatók föl közönséges mágiával",
             "Szintkorlátok: Harcos 9, Pap 7, Tolvaj 6, Varázsló 9",
         ];
         case Faj.Felelf: return [
-            "Automatikusan képzettek az íjak és a hoszszúkard használatában",
+            "Automatikusan képzettek az íjak és a hosszúkard használatában",
             "Szintkorlátok: Harcos 9, Pap 5, Tolvaj 9, Varázsló 9",
         ];
         case Faj.Felork: return [

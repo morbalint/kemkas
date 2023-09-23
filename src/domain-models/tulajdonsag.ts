@@ -12,6 +12,15 @@ export enum Tulajdonsag {
 
 export type KarakterTulajdonsagok = Record<Tulajdonsag, number>
 
+export const TulajdonsagDefaults: KarakterTulajdonsagok = {
+    t_ero: 10,
+    t_ugy: 10,
+    t_egs: 10,
+    t_int: 10,
+    t_bol: 10,
+    t_kar: 10,
+}
+
 export function TulajdonsagLabel(tul: Tulajdonsag) : string {
     switch (tul) {
         case Tulajdonsag.Bolcsesseg: return 'Bölcsesség';
@@ -33,22 +42,22 @@ function rollAbility() {
             min = roll;
         }
         sum += roll;
-        rolls = [...rolls, roll]
+        rolls.push(roll)
     }
     const result = sum - min;
     console.log("Rolled: " + rolls + " got: " + result)
     return result;
 }
 
-export function RollAllAbilities(setValue: (newValue: KarakterTulajdonsagok) => void) {
-    setValue({
+export function RollAllAbilities() : KarakterTulajdonsagok {
+    return {
         t_ero: rollAbility(),
         t_ugy: rollAbility(),
         t_egs: rollAbility(),
         t_int: rollAbility(),
         t_bol: rollAbility(),
         t_kar: rollAbility(),
-    })
+    }
 }
 
 export const Modifier = (val : number) => Math.floor(val / 3) - 3

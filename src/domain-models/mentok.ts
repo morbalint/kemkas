@@ -1,5 +1,6 @@
 import {Osztaly} from "./osztaly";
-import {KarakterTulajdonsagok} from "./tulajdonsag";
+import {KarakterTulajdonsagok, TulajdonsagModosito} from "./tulajdonsag";
+import {KarakterInputs} from "./karakter";
 
 export interface Mentok {
     kitartas: number
@@ -65,5 +66,15 @@ export function MentoModositok(tulajdonsagModositok: KarakterTulajdonsagok) {
         kitartas: tulajdonsagModositok.t_egs,
         reflex: tulajdonsagModositok.t_ugy,
         akaratero: tulajdonsagModositok.t_bol,
+    }
+}
+
+export function MentokTotal(karakter: Pick<KarakterInputs, 'osztaly' | 'szint' | 'tulajdonsagok'>) {
+    const alap = MentokAlap(karakter.osztaly, karakter.szint)
+    const modositok = MentoModositok(TulajdonsagModosito(karakter.tulajdonsagok))
+    return {
+        kitartas: alap.kitartas + modositok.kitartas,
+        reflex: alap.kitartas + modositok.kitartas,
+        akaratero: alap.akaratero + modositok.akaratero,
     }
 }
