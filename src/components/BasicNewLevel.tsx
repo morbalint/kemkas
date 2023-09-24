@@ -57,7 +57,7 @@ function BasicNewLevel(props: {
                             className='form-control'
                             maxLength={2}
                             type='number'
-                            value={karakter.HProlls[szint-2] || 1}
+                            value={karakter.hpRolls[szint-2] || 1}
                             min={1}
                             max={12}
                             onChange={e => changeRolledHP(Number(e.target.value))} />
@@ -74,7 +74,7 @@ function BasicNewLevel(props: {
             <div className='col-lg-6'>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label'>Új HP{' '}</label>
-                    <span className='col col-form-label'>{HP({...karakter, HProlls: karakter.HProlls.slice(0, szint-1)})}</span>
+                    <span className='col col-form-label'>{HP({...karakter, hpRolls: karakter.hpRolls.slice(0, szint-1)})}</span>
                 </div>
                 {isTBincreased && <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label'>Új Támadás bónusz{' '}</label>

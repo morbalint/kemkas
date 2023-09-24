@@ -1,6 +1,6 @@
 import {Faj} from "./faj";
 import {Osztaly} from "./osztaly";
-import {KarakterTulajdonsagok, TulajdonsagDefaults} from "./tulajdonsag";
+import {KarakterTulajdonsagok, Tulajdonsag, TulajdonsagDefaults} from "./tulajdonsag";
 import {KepzettsegId} from "./kepzettsegek";
 
 export interface KarakterInputs {
@@ -14,7 +14,8 @@ export interface KarakterInputs {
     kepzettsegek: KepzettsegId[],
     tolvajKepzettsegek?: KepzettsegId[]
     szint: number
-    HProlls: number[],
+    hpRolls: number[],
+    tulajdonsagNovekedes: Tulajdonsag[],
 }
 
 export const KarakterDefaults: KarakterInputs = {
@@ -25,6 +26,7 @@ export const KarakterDefaults: KarakterInputs = {
     osztaly: Osztaly.Harcos,
     kepzettsegek: [],
     szint: 1,
-    HProlls: [],
+    hpRolls: [],
+    tulajdonsagNovekedes: []
 }
 

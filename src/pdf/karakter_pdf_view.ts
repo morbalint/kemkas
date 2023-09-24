@@ -1,4 +1,4 @@
-import {KarakterTulajdonsagok, TulajdonsagModosito} from "../domain-models/tulajdonsag";
+import {KarakterTulajdonsagok, TulajdonsagModosito, TulajdonsagokFajjal} from "../domain-models/tulajdonsag";
 import {Mentok, MentokAlap, MentoModositok} from "../domain-models/mentok";
 import {Kepzettseg, Kepzettsegek} from "../domain-models/kepzettsegek";
 import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
@@ -31,8 +31,10 @@ export interface KarakterPdfView {
 }
 
 export function KarakterInputToPdfView(karakter: KarakterInputs): KarakterPdfView {
+    const tulajdonsagok = TulajdonsagokFajjal(karakter.tulajdonsagok, karakter.faj)
+    karakter = {...karakter, tulajdonsagok}
+    const tulajdonsagModositok = TulajdonsagModosito(tulajdonsagok)
     const masodlagosErtekek = CalculateMasodlagosErtekek(karakter)
-    const tulajdonsagModositok = TulajdonsagModosito(karakter.tulajdonsagok)
     const mozgas = karakter.faj === Faj.Torpe ? 20 : 30
     const kezdemenyezes = tulajdonsagModositok.t_ugy + (karakter.osztaly === Osztaly.Tolvaj ? 4 : 0)
 

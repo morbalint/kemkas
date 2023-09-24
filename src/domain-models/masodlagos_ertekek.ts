@@ -12,7 +12,7 @@ export interface MasodlagosErtekekView {
     Mentok: Mentok
 }
 
-export type KarakterpickForMasodlagosErtekek = Pick<KarakterInputs, 'osztaly' | 'HProlls' | 'tulajdonsagok' | 'szint'>
+export type KarakterpickForMasodlagosErtekek = Pick<KarakterInputs, 'osztaly' | 'hpRolls' | 'tulajdonsagok' | 'szint'>
 
 export function BaseHP(osztaly: Osztaly) {
     let base = 4;
@@ -40,9 +40,9 @@ export function BaseHP(osztaly: Osztaly) {
     return base
 }
 
-export function HP(karakter: Pick<KarakterInputs, 'osztaly' | 'tulajdonsagok' | 'HProlls'>): number {
+export function HP(karakter: Pick<KarakterInputs, 'osztaly' | 'tulajdonsagok' | 'hpRolls'>): number {
     const egeszsegModifier = Modifier(karakter.tulajdonsagok.t_egs)
-    return BaseHP(karakter.osztaly) + egeszsegModifier + karakter.HProlls
+    return BaseHP(karakter.osztaly) + egeszsegModifier + karakter.hpRolls
         // https://lfg.hu/forum/topic/15079-kard-es-magia/page/219/#comment-2218333
         .map(hp => Math.max(1, hp + egeszsegModifier))
         .reduce((sum, val) => sum + val, 0)

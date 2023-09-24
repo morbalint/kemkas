@@ -6,7 +6,7 @@ import FajSelector from "../components/FajSelector";
 import Tulajdonsagok from "../components/Tulajdonsagok";
 import OsztalySelector from "../components/OsztalySelector";
 import KarakterKepzettsegek from "../components/KarakterKepzettsegek";
-import {KarakterTulajdonsagok} from "../domain-models/tulajdonsag";
+import {KarakterTulajdonsagok, TulajdonsagokFajjal} from "../domain-models/tulajdonsag";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
 import {
     AvailableKezpettsegList,
@@ -25,12 +25,12 @@ function CreateCharacterPage() {
 
     let [karakter, changeKarakter] = useState(KarakterDefaults)
 
+    const tulajdonsagokTotal = TulajdonsagokFajjal(karakter.tulajdonsagok, karakter.faj)
+
     const changeKepzettseg = (k: KepzettsegId[]) => changeKarakter({...karakter, kepzettsegek: k})
     const changeTolvajKepzettseg = (tk?: KepzettsegId[]) => changeKarakter({...karakter, tolvajKepzettsegek: tk})
-
     SetDefaultTolvajKepzettsegek(karakter, changeTolvajKepzettseg)
-    SetDefaultKepzettsegek(karakter, changeKepzettseg)
-
+    SetDefaultKepzettsegek({...karakter, tulajdonsagok: tulajdonsagokTotal}, changeKepzettseg)
     const availableKepzettsegList = AvailableKezpettsegList(karakter.osztaly)
 
     function levelUp() {
@@ -38,15 +38,15 @@ function CreateCharacterPage() {
         const dice = BaseHP(karakter.osztaly)
         const roll = dAny(dice)
         console.log(`Level ${szint} HP roll on d${dice} is: ${roll}`)
-        changeKarakter({...karakter, szint: szint, HProlls: [...karakter.HProlls, roll]})
+        changeKarakter({...karakter, szint: szint, hpRolls: [...karakter.hpRolls, roll]})
     }
 
     function levelDown() {
-        changeKarakter({...karakter, szint: karakter.szint - 1, HProlls: karakter.HProlls.slice(0, -1)})
+        changeKarakter({...karakter, szint: karakter.szint - 1, hpRolls: karakter.hpRolls.slice(0, -1)})
     }
 
     const changeHProllAtSzint = (szint: number) => (newHProll: number) => {
-        changeKarakter({...karakter, HProlls: arraySetN(karakter.HProlls, szint-2, newHProll)})
+        changeKarakter({...karakter, hpRolls: arraySetN(karakter.hpRolls, szint-2, newHProll)})
         console.log(karakter)
     }
 
@@ -107,7 +107,7 @@ function CreateCharacterPage() {
                     />
                     <KarakterKepzettsegek
                         availableKepzettsegList={availableKepzettsegList}
-                        numberOfKepzettsegek={GetNumberOfKepzettsegek(karakter.tulajdonsagok.t_int, karakter.faj, availableKepzettsegList.length)}
+                        numberOfKepzettsegek={GetNumberOfKepzettsegek(tulajdonsagokTotal.t_int, karakter.faj, availableKepzettsegList.length)}
                         kepzettsegek={karakter.kepzettsegek}
                         changeKepzettsegek={changeKepzettseg}
                         tolvajKepzettsegek={karakter.tolvajKepzettsegek || []}
@@ -115,10 +115,10 @@ function CreateCharacterPage() {
                     />
 
                     <hr />
-                    <MasodlagosErtekek {...CalculateMasodlagosErtekek({...karakter, szint: 1, HProlls: []})} />
+                    <MasodlagosErtekek {...CalculateMasodlagosErtekek({...karakter, tulajdonsagok: tulajdonsagokTotal, szint: 1, hpRolls: []})} />
 
-                    {karakter.HProlls.map((_, i) => (
-                        <BasicNewLevel karakter={{...karakter}} szint={i + 2} key={'level-'+(i+2)} changeRolledHP={changeHProllAtSzint(i+2)} />)
+                    {karakter.hpRolls.map((_, i) => i+2).map(szint => (
+                        <BasicNewLevel karakter={{...karakter}} szint={szint + 2} key={'level-'+(szint+2)} changeRolledHP={changeHProllAtSzint(szint+2)} />)
                     )}
 
                     <div className='d-grid gap-2 m-5'>

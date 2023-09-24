@@ -131,6 +131,24 @@ export function TulajdonsagModositokFajokra(tul: Tulajdonsag) {
     return (faj: Faj) => tulajdonsagModositokPerFaj(tul, faj);
 }
 
-export function FajiTulajdonsagModositok(faj: Faj) {
-    return (tul: Tulajdonsag) => tulajdonsagModositokPerFaj(tul, faj)
+export function FajiTulajdonsagModositok(faj: Faj) : KarakterTulajdonsagok {
+    return {
+        [Tulajdonsag.Ero]: tulajdonsagModositokPerFaj(Tulajdonsag.Ero, faj),
+        [Tulajdonsag.Ugyesseg]: tulajdonsagModositokPerFaj(Tulajdonsag.Ugyesseg, faj),
+        [Tulajdonsag.Egeszseg]: tulajdonsagModositokPerFaj(Tulajdonsag.Egeszseg, faj),
+        [Tulajdonsag.Intelligencia]: tulajdonsagModositokPerFaj(Tulajdonsag.Intelligencia, faj),
+        [Tulajdonsag.Bolcsesseg]: tulajdonsagModositokPerFaj(Tulajdonsag.Bolcsesseg, faj),
+        [Tulajdonsag.Karizma]: tulajdonsagModositokPerFaj(Tulajdonsag.Karizma, faj),
+    }
+}
+
+export function TulajdonsagokFajjal(tulajdonsagok: KarakterTulajdonsagok, faj: Faj): KarakterTulajdonsagok {
+    return {
+        [Tulajdonsag.Ero]: tulajdonsagok.t_ero + tulajdonsagModositokPerFaj(Tulajdonsag.Ero, faj),
+        [Tulajdonsag.Ugyesseg]: tulajdonsagok.t_ugy + tulajdonsagModositokPerFaj(Tulajdonsag.Ugyesseg, faj),
+        [Tulajdonsag.Egeszseg]: tulajdonsagok.t_egs + tulajdonsagModositokPerFaj(Tulajdonsag.Egeszseg, faj),
+        [Tulajdonsag.Intelligencia]: tulajdonsagok.t_int + tulajdonsagModositokPerFaj(Tulajdonsag.Intelligencia, faj),
+        [Tulajdonsag.Bolcsesseg]: tulajdonsagok.t_bol + tulajdonsagModositokPerFaj(Tulajdonsag.Bolcsesseg, faj),
+        [Tulajdonsag.Karizma]: tulajdonsagok.t_kar + tulajdonsagModositokPerFaj(Tulajdonsag.Karizma, faj),
+    }
 }
