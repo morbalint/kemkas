@@ -128,26 +128,73 @@ export function OsztalySpecialSkills(osztaly: Osztaly) : Skill[] {
             Description: 'Speciális harci tapasztalatuknak köszönhetően minden páratlan szinten +2-t kapnak egy választott fegyvertípus (pl. csatabárd, hosszúkard, stb.) sebzésére. Ez fegyverenként csak egyszer választható, s arra is fölhasználható, hogy a harcos megtanulja egy egzotikus fegyver használatát, amire később specializálódhat is. 9. szinttől elérhető számukra a kettős specializáció: ezzel sebzésmódosítójukat az adott fegyverre +4-re emelhetik.'
         }
         ]
-        case Osztaly.Ijasz: return [{
-            Id: 's_harcos_ijasz',
-            Name: 'Íjász',
-            Description: 'A távolsági harc mesterei. Íjak használatakor körönként eggyel többször támadhatnak. Értenek a visszacsapó íjak használatához is. Nem viselhetnek nehéz vérteket.'
-        }]
-        case Osztaly.Amazon: return [{
-            Id: 's_harcos_amazon',
-            Name: 'Amazon',
-            Description: 'Az amazonok barbár népe szépségéről és a karizmatikus jelenlétre építő védekező harcmodoráról ismert. Az amazonok csak láncinget vagy könnyebb vérteket viselhetnek, de VO-juk Szint/2-vel javul, továbbá Karizma- és Ügyességmódosítói közül a kedvezőbbet választhatják. Ha kettő vagy több amazon együttesen harcol, VO-juk további 2 ponttal nő pszionikus képességeik miatt.'
-        }]
-        case Osztaly.Kaloz: return [{
-            Id: 's_harcos_kaloz',
-            Name: 'Tengerész/Kalóz',
-            Description: 'A tengerészek a hajózás mesterei; kereskedők, tengeri rablók és rabszolgavadászok. Ha magasabb, Ügyességbónuszukat adják hozzá közelharci támadásaikhoz. Nem viselhetnek nehéz vértezetet, de VO-juk könnyű vértben Szint/3-al javul. Minden harmadik szinten kiválaszthatnak egy fegyvert, amivel könynyebben okoznak kritikus sebesülést, tehát pl. csatabárddal 20 helyett 19-20-on, hoszszúkarddal 19-20 helyett 18-20-on, szablyával 18-20 helyett 17-20-on, stb. Ez a képesség 9. szintig fegyverenként csak egyszer választható.'
-        }]
-        case Osztaly.Barbar: return [{
-            Id: 's_harcos_barbar',
-            Name: 'Barbár',
-            Description: 'A barbár törzsek köré sorolhatók a pusztai és sivatagi nomádok, a déli dzsungelek emberevői és az északi tengermelléki rablók nemzetségei egyaránt. A barbárok 1d12-vel dobják a Hp-jüket, -5 Hp-ig öntudatuknál vannak és +1 bónuszt (10. szinttől +2, 15. szinttől +4) kapnak a mentődobásaikra. Minden barbár írástudatlanul kezdi a játékot, de ha kell, később megtanulhatja a betűvetést.'
-        }]
+        case Osztaly.Ijasz: return [
+            {
+                Id: 's_harcos_ijasz',
+                Name: 'Íjász',
+                Description: 'A távolsági harc mesterei. Íjak használatakor körönként eggyel többször támadhatnak. Értenek a visszacsapó íjak használatához is.'
+            },
+            {
+                Id: 's_harcos_ijasz_vert',
+                Name: 'Kötelező mozgékonyság',
+                Description: 'Az íjjászok nem viselhetnek nehéz vérteket.'
+            }
+        ]
+        case Osztaly.Amazon: return [
+            {
+                Id: 's_harcos_amazon',
+                Name: 'Amazon',
+                Description: 'Az amazonok barbár népe szépségéről és a karizmatikus jelenlétre építő védekező harcmodoráról ismert.'
+            },
+            {
+                Id: 's_harcos_amazon_vert',
+                Name: 'MMO vért',
+                Description: 'Az amazonok csak láncinget vagy könnyebb vérteket viselhetnek, de VO-juk Szint/2-vel javul, továbbá Karizma- és Ügyességmódosítói közül a kedvezőbbet választhatják.'
+            },
+            {
+                Id: 's_harcos_amazon_csapatmunka',
+                Name: 'Csapatmunka',
+                Description: 'Ha kettő vagy több amazon együttesen harcol, VO-juk további 2 ponttal nő pszionikus képességeik miatt.'
+            },
+        ]
+        case Osztaly.Kaloz: return [
+            {
+                Id: 's_harcos_kaloz',
+                Name: 'Tengerész/Kalóz',
+                Description: 'A tengerészek a hajózás mesterei; kereskedők, tengeri rablók és rabszolgavadászok.'
+            },
+            {
+                Id: 's_harcos_kaloz_ugyes_huzas',
+                Name: 'Ügyes húzás',
+                Description: 'A kalózok és tengerészek ha magasabb, Ügyességbónuszukat adják hozzá közelharci támadásaikhoz.'
+            },
+            {
+                Id: 's_harcos_kaloz_vasmacska',
+                Name: 'Vasmacska',
+                Description: 'A kalózok és tengerészek nem viselhetnek nehéz vértezetet, de VO-juk könnyű vértben Szint/3-al javul.'
+            },
+            {
+                Id: 's_harcos_kaloz_kritikus',
+                Name: 'Kritikus',
+                Description: 'Minden harmadik szinten kiválaszthatnak egy fegyvert, amivel könnyebben okoznak kritikus sebesülést, tehát pl. csatabárddal 20 helyett 19-20-on, hoszszúkarddal 19-20 helyett 18-20-on, szablyával 18-20 helyett 17-20-on, stb. Ez a képesség 9. szintig fegyverenként csak egyszer választható.'
+            }]
+        case Osztaly.Barbar: return [
+            {
+                Id: 's_harcos_barbar',
+                Name: 'Barbár',
+                Description: 'A barbár törzsek köré sorolhatók a pusztai és sivatagi nomádok, a déli dzsungelek emberevői és az északi tengermelléki rablók nemzetségei egyaránt.'
+            },
+            {
+                Id: 's_harcos_barbar_eletero',
+                Name: 'Túlélő',
+                Description: 'A barbárok 1d12-vel dobják a Hp-jüket, -5 Hp-ig öntudatuknál vannak és +1 bónuszt (10. szinttől +2, 15. szinttől +4) kapnak a mentődobásaikra.'
+            },
+            {
+                Id: 's_harcos_barbar_iras',
+                Name: 'Írástudatlan',
+                Description: 'Minden barbár írástudatlanul kezdi a játékot, de ha kell, később megtanulhatja a betűvetést.'
+            }
+        ]
         case Osztaly.Pap: return [
             {
                 Id: 's_pap_varazslat',
