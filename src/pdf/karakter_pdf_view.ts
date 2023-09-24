@@ -10,6 +10,7 @@ import {Faj} from "../domain-models/faj";
 import {Osztaly} from "../domain-models/osztaly";
 import {CelzoTB, KozelharciTB} from "../domain-models/tamadas_bonusz";
 import {KarakterInputs} from "../domain-models/karakter";
+import {NapiVarazslatok, CalculateVarazslatMentokNF} from "../domain-models/memorizalt_varazslatok";
 
 export interface KarakterPdfView {
     Name: string
@@ -32,6 +33,8 @@ export interface KarakterPdfView {
     MentokModositokkal: Mentok
     Kepzettsegek: Kepzettseg[]
     TolvajKepzettsegek: Kepzettseg[]
+    NapiMemorizalhatoVarazslatok: number[]
+    VarazslatMentokNF : number[]
 }
 
 export function KarakterInputToPdfView(karakter: KarakterInputs): KarakterPdfView {
@@ -44,6 +47,9 @@ export function KarakterInputToPdfView(karakter: KarakterInputs): KarakterPdfVie
 
     const mentok = MentokAlap(karakter.osztaly, karakter.szint)
     const mentoModositok = MentoModositok(tulajdonsagModositok)
+
+    const NapiMemorizalhatoVarazslatok = NapiVarazslatok(karakter)
+    const VarazslatMentokNF = CalculateVarazslatMentokNF(karakter)
 
     return {
         Faj: karakter.faj,
@@ -67,6 +73,9 @@ export function KarakterInputToPdfView(karakter: KarakterInputs): KarakterPdfVie
 
         MentoModositok: mentoModositok,
         MentokAlap: mentok,
-        MentokModositokkal: masodlagosErtekek.Mentok
+        MentokModositokkal: masodlagosErtekek.Mentok,
+
+        NapiMemorizalhatoVarazslatok,
+        VarazslatMentokNF,
     }
 }

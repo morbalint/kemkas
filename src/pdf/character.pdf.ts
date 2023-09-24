@@ -200,6 +200,35 @@ function DrawKepzettsegek(page: PDFPage, fontSizeBase: number, pdfFont: PDFFont,
     }
 }
 
+function DrawMagic(page: PDFPage, fontSizeBase: number, pdfFont: PDFFont, napiVarazslatok: number[], varazsMentokNF: number[]){
+    for(let i = 0; i < 6; i++) {
+        const y = 247 - (i*18)
+        page.drawText(i.toString(), {
+            x: 210,
+            y: y,
+            size: fontSizeBase,
+            font: pdfFont,
+            color: rgb(0, 0, 0),
+        })
+        if (i < napiVarazslatok.length) {
+            page.drawText(napiVarazslatok[i].toString(), {
+                x: 242,
+                y: y,
+                size: fontSizeBase,
+                font: pdfFont,
+                color: rgb(0, 0, 0),
+            })
+            page.drawText(varazsMentokNF[i].toString(), {
+                x: 269,
+                y: y,
+                size: fontSizeBase,
+                font: pdfFont,
+                color: rgb(0, 0, 0),
+            })
+        }
+    }
+}
+
 export async function CreatePDF(karakter: KarakterPdfView) {
 
     const existingPdfBytes = await fetch('/km_karakterlap_hysteria_1.2.pdf').then(res => res.arrayBuffer())
@@ -257,9 +286,9 @@ export async function CreatePDF(karakter: KarakterPdfView) {
     })
     const kozelharciTB = karakter.KozelharciTB.map(SignedNumberToText).join("/")
     page.drawText(kozelharciTB, {
-        x: 254,
+        x: 256,
         y: kozelharciTB.length > 2 ? 386 : 382,
-        size: kozelharciTB.length > 2 ? fontSizeBase : fontSizeBase * 2,
+        size: kozelharciTB.length > 5 ? fontSizeBase * 0.5 : (kozelharciTB.length > 2 ? fontSizeBase : fontSizeBase * 2),
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
@@ -277,6 +306,8 @@ export async function CreatePDF(karakter: KarakterPdfView) {
     DrawKepzettsegek(page, fontSizeBase, pdfFont, karakter.Kepzettsegek, karakter.Tulajdonsagok, karakter.Szint, 337);
     const nextKepzettsegFrom = 337 - (karakter.Kepzettsegek.length * 18)
     DrawKepzettsegek(page, fontSizeBase, pdfFont, karakter.TolvajKepzettsegek, karakter.Tulajdonsagok, karakter.Szint, nextKepzettsegFrom)
+
+    DrawMagic(page, fontSizeBase, pdfFont, karakter.NapiMemorizalhatoVarazslatok, karakter.VarazslatMentokNF)
 
     const pdfBytes = await pdfDoc.save();
     download(pdfBytes, karakter.Name + ".pdf", "application/pdf");
