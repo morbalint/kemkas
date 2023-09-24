@@ -1,5 +1,6 @@
 import {d6} from "./kockak";
 import {Faj} from "./faj";
+import {KarakterInputs} from "./karakter";
 
 export enum Tulajdonsag {
     Ero = 't_ero',
@@ -11,6 +12,15 @@ export enum Tulajdonsag {
 }
 
 export type KarakterTulajdonsagok = Record<Tulajdonsag, number>
+
+export const TulajdonsagIDs = [
+    Tulajdonsag.Ero,
+    Tulajdonsag.Ugyesseg,
+    Tulajdonsag.Egeszseg,
+    Tulajdonsag.Intelligencia,
+    Tulajdonsag.Bolcsesseg,
+    Tulajdonsag.Karizma
+]
 
 export const TulajdonsagDefaults: KarakterTulajdonsagok = {
     t_ero: 10,
@@ -50,22 +60,18 @@ function rollAbility() {
 }
 
 export function RollAllAbilities() : KarakterTulajdonsagok {
-    return {
-        t_ero: rollAbility(),
-        t_ugy: rollAbility(),
-        t_egs: rollAbility(),
-        t_int: rollAbility(),
-        t_bol: rollAbility(),
-        t_kar: rollAbility(),
+    const response = {...TulajdonsagDefaults}
+    for (const key of TulajdonsagIDs) {
+        response[key] = rollAbility()
     }
+    return response
 }
 
 export const Modifier = (val : number) => Math.floor(val / 3) - 3
 
 export function TulajdonsagModosito(tulajdonsagok: KarakterTulajdonsagok): KarakterTulajdonsagok {
     let response: KarakterTulajdonsagok = { ...tulajdonsagok }
-    const keys = Object.keys(tulajdonsagok) as (keyof KarakterTulajdonsagok)[]
-    for (const key of keys) {
+    for (const key of TulajdonsagIDs) {
         response[key] = Modifier(tulajdonsagok[key])
     }
     return response
@@ -131,17 +137,6 @@ export function TulajdonsagModositokFajokra(tul: Tulajdonsag) {
     return (faj: Faj) => tulajdonsagModositokPerFaj(tul, faj);
 }
 
-export function FajiTulajdonsagModositok(faj: Faj) : KarakterTulajdonsagok {
-    return {
-        [Tulajdonsag.Ero]: tulajdonsagModositokPerFaj(Tulajdonsag.Ero, faj),
-        [Tulajdonsag.Ugyesseg]: tulajdonsagModositokPerFaj(Tulajdonsag.Ugyesseg, faj),
-        [Tulajdonsag.Egeszseg]: tulajdonsagModositokPerFaj(Tulajdonsag.Egeszseg, faj),
-        [Tulajdonsag.Intelligencia]: tulajdonsagModositokPerFaj(Tulajdonsag.Intelligencia, faj),
-        [Tulajdonsag.Bolcsesseg]: tulajdonsagModositokPerFaj(Tulajdonsag.Bolcsesseg, faj),
-        [Tulajdonsag.Karizma]: tulajdonsagModositokPerFaj(Tulajdonsag.Karizma, faj),
-    }
-}
-
 export function TulajdonsagokFajjal(tulajdonsagok: KarakterTulajdonsagok, faj: Faj): KarakterTulajdonsagok {
     return {
         [Tulajdonsag.Ero]: tulajdonsagok.t_ero + tulajdonsagModositokPerFaj(Tulajdonsag.Ero, faj),
@@ -151,4 +146,12 @@ export function TulajdonsagokFajjal(tulajdonsagok: KarakterTulajdonsagok, faj: F
         [Tulajdonsag.Bolcsesseg]: tulajdonsagok.t_bol + tulajdonsagModositokPerFaj(Tulajdonsag.Bolcsesseg, faj),
         [Tulajdonsag.Karizma]: tulajdonsagok.t_kar + tulajdonsagModositokPerFaj(Tulajdonsag.Karizma, faj),
     }
+}
+
+export function TulajdonsagokTotal(karakter: Pick<KarakterInputs, 'tulajdonsagok' | 'faj' | 'tulajdonsagNovelesek'>): KarakterTulajdonsagok {
+    const response = TulajdonsagokFajjal(karakter.tulajdonsagok, karakter.faj)
+    for (const tulajdonsag of karakter.tulajdonsagNovelesek) {
+        response[tulajdonsag] += 1
+    }
+    return response
 }

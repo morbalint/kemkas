@@ -15,7 +15,7 @@ export interface KarakterInputs {
     tolvajKepzettsegek?: KepzettsegId[]
     szint: number
     hpRolls: number[],
-    tulajdonsagNovekedes: Tulajdonsag[],
+    tulajdonsagNovelesek: Tulajdonsag[],
 }
 
 export const KarakterDefaults: KarakterInputs = {
@@ -27,6 +27,5 @@ export const KarakterDefaults: KarakterInputs = {
     kepzettsegek: [],
     szint: 1,
     hpRolls: [],
-    tulajdonsagNovekedes: []
+    tulajdonsagNovelesek: []
 }
-
