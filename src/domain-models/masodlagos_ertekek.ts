@@ -3,6 +3,7 @@ import {Osztaly} from "./osztaly";
 import {KarakterInputs} from "./karakter";
 import {Modifier} from "./tulajdonsag";
 import {CelzoTB, KozelharciTB} from "./tamadas_bonusz";
+import {Faj} from "./faj";
 
 export interface MasodlagosErtekekView {
     HP: number
@@ -12,7 +13,7 @@ export interface MasodlagosErtekekView {
     Mentok: Mentok
 }
 
-export type KarakterpickForMasodlagosErtekek = Pick<KarakterInputs, 'osztaly' | 'hpRolls' | 'tulajdonsagok' | 'szint'>
+export type KarakterpickForMasodlagosErtekek = Pick<KarakterInputs, 'osztaly' | 'hpRolls' | 'tulajdonsagok' | 'szint' | 'faj'>
 
 export function BaseHP(osztaly: Osztaly) {
     let base = 4;
@@ -48,8 +49,21 @@ export function HP(karakter: Pick<KarakterInputs, 'osztaly' | 'tulajdonsagok' | 
         .reduce((sum, val) => sum + val, 0)
 }
 
-export function VO(karakter: Pick<KarakterInputs, 'tulajdonsagok'>): number {
-    return 10 + Modifier(karakter.tulajdonsagok.t_ugy) // TODO: Kaloz, Amazon
+export function VO(karakter: Pick<KarakterInputs, 'tulajdonsagok' | 'faj' | 'osztaly' | 'szint'>): number {
+    let vo = 10 + Modifier(karakter.tulajdonsagok.t_ugy)
+    if (karakter.osztaly === Osztaly.Kaloz) {
+        vo += Math.floor(karakter.szint / 3)
+    }
+    if (karakter.osztaly === Osztaly.Amazon) {
+        if (karakter.tulajdonsagok.t_kar > karakter.tulajdonsagok.t_ugy) {
+            vo = 10 + Modifier(karakter.tulajdonsagok.t_kar)
+        }
+        vo += Math.floor(karakter.szint / 2)
+    }
+    if (karakter.faj === Faj.Felszerzet){
+        vo += 1
+    }
+    return vo
 }
 
 export function CalculateMasodlagosErtekek(karakter: KarakterpickForMasodlagosErtekek): MasodlagosErtekekView {
