@@ -2,6 +2,7 @@
 
 ## Fixes
 - Kötelező képezettségek - Birodalmi tolvaj
+- PDF pretty: Tamadas bonuszok +10/+5 
 
 ## Level up
 - Faji szint korlatok

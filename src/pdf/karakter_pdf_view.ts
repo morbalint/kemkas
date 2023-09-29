@@ -1,5 +1,5 @@
 import {
-    KarakterTulajdonsagok,
+    KarakterTulajdonsagok, Modifier,
     TulajdonsagModosito,
     TulajdonsagokTotal
 } from "../domain-models/tulajdonsag";
@@ -13,6 +13,11 @@ import {KarakterInputs} from "../domain-models/karakter";
 import {NapiVarazslatok, CalculateVarazslatMentokNF} from "../domain-models/memorizalt_varazslatok";
 import {GetJellem} from "../domain-models/jellem";
 
+export interface KepzettsegPdfView {
+    KepzettsegName: string
+    KepzettsegModifier: number
+}
+
 export interface KarakterPdfView {
     Name: string
     Nem: string
@@ -23,7 +28,7 @@ export interface KarakterPdfView {
     Osztaly: string
     Tulajdonsagok: KarakterTulajdonsagok,
     TulajdonsagModositok: KarakterTulajdonsagok,
-    Szint: number
+    Szint: string
     HP: number
     VO: number
     Mozgas: number
@@ -33,8 +38,8 @@ export interface KarakterPdfView {
     MentokAlap: Mentok
     MentoModositok: Mentok
     MentokModositokkal: Mentok
-    Kepzettsegek: Kepzettseg[]
-    TolvajKepzettsegek: Kepzettseg[]
+    Kepzettsegek: KepzettsegPdfView[]
+    TolvajKepzettsegek: KepzettsegPdfView[]
     NapiMemorizalhatoVarazslatok: number[]
     VarazslatMentokNF : number[]
 }
@@ -62,9 +67,9 @@ export function KarakterInputToPdfView(karakter: KarakterInputs): KarakterPdfVie
         Nem: karakter.nem || "",
         Tulajdonsagok: karakter.tulajdonsagok,
         Osztaly: OsztalyLabel(karakter.osztaly),
-        Szint: karakter.szint,
-        Kepzettsegek: karakter.kepzettsegek.map(id => Kepzettsegek[id]),
-        TolvajKepzettsegek: karakter.tolvajKepzettsegek?.map(id => Kepzettsegek[id]) || [],
+        Szint: karakter.szint.toString(),
+        Kepzettsegek: karakter.kepzettsegek.map(id => mapKepzettsegToPdfView(Kepzettsegek[id], tulajdonsagok, karakter.szint)),
+        TolvajKepzettsegek: karakter.tolvajKepzettsegek?.map(id => mapKepzettsegToPdfView(Kepzettsegek[id], tulajdonsagok, karakter.szint)) || [],
         TulajdonsagModositok: tulajdonsagModositok,
 
         HP: masodlagosErtekek.HP,
@@ -80,5 +85,19 @@ export function KarakterInputToPdfView(karakter: KarakterInputs): KarakterPdfVie
 
         NapiMemorizalhatoVarazslatok,
         VarazslatMentokNF,
+    }
+}
+
+function mapKepzettsegToPdfView(kepzettseg: Kepzettseg, tulajdonsagok: KarakterTulajdonsagok, szint: number) {
+    const tulajdonsagErtek = kepzettseg.Tulajdonsag.reduce((maxTulajdonsagErtek, currentTulajdonsag) =>
+            (tulajdonsagok[currentTulajdonsag] > maxTulajdonsagErtek)
+                ? tulajdonsagok[currentTulajdonsag]
+                : maxTulajdonsagErtek,
+        tulajdonsagok[kepzettseg.Tulajdonsag[0]])
+
+    const modifier = Modifier(tulajdonsagErtek) + szint
+    return {
+        KepzettsegName: kepzettseg.Name,
+        KepzettsegModifier: modifier,
     }
 }
