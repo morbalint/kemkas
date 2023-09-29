@@ -1,10 +1,10 @@
 # TODO
 
 ## Fixes
-- Kötelező képezettségek
-- Jellem
+- Kötelező képezettségek - Birodalmi tolvaj
 
 ## Level up
+- Faji szint korlatok
 - Harcos fegyver specializáció választás szintlépéskor (free text)
 - Kalóz kritikus fegyver választás szintlépéskor (free text)
 - Tolvaj 9.ik szinttől tiltott képzettségek

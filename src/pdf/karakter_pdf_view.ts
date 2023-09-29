@@ -6,19 +6,21 @@ import {
 import {Mentok, MentokAlap, MentoModositok} from "../domain-models/mentok";
 import {Kepzettseg, Kepzettsegek} from "../domain-models/kepzettsegek";
 import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
-import {Faj} from "../domain-models/faj";
-import {Osztaly} from "../domain-models/osztaly";
+import {Faj, FajLabel} from "../domain-models/faj";
+import {Osztaly, OsztalyLabel} from "../domain-models/osztaly";
 import {CelzoTB, KozelharciTB} from "../domain-models/tamadas_bonusz";
 import {KarakterInputs} from "../domain-models/karakter";
 import {NapiVarazslatok, CalculateVarazslatMentokNF} from "../domain-models/memorizalt_varazslatok";
+import {GetJellem} from "../domain-models/jellem";
 
 export interface KarakterPdfView {
     Name: string
     Nem: string
     Kor: number
     Isten: string
-    Faj: Faj
-    Osztaly: Osztaly
+    Jellem: string
+    Faj: string
+    Osztaly: string
     Tulajdonsagok: KarakterTulajdonsagok,
     TulajdonsagModositok: KarakterTulajdonsagok,
     Szint: number
@@ -52,13 +54,14 @@ export function KarakterInputToPdfView(karakter: KarakterInputs): KarakterPdfVie
     const VarazslatMentokNF = CalculateVarazslatMentokNF(karakter)
 
     return {
-        Faj: karakter.faj,
+        Faj: FajLabel(karakter.faj),
         Isten: karakter.isten || "",
+        Jellem: GetJellem(karakter.jellem).Label,
         Kor: karakter.kor,
         Name: karakter.name,
         Nem: karakter.nem || "",
         Tulajdonsagok: karakter.tulajdonsagok,
-        Osztaly: karakter.osztaly,
+        Osztaly: OsztalyLabel(karakter.osztaly),
         Szint: karakter.szint,
         Kepzettsegek: karakter.kepzettsegek.map(id => Kepzettsegek[id]),
         TolvajKepzettsegek: karakter.tolvajKepzettsegek?.map(id => Kepzettsegek[id]) || [],

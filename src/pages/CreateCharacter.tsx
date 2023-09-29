@@ -15,7 +15,7 @@ import {
 } from "../domain-models/tulajdonsag";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
 import {
-    AvailableKezpettsegList,
+    AvailableKezpettsegList, GetKepzettsegListaN,
     GetNumberOfKepzettsegek, KepzettsegId, SetDefaultKepzettsegek,
     SetDefaultTolvajKepzettsegek,
 } from "../domain-models/kepzettsegek";
@@ -27,6 +27,7 @@ import {BaseHP, CalculateMasodlagosErtekek} from "../domain-models/masodlagos_er
 import {KarakterInputToPdfView} from "../pdf/karakter_pdf_view";
 import {arraySetN} from "../util";
 import TulajdonsagNoveles from "../components/TulajdonsagNoveles";
+import JellemSelector from "../components/JellemSelector";
 
 function CreateCharacterPage() {
 
@@ -104,6 +105,7 @@ function CreateCharacterPage() {
                                type={"number"}
                                onChange={(e) => changeKarakter({...karakter, kor: Number(e.target.value)})}/>
                     </div>
+                    <JellemSelector selected={karakter.jellem} changeJellem={(val) => changeKarakter({...karakter, jellem: val})} />
                     <div className='row m-2'>
                         <label className='col-md-2 col-sm-3 col-form-label' >Választott istenség</label>
                         <input className='col form-control'
@@ -130,7 +132,7 @@ function CreateCharacterPage() {
                         changeOsztaly={(o: Osztaly) => changeKarakter({...karakter, osztaly: o})}
                     />
                     <KarakterKepzettsegek
-                        availableKepzettsegList={availableKepzettsegList}
+                        getKepzettsegListaN={GetKepzettsegListaN(karakter)}
                         numberOfKepzettsegek={GetNumberOfKepzettsegek(tulajdonsagokFajjal.t_int, karakter.faj, availableKepzettsegList.length)}
                         kepzettsegek={karakter.kepzettsegek}
                         changeKepzettsegek={changeKepzettseg}

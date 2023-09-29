@@ -238,25 +238,60 @@ export function SetDefaultTolvajKepzettsegek(karakter: Pick<KarakterInputs, 'osz
     }
 }
 
+export function GetKepzettsegListaN(karakter: Pick<KarakterInputs, 'osztaly' | 'faj' | 'kepzettsegek' | 'tolvajKepzettsegek'>) {
+    const availableKepzettsegList = AvailableKezpettsegList(karakter.osztaly)
+    return (n: number): Kepzettseg[] => {
+        let available = [...availableKepzettsegList]
+        if (n === 0) {
+            if (karakter.faj === Faj.Eszaki) {
+                return [Kepzettsegek.k_hajozas]
+            }
+            if (karakter.faj === Faj.Etuniai) {
+                return [Kepzettsegek.k_lovaglas]
+            }
+            if (karakter.faj === Faj.Birodalmi && karakter.osztaly !== Osztaly.Tolvaj) {
+                available = [Kepzettsegek.k_meregkeveres, Kepzettsegek.k_alkimia]
+            }
+        }
+        const kepzettsegekWithoutN = [...karakter.kepzettsegek.slice(0, n), ...karakter.kepzettsegek.slice(n + 1)]
+        return available.filter(x => !kepzettsegekWithoutN.includes(x.Id) && !karakter.tolvajKepzettsegek?.includes(x.Id))
+    }
+}
+
 export function SetDefaultKepzettsegek(karakter: Pick<KarakterInputs, 'osztaly' | 'faj' | 'tulajdonsagok' | 'kepzettsegek' | 'tolvajKepzettsegek'>, changeKepzettsegek: (k: KepzettsegId[]) => void) {
     const availableKepzettsegList = AvailableKezpettsegList(karakter.osztaly)
     const numberOfKepzettsegek = GetNumberOfKepzettsegek(karakter.tulajdonsagok.t_int, karakter.faj, availableKepzettsegList.length)
-    let kepzettsegek = karakter.kepzettsegek
-    const getKepzettsegListaN = (n: number) => {
-        const kepzettsegekWithoutN = [...kepzettsegek.slice(0, n), ...kepzettsegek.slice(n+1)]
-        return availableKepzettsegList.filter(x => !kepzettsegekWithoutN.includes(x.Id) && !karakter.tolvajKepzettsegek?.includes(x.Id))
+    let kepzettsegek = [...karakter.kepzettsegek]
+
+    let mustChangeKepzettsegek = false
+
+    const restrictedKepzettsegek = GetKepzettsegListaN(karakter)(0)
+    if (kepzettsegek.length === 0) {
+        if (restrictedKepzettsegek.length > 0) {
+            kepzettsegek.push(restrictedKepzettsegek[0].Id)
+            mustChangeKepzettsegek = true
+        }
+    } else {
+        if (!restrictedKepzettsegek.includes(Kepzettsegek[kepzettsegek[0]])) {
+            kepzettsegek[0] = restrictedKepzettsegek[0].Id
+            mustChangeKepzettsegek = true
+        }
     }
+
     if (kepzettsegek.length < numberOfKepzettsegek) {
         for (let i = kepzettsegek.length; i < numberOfKepzettsegek; i++) {
-            const kepzettsegLista = getKepzettsegListaN(i)
+            const kepzettsegLista = GetKepzettsegListaN({...karakter, kepzettsegek})(i)
             if (kepzettsegLista.length > 0) {
                 kepzettsegek.push(kepzettsegLista[0].Id)
             }
         }
-        changeKepzettsegek(kepzettsegek)
+        mustChangeKepzettsegek = true
     }
     if (kepzettsegek.length > numberOfKepzettsegek){
         kepzettsegek = kepzettsegek.slice(0, numberOfKepzettsegek)
+        mustChangeKepzettsegek = true
+    }
+    if (mustChangeKepzettsegek){
         changeKepzettsegek(kepzettsegek)
     }
 }

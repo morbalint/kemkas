@@ -55,27 +55,22 @@ function InternalKepzettsegekSelector(props: {
 }
 
 function KarakterKepzettsegek (props: {
-    availableKepzettsegList: Kepzettseg[],
     numberOfKepzettsegek: number
     kepzettsegek: KepzettsegId[],
     changeKepzettsegek: (newKepzettsegek: KepzettsegId[]) => void
     tolvajKepzettsegek: KepzettsegId[],
     changeTolvajKepzettsegek: (newKepzettsegek: KepzettsegId[]) => void
+    getKepzettsegListaN: (n: number) => Kepzettseg[]
 }) {
-    const { kepzettsegek, numberOfKepzettsegek, availableKepzettsegList, changeKepzettsegek, tolvajKepzettsegek, changeTolvajKepzettsegek} = props
+    const { kepzettsegek, numberOfKepzettsegek, getKepzettsegListaN, changeKepzettsegek, tolvajKepzettsegek, changeTolvajKepzettsegek} = props
 
     // TODO: Eszakinak es Kaloznak hajozas, Birodalminak Alikmia, vagy Meregkeveres, Etuniainak Lovaglas
-
-    const getKepzettsegListaN = (n: number) => {
-        const kepzettsegekWithoutN = [...kepzettsegek.slice(0, n), ...kepzettsegek.slice(n+1)]
-        return availableKepzettsegList.filter(x => !kepzettsegekWithoutN.includes(x.Id) && !tolvajKepzettsegek.includes(x.Id))
-    }
 
     const getTolvajKepzettsegListaN = (n: number) : Kepzettseg[] => {
         const tolvajKepzettsegekWithoutN = [...tolvajKepzettsegek.slice(0, n), ...tolvajKepzettsegek.slice(n+1)]
         return TolvajKepzettsegList.filter(x => !kepzettsegek.includes(x.Id) && !tolvajKepzettsegekWithoutN.includes(x.Id))
     }
-
+    
     return <>
         <InternalKepzettsegekSelector
             title="Képzettségek"

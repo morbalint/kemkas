@@ -1,8 +1,6 @@
 import {KarakterPdfView} from "./karakter_pdf_view";
 import {PDFDocument, PDFFont, PDFPage, rgb} from "pdf-lib";
 import fontkit from '@pdf-lib/fontkit'
-import {OsztalyLabel} from "../domain-models/osztaly";
-import {FajLabel} from "../domain-models/faj";
 import {SignedNumberToText} from "../components/Helpers";
 import {KarakterTulajdonsagok, Modifier} from "../domain-models/tulajdonsag";
 import download from "downloadjs";
@@ -168,21 +166,16 @@ function drawBaseInfo(karakter: KarakterPdfView, draw: (text: string, x : number
     draw(karakter.Nem, 454, 710, 1)
     draw(karakter.Kor.toString(), 454, 690, 1)
     draw(karakter.Isten, 454, 670, 1)
-    draw(OsztalyLabel(karakter.Osztaly), 60, 672, 1)
+    draw(karakter.Osztaly, 60, 672, 1)
     draw(karakter.Szint.toString(), 264, 682, 3)
-    draw(FajLabel(karakter.Faj), 304, 710, 1)
+    draw(karakter.Faj, 302, 710, 1)
+    draw(karakter.Jellem, 302, 672, karakter.Jellem.length > 17 ? 11/12 : 1)
 }
 
-function DrawKepzettsegek(page: PDFPage, fontSizeBase: number, pdfFont: PDFFont, kepzettsegek: Kepzettseg[], tulajdonsagok: KarakterTulajdonsagok, szint: number, startFrom: number) {
+function DrawKepzettsegek(draw: (text: string, x: number, y: number) => void, kepzettsegek: Kepzettseg[], tulajdonsagok: KarakterTulajdonsagok, szint: number, startFrom: number) {
     for (let i = 0; i < kepzettsegek.length; i++) {
         let kepzettseg = kepzettsegek[i]
-        page.drawText(kepzettseg.Name, {
-            x: 60,
-            y: startFrom - (i * 18),
-            size: fontSizeBase,
-            font: pdfFont,
-            color: rgb(0, 0, 0),
-        })
+        draw(kepzettseg.Name, 60, startFrom - (i * 18))
         const tulajdonsagErtek = kepzettseg.Tulajdonsag.reduce((maxTulajdonsagErtek, currentTulajdonsag) =>
                 (tulajdonsagok[currentTulajdonsag] > maxTulajdonsagErtek)
                     ? tulajdonsagok[kepzettseg.Tulajdonsag[i]]
@@ -190,13 +183,7 @@ function DrawKepzettsegek(page: PDFPage, fontSizeBase: number, pdfFont: PDFFont,
             tulajdonsagok[kepzettseg.Tulajdonsag[0]])
 
         const kepzettsegModifier = SignedNumberToText(Modifier(tulajdonsagErtek) + szint)
-        page.drawText(kepzettsegModifier, {
-            x: kepzettsegModifier.length > 2 ? 172 : 175,
-            y: startFrom - (i * 18),
-            size: fontSizeBase,
-            font: pdfFont,
-            color: rgb(0, 0, 0),
-        })
+        draw(kepzettsegModifier, kepzettsegModifier.length > 2 ? 172 : 175, startFrom - (i * 18))
     }
 }
 
@@ -303,9 +290,9 @@ export async function CreatePDF(karakter: KarakterPdfView) {
 
     drawMentok(page, karakter, fontSizeBase, pdfFont);
 
-    DrawKepzettsegek(page, fontSizeBase, pdfFont, karakter.Kepzettsegek, karakter.Tulajdonsagok, karakter.Szint, 337);
+    DrawKepzettsegek(drawText, karakter.Kepzettsegek, karakter.Tulajdonsagok, karakter.Szint, 337);
     const nextKepzettsegFrom = 337 - (karakter.Kepzettsegek.length * 18)
-    DrawKepzettsegek(page, fontSizeBase, pdfFont, karakter.TolvajKepzettsegek, karakter.Tulajdonsagok, karakter.Szint, nextKepzettsegFrom)
+    DrawKepzettsegek(drawText, karakter.TolvajKepzettsegek, karakter.Tulajdonsagok, karakter.Szint, nextKepzettsegFrom)
 
     DrawMagic(page, fontSizeBase, pdfFont, karakter.NapiMemorizalhatoVarazslatok, karakter.VarazslatMentokNF)
 
