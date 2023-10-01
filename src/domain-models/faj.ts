@@ -1,3 +1,9 @@
+import {
+    KarakterTulajdonsagok,
+    Tulajdonsag,
+    TulajdonsagModositokFajokra,
+} from "./tulajdonsag";
+import {Osztaly} from "./osztaly";
 
 
 export enum Faj {
@@ -110,4 +116,147 @@ export function FajSpecials(faj : Faj) : string[] {
             "Szintkorlátok: Harcos 9, Pap 9, Tolvaj 6, Varázsló 4",
         ];
     }
+}
+
+export type Szintkorlatok = Record<Osztaly, number>
+
+export interface FajDetails {
+    ID: Faj,
+    Label: string,
+    Description: string,
+    Specials: string[],
+    TulajdonsagModifiers: KarakterTulajdonsagok
+    Szintkorlatok: Szintkorlatok
+}
+
+
+export function GetFajDetails(faj: Faj): FajDetails {
+    return {
+        ID: faj,
+        Label: FajLabel(faj),
+        Description: FajDescription(faj),
+        Specials: FajSpecials(faj),
+        TulajdonsagModifiers: fajiTulajdonsagModositok(faj),
+        Szintkorlatok: SzintKorlatokFajokra(faj),
+    }
+}
+
+function fajiTulajdonsagModositok(faj: Faj): KarakterTulajdonsagok {
+    return {
+        [Tulajdonsag.Ero]: TulajdonsagModositokFajokra(Tulajdonsag.Ero)(faj),
+        [Tulajdonsag.Ugyesseg]: TulajdonsagModositokFajokra(Tulajdonsag.Ugyesseg)(faj),
+        [Tulajdonsag.Egeszseg]: TulajdonsagModositokFajokra(Tulajdonsag.Egeszseg)(faj),
+        [Tulajdonsag.Intelligencia]: TulajdonsagModositokFajokra(Tulajdonsag.Intelligencia)(faj),
+        [Tulajdonsag.Bolcsesseg]: TulajdonsagModositokFajokra(Tulajdonsag.Bolcsesseg)(faj),
+        [Tulajdonsag.Karizma]: TulajdonsagModositokFajokra(Tulajdonsag.Karizma)(faj),
+    }
+}
+
+const EmberiSzintKorlatok: Szintkorlatok = {
+    o_amazon: 0,
+    o_barbar: 20,
+    o_harcos: 20,
+    o_ijasz: 20,
+    o_illuzionista: 20,
+    o_kaloz: 20,
+    o_pap: 20,
+    o_tolvaj: 20,
+    o_varazslo: 20
+
+}
+
+// noinspection OverlyComplexFunctionJS,FunctionTooLongJS
+export function SzintKorlatokFajokra(faj: Faj) : Szintkorlatok {
+    let szintkorlatok = {...EmberiSzintKorlatok}
+    switch (faj) {
+        case Faj.Ember: break;
+        case Faj.Amazon:
+            szintkorlatok.o_pap = 5
+            szintkorlatok.o_tolvaj = 0
+            szintkorlatok.o_illuzionista = 0
+            szintkorlatok.o_varazslo = 0
+            szintkorlatok.o_amazon = 20
+            break
+        case Faj.Birodalmi:
+            szintkorlatok.o_harcos = 7
+            szintkorlatok.o_barbar = 7
+            szintkorlatok.o_ijasz = 7
+            szintkorlatok.o_kaloz = 7
+            szintkorlatok.o_pap = 5
+            szintkorlatok.o_tolvaj = 5
+            break
+        case Faj.Eszaki:
+        case Faj.Etuniai:
+            szintkorlatok.o_pap = 7
+            szintkorlatok.o_illuzionista = 5
+            szintkorlatok.o_varazslo = 5
+            break
+        case Faj.Osember:
+            szintkorlatok.o_pap = 7
+            szintkorlatok.o_tolvaj = 4
+            szintkorlatok.o_illuzionista = 0
+            szintkorlatok.o_varazslo = 0
+            break
+        case Faj.Elf:
+            szintkorlatok.o_pap = 7
+            szintkorlatok.o_tolvaj = 6
+            szintkorlatok.o_illuzionista = 9
+            szintkorlatok.o_varazslo = 9
+            szintkorlatok.o_harcos = 9
+            szintkorlatok.o_barbar = 9
+            szintkorlatok.o_ijasz = 9
+            szintkorlatok.o_kaloz = 9
+            break
+        case Faj.Felelf:
+            szintkorlatok.o_pap = 5
+            szintkorlatok.o_tolvaj = 9
+            szintkorlatok.o_illuzionista = 9
+            szintkorlatok.o_varazslo = 9
+            szintkorlatok.o_harcos = 9
+            szintkorlatok.o_barbar = 9
+            szintkorlatok.o_ijasz = 9
+            szintkorlatok.o_kaloz = 9
+            break
+        case Faj.Felork:
+            szintkorlatok.o_pap = 5
+            szintkorlatok.o_tolvaj = 9
+            szintkorlatok.o_illuzionista = 5
+            szintkorlatok.o_varazslo = 5
+            szintkorlatok.o_harcos = 9
+            szintkorlatok.o_barbar = 9
+            szintkorlatok.o_ijasz = 9
+            szintkorlatok.o_kaloz = 9
+            break
+        case Faj.Felszerzet:
+            szintkorlatok.o_pap = 6
+            szintkorlatok.o_tolvaj = 9
+            szintkorlatok.o_illuzionista = 4
+            szintkorlatok.o_varazslo = 4
+            szintkorlatok.o_harcos = 6
+            szintkorlatok.o_barbar = 6
+            szintkorlatok.o_ijasz = 6
+            szintkorlatok.o_kaloz = 6
+            break
+        case Faj.Gnom:
+            szintkorlatok.o_pap = 6
+            szintkorlatok.o_tolvaj = 8
+            szintkorlatok.o_illuzionista = 7
+            szintkorlatok.o_varazslo = 7
+            szintkorlatok.o_harcos = 6
+            szintkorlatok.o_barbar = 6
+            szintkorlatok.o_ijasz = 6
+            szintkorlatok.o_kaloz = 6
+            break
+        case Faj.Torpe:
+            szintkorlatok.o_pap = 9
+            szintkorlatok.o_tolvaj = 6
+            szintkorlatok.o_illuzionista = 4
+            szintkorlatok.o_varazslo = 4
+            szintkorlatok.o_harcos = 9
+            szintkorlatok.o_barbar = 9
+            szintkorlatok.o_ijasz = 9
+            szintkorlatok.o_kaloz = 9
+            break
+    }
+    return szintkorlatok
 }

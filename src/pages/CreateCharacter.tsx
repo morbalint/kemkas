@@ -9,7 +9,6 @@ import KarakterKepzettsegek from "../components/KarakterKepzettsegek";
 import {
     KarakterTulajdonsagok,
     Tulajdonsag,
-    TulajdonsagIDs,
     TulajdonsagokFajjal,
     TulajdonsagokTotal
 } from "../domain-models/tulajdonsag";
@@ -22,12 +21,13 @@ import {
 import {CreatePDF} from "../pdf/character.pdf";
 import {KarakterDefaults} from "../domain-models/karakter";
 import BasicNewLevel from "../components/BasicNewLevel";
-import {dAny} from "../domain-models/kockak";
-import {BaseHP, CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
+import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
 import {KarakterInputToPdfView} from "../pdf/karakter_pdf_view";
 import {arraySetN} from "../util";
 import TulajdonsagNoveles from "../components/TulajdonsagNoveles";
 import JellemSelector from "../components/JellemSelector";
+import {LevelUp, LevelDown, CanLevelUp} from "../domain-models/level";
+import {Card} from "react-bootstrap";
 
 function CreateCharacterPage() {
 
@@ -42,38 +42,17 @@ function CreateCharacterPage() {
     SetDefaultKepzettsegek({...karakter, tulajdonsagok: tulajdonsagokFajjal}, changeKepzettseg)
     const availableKepzettsegList = AvailableKezpettsegList(karakter.osztaly)
 
-    function levelUp() {
-        const szint = karakter.szint + 1
-        const dice = BaseHP(karakter.osztaly)
-        const roll = dAny(dice)
-        const hpRolls = [...karakter.hpRolls, roll]
-        console.log(`Level ${szint} HP roll on d${dice} is: ${roll}`)
-        let tulajdonsagNovelesek = karakter.tulajdonsagNovelesek
-        if (szint % 4 === 0) {
-            for (const tulajdonsag of TulajdonsagIDs) {
-                if (tulajdonsagokTotal[tulajdonsag] < 18) {
-                    tulajdonsagNovelesek = [...tulajdonsagNovelesek, tulajdonsag]
-                    break;
-                }
-            }
-        }
-        changeKarakter({...karakter, szint, hpRolls, tulajdonsagNovelesek})
-    }
 
-    function levelDown() {
-        let tulajdonsagNovelesek = karakter.tulajdonsagNovelesek
-        if (karakter.szint % 4 === 0) {
-           tulajdonsagNovelesek = tulajdonsagNovelesek.slice(0, -1)
-        }
-        const szint = karakter.szint - 1
-        const hpRolls = karakter.hpRolls.slice(0, -1)
-        changeKarakter({...karakter, szint, hpRolls, tulajdonsagNovelesek})
-    }
 
     const changeHProllAtSzint = (szint: number) => (newHProll: number) => {
         changeKarakter({...karakter, hpRolls: arraySetN(karakter.hpRolls, szint-2, newHProll)})
         console.log(karakter)
     }
+
+    const levelUp = () => LevelUp(karakter, changeKarakter)
+    const levelDown = () => LevelDown(karakter, changeKarakter)
+
+    const canLevelUp = CanLevelUp(karakter)
 
     return (
         <div>
@@ -161,7 +140,9 @@ function CreateCharacterPage() {
                     )}
 
                     <div className='d-grid gap-2 m-5'>
-                        {karakter.szint < 10 && <button className='btn btn-dark btn-lg' type='button' onClick={levelUp}>Szintlépés! ⇧</button> }
+                        {canLevelUp && <button className='btn btn-dark btn-lg' type='button' onClick={levelUp}>Szintlépés! ⇧</button> }
+                        {!canLevelUp && karakter.szint < 10 &&
+                            <Card className='col text-center p-3'>Elérted a fajod szint limitjét</Card>}
                         {karakter.szint > 1 && <button className='btn btn-dark btn-lg' type='button' onClick={levelDown}>Visszalépés! ⇩</button> }
                     </div>
 
