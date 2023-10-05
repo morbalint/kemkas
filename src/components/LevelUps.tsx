@@ -6,14 +6,30 @@ import {Tulajdonsag, TulajdonsagokTotal} from "../domain-models/tulajdonsag";
 import {arraySetN} from "../util";
 import {Osztaly} from "../domain-models/osztaly";
 import HarcosFegyverSpecializacio from "./HarcosFegyverSpecializacio";
+import KalozKritikus from "./KalozKritikus";
 
-function LevelUp(props: {szint: number, karakter: KarakterInputs, changeTulajdonsagNoveles: (t: Tulajdonsag) => void, changeRolledHP: (rolledHP: number) => void, changeHarcosSpec: (spec: string) => void}) {
-    const {szint, karakter, changeTulajdonsagNoveles, changeRolledHP, changeHarcosSpec} = props
+function LevelUp(props: {
+    szint: number,
+    karakter: KarakterInputs,
+    changeTulajdonsagNoveles: (t: Tulajdonsag) => void,
+    changeRolledHP: (rolledHP: number) => void,
+    changeHarcosSpec: (spec: string) => void,
+    changeKalozKritikus: (krit: string) => void,
+}) {
+    const {
+        szint,
+        karakter,
+        changeTulajdonsagNoveles,
+        changeRolledHP,
+        changeHarcosSpec,
+        changeKalozKritikus,
+    } = props
 
     const specializationIndex = Math.floor((szint-1) / 2)
     console.log('Specialization index: ' + specializationIndex.toString())
     const specialization = karakter.harcosSpecializaciok[specializationIndex]
     console.log(specialization)
+    const krit = karakter.kalozKritikus[Math.floor(szint/3)]
 
     return <div key={`level-up-${szint}`}>
         <div className='row mt-3'>
@@ -31,7 +47,21 @@ function LevelUp(props: {szint: number, karakter: KarakterInputs, changeTulajdon
             changeRolledHP={changeRolledHP}
         />
         {karakter.osztaly === Osztaly.Harcos && szint % 2 === 1 &&
-            <HarcosFegyverSpecializacio specialization={specialization} existingSpecializations={karakter.harcosSpecializaciok} changeSpecialization={changeHarcosSpec} />}
+            <HarcosFegyverSpecializacio
+                specialization={specialization}
+                existingSpecializations={karakter.harcosSpecializaciok}
+                changeSpecialization={changeHarcosSpec}
+                szint={szint}
+            />
+        }
+        {karakter.osztaly === Osztaly.Kaloz && szint % 3 === 0 &&
+            <KalozKritikus
+                krit={krit}
+                existingKrits={karakter.kalozKritikus}
+                changeKrit={changeKalozKritikus}
+                szint={szint}
+            />
+        }
     </div>
 }
 
@@ -50,6 +80,10 @@ export function LevelUps(props: {karakter: KarakterInputs, changeKarakter: (inpu
         changeKarakter({...karakter, harcosSpecializaciok: arraySetN(karakter.harcosSpecializaciok, Math.floor((szint-1) / 2), spec)})
     }
 
+    const changeKalozKritikusAtSzint = (szint: number) => (spec: string) => {
+        changeKarakter({...karakter, kalozKritikus: arraySetN(karakter.kalozKritikus, Math.floor(szint / 3), spec)})
+    }
+
     return <>
         {karakter.hpRolls.map((_, i) => i+2).map(szint => <>
             <LevelUp
@@ -59,6 +93,7 @@ export function LevelUps(props: {karakter: KarakterInputs, changeKarakter: (inpu
                 changeTulajdonsagNoveles={changeTulajdonsagNovelesAtSzint(szint)}
                 changeRolledHP={changeRolledHPAtSzint(szint)}
                 changeHarcosSpec={changeHarcosSpecializacioAtSzint(szint)}
+                changeKalozKritikus={changeKalozKritikusAtSzint(szint)}
             />
             </>
         )}

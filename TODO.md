@@ -2,19 +2,16 @@
 
 ## Fixes
 - Kötelező képezettségek - Birodalmi tolvaj
-- PDF pretty: Tamadas bonuszok +10/+5 
-
-## Level up
-- Kalóz kritikus fegyver választás szintlépéskor (free text)
+- PDF pretty: Tamadas bonuszok +10/+5
 - Tolvaj 9.ik szinttől tiltott képzettségek
-- multiclass characters
 
-## PDF
+## Features
 - specialis kepessegek 2ik oldalra nyomtatasa
+- multiclass characters
 
 ## Epics
 - Backend
 - Varazslatok
 - Felszerelés
-- Klikkelésre dobás
 - KéM 2.0-ra felkészülés
+- Klikkelésre dobás

@@ -97,7 +97,13 @@ function CreateCharacterPage() {
                     <OsztalySelector
                         currentFaj={karakter.faj}
                         currentOsztaly={karakter.osztaly}
-                        changeOsztaly={(o: Osztaly) => changeKarakter({...karakter, osztaly: o, harcosSpecializaciok: o === Osztaly.Harcos ? ['szablya'] : []})}
+                        changeOsztaly={(o: Osztaly) =>
+                            changeKarakter({
+                                ...karakter,
+                                osztaly: o,
+                                harcosSpecializaciok: o === Osztaly.Harcos ? ['kard'] : [],
+                                kalozKritikus: o === Osztaly.Kaloz ? ['szablya'] : [],
+                            })}
                     />
                     {karakter.osztaly === Osztaly.Harcos &&
                         <div className='mb-6'>
@@ -105,6 +111,7 @@ function CreateCharacterPage() {
                                 specialization={karakter.harcosSpecializaciok[0]}
                                 existingSpecializations={karakter.harcosSpecializaciok}
                                 changeSpecialization={(spec: string) => changeKarakter({...karakter, harcosSpecializaciok: [spec, ...karakter.harcosSpecializaciok.slice(1)]})}
+                                szint={1}
                             />
                         </div>}
                     <KarakterKepzettsegek
