@@ -6,48 +6,37 @@ import FajSelector from "../components/FajSelector";
 import Tulajdonsagok from "../components/Tulajdonsagok";
 import OsztalySelector from "../components/OsztalySelector";
 import KarakterKepzettsegek from "../components/KarakterKepzettsegek";
-import {
-    KarakterTulajdonsagok,
-    Tulajdonsag,
-    TulajdonsagokFajjal,
-    TulajdonsagokTotal
-} from "../domain-models/tulajdonsag";
+import {KarakterTulajdonsagok, TulajdonsagokFajjal} from "../domain-models/tulajdonsag";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
 import {
-    AvailableKezpettsegList, GetKepzettsegListaN,
-    GetNumberOfKepzettsegek, KepzettsegId, SetDefaultKepzettsegek,
+    AvailableKezpettsegList,
+    GetKepzettsegListaN,
+    GetNumberOfKepzettsegek,
+    KepzettsegId,
+    SetDefaultKepzettsegek,
     SetDefaultTolvajKepzettsegek,
 } from "../domain-models/kepzettsegek";
 import {CreatePDF} from "../pdf/character.pdf";
 import {KarakterDefaults} from "../domain-models/karakter";
-import BasicNewLevel from "../components/BasicNewLevel";
 import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
 import {KarakterInputToPdfView} from "../pdf/karakter_pdf_view";
-import {arraySetN} from "../util";
-import TulajdonsagNoveles from "../components/TulajdonsagNoveles";
 import JellemSelector from "../components/JellemSelector";
-import {LevelUp, LevelDown, CanLevelUp} from "../domain-models/level";
+import {CanLevelUp, LevelDown, LevelUp} from "../domain-models/level";
 import {Card} from "react-bootstrap";
+import LevelUps from "../components/LevelUps";
+import HarcosFegyverSpecializacio from "../components/HarcosFegyverSpecializacio";
 
 function CreateCharacterPage() {
 
     let [karakter, changeKarakter] = useState(KarakterDefaults)
 
     const tulajdonsagokFajjal = TulajdonsagokFajjal(karakter.tulajdonsagok, karakter.faj)
-    const tulajdonsagokTotal = TulajdonsagokTotal(karakter)
 
     const changeKepzettseg = (k: KepzettsegId[]) => changeKarakter({...karakter, kepzettsegek: k})
     const changeTolvajKepzettseg = (tk?: KepzettsegId[]) => changeKarakter({...karakter, tolvajKepzettsegek: tk})
     SetDefaultTolvajKepzettsegek(karakter, changeTolvajKepzettseg)
     SetDefaultKepzettsegek({...karakter, tulajdonsagok: tulajdonsagokFajjal}, changeKepzettseg)
     const availableKepzettsegList = AvailableKezpettsegList(karakter.osztaly)
-
-
-
-    const changeHProllAtSzint = (szint: number) => (newHProll: number) => {
-        changeKarakter({...karakter, hpRolls: arraySetN(karakter.hpRolls, szint-2, newHProll)})
-        console.log(karakter)
-    }
 
     const levelUp = () => LevelUp(karakter, changeKarakter)
     const levelDown = () => LevelDown(karakter, changeKarakter)
@@ -108,8 +97,16 @@ function CreateCharacterPage() {
                     <OsztalySelector
                         currentFaj={karakter.faj}
                         currentOsztaly={karakter.osztaly}
-                        changeOsztaly={(o: Osztaly) => changeKarakter({...karakter, osztaly: o})}
+                        changeOsztaly={(o: Osztaly) => changeKarakter({...karakter, osztaly: o, harcosSpecializaciok: o === Osztaly.Harcos ? ['szablya'] : []})}
                     />
+                    {karakter.osztaly === Osztaly.Harcos &&
+                        <div className='mb-6'>
+                            <HarcosFegyverSpecializacio
+                                specialization={karakter.harcosSpecializaciok[0]}
+                                existingSpecializations={karakter.harcosSpecializaciok}
+                                changeSpecialization={(spec: string) => changeKarakter({...karakter, harcosSpecializaciok: [spec, ...karakter.harcosSpecializaciok.slice(1)]})}
+                            />
+                        </div>}
                     <KarakterKepzettsegek
                         getKepzettsegListaN={GetKepzettsegListaN(karakter)}
                         numberOfKepzettsegek={GetNumberOfKepzettsegek(tulajdonsagokFajjal.t_int, karakter.faj, availableKepzettsegList.length)}
@@ -122,22 +119,7 @@ function CreateCharacterPage() {
                     <hr />
                     <MasodlagosErtekek {...CalculateMasodlagosErtekek({...karakter, tulajdonsagok: tulajdonsagokFajjal, szint: 1, hpRolls: []})} />
 
-                    {karakter.hpRolls.map((_, i) => i+2).map(szint => <>
-                        <BasicNewLevel
-                            key={`level-${szint}`}
-                            szint={szint}
-                            karakter={karakter}
-                            changeRolledHP={changeHProllAtSzint(szint)}
-                        />
-                        {szint % 4 === 0 && <TulajdonsagNoveles
-                            key={`tulajdonsag-noveles-${szint}`}
-                            tulajdonsagok={tulajdonsagokTotal}
-                            szint={szint}
-                            tulajdonsagNovelesek={karakter.tulajdonsagNovelesek}
-                            changeTulajdonsagNoveles={(t: Tulajdonsag) => { changeKarakter({...karakter, tulajdonsagNovelesek: arraySetN(karakter.tulajdonsagNovelesek, Math.floor((szint / 4)-1), t)}) }}
-                        />}
-                        </>
-                    )}
+                    <LevelUps key={'level-ups'} karakter={karakter} changeKarakter={changeKarakter} />
 
                     <div className='d-grid gap-2 m-5'>
                         {canLevelUp && <button className='btn btn-dark btn-lg' type='button' onClick={levelUp}>Szintlépés! ⇧</button> }

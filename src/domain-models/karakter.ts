@@ -18,6 +18,8 @@ export interface KarakterInputs {
     szint: number
     hpRolls: number[],
     tulajdonsagNovelesek: Tulajdonsag[],
+    harcosSpecializaciok: string[],
+    kalozKritikus: string[],
 }
 
 export const KarakterDefaults: KarakterInputs = {
@@ -30,5 +32,7 @@ export const KarakterDefaults: KarakterInputs = {
     kepzettsegek: [],
     szint: 1,
     hpRolls: [],
-    tulajdonsagNovelesek: []
+    tulajdonsagNovelesek: [],
+    harcosSpecializaciok: ['szablya'],
+    kalozKritikus: [],
 }

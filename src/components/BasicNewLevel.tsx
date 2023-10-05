@@ -28,7 +28,7 @@ function UjMento(props : {tipus: MentoTipus, ujMentok: Mentok, regiMentok: Mento
 }
 
 function BasicNewLevel(props: {
-    karakter: KarakterInputs
+    karakter: Pick<KarakterInputs, 'osztaly' | 'tulajdonsagok' | 'hpRolls'>
     szint: number
     changeRolledHP: (hp: number) => void,
 }) {
@@ -45,9 +45,6 @@ function BasicNewLevel(props: {
     const isTBincreased = TBdiff.length > 0 && TBdiff.some(x => x > 0)
 
     return <>
-        <div className='row'>
-            <h5 className='col align-self-center'>{szint}. Szint</h5>
-        </div>
         <div className='row'>
             <div className='col-lg-6'>
                 <div className='row m-2'>

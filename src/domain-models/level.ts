@@ -3,6 +3,7 @@ import {dAny} from "./kockak";
 import {TulajdonsagIDs, TulajdonsagokTotal} from "./tulajdonsag";
 import {KarakterInputs} from "./karakter";
 import {GetFajDetails} from "./faj";
+import {Osztaly} from "./osztaly";
 
 
 export function LevelUp(karakter: KarakterInputs, changeKarakter: (input: KarakterInputs) => void) {
@@ -21,7 +22,11 @@ export function LevelUp(karakter: KarakterInputs, changeKarakter: (input: Karakt
             }
         }
     }
-    changeKarakter({...karakter, szint, hpRolls, tulajdonsagNovelesek})
+    let harcosSpecializaciok = karakter.harcosSpecializaciok
+    if(karakter.osztaly === Osztaly.Harcos && szint % 2 === 1) {
+        harcosSpecializaciok = [...harcosSpecializaciok, "szablya"]
+    }
+    changeKarakter({...karakter, szint, hpRolls, tulajdonsagNovelesek, harcosSpecializaciok})
 }
 
 export function LevelDown(karakter: KarakterInputs, changeKarakter: (input: KarakterInputs) => void) {
@@ -31,7 +36,11 @@ export function LevelDown(karakter: KarakterInputs, changeKarakter: (input: Kara
     }
     const szint = karakter.szint - 1
     const hpRolls = karakter.hpRolls.slice(0, -1)
-    changeKarakter({...karakter, szint, hpRolls, tulajdonsagNovelesek})
+    let harcosSpecializaciok = karakter.harcosSpecializaciok
+    if (karakter.osztaly === Osztaly.Harcos && szint % 2 === 0) {
+        harcosSpecializaciok = harcosSpecializaciok.slice(0, -1)
+    }
+    changeKarakter({...karakter, szint, hpRolls, tulajdonsagNovelesek, harcosSpecializaciok})
 }
 
 export function CanLevelUp(karakter: Pick<KarakterInputs, 'szint' | 'faj' | 'osztaly'>): boolean {

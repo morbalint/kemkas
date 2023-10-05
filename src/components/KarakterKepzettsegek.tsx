@@ -35,10 +35,8 @@ function InternalKepzettsegekSelector(props: {
     }
 
     return <>
-        <div className='row'>
-            <div className='col-lg-2 col-md-12'>
-                <label className='col-form-label text-body-emphasis'>{title}</label>
-            </div>
+        <div className='row m-2'>
+            <label className='col-lg-2 col-md-12 col-form-label'>{title}</label>
             <div className='col'>
                 {klist.map((idx) =>
                     <KepzettsegSelector
@@ -64,7 +62,7 @@ function KarakterKepzettsegek (props: {
 }) {
     const { kepzettsegek, numberOfKepzettsegek, getKepzettsegListaN, changeKepzettsegek, tolvajKepzettsegek, changeTolvajKepzettsegek} = props
 
-    // TODO: Eszakinak es Kaloznak hajozas, Birodalminak Alikmia, vagy Meregkeveres, Etuniainak Lovaglas
+    // TODO: Birodalmi tolvajnal az Alikmia, vagy Meregkeveres kezelese
 
     const getTolvajKepzettsegListaN = (n: number) : Kepzettseg[] => {
         const tolvajKepzettsegekWithoutN = [...tolvajKepzettsegek.slice(0, n), ...tolvajKepzettsegek.slice(n+1)]
