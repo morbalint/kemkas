@@ -51,10 +51,10 @@ function OsztalySelector(props: {currentFaj: Faj, currentOsztaly: Osztaly, chang
                             {' '}
                             {skill.Description}
                             {skill.ExtendedDescription && (
-                                <ul>
+                                <ol>
                                     {skill.ExtendedDescription.map((ext, i) =>
                                         (<li key={skill.Id + '-' + i}>{ext}</li>))}
-                                </ul>
+                                </ol>
                             )}
                         </div>
                     )}

@@ -265,18 +265,44 @@ export async function CreatePDF(karakter: KarakterPdfView) {
         color: rgb(0.75, 0.75, 0.75),
     })
     const kozelharciTB = karakter.KozelharciTB.map(SignedNumberToText).join("/")
+
+    function getFontSize(length: number): number {
+        switch (length) {
+            case 1:
+            case 2:
+                return 24;
+            case 3:
+                return 18;
+            case 4:
+                return 14;
+            case 5:
+                return 11;
+            case 6:
+                return 9;
+            case 7:
+                return 8;
+            default:
+                return 6;
+        }
+    }
+    function getYOffset(length: number): number {
+        return Math.min(length-2, 6);
+    }
+
+    const kozelHarciFontSize = getFontSize(kozelharciTB.length)
     page.drawText(kozelharciTB, {
-        x: 256,
-        y: kozelharciTB.length > 2 ? 386 : 382,
-        size: kozelharciTB.length > 5 ? fontSizeBase * 0.5 : (kozelharciTB.length > 2 ? fontSizeBase : fontSizeBase * 2),
+        x: kozelharciTB.length > 4 ? 256 : 258,
+        y: 383 + getYOffset(kozelharciTB.length),
+        size: kozelHarciFontSize,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
     const celzoTB = karakter.CelzoTB.map(SignedNumberToText).join("/")
+    const celzoFontSize = getFontSize(celzoTB.length)
     page.drawText(celzoTB, {
-        x: 344,
-        y: celzoTB.length > 2 ? 386 : 382,
-        size: celzoTB.length > 5 ? fontSizeBase * 0.5 : celzoTB.length > 2 ? fontSizeBase : fontSizeBase * 2,
+        x: celzoTB.length > 4 ? 343 : 346,
+        y: 383 + getYOffset(celzoTB.length),
+        size: celzoFontSize,
         font: pdfFont,
         color: rgb(0, 0, 0),
     })
@@ -289,6 +315,50 @@ export async function CreatePDF(karakter: KarakterPdfView) {
 
     DrawMagic(page, fontSizeBase, pdfFont, karakter.NapiMemorizalhatoVarazslatok, karakter.VarazslatMentokNF)
 
+    const secondPage = pdfDoc.addPage()
+    DrawSecondPage(secondPage, pdfFont, karakter)
+
+
     const pdfBytes = await pdfDoc.save();
     download(pdfBytes, karakter.Name + ".pdf", "application/pdf");
+}
+
+function DrawSecondPage(page: PDFPage, font: PDFFont, karakter: KarakterPdfView){
+    const baseFontSize = 12
+    const titleFontSize = baseFontSize * 3
+    const pageCenterX = page.getWidth()/2
+    const titleWidth = font.widthOfTextAtSize(karakter.Osztaly, titleFontSize)
+    const titleX = pageCenterX - (titleWidth / 2)
+    page.drawText(karakter.Osztaly, {
+        x: titleX,
+        y: 770,
+        size: titleFontSize,
+        font: font,
+        color: rgb(0, 0, 0),
+    })
+    let rows = 0
+    // const margin = 30
+    // const textWidth = page.getWidth() - 2*margin;
+    for (let i = 0; i < karakter.OsztalySkills.length; i++) {
+        const skill = karakter.OsztalySkills[i];
+        page.drawText(skill.Name, {
+            x: 30,
+            y: 720 - rows,
+            size: baseFontSize,
+            font: font,
+            color: rgb(0, 0, 0),
+        })
+        page.drawText(skill.Description, {
+            x: 30,
+            y: 700 - rows,
+            size: baseFontSize,
+            font: font,
+            lineHeight: 16,
+            color: rgb(0, 0, 0),
+            // maxWidth: textWidth,
+            // wordBreaks: [' ', '-']
+        })
+        // rows += Math.ceil(font.widthOfTextAtSize(skill.Description, baseFontSize)/textWidth)*20 + 30
+        rows += skill.Description.split('\n').length*16 + 30
+    }
 }

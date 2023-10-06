@@ -2,11 +2,11 @@
 
 ## Fixes
 - Kötelező képezettségek - Birodalmi tolvaj
-- PDF pretty: Tamadas bonuszok +10/+5
 - Tolvaj 9.ik szinttől tiltott képzettségek
+- eloholtak eluzese PDF-be!
+- PDF pretty: use `font.widthOfTextAtSize(...)`
 
 ## Features
-- specialis kepessegek 2ik oldalra nyomtatasa
 - multiclass characters
 
 ## Epics
