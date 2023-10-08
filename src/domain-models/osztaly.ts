@@ -265,7 +265,7 @@ export function OsztalySkillsTordelt(osztaly: Osztaly) : Skill[] {
             {
                 Id: 's_harcos_ijasz',
                 Name: 'Íjász',
-                Description: 'A távolsági harc mesterei. Íjak használatakor körönként eggyel többször támadhatnak.\n' +
+                Description: 'Íjak használatakor körönként eggyel többször támadhatnak.\n' +
                     'Értenek a visszacsapó íjak használatához is.'
             },
             {
@@ -275,12 +275,6 @@ export function OsztalySkillsTordelt(osztaly: Osztaly) : Skill[] {
             }
         ]
         case Osztaly.Amazon: return [
-            {
-                Id: 's_harcos_amazon',
-                Name: 'Amazon',
-                Description: 'Az amazonok barbár népe szépségéről és a karizmatikus jelenlétre építő védekező harc-\n' +
-                    'modoráról ismert.'
-            },
             {
                 Id: 's_harcos_amazon_vert',
                 Name: 'MMO vért',
@@ -295,11 +289,6 @@ export function OsztalySkillsTordelt(osztaly: Osztaly) : Skill[] {
             },
         ]
         case Osztaly.Kaloz: return [
-            {
-                Id: 's_harcos_kaloz',
-                Name: 'Tengerész/Kalóz',
-                Description: 'A tengerészek a hajózás mesterei; kereskedők, tengeri rablók és rabszolgavadászok.'
-            },
             {
                 Id: 's_harcos_kaloz_ugyes_huzas',
                 Name: 'Ügyes húzás',
@@ -322,12 +311,6 @@ export function OsztalySkillsTordelt(osztaly: Osztaly) : Skill[] {
             }]
         case Osztaly.Barbar: return [
             {
-                Id: 's_harcos_barbar',
-                Name: 'Barbár',
-                Description: 'A barbár törzsek köré sorolhatók a pusztai és sivatagi nomádok,\n' +
-                    'a déli dzsungelek emberevői és az északi tengermelléki rablók nemzetségei egyaránt.'
-            },
-            {
                 Id: 's_harcos_barbar_eletero',
                 Name: 'Túlélő',
                 Description: 'A barbárok 1d12-vel dobják a Hp-jüket, -5 Hp-ig öntudatuknál vannak és\n' +
@@ -344,7 +327,7 @@ export function OsztalySkillsTordelt(osztaly: Osztaly) : Skill[] {
             {
                 Id: 's_pap_varazslat',
                 Name: 'Varázslatok',
-                Description: 'a papi varázslatok általában gyógyításra, mások megsegítésére és vallási feladatok\n' +
+                Description: 'A papi varázslatok általában gyógyításra, mások megsegítésére és vallási feladatok\n' +
                     'ellátására szolgálnak. Minél magasabb szintűek, egy nap annál több varázslatot tudnak\n' +
                     'alkalmazni. Ez a karakterlapon a Mágiánál megtalálható.'
             },
@@ -352,7 +335,7 @@ export function OsztalySkillsTordelt(osztaly: Osztaly) : Skill[] {
                 Id: 's_pap_gyogyseb',
                 Name: 'Gyógyítás vagy sebokozás',
                 Description:
-                    'a pap az aznap már memorizált (megtanult) varázslatokat gyógyításra vagy sebek\n' +
+                    'A pap az aznap már memorizált (megtanult) varázslatokat gyógyításra vagy sebek\n' +
                     'okozására is fölhasználhatja. Érintésével a varázslat minden szintjéért 1d8 Hp-t gyógyít\n' +
                     'vagy sebez – így pl. egy Ómen elhasználásával 2d8 Hp-t. Az így konvertált varázslat\n' +
                     'természetesen elvész. Az, hogy a képesség sebek gyógyítására vagy okozására szolgál, a\n' +
@@ -398,7 +381,7 @@ export function OsztalySkillsTordelt(osztaly: Osztaly) : Skill[] {
                 Id: 's_tolvaj_kepzettsegek',
                 Name: 'Tolvajképzettségek',
                 Description:
-                    'minden tolvaj jártas több olyan képzettségben, amely segíti a rejtőzködésben, a jól őrzött\n' +
+                    'Minden tolvaj jártas több olyan képzettségben, amely segíti a rejtőzködésben, a jól őrzött\n' +
                     'értékek eltulajdonításában és hasonló feladatokban. A tolvajok azokat a tolvajképzettség-\n' +
                     'eket is használhatják, amelyekben nem járatosak külön, de ekkor szintjük nem számít bele\n' +
                     'a próbadobás módosítójába! A tolvajképzettségek listája:\n' +
@@ -411,7 +394,7 @@ export function OsztalySkillsTordelt(osztaly: Osztaly) : Skill[] {
             Id: 's_varazslo_varazskonyv',
             Name: 'Varázskönyv',
             Description:
-                'egy első szintű varázsló varázskönyve 6 nulladik és 3 első szintű varázslatot tartalmaz,\n' +
+                'Egy első szintű varázsló varázskönyve 6 nulladik és 3 első szintű varázslatot tartalmaz,\n' +
                 'harmadik szintű kezdő karakteré ezen felül még 2 első szintűt és 2 második szintűt.\n' +
                 'Az újabb varázslatokat mások könyveiből, mágikus tekercsekből vagy más módszerek\n' +
                 'segítségével kell könyvébe másolnia. Az illuzionisták szintén varázskönyveket használnak\n' +

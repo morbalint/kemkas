@@ -101,8 +101,7 @@ function CreateCharacterPage() {
                             changeKarakter({
                                 ...karakter,
                                 osztaly: o,
-                                harcosSpecializaciok: o === Osztaly.Harcos ? ['kard'] : [],
-                                kalozKritikus: o === Osztaly.Kaloz ? ['szablya'] : [],
+                                harcosSpecializaciok: (o === Osztaly.Harcos && karakter.harcosSpecializaciok.length === 0) ? ['Kard'] : karakter.harcosSpecializaciok,
                             })}
                     />
                     {karakter.osztaly === Osztaly.Harcos &&
@@ -126,8 +125,10 @@ function CreateCharacterPage() {
                     <hr />
                     <MasodlagosErtekek {...CalculateMasodlagosErtekek({...karakter, tulajdonsagok: tulajdonsagokFajjal, szint: 1, hpRolls: []})} />
 
+                    <hr />
                     <LevelUps key={'level-ups'} karakter={karakter} changeKarakter={changeKarakter} />
 
+                    <hr />
                     <div className='d-grid gap-2 m-5'>
                         {canLevelUp && <button className='btn btn-dark btn-lg' type='button' onClick={levelUp}>Szintlépés! ⇧</button> }
                         {!canLevelUp && karakter.szint < 10 &&

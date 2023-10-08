@@ -34,5 +34,5 @@ export const KarakterDefaults: KarakterInputs = {
     hpRolls: [],
     tulajdonsagNovelesek: [],
     harcosSpecializaciok: [],
-    kalozKritikus: ['szablya'],
+    kalozKritikus: [],
 }
