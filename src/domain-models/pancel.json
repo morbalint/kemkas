@@ -2,21 +2,21 @@
     "pancel": [
         {
             "ID": "tomott",
-            "Name": "Tömött",
+            "Name": "Tömött páncél",
             "Type": "konnyu",
             "VO": 1,
             "Price": 4
         },
         {
             "ID": "bor",
-            "Name": "Bőr",
+            "Name": "Bőrvért",
             "Type": "konnyu",
             "VO": 2,
             "Price": 5
         },
         {
             "ID": "kivert_bor",
-            "Name": "Kivert bőr",
+            "Name": "Kivert bőrvért",
             "Type": "konnyu",
             "VO": 3,
             "Price": 15

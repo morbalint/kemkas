@@ -58,7 +58,9 @@ export function KarakterInputToPdfView(karakter: KarakterInputs): KarakterPdfVie
     karakter = {...karakter, tulajdonsagok}
     const tulajdonsagModositok = TulajdonsagModosito(tulajdonsagok)
     const masodlagosErtekek = CalculateMasodlagosErtekek(karakter)
-    const mozgas = karakter.faj === Faj.Torpe ? 20 : 30
+    const pancel = GetPancel(karakter.felszereles.pancelID)
+    const pajzs = GetPajzs(karakter.felszereles.pajzsID)
+    const mozgas = karakter.faj === Faj.Torpe || pancel?.Type === 'nehez' || pancel?.Type === 'kozepes' ? 20 : 30
     const kezdemenyezes = tulajdonsagModositok.t_ugy + (karakter.osztaly === Osztaly.Tolvaj ? 4 : 0)
 
     const mentok = MentokAlap(karakter.osztaly, karakter.szint)
@@ -66,9 +68,6 @@ export function KarakterInputToPdfView(karakter: KarakterInputs): KarakterPdfVie
 
     const NapiMemorizalhatoVarazslatok = NapiVarazslatok(karakter)
     const VarazslatMentokNF = CalculateVarazslatMentokNF(karakter)
-
-    const pancel = GetPancel(karakter.felszereles.pancelID)
-    const pajzs = GetPajzs(karakter.felszereles.pajzsID)
 
     return {
         Faj: FajLabel(karakter.faj),
