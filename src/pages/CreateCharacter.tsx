@@ -25,6 +25,7 @@ import {CanLevelUp, LevelDown, LevelUp} from "../domain-models/level";
 import {Card} from "react-bootstrap";
 import LevelUps from "../components/LevelUps";
 import HarcosFegyverSpecializacio from "../components/HarcosFegyverSpecializacio";
+import Felszereles from '../components/Felszereles';
 
 function CreateCharacterPage() {
 
@@ -126,9 +127,14 @@ function CreateCharacterPage() {
                     <MasodlagosErtekek {...CalculateMasodlagosErtekek({...karakter, tulajdonsagok: tulajdonsagokFajjal, szint: 1, hpRolls: []})} />
 
                     <hr />
-                    <LevelUps key={'level-ups'} karakter={karakter} changeKarakter={changeKarakter} />
+
+                    <Felszereles felszereles={karakter.felszereles} changeFelszereles={(f) => changeKarakter({...karakter, felszereles: f})} />
 
                     <hr />
+
+                    <LevelUps key={'level-ups'} karakter={karakter} changeKarakter={changeKarakter} />
+
+                    {karakter.szint > 1 &&  <hr />}
                     <div className='d-grid gap-2 m-5'>
                         {canLevelUp && <button className='btn btn-dark btn-lg' type='button' onClick={levelUp}>Szintlépés! ⇧</button> }
                         {!canLevelUp && karakter.szint < 10 &&

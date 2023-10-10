@@ -3,6 +3,7 @@ import {Osztaly} from "./osztaly";
 import {KarakterTulajdonsagok, Tulajdonsag, TulajdonsagDefaults} from "./tulajdonsag";
 import {KepzettsegId} from "./kepzettsegek";
 import {JellemID} from "./jellem";
+import { DefaultFelszereles, KarakterFelszereles } from './felszereles'
 
 export interface KarakterInputs {
     name: string,
@@ -20,6 +21,7 @@ export interface KarakterInputs {
     tulajdonsagNovelesek: Tulajdonsag[],
     harcosSpecializaciok: string[],
     kalozKritikus: string[],
+    felszereles: KarakterFelszereles,
 }
 
 export const KarakterDefaults: KarakterInputs = {
@@ -35,4 +37,5 @@ export const KarakterDefaults: KarakterInputs = {
     tulajdonsagNovelesek: [],
     harcosSpecializaciok: [],
     kalozKritikus: [],
+    felszereles: DefaultFelszereles,
 }

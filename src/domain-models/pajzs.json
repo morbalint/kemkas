@@ -1,0 +1,32 @@
+{
+    "pajzs": [
+        {
+            "ID": "kis_fa",
+            "Name": "Kis fapajzs ",
+            "Type": "pajzs",
+            "VO": 1,
+            "Price": 3
+        },
+        {
+            "ID": "kis_fem",
+            "Name": "Kis fémpajzs ",
+            "Type": "pajzs",
+            "VO": 1,
+            "Price": 9
+        },
+        {
+            "ID": "nagy_fa",
+            "Name": "Nagy fapajzs ",
+            "Type": "pajzs",
+            "VO": 2,
+            "Price": 7
+        },
+        {
+            "ID": "nagy_fem",
+            "Name": "Nagy fémpajzs ",
+            "Type": "pajzs",
+            "VO": 2,
+            "Price": 20
+        }
+    ]
+}
