@@ -1,0 +1,122 @@
+{
+    "konnyu": [
+        {
+            "ID": "tomott",
+            "Name": "Tömött",
+            "Type": "konnyu",
+            "VO": 1,
+            "Price": 4
+        },
+        {
+            "ID": "bor",
+            "Name": "Bőr",
+            "Type": "konnyu",
+            "VO": 2,
+            "Price": 5
+        },
+        {
+            "ID": "kivert_bor",
+            "Name": "Kivert bőr",
+            "Type": "konnyu",
+            "VO": 3,
+            "Price": 15
+        },
+        {
+            "ID": "gyuruvert",
+            "Name": "Gyűrűvért",
+            "Type": "konnyu",
+            "VO": 3,
+            "Price": 20
+        },
+        {
+            "ID": "lancing",
+            "Name": "Láncing",
+            "Type": "konnyu",
+            "VO": 4,
+            "Price": 50
+        }
+    ],
+    "kozepes": [
+        {
+            "ID": "pikkelyvert",
+            "Name": "Pikkelyvért",
+            "Type": "kozepes",
+            "VO": 4,
+            "Price": 30
+        },
+        {
+            "ID": "lancvert",
+            "Name": "Láncvért",
+            "Type": "kozepes",
+            "VO": 5,
+            "Price": 75
+        },
+        {
+            "ID": "mellvert",
+            "Name": "Mellvért",
+            "Type": "kozepes",
+            "VO": 5,
+            "Price": 100
+        }
+    ],
+    "nehez": [
+        {
+            "ID": "racsvert",
+            "Name": "Rácsvért",
+            "Type": "nehez",
+            "VO": 6,
+            "Price": 200
+        },
+        {
+            "ID": "szalagvert",
+            "Name": "Szalagvért",
+            "Type": "nehez",
+            "VO": 6,
+            "Price": 250
+        },
+        {
+            "ID": "lemezvert",
+            "Name": "Lemezvért",
+            "Type": "nehez",
+            "VO": 7,
+            "Price": 400
+        },
+        {
+            "ID": "teljes_lemezvert",
+            "Name": "Teljes lemezvért",
+            "Type": "nehez",
+            "VO": 8,
+            "Price": 800
+        }
+    ],
+    "pajzs": [
+        {
+            "ID": "kis_fa",
+            "Name": "Kis fapajzs ",
+            "Type": "pajzs",
+            "VO": 1,
+            "Price": 3
+        },
+        {
+            "ID": "kis_fem",
+            "Name": "Kis fémpajzs ",
+            "Type": "pajzs",
+            "VO": 1,
+            "Price": 9
+        },
+        {
+            "ID": "nagy_fa",
+            "Name": "Nagy fapajzs ",
+            "Type": "pajzs",
+            "VO": 2,
+            "Price": 7
+        },
+        {
+            "ID": "nagy_fem",
+            "Name": "Nagy fémpajzs ",
+            "Type": "pajzs",
+            "VO": 2,
+            "Price": 20
+        }
+    ]
+}
