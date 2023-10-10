@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './CreateCharacter.css'
 import {Faj} from "../domain-models/faj";
-import {Osztaly} from "../domain-models/osztaly"
+import {Osztaly, SetFelszerelesForChangedOsztaly} from "../domain-models/osztaly"
 import FajSelector from "../components/FajSelector";
 import Tulajdonsagok from "../components/Tulajdonsagok";
 import OsztalySelector from "../components/OsztalySelector";
@@ -26,6 +26,7 @@ import {Card} from "react-bootstrap";
 import LevelUps from "../components/LevelUps";
 import HarcosFegyverSpecializacio from "../components/HarcosFegyverSpecializacio";
 import Felszereles from '../components/Felszereles';
+import { KarakterFelszereles } from '../domain-models/felszereles';
 
 function CreateCharacterPage() {
 
@@ -38,6 +39,8 @@ function CreateCharacterPage() {
     SetDefaultTolvajKepzettsegek(karakter, changeTolvajKepzettseg)
     SetDefaultKepzettsegek({...karakter, tulajdonsagok: tulajdonsagokFajjal}, changeKepzettseg)
     const availableKepzettsegList = AvailableKezpettsegList(karakter.osztaly)
+    const setFelszereles = (f: KarakterFelszereles) => changeKarakter({...karakter, felszereles: f})
+    SetFelszerelesForChangedOsztaly(karakter.osztaly, karakter.felszereles, setFelszereles)
 
     const levelUp = () => LevelUp(karakter, changeKarakter)
     const levelDown = () => LevelDown(karakter, changeKarakter)
@@ -128,7 +131,7 @@ function CreateCharacterPage() {
 
                     <hr />
 
-                    <Felszereles felszereles={karakter.felszereles} changeFelszereles={(f) => changeKarakter({...karakter, felszereles: f})} />
+                    <Felszereles osztaly={karakter.osztaly} felszereles={karakter.felszereles} changeFelszereles={setFelszereles} />
 
                     <hr />
 

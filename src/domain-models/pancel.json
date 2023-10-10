@@ -1,5 +1,5 @@
 {
-    "konnyu": [
+    "pancel": [
         {
             "ID": "tomott",
             "Name": "Tömött",
@@ -34,9 +34,7 @@
             "Type": "konnyu",
             "VO": 4,
             "Price": 50
-        }
-    ],
-    "kozepes": [
+        },
         {
             "ID": "pikkelyvert",
             "Name": "Pikkelyvért",
@@ -57,9 +55,7 @@
             "Type": "kozepes",
             "VO": 5,
             "Price": 100
-        }
-    ],
-    "nehez": [
+        },
         {
             "ID": "racsvert",
             "Name": "Rácsvért",

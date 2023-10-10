@@ -315,6 +315,21 @@ export async function CreatePDF(karakter: KarakterPdfView) {
 
     DrawMagic(page, fontSizeBase, pdfFont, karakter.NapiMemorizalhatoVarazslatok, karakter.VarazslatMentokNF)
 
+    page.drawText(karakter.PancelVO.toString(), {
+        x: 512,
+        y: 515,
+        size: fontSizeBase * 2,
+        font: pdfFont,
+        color: rgb(0, 0, 0),
+    })
+    page.drawText(karakter.PajzsVO.toString(), {
+        x: 512,
+        y: 482,
+        size: fontSizeBase * 2,
+        font: pdfFont,
+        color: rgb(0, 0, 0),
+    })
+
     const secondPage = pdfDoc.addPage()
     DrawSecondPage(secondPage, pdfFont, karakter)
 

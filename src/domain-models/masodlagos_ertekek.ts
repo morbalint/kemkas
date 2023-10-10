@@ -4,6 +4,7 @@ import {KarakterInputs} from "./karakter";
 import {Modifier} from "./tulajdonsag";
 import {CelzoTB, KozelharciTB} from "./tamadas_bonusz";
 import {Faj} from "./faj";
+import { GetPajzs, GetPancel, MaxAbilityVO } from "./felszereles";
 
 export interface MasodlagosErtekekView {
     HP: number
@@ -13,7 +14,7 @@ export interface MasodlagosErtekekView {
     Mentok: Mentok
 }
 
-export type KarakterpickForMasodlagosErtekek = Pick<KarakterInputs, 'osztaly' | 'hpRolls' | 'tulajdonsagok' | 'szint' | 'faj'>
+export type KarakterpickForMasodlagosErtekek = Pick<KarakterInputs, 'osztaly' | 'hpRolls' | 'tulajdonsagok' | 'szint' | 'faj' | 'felszereles'>
 
 export function BaseHP(osztaly: Osztaly) {
     let base = 4;
@@ -49,20 +50,29 @@ export function HP(karakter: Pick<KarakterInputs, 'osztaly' | 'tulajdonsagok' | 
         .reduce((sum, val) => sum + val, 0)
 }
 
-export function VO(karakter: Pick<KarakterInputs, 'tulajdonsagok' | 'faj' | 'osztaly' | 'szint'>): number {
-    let vo = 10 + Modifier(karakter.tulajdonsagok.t_ugy)
+export function VO(karakter: Pick<KarakterInputs, 'tulajdonsagok' | 'faj' | 'osztaly' | 'szint' | 'felszereles'>): number {
+    const pancel = GetPancel(karakter.felszereles.pancelID)
+    const pancelVO = pancel?.VO ?? 0
+    const pajzsVO = GetPajzs(karakter.felszereles.pajzsID)?.VO ?? 0
+    let vo = 10 + pajzsVO + pancelVO
+    let abilityVO = Modifier(karakter.tulajdonsagok.t_ugy)
     if (karakter.osztaly === Osztaly.Kaloz) {
         vo += Math.floor(karakter.szint / 3)
     }
     if (karakter.osztaly === Osztaly.Amazon) {
         if (karakter.tulajdonsagok.t_kar > karakter.tulajdonsagok.t_ugy) {
-            vo = 10 + Modifier(karakter.tulajdonsagok.t_kar)
+            abilityVO = Modifier(karakter.tulajdonsagok.t_kar)
         }
         vo += Math.floor(karakter.szint / 2)
     }
     if (karakter.faj === Faj.Felszerzet){
         vo += 1
     }
+    if (pancel) {
+        abilityVO = Math.min(MaxAbilityVO(pancel.Type), abilityVO)
+    }
+    vo += abilityVO
+
     return vo
 }
 

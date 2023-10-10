@@ -1,13 +1,14 @@
-import pancel from "./pancel.json"
+import pancelok from './pancel.json'
+import pajzsok from './pajzs.json'
 
-export type PancelType = keyof typeof pancel
+export type PancelType = 'konnyu' | 'kozepes' | 'nehez'
 
 export const PancelTypes: PancelType[] = ['konnyu', 'kozepes', 'nehez']
 
 export interface Pancel {
     ID: string,
     Name: string,
-    Type: 'konnyu' | 'kozepes' | 'nehez'
+    Type: PancelType
     VO: number,
     Price: number,
 }
@@ -55,4 +56,29 @@ export function PancelTypeLabel(type: PancelType): string {
             result = 'Egyéb páncél'
     }
     return result
+}
+
+export function GetPancel(id?: string): Pancel | undefined {
+    if (id == null) {
+        return undefined
+    }
+    const filteredPancel = pancelok['pancel'].filter(p => p.ID === id) as Pancel[]
+    return filteredPancel.length > 0 ? filteredPancel[0] : undefined
+}
+
+export function MaxAbilityVO(p: PancelType) {
+    switch(p){
+        case 'konnyu': return 3;
+        case 'kozepes': return 2;
+        case 'nehez': return 1;
+        default: return 9999;
+    }
+}
+
+export function GetPajzs(id?: string): Pajzs | undefined {
+    if (id == null) {
+        return undefined
+    }
+    const filtered = pajzsok['pajzs'].filter(p => p.ID === id) as Pajzs[]
+    return filtered.length > 0 ? filtered[0] : undefined
 }

@@ -1,3 +1,6 @@
+import { GetPancel, KarakterFelszereles, Pancel, PancelType } from "./felszereles";
+import pancelok from './pancel.json'
+
 export enum Osztaly {
     Harcos = 'o_harcos',
     Ijasz = 'o_ijasz',
@@ -8,6 +11,31 @@ export enum Osztaly {
     Tolvaj = 'o_tolvaj',
     Varazslo = 'o_varazslo',
     Illuzionista = 'o_illuzionista',
+}
+
+export function OsztalyAllowedPancelTypes(o: Osztaly): PancelType[] {
+    switch (o) {
+        case Osztaly.Amazon: return ['konnyu'];
+        case Osztaly.Barbar: return ['konnyu', 'kozepes', 'nehez'];
+        case Osztaly.Pap: return ['konnyu', 'kozepes', 'nehez'];
+        case Osztaly.Illuzionista: return [];
+        case Osztaly.Varazslo: return [];
+        case Osztaly.Harcos: return ['konnyu', 'kozepes', 'nehez'];
+        case Osztaly.Ijasz: return ['konnyu', 'kozepes'];
+        case Osztaly.Kaloz: return ['konnyu', 'kozepes'];
+        case Osztaly.Tolvaj: return ['konnyu']
+    }
+}
+
+export function SetFelszerelesForChangedOsztaly(o: Osztaly, felszereles: KarakterFelszereles, changeFelszereles: (f: KarakterFelszereles) => void) {
+    const allowedPancelTypes = OsztalyAllowedPancelTypes(o)
+    const pancel = GetPancel(felszereles.pancelID)
+    if (pancel && !allowedPancelTypes.includes(pancel.Type)) {
+        changeFelszereles({...felszereles, pancelID: undefined})
+    }
+    if (allowedPancelTypes.length === 0 && !!felszereles.pajzsID){
+        changeFelszereles({...felszereles, pajzsID: undefined})
+    }
 }
 
 export function OsztalyLabel(osztaly: Osztaly) : string {
