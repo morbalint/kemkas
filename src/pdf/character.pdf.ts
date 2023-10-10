@@ -180,6 +180,14 @@ function DrawKepzettsegek(draw: (text: string, x: number, y: number) => void, ke
     }
 }
 
+function DrawFelszereles(draw: (text: string, x: number, y:number) => void, felszereles: string[]) {     
+    const startFrom = 337   
+    for (let i = 0; i < felszereles.length; i++) {
+        const item = felszereles[i];
+        draw(item, 390, startFrom - (i * 18))
+    }
+}
+
 function DrawMagic(page: PDFPage, fontSizeBase: number, pdfFont: PDFFont, napiVarazslatok: number[], varazsMentokNF: number[]){
     for(let i = 0; i < 6; i++) {
         const y = 247 - (i*18)
@@ -262,7 +270,21 @@ export async function CreatePDF(karakter: KarakterPdfView) {
         y: 495,
         size: fontSizeBase * 3,
         font: pdfFont,
-        color: rgb(0.75, 0.75, 0.75),
+        color: rgb(0, 0, 0),
+    })
+    page.drawText(karakter.PancelVO.toString(), {
+        x: 512,
+        y: 515,
+        size: fontSizeBase * 2,
+        font: pdfFont,
+        color: rgb(0, 0, 0),
+    })
+    page.drawText(karakter.PajzsVO.toString(), {
+        x: 512,
+        y: 482,
+        size: fontSizeBase * 2,
+        font: pdfFont,
+        color: rgb(0, 0, 0),
     })
     const kozelharciTB = karakter.KozelharciTB.map(SignedNumberToText).join("/")
 
@@ -313,22 +335,9 @@ export async function CreatePDF(karakter: KarakterPdfView) {
     const nextKepzettsegFrom = 337 - (karakter.Kepzettsegek.length * 18)
     DrawKepzettsegek(drawText, karakter.TolvajKepzettsegek, nextKepzettsegFrom)
 
-    DrawMagic(page, fontSizeBase, pdfFont, karakter.NapiMemorizalhatoVarazslatok, karakter.VarazslatMentokNF)
+    DrawFelszereles(drawText, karakter.Felszereles)
 
-    page.drawText(karakter.PancelVO.toString(), {
-        x: 512,
-        y: 515,
-        size: fontSizeBase * 2,
-        font: pdfFont,
-        color: rgb(0, 0, 0),
-    })
-    page.drawText(karakter.PajzsVO.toString(), {
-        x: 512,
-        y: 482,
-        size: fontSizeBase * 2,
-        font: pdfFont,
-        color: rgb(0, 0, 0),
-    })
+    DrawMagic(page, fontSizeBase, pdfFont, karakter.NapiMemorizalhatoVarazslatok, karakter.VarazslatMentokNF)
 
     const secondPage = pdfDoc.addPage()
     DrawSecondPage(secondPage, pdfFont, karakter)

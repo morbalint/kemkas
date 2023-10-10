@@ -98,7 +98,7 @@ export function KarakterInputToPdfView(karakter: KarakterInputs): KarakterPdfVie
 
         NapiMemorizalhatoVarazslatok,
         VarazslatMentokNF,
-        Felszereles: [pajzs?.Name, pancel?.Name].filter(x => !!x) as string[],
+        Felszereles: [pancel?.Name, pajzs?.Name].filter(x => !!x) as string[],
         PajzsVO: pajzs?.VO ?? 0,
         PancelVO: pancel?.VO ?? 0,
     }
