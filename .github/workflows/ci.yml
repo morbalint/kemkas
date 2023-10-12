@@ -25,6 +25,9 @@ jobs:
     - name: install deps
       run: |
         yarn install --frozen-lockfiles
+    - name: build css files
+      run: |
+        ./compile-less.sh
     - name: unit tests
       run: |
         yarn test
