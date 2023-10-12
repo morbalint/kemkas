@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@types/downloadjs": "^1.4.3",
+    "@types/downloadjs": "^1.4.4",
     "less": "^4.2.0",
     "less-loader": "^11.1.3"
   }
