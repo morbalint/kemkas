@@ -1,5 +1,4 @@
-import { GetPancel, KarakterFelszereles, Pancel, PancelType } from "./felszereles";
-import pancelok from './pancel.json'
+import { GetPancel, KarakterFelszereles, PancelType } from "./felszereles";
 
 export enum Osztaly {
     Harcos = 'o_harcos',

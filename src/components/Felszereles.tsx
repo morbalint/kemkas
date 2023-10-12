@@ -1,5 +1,5 @@
 import React from "react";
-import { KarakterFelszereles, PancelTypes, PancelTypeLabel } from "../domain-models/felszereles";
+import { KarakterFelszereles, PancelTypeLabel } from "../domain-models/felszereles";
 import { Osztaly, OsztalyAllowedPancelTypes } from '../domain-models/osztaly'
 import pancelok from '../domain-models/pancel.json'
 import pajzsok from '../domain-models/pajzs.json'

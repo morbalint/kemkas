@@ -9,7 +9,7 @@ import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
 import {Faj, FajLabel} from "../domain-models/faj";
 import {
     Osztaly,
-    OsztalyLabel, OsztalySkillsTordelt, OsztalySpecialSkills,
+    OsztalyLabel, OsztalySkillsTordelt,
     Skill
 } from "../domain-models/osztaly";
 import {CelzoTB, KozelharciTB} from "../domain-models/tamadas_bonusz";
