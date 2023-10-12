@@ -1,4 +1,4 @@
-name: NodeJS with Webpack
+name: CI compile & test & build
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  ci:
     runs-on: ubuntu-latest
 
     strategy:
