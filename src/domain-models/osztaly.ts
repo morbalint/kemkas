@@ -184,7 +184,7 @@ export function OsztalySpecialSkills(osztaly: Osztaly) : Skill[] {
             {
                 Id: 's_harcos_ijasz_vert',
                 Name: 'Kötelező mozgékonyság',
-                Description: 'Az íjjászok nem viselhetnek nehéz vérteket.'
+                Description: 'Az íjászok nem viselhetnek nehéz vérteket.'
             }
         ]
         case Osztaly.Amazon: return [
@@ -318,7 +318,7 @@ export function OsztalySkillsTordelt(osztaly: Osztaly) : Skill[] {
             {
                 Id: 's_harcos_ijasz_vert',
                 Name: 'Kötelező mozgékonyság',
-                Description: 'Az íjjászok nem viselhetnek nehéz vérteket.'
+                Description: 'Az íjászok nem viselhetnek nehéz vérteket.'
             }
         ]
         case Osztaly.Amazon: return [

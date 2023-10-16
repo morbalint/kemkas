@@ -46,11 +46,11 @@ describe('Tamadas Bonusz calculation', () => {
 
             expect(actual).toEqual(expected)
         });
-        it('should double the first base TB for Íjjász', () => {
+        it('should double the first base TB for Íjász', () => {
             const osztaly = Osztaly.Ijasz
             const base = TamadasBonusz(osztaly, szint)
-            const ijjaszDoubleBase = [base[0], ...base]
-            const expected = ijjaszDoubleBase.map(x => x + modifier)
+            const ijaszDoubleBase = [base[0], ...base]
+            const expected = ijaszDoubleBase.map(x => x + modifier)
 
             const actual = CelzoTB({
                 osztaly,
