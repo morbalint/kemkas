@@ -45,7 +45,7 @@ export function OsztalyLabel(osztaly: Osztaly) : string {
         case Osztaly.Illuzionista: return 'Illúzionista';
         case Osztaly.Varazslo: return 'Varázsló';
         case Osztaly.Harcos: return 'Harcos';
-        case Osztaly.Ijasz: return 'Íjjász';
+        case Osztaly.Ijasz: return 'Íjász';
         case Osztaly.Kaloz: return 'Tengerész/Kalóz';
         case Osztaly.Tolvaj: return 'Tolvaj'
     }
