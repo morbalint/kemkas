@@ -24,24 +24,30 @@ export interface Pajzs {
 export interface Fegyver {
     ID: string,
     Name: string,
-    Range: 'kozelharci' | 'tavolsagi'
+    Type: 'kozelharci' | 'lofegyver'
     Ketkezes: boolean,
     Egzotikus: boolean,
-    Rohamtoro: boolean, 
+    Rohamfelfogo: boolean,
+    Price: number,
+    DamageDice: number,
+    NumberOfDamageDice: number,
+    CritRangeStart: number,
+    CritMultiplier: number,
+    Range: number
 }
 
 export interface KarakterFelszereles {
     pancelID?: string
     pajzsID?: string
-    FegyverIDk: string[]
+    fegyverIDk: string[]
 }
 
 export const DefaultFelszereles: KarakterFelszereles = {
-    FegyverIDk: [],
+    fegyverIDk: [],
 }
 
 export function PancelTypeLabel(type: PancelType): string {
-    let result = ''
+    let result: string
     switch(type) {
         case 'konnyu': 
             result = 'Könnyű'
