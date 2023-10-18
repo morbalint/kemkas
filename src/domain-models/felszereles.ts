@@ -1,5 +1,6 @@
 import pancelok from './pancel.json'
 import pajzsok from './pajzs.json'
+import fegyverek from './fegyver.json'
 
 export type PancelType = 'konnyu' | 'kozepes' | 'nehez'
 
@@ -87,4 +88,12 @@ export function GetPajzs(id?: string): Pajzs | undefined {
     }
     const filtered = pajzsok['pajzs'].filter(p => p.ID === id) as Pajzs[]
     return filtered.length > 0 ? filtered[0] : undefined
+}
+
+export function GetFegyver(id: string): Fegyver | undefined {
+    return fegyverek.fegyverek.find(f => f.ID === id) as Fegyver | undefined
+}
+
+export function GetFegyverek(ids: string[]): Fegyver[] {
+    return ids.map(GetFegyver).filter(x => x != null).map(x => x as Fegyver)
 }

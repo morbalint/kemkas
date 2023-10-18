@@ -16,7 +16,7 @@ import {CelzoTB, KozelharciTB} from "../domain-models/tamadas_bonusz";
 import {KarakterInputs} from "../domain-models/karakter";
 import {NapiVarazslatok, CalculateVarazslatMentokNF} from "../domain-models/memorizalt_varazslatok";
 import {GetJellem} from "../domain-models/jellem";
-import {GetPancel, GetPajzs} from '../domain-models/felszereles'
+import {GetPancel, GetPajzs, Fegyver, GetFegyverek} from '../domain-models/felszereles'
 
 export interface KepzettsegPdfView {
     KepzettsegName: string
@@ -51,6 +51,7 @@ export interface KarakterPdfView {
     Felszereles: string[]
     PancelVO: number
     PajzsVO: number
+    Fegyverek: Fegyver[]
 }
 
 export function KarakterInputToPdfView(karakter: KarakterInputs): KarakterPdfView {
@@ -68,6 +69,9 @@ export function KarakterInputToPdfView(karakter: KarakterInputs): KarakterPdfVie
 
     const NapiMemorizalhatoVarazslatok = NapiVarazslatok(karakter)
     const VarazslatMentokNF = CalculateVarazslatMentokNF(karakter)
+    const fegyverek = GetFegyverek(karakter.felszereles.fegyverIDk)
+
+    const felszereles = [ pancel?.Name, pajzs?.Name, ...fegyverek.filter(f => f.ID !== 'okol').map(f => f.Name.includes('és') ? f.Name.split(' ')[0] : f.Name) ].filter(x => !!x) as string[]
 
     return {
         Faj: FajLabel(karakter.faj),
@@ -97,9 +101,10 @@ export function KarakterInputToPdfView(karakter: KarakterInputs): KarakterPdfVie
 
         NapiMemorizalhatoVarazslatok,
         VarazslatMentokNF,
-        Felszereles: [pancel?.Name, pajzs?.Name].filter(x => !!x) as string[],
+        Felszereles: felszereles,
         PajzsVO: pajzs?.VO ?? 0,
         PancelVO: pancel?.VO ?? 0,
+        Fegyverek: fegyverek,
     }
 }
 
