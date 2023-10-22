@@ -105,7 +105,7 @@ function CreateCharacterPage() {
                             changeKarakter({
                                 ...karakter,
                                 osztaly: o,
-                                harcosSpecializaciok: (o === Osztaly.Harcos && karakter.harcosSpecializaciok.length === 0) ? ['Kard'] : karakter.harcosSpecializaciok,
+                                harcosSpecializaciok: (o === Osztaly.Harcos && karakter.harcosSpecializaciok.length === 0) ? ['hosszu_kard'] : karakter.harcosSpecializaciok,
                             })}
                     />
                     {karakter.osztaly === Osztaly.Harcos &&

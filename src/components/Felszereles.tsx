@@ -1,21 +1,30 @@
 import React from "react";
 import {Fegyver, KarakterFelszereles, PancelTypeLabel} from "../domain-models/felszereles";
-import {Osztaly, OsztalyAllowedFegyver, OsztalyAllowedPancelTypes} from '../domain-models/osztaly'
+import {Osztaly, OsztalyAllowedFegyver} from '../domain-models/osztaly'
+import {AllowedPancelTypes} from '../domain-models/allowed-pancel-types'
 import pancelok from '../domain-models/pancel.json'
 import pajzsok from '../domain-models/pajzs.json'
 import fegyverek from '../domain-models/fegyver.json'
 import {arraySetN} from "../util";
 
+export function FegyverLabel(fegyver: Fegyver): string {
+    return `${fegyver.Name}${fegyver.Ketkezes ? '+' : ''}${fegyver.Egzotikus ? '(E)' : ''} | ${
+        fegyver.NumberOfDamageDice}d${fegyver.DamageDice} ${
+        fegyver.CritRangeStart < 20 ? `${fegyver.CritRangeStart}-20` : ''}x${fegyver.CritMultiplier}${
+        fegyver.Price > 0 ? ` | ár: ${fegyver.Price} at ` : ''}${
+        fegyver.Range > 0 ? ` | táv: ${fegyver.Range}` : ''}`
+}
+
 function Felszereles(props: {felszereles: KarakterFelszereles, changeFelszereles: (felszereles: KarakterFelszereles) => void, osztaly: Osztaly}) {
     const { felszereles, changeFelszereles, osztaly } = props;
-    const allowedPancelTypes = OsztalyAllowedPancelTypes(osztaly)
+    const allowedPancelTypes = AllowedPancelTypes([osztaly])
     const valasztottFegyverek = felszereles.fegyverIDk
-            .map((id, idx) => ({idx, fegyver: fegyverek.fegyverek.find(f => f.ID === id)})).filter((x) => x.fegyver != null).map(({idx, fegyver}) => ({idx, fegyver: fegyver as Fegyver}))
+            .map((id, idx) => ({idx, fegyver: fegyverek.data.find(f => f.ID === id)})).filter((x) => x.fegyver != null).map(({idx, fegyver}) => ({idx, fegyver: fegyver as Fegyver}))
 
     const osztalyAllowedFegyverek = OsztalyAllowedFegyver(osztaly)
     const allowedFegyverek = [...osztalyAllowedFegyverek, ...valasztottFegyverek.filter(({idx, fegyver}) => !osztalyAllowedFegyverek.map(f => f.ID).includes(fegyver.ID)).map(({fegyver}) => fegyver)]
     const changeFegyver = (idx: number, newID: string) => {
-        const found = fegyverek.fegyverek.find(x => x.ID === newID)
+        const found = fegyverek.data.find(x => x.ID === newID)
         if (!found) {
             console.log('Nem létező fegyver ID: ', newID)
             return
@@ -49,10 +58,10 @@ function Felszereles(props: {felszereles: KarakterFelszereles, changeFelszereles
                 <label className='col-md-2 col-sm-3 col-form-label'>Fegyver</label>
                 <select className='col form-select' value={fegyver.ID} onChange={e => changeFegyver(idx, e.target.value)}>
                     <optgroup label="Közelharci">
-                        {allowedFegyverek.filter(f => f.Type === 'kozelharci').map(f => <option key={f.ID} value={f.ID}>{`${f.Name}`}</option>)}
+                        {allowedFegyverek.filter(f => f.Type === 'kozelharci').map(f => <option key={f.ID} value={f.ID}>{FegyverLabel(f)}</option>)}
                     </optgroup>
                     <optgroup label="Távolsági">
-                        {allowedFegyverek.filter(f => f.Type === 'lofegyver').map(f => <option key={f.ID} value={f.ID}>{`${f.Name}`}</option>)}
+                        {allowedFegyverek.filter(f => f.Type === 'lofegyver').map(f => <option key={f.ID} value={f.ID}>{FegyverLabel(f)}</option>)}
                     </optgroup>
                 </select>
                 <button className='col-md-2 col-sm-3 btn btn-outline-dark btn-lg ms-2' type='button' onClick={() => changeFelszereles({...felszereles, fegyverIDk: [...felszereles.fegyverIDk.slice(0, idx), ...felszereles.fegyverIDk.slice(idx+1)]})}>Elvesz</button>

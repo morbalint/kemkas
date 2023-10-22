@@ -91,9 +91,11 @@ export function GetPajzs(id?: string): Pajzs | undefined {
 }
 
 export function GetFegyver(id: string): Fegyver | undefined {
-    return fegyverek.fegyverek.find(f => f.ID === id) as Fegyver | undefined
+    return fegyverek.data.find(f => f.ID === id) as Fegyver | undefined
 }
 
 export function GetFegyverek(ids: string[]): Fegyver[] {
     return ids.map(GetFegyver).filter(x => x != null).map(x => x as Fegyver)
 }
+export const defaultFegyverID = 'okol'
+export const defaultFegyver = GetFegyver('okol')!

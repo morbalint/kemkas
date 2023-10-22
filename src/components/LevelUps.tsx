@@ -29,7 +29,9 @@ function LevelUp(props: {
     console.log('Specialization index: ' + specializationIndex.toString())
     const specialization = karakter.harcosSpecializaciok[specializationIndex]
     console.log(specialization)
-    const krit = karakter.kalozKritikus[Math.floor(szint/3)-1]
+    const kritIndex = Math.floor(szint/3)-1
+    const krit = karakter.kalozKritikus[kritIndex]
+    console.log(`kaloz krit @${szint}: ${krit}`)
 
     return <div key={`level-up-${szint}`}>
         <div className='row mt-3'>
@@ -54,7 +56,7 @@ function LevelUp(props: {
                 szint={szint}
             />
         }
-        {karakter.osztaly === Osztaly.Kaloz && szint % 3 === 0 &&
+        {karakter.osztaly === Osztaly.Kaloz && szint % 3 === 0 && !!krit &&
             <KalozKritikus
                 krit={krit}
                 existingKrits={karakter.kalozKritikus}

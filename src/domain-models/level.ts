@@ -24,11 +24,11 @@ export function LevelUp(karakter: KarakterInputs, changeKarakter: (input: Karakt
     }
     let harcosSpecializaciok = karakter.harcosSpecializaciok
     if(karakter.osztaly === Osztaly.Harcos && szint % 2 === 1) {
-        harcosSpecializaciok = [...harcosSpecializaciok, "Csatabárd"]
+        harcosSpecializaciok = [...harcosSpecializaciok, "csatabard"]
     }
     let kalozKritikus = karakter.kalozKritikus
     if(karakter.osztaly === Osztaly.Kaloz && szint % 3 === 0) {
-        kalozKritikus = [...kalozKritikus, "Szablya"]
+        kalozKritikus = [...kalozKritikus, "szablya"]
     }
     changeKarakter({...karakter, szint, hpRolls, tulajdonsagNovelesek, harcosSpecializaciok, kalozKritikus})
 }
