@@ -88,7 +88,7 @@
       "Id": "csakany",
       "Name": "Csákány",
       "Type": "kozelharci",
-      "Ketkezes": true,
+      "Ketkezes": false,
       "Egzotikus": false,
       "Rohamfelfogo": false,
       "Price": 5,

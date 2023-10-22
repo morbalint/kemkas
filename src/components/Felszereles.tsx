@@ -1,11 +1,12 @@
 import React from "react";
 import {Fegyver, KarakterFelszereles, PancelTypeLabel} from "../domain-models/felszereles";
-import {Osztaly, OsztalyAllowedFegyver} from '../domain-models/osztaly'
+import {Osztaly} from '../domain-models/osztaly'
 import {AllowedPancelTypes} from '../domain-models/allowed-pancel-types'
 import pancelok from '../domain-models/pancel.json'
 import pajzsok from '../domain-models/pajzs.json'
 import fegyverek from '../domain-models/fegyver.json'
 import {arraySetN} from "../util";
+import {AllowedFegyver} from "../domain-models/allowed-fegyver";
 
 export function FegyverLabel(fegyver: Fegyver): string {
     return `${fegyver.Name}${fegyver.Ketkezes ? '+' : ''}${fegyver.Egzotikus ? '(E)' : ''} | ${
@@ -15,13 +16,13 @@ export function FegyverLabel(fegyver: Fegyver): string {
         fegyver.Range > 0 ? ` | táv: ${fegyver.Range}` : ''}`
 }
 
-function Felszereles(props: {felszereles: KarakterFelszereles, changeFelszereles: (felszereles: KarakterFelszereles) => void, osztaly: Osztaly}) {
-    const { felszereles, changeFelszereles, osztaly } = props;
+function Felszereles(props: {felszereles: KarakterFelszereles, changeFelszereles: (felszereles: KarakterFelszereles) => void, osztaly: Osztaly, harcosSpec: Fegyver['Id'][]}) {
+    const { felszereles, changeFelszereles, osztaly, harcosSpec } = props;
     const allowedPancelTypes = AllowedPancelTypes([osztaly])
     const valasztottFegyverek = felszereles.fegyverIDk
             .map((id, idx) => ({idx, fegyver: fegyverek.data.find(f => f.Id === id)})).filter((x) => x.fegyver != null).map(({idx, fegyver}) => ({idx, fegyver: fegyver as Fegyver}))
 
-    const osztalyAllowedFegyverek = OsztalyAllowedFegyver(osztaly)
+    const osztalyAllowedFegyverek = AllowedFegyver(osztaly, harcosSpec)
     const allowedFegyverek = [...osztalyAllowedFegyverek, ...valasztottFegyverek.filter(({idx, fegyver}) => !osztalyAllowedFegyverek.map(f => f.Id).includes(fegyver.Id)).map(({fegyver}) => fegyver)]
     const changeFegyver = (idx: number, newID: string) => {
         const found = fegyverek.data.find(x => x.Id === newID)
@@ -33,6 +34,9 @@ function Felszereles(props: {felszereles: KarakterFelszereles, changeFelszereles
     }
 
     return <>
+        <div className='row'>
+            <h5 className='col align-self-center'>Felszerelés</h5>
+        </div>
         <div className='row m-2'>
             <label className='col-md-2 col-sm-3 col-form-label'>Viselt páncél</label>
             <select className='col form-select' value={felszereles.pancelID} onChange={e => changeFelszereles({...felszereles, pancelID: e.target.value === 'nincs' ? undefined : e.target.value})}>

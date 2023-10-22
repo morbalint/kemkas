@@ -1,5 +1,4 @@
-import {Fegyver, GetPancel, KarakterFelszereles} from "./felszereles";
-import fegyverDB from './fegyver.json'
+import {GetPancel, KarakterFelszereles} from "./felszereles";
 import {AllowedPancelTypes} from "./allowed-pancel-types";
 
 export enum Osztaly {
@@ -12,25 +11,6 @@ export enum Osztaly {
     Tolvaj = 'o_tolvaj',
     Varazslo = 'o_varazslo',
     Illuzionista = 'o_illuzionista',
-}
-
-export function OsztalyAllowedFegyver(o: Osztaly): Fegyver[] {
-    const fegyverek = fegyverDB.data.map(x => x as Fegyver)
-    const nemEgzotikus = fegyverek.filter(f => !f.Egzotikus)
-    const varazslo = fegyverek.filter(f => ['okol', 'bot', 'bunko', 'tor', 'parittya', 'dobotu'].includes(f.Id))
-    const tolvaj = fegyverek.filter(f => ['okol', 'tor', 'parittya', 'rovid_ij', 'dobotu', 'konnyu_szamszerij', 'nehez_szamszerij', 'szablya', 'hosszu_kard', 'rovid_kard' ].includes(f.Id))
-    switch (o) {
-        case Osztaly.Amazon:
-        case Osztaly.Harcos:
-        case Osztaly.Barbar:
-        case Osztaly.Kaloz: return nemEgzotikus;
-        case Osztaly.Ijasz: return [...nemEgzotikus, fegyverDB.data.find(f => f.Id === 'visszacsapo_ij') as Fegyver]
-        // Note: Isteni fegyver barmi lehet istentol foggoen
-        case Osztaly.Pap: return fegyverek;
-        case Osztaly.Tolvaj: return tolvaj;
-        case Osztaly.Illuzionista:
-        case Osztaly.Varazslo: return varazslo;
-    }
 }
 
 export function SetFelszerelesForChangedOsztaly(o: Osztaly, felszereles: KarakterFelszereles, changeFelszereles: (f: KarakterFelszereles) => void) {

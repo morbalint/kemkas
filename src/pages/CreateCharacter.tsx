@@ -131,10 +131,6 @@ function CreateCharacterPage() {
 
                     <hr />
 
-                    <Felszereles osztaly={karakter.osztaly} felszereles={karakter.felszereles} changeFelszereles={setFelszereles} />
-
-                    <hr />
-
                     <LevelUps key={'level-ups'} karakter={karakter} changeKarakter={changeKarakter} />
 
                     {karakter.szint > 1 &&  <hr />}
@@ -144,6 +140,11 @@ function CreateCharacterPage() {
                             <Card className='col text-center p-3'>Elérted a fajod szint limitjét</Card>}
                         {karakter.szint > 1 && <button className='btn btn-dark btn-lg' type='button' onClick={levelDown}>Visszalépés! ⇩</button> }
                     </div>
+
+
+                    <hr />
+
+                    <Felszereles osztaly={karakter.osztaly} felszereles={karakter.felszereles} changeFelszereles={setFelszereles} harcosSpec={karakter.harcosSpecializaciok} />
 
                     <div className='d-grid gap-2 m-5'>
                         <button className='btn btn-danger btn-lg' type='button' onClick={async () =>  await CreatePDF(KarakterInputToPdfView(karakter))}>Létrehozás</button>

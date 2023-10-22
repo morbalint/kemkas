@@ -1,5 +1,6 @@
 import React from "react";
-import {Osztaly, OsztalyAllowedFegyver} from "../domain-models/osztaly";
+import {Osztaly} from "../domain-models/osztaly";
+import {AllowedFegyver} from "../domain-models/allowed-fegyver";
 
 function KalozKritikus(props: {
     kritFegyverId: string,
@@ -14,7 +15,7 @@ function KalozKritikus(props: {
         szint
     } = props
     const hasError = existingKrits.filter(x => x === kritFegyverId).length > (szint < 9 ? 1 : 2)
-    const fegyverek = OsztalyAllowedFegyver(Osztaly.Kaloz)
+    const fegyverek = AllowedFegyver(Osztaly.Kaloz, [])
     return <>
         <div className='row m-2'>
             <label className='col-md-2 col-sm-3 col-form-label'>Kritikus</label>
