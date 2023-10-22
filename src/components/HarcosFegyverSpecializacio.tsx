@@ -19,12 +19,12 @@ function HarcosFegyverSpecializacio(props: {
     return <>
         <div className='row m-2'>
             <label className='col-md-2 col-sm-3 col-form-label' >Fegyver specializáció</label>
-            <select className='col form-select' value={fegyver?.ID || defaultFegyverID} onChange={e => changeSpecialization(e.target.value)}>
+            <select className='col form-select' value={fegyver?.Id || defaultFegyverID} onChange={e => changeSpecialization(e.target.value)}>
                 <optgroup label="Közelharci">
-                    {fegyverek.data.filter(f => f.Type === 'kozelharci').map(f => <option key={f.ID} value={f.ID}>{f.Name}</option>)}
+                    {fegyverek.data.filter(f => f.Type === 'kozelharci').map(f => <option key={f.Id} value={f.Id}>{f.Name}</option>)}
                 </optgroup>
                 <optgroup label="Távolsági">
-                    {fegyverek.data.filter(f => f.Type === 'lofegyver').map(f => <option key={f.ID} value={f.ID}>{f.Name}</option>)}
+                    {fegyverek.data.filter(f => f.Type === 'lofegyver').map(f => <option key={f.Id} value={f.Id}>{f.Name}</option>)}
                 </optgroup>
             </select>
             {fegyver == null && <span className='form-field-error'>Ismeretlen fegyver: {specialization}</span>}

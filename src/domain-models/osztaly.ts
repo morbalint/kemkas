@@ -17,14 +17,14 @@ export enum Osztaly {
 export function OsztalyAllowedFegyver(o: Osztaly): Fegyver[] {
     const fegyverek = fegyverDB.data.map(x => x as Fegyver)
     const nemEgzotikus = fegyverek.filter(f => !f.Egzotikus)
-    const varazslo = fegyverek.filter(f => ['okol', 'bot', 'bunko', 'tor', 'parittya', 'dobotu'].includes(f.ID))
-    const tolvaj = fegyverek.filter(f => ['okol', 'tor', 'parittya', 'rovid_ij', 'dobotu', 'konnyu_szamszerij', 'nehez_szamszerij', 'szablya', 'hosszu_kard', 'rovid_kard' ].includes(f.ID))
+    const varazslo = fegyverek.filter(f => ['okol', 'bot', 'bunko', 'tor', 'parittya', 'dobotu'].includes(f.Id))
+    const tolvaj = fegyverek.filter(f => ['okol', 'tor', 'parittya', 'rovid_ij', 'dobotu', 'konnyu_szamszerij', 'nehez_szamszerij', 'szablya', 'hosszu_kard', 'rovid_kard' ].includes(f.Id))
     switch (o) {
         case Osztaly.Amazon:
         case Osztaly.Harcos:
         case Osztaly.Barbar:
         case Osztaly.Kaloz: return nemEgzotikus;
-        case Osztaly.Ijasz: return [...nemEgzotikus, fegyverDB.data.find(f => f.ID === 'visszacsapo_ij') as Fegyver]
+        case Osztaly.Ijasz: return [...nemEgzotikus, fegyverDB.data.find(f => f.Id === 'visszacsapo_ij') as Fegyver]
         // Note: Isteni fegyver barmi lehet istentol foggoen
         case Osztaly.Pap: return fegyverek;
         case Osztaly.Tolvaj: return tolvaj;
@@ -210,7 +210,7 @@ export function OsztalySpecialSkills(osztaly: Osztaly) : Skill[] {
             {
                 Id: 's_harcos_kaloz_kritikus',
                 Name: 'Kritikus',
-                Description: 'Minden harmadik szinten kiválaszthatnak egy fegyvert, amivel könnyebben okoznak kritikus sebesülést, tehát pl. csatabárddal 20 helyett 19-20-on, hoszszúkarddal 19-20 helyett 18-20-on, szablyával 18-20 helyett 17-20-on, stb. Ez a képesség 9. szintig fegyverenként csak egyszer választható.'
+                Description: 'Minden harmadik szinten kiválaszthatnak egy fegyvert, amivel könnyebben okoznak kritikus sebesülést, tehát pl. csatabárddal 20 helyett 19-20-on, hosszúkarddal 19-20 helyett 18-20-on, szablyával 18-20 helyett 17-20-on, stb. Ez a képesség 9. szintig fegyverenként csak egyszer választható.'
             }]
         case Osztaly.Barbar: return [
             {
@@ -339,7 +339,7 @@ export function OsztalySkillsTordelt(osztaly: Osztaly) : Skill[] {
                 Id: 's_harcos_kaloz_kritikus',
                 Name: 'Kritikus',
                 Description: 'Minden harmadik szinten kiválaszthatnak egy fegyvert, amivel könnyebben okoznak\n' +
-                    'kritikus sebesülést, tehát pl. csatabárddal 20 helyett 19-20-on, hoszszúkarddal 19-20\n' +
+                    'kritikus sebesülést, tehát pl. csatabárddal 20 helyett 19-20-on, hosszúkarddal 19-20\n' +
                     'helyett 18-20-on, szablyával 18-20 helyett 17-20-on, stb. Ez a képesség 9. szintig\n' +
                     'fegyverenként csak egyszer választható.'
             }]

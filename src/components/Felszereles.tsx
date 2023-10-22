@@ -19,12 +19,12 @@ function Felszereles(props: {felszereles: KarakterFelszereles, changeFelszereles
     const { felszereles, changeFelszereles, osztaly } = props;
     const allowedPancelTypes = AllowedPancelTypes([osztaly])
     const valasztottFegyverek = felszereles.fegyverIDk
-            .map((id, idx) => ({idx, fegyver: fegyverek.data.find(f => f.ID === id)})).filter((x) => x.fegyver != null).map(({idx, fegyver}) => ({idx, fegyver: fegyver as Fegyver}))
+            .map((id, idx) => ({idx, fegyver: fegyverek.data.find(f => f.Id === id)})).filter((x) => x.fegyver != null).map(({idx, fegyver}) => ({idx, fegyver: fegyver as Fegyver}))
 
     const osztalyAllowedFegyverek = OsztalyAllowedFegyver(osztaly)
-    const allowedFegyverek = [...osztalyAllowedFegyverek, ...valasztottFegyverek.filter(({idx, fegyver}) => !osztalyAllowedFegyverek.map(f => f.ID).includes(fegyver.ID)).map(({fegyver}) => fegyver)]
+    const allowedFegyverek = [...osztalyAllowedFegyverek, ...valasztottFegyverek.filter(({idx, fegyver}) => !osztalyAllowedFegyverek.map(f => f.Id).includes(fegyver.Id)).map(({fegyver}) => fegyver)]
     const changeFegyver = (idx: number, newID: string) => {
-        const found = fegyverek.data.find(x => x.ID === newID)
+        const found = fegyverek.data.find(x => x.Id === newID)
         if (!found) {
             console.log('Nem létező fegyver ID: ', newID)
             return
@@ -40,7 +40,7 @@ function Felszereles(props: {felszereles: KarakterFelszereles, changeFelszereles
                 {
                     allowedPancelTypes.map(pancelType => (
                         <optgroup key={pancelType} label={PancelTypeLabel(pancelType)}>
-                            {pancelok['pancel'].filter(p => p.Type === pancelType).map(p => <option key={p.ID} value={p.ID}>{`${p.Name} (+${p.VO} VO) - ${p.Price} at`}</option>)}
+                            {pancelok['pancel'].filter(p => p.Type === pancelType).map(p => <option key={p.Id} value={p.Id}>{`${p.Name} (+${p.VO} VO) - ${p.Price} at`}</option>)}
                         </optgroup>
                     ))
                 }
@@ -50,18 +50,18 @@ function Felszereles(props: {felszereles: KarakterFelszereles, changeFelszereles
             <label className='col-md-2 col-sm-3 col-form-label'>Hordott pajzs</label>
             <select className='col form-select' value={felszereles.pajzsID} onChange={e => changeFelszereles({...felszereles, pajzsID: e.target.value === 'nincs' ? undefined : e.target.value})}>
                 <option key={'nincs'} value={'nincs'}>Nincs</option>
-                {allowedPancelTypes.length > 0 && (pajzsok['pajzs'].map(p => <option key={p.ID} value={p.ID}>{`${p.Name} (+${p.VO} VO) - ${p.Price} at`}</option>))}
+                {allowedPancelTypes.length > 0 && (pajzsok['pajzs'].map(p => <option key={p.Id} value={p.Id}>{`${p.Name} (+${p.VO} VO) - ${p.Price} at`}</option>))}
             </select>
         </div>
         {valasztottFegyverek.map(({idx, fegyver}) => (
             <div key={`fegyver-${idx}`} className='row m-2'>
                 <label className='col-md-2 col-sm-3 col-form-label'>Fegyver</label>
-                <select className='col form-select' value={fegyver.ID} onChange={e => changeFegyver(idx, e.target.value)}>
+                <select className='col form-select' value={fegyver.Id} onChange={e => changeFegyver(idx, e.target.value)}>
                     <optgroup label="Közelharci">
-                        {allowedFegyverek.filter(f => f.Type === 'kozelharci').map(f => <option key={f.ID} value={f.ID}>{FegyverLabel(f)}</option>)}
+                        {allowedFegyverek.filter(f => f.Type === 'kozelharci').map(f => <option key={f.Id} value={f.Id}>{FegyverLabel(f)}</option>)}
                     </optgroup>
                     <optgroup label="Távolsági">
-                        {allowedFegyverek.filter(f => f.Type === 'lofegyver').map(f => <option key={f.ID} value={f.ID}>{FegyverLabel(f)}</option>)}
+                        {allowedFegyverek.filter(f => f.Type === 'lofegyver').map(f => <option key={f.Id} value={f.Id}>{FegyverLabel(f)}</option>)}
                     </optgroup>
                 </select>
                 <button className='col-md-2 col-sm-3 btn btn-outline-dark btn-lg ms-2' type='button' onClick={() => changeFelszereles({...felszereles, fegyverIDk: [...felszereles.fegyverIDk.slice(0, idx), ...felszereles.fegyverIDk.slice(idx+1)]})}>Elvesz</button>

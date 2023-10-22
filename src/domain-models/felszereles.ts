@@ -7,7 +7,7 @@ export type PancelType = 'konnyu' | 'kozepes' | 'nehez'
 export const PancelTypes: PancelType[] = ['konnyu', 'kozepes', 'nehez']
 
 export interface Pancel {
-    ID: string,
+    Id: string,
     Name: string,
     Type: PancelType
     VO: number,
@@ -15,7 +15,7 @@ export interface Pancel {
 }
 
 export interface Pajzs {
-    ID: string,
+    Id: string,
     Name: string,
     Type: 'pajzs'
     VO: number,
@@ -23,7 +23,7 @@ export interface Pajzs {
 }
 
 export interface Fegyver {
-    ID: string,
+    Id: string,
     Name: string,
     Type: 'kozelharci' | 'lofegyver'
     Ketkezes: boolean,
@@ -69,7 +69,7 @@ export function GetPancel(id?: string): Pancel | undefined {
     if (id == null) {
         return undefined
     }
-    const filteredPancel = pancelok['pancel'].filter(p => p.ID === id) as Pancel[]
+    const filteredPancel = pancelok['pancel'].filter(p => p.Id === id) as Pancel[]
     return filteredPancel.length > 0 ? filteredPancel[0] : undefined
 }
 
@@ -86,12 +86,12 @@ export function GetPajzs(id?: string): Pajzs | undefined {
     if (id == null) {
         return undefined
     }
-    const filtered = pajzsok['pajzs'].filter(p => p.ID === id) as Pajzs[]
+    const filtered = pajzsok['pajzs'].filter(p => p.Id === id) as Pajzs[]
     return filtered.length > 0 ? filtered[0] : undefined
 }
 
 export function GetFegyver(id: string): Fegyver | undefined {
-    return fegyverek.data.find(f => f.ID === id) as Fegyver | undefined
+    return fegyverek.data.find(f => f.Id === id) as Fegyver | undefined
 }
 
 export function GetFegyverek(ids: string[]): Fegyver[] {

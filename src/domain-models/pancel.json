@@ -1,84 +1,84 @@
 {
     "pancel": [
         {
-            "ID": "tomott",
+            "Id": "tomott",
             "Name": "Tömött páncél",
             "Type": "konnyu",
             "VO": 1,
             "Price": 4
         },
         {
-            "ID": "bor",
+            "Id": "bor",
             "Name": "Bőrvért",
             "Type": "konnyu",
             "VO": 2,
             "Price": 5
         },
         {
-            "ID": "kivert_bor",
+            "Id": "kivert_bor",
             "Name": "Kivert bőrvért",
             "Type": "konnyu",
             "VO": 3,
             "Price": 15
         },
         {
-            "ID": "gyuruvert",
+            "Id": "gyuruvert",
             "Name": "Gyűrűvért",
             "Type": "konnyu",
             "VO": 3,
             "Price": 20
         },
         {
-            "ID": "lancing",
+            "Id": "lancing",
             "Name": "Láncing",
             "Type": "konnyu",
             "VO": 4,
             "Price": 50
         },
         {
-            "ID": "pikkelyvert",
+            "Id": "pikkelyvert",
             "Name": "Pikkelyvért",
             "Type": "kozepes",
             "VO": 4,
             "Price": 30
         },
         {
-            "ID": "lancvert",
+            "Id": "lancvert",
             "Name": "Láncvért",
             "Type": "kozepes",
             "VO": 5,
             "Price": 75
         },
         {
-            "ID": "mellvert",
+            "Id": "mellvert",
             "Name": "Mellvért",
             "Type": "kozepes",
             "VO": 5,
             "Price": 100
         },
         {
-            "ID": "racsvert",
+            "Id": "racsvert",
             "Name": "Rácsvért",
             "Type": "nehez",
             "VO": 6,
             "Price": 200
         },
         {
-            "ID": "szalagvert",
+            "Id": "szalagvert",
             "Name": "Szalagvért",
             "Type": "nehez",
             "VO": 6,
             "Price": 250
         },
         {
-            "ID": "lemezvert",
+            "Id": "lemezvert",
             "Name": "Lemezvért",
             "Type": "nehez",
             "VO": 7,
             "Price": 400
         },
         {
-            "ID": "teljes_lemezvert",
+            "Id": "teljes_lemezvert",
             "Name": "Teljes lemezvért",
             "Type": "nehez",
             "VO": 8,

@@ -1,7 +1,7 @@
 {
   "data": [
     {
-      "ID": "alabard",
+      "Id": "alabard",
       "Name": "Alabárd és más szálfegyverek",
       "Type": "kozelharci",
       "Ketkezes": true,
@@ -15,7 +15,7 @@
       "Range": 0
     },
     {
-      "ID": "bot",
+      "Id": "bot",
       "Name": "Bot",
       "Type": "kozelharci",
       "Ketkezes": false,
@@ -29,7 +29,7 @@
       "Range": 0
     },
     {
-      "ID": "bunko",
+      "Id": "bunko",
       "Name": "Bunkó",
       "Type": "kozelharci",
       "Ketkezes": false,
@@ -43,7 +43,7 @@
       "Range": 0
     },
     {
-      "ID": "buzogany",
+      "Id": "buzogany",
       "Name": "Buzogány és láncos buzogány",
       "Type": "kozelharci",
       "Ketkezes": false,
@@ -57,7 +57,7 @@
       "Range": 0
     },
     {
-      "ID": "csatabard",
+      "Id": "csatabard",
       "Name": "Csatabárd",
       "Type": "kozelharci",
       "Ketkezes": false,
@@ -71,7 +71,7 @@
       "Range": 0
     },
     {
-      "ID": "csatabard_2",
+      "Id": "csatabard_2",
       "Name": "Kétkezes csatabárd",
       "Type": "kozelharci",
       "Ketkezes": true,
@@ -85,7 +85,7 @@
       "Range": 0
     },
     {
-      "ID": "csakany",
+      "Id": "csakany",
       "Name": "Csákány",
       "Type": "kozelharci",
       "Ketkezes": true,
@@ -99,7 +99,7 @@
       "Range": 0
     },
     {
-      "ID": "darda",
+      "Id": "darda",
       "Name": "Dárda",
       "Type": "kozelharci",
       "Ketkezes": true,
@@ -113,7 +113,7 @@
       "Range": 0
     },
     {
-      "ID": "fejsze",
+      "Id": "fejsze",
       "Name": "Fejsze",
       "Type": "kozelharci",
       "Ketkezes": false,
@@ -127,7 +127,7 @@
       "Range": 10
     },
     {
-      "ID": "torpe_fejsze",
+      "Id": "torpe_fejsze",
       "Name": "Törpe fejsze",
       "Type": "kozelharci",
       "Ketkezes": false,
@@ -141,7 +141,7 @@
       "Range": 0
     },
     {
-      "ID": "handzsar",
+      "Id": "handzsar",
       "Name": "Handzsár",
       "Type": "kozelharci",
       "Ketkezes": true,
@@ -155,7 +155,7 @@
       "Range": 0
     },
     {
-      "ID": "harci_kalapacs",
+      "Id": "harci_kalapacs",
       "Name": "Harci kalapács",
       "Type": "kozelharci",
       "Ketkezes": false,
@@ -169,7 +169,7 @@
       "Range": 0
     },
     {
-      "ID": "harci_kalapacs_2",
+      "Id": "harci_kalapacs_2",
       "Name": "Kétkezes harci kalapács",
       "Type": "kozelharci",
       "Ketkezes": true,
@@ -183,7 +183,7 @@
       "Range": 0
     },
     {
-      "ID": "fattyu_kard",
+      "Id": "fattyu_kard",
       "Name": "Fattyú kard",
       "Type": "kozelharci",
       "Ketkezes": false,
@@ -197,7 +197,7 @@
       "Range": 0
     },
     {
-      "ID": "rovid_kard",
+      "Id": "rovid_kard",
       "Name": "Rövid kard",
       "Type": "kozelharci",
       "Ketkezes": false,
@@ -211,7 +211,7 @@
       "Range": 0
     },
     {
-      "ID": "hosszu_kard",
+      "Id": "hosszu_kard",
       "Name": "Hosszú kard",
       "Type": "kozelharci",
       "Ketkezes": false,
@@ -225,7 +225,7 @@
       "Range": 0
     },
     {
-      "ID": "kard_2",
+      "Id": "kard_2",
       "Name": "Kétkezes kard",
       "Type": "kozelharci",
       "Ketkezes": true,
@@ -239,7 +239,7 @@
       "Range": 0
     },
     {
-      "ID": "kasza",
+      "Id": "kasza",
       "Name": "Kasza",
       "Type": "kozelharci",
       "Ketkezes": true,
@@ -253,7 +253,7 @@
       "Range": 0
     },
     {
-      "ID": "landzsa",
+      "Id": "landzsa",
       "Name": "Lándzsa",
       "Type": "kozelharci",
       "Ketkezes": false,
@@ -267,7 +267,7 @@
       "Range": 20
     },
     {
-      "ID": "sarlo",
+      "Id": "sarlo",
       "Name": "Sarló",
       "Type": "kozelharci",
       "Ketkezes": false,
@@ -281,7 +281,7 @@
       "Range": 0
     },
     {
-      "ID": "szablya",
+      "Id": "szablya",
       "Name": "Szablya",
       "Type": "kozelharci",
       "Ketkezes": false,
@@ -295,7 +295,7 @@
       "Range": 0
     },
     {
-      "ID": "szigony",
+      "Id": "szigony",
       "Name": "Háromágú szigony",
       "Type": "kozelharci",
       "Ketkezes": false,
@@ -309,7 +309,7 @@
       "Range": 10
     },
     {
-      "ID": "tor",
+      "Id": "tor",
       "Name": "Tőr",
       "Type": "kozelharci",
       "Ketkezes": false,
@@ -323,7 +323,7 @@
       "Range": 10
     },
     {
-      "ID": "ostor",
+      "Id": "ostor",
       "Name": "Ostor",
       "Type": "kozelharci",
       "Ketkezes": false,
@@ -337,7 +337,7 @@
       "Range": 0
     },
     {
-      "ID": "okol",
+      "Id": "okol",
       "Name": "Ököl",
       "Type": "kozelharci",
       "Ketkezes": false,
@@ -352,7 +352,7 @@
     },
 
     {
-      "ID": "dobodarda",
+      "Id": "dobodarda",
       "Name": "Dobódárda",
       "Type": "lofegyver",
       "Ketkezes": false,
@@ -366,7 +366,7 @@
       "Range": 30
     },
     {
-      "ID": "dobotu",
+      "Id": "dobotu",
       "Name": "Dobótű",
       "Type": "lofegyver",
       "Ketkezes": false,
@@ -380,7 +380,7 @@
       "Range": 20
     },
     {
-      "ID": "rovid_ij",
+      "Id": "rovid_ij",
       "Name": "Rövid íj",
       "Type": "lofegyver",
       "Ketkezes": true,
@@ -394,7 +394,7 @@
       "Range": 60
     },
     {
-      "ID": "hosszu_ij",
+      "Id": "hosszu_ij",
       "Name": "Hosszú íj",
       "Type": "lofegyver",
       "Ketkezes": true,
@@ -408,7 +408,7 @@
       "Range": 70
     },
     {
-      "ID": "visszacsapo_ij",
+      "Id": "visszacsapo_ij",
       "Name": "Visszacsapó íj",
       "Type": "lofegyver",
       "Ketkezes": true,
@@ -422,7 +422,7 @@
       "Range": 110
     },
     {
-      "ID": "parittya",
+      "Id": "parittya",
       "Name": "Parittya",
       "Type": "lofegyver",
       "Ketkezes": true,
@@ -436,7 +436,7 @@
       "Range": 50
     },
     {
-      "ID": "konnyu_szamszerij",
+      "Id": "konnyu_szamszerij",
       "Name": "Könnyű számszeríj",
       "Type": "lofegyver",
       "Ketkezes": true,
@@ -450,7 +450,7 @@
       "Range": 80
     },
     {
-      "ID": "nehez_szamszerij",
+      "Id": "nehez_szamszerij",
       "Name": "Nehéz számszeríj",
       "Type": "lofegyver",
       "Ketkezes": true,
