@@ -27,8 +27,10 @@ import LevelUps from "../components/LevelUps";
 import HarcosFegyverSpecializacio from "../components/HarcosFegyverSpecializacio";
 import Felszereles from '../components/Felszereles';
 import { KarakterFelszereles } from '../domain-models/felszereles';
+import {Faro} from "@grafana/faro-web-sdk";
 
-function CreateCharacterPage() {
+function CreateCharacterPage(props: {faro?: Faro}) {
+    const {faro} = props
 
     let [karakter, changeKarakter] = useState(KarakterDefaults)
 
@@ -46,6 +48,7 @@ function CreateCharacterPage() {
     const levelDown = () => LevelDown(karakter, changeKarakter)
 
     const canLevelUp = CanLevelUp(karakter)
+
 
     return (
         <div>
@@ -147,7 +150,13 @@ function CreateCharacterPage() {
                     <Felszereles osztaly={karakter.osztaly} felszereles={karakter.felszereles} changeFelszereles={setFelszereles} harcosSpec={karakter.harcosSpecializaciok} />
 
                     <div className='d-grid gap-2 m-5'>
-                        <button className='btn btn-danger btn-lg' type='button' onClick={async () =>  await CreatePDF(KarakterInputToPdfView(karakter))}>Létrehozás</button>
+                        <button className='btn btn-danger btn-lg' type='button' onClick={async () => {
+                            faro?.api.pushEvent('character_created', {
+                                osztaly: karakter.osztaly,
+                                szint: karakter.szint.toString()
+                            })
+                            await CreatePDF(KarakterInputToPdfView(karakter))
+                        }}>Létrehozás</button>
                     </div>
                 </form>
             </div>
