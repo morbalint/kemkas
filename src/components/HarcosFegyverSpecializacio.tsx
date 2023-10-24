@@ -15,20 +15,22 @@ function HarcosFegyverSpecializacio(props: {
         szint
     } = props
     const fegyver = GetFegyver(specialization)
-    const hasError = existingSpecializations.filter(x => x === specialization).length > (szint < 9 ? 1 : 2)
+    const pickableFegyverek = fegyverek.data.filter(f => f.Id === specialization || existingSpecializations.filter(x => x === f.Id).length < (szint < 9 ? 1 : 2))
+    const kozelharciPickable = pickableFegyverek.filter(f => f.Type === 'kozelharci')
+    const tavolsagiPickable = pickableFegyverek.filter(f => f.Type === 'lofegyver')
+
     return <>
         <div className='row m-2'>
             <label className='col-md-2 col-sm-3 col-form-label' >Fegyver specializáció</label>
             <select className='col form-select' value={fegyver?.Id || defaultFegyverID} onChange={e => changeSpecialization(e.target.value)}>
                 <optgroup label="Közelharci">
-                    {fegyverek.data.filter(f => f.Type === 'kozelharci').map(f => <option key={f.Id} value={f.Id}>{f.Name}</option>)}
+                    {kozelharciPickable.map(f => <option key={`spec-${szint}-${f.Id}`} value={f.Id}>{f.Name}</option>)}
                 </optgroup>
                 <optgroup label="Távolsági">
-                    {fegyverek.data.filter(f => f.Type === 'lofegyver').map(f => <option key={f.Id} value={f.Id}>{f.Name}</option>)}
+                    {tavolsagiPickable.map(f => <option key={`spec-${szint}-${f.Id}`} value={f.Id}>{f.Name}</option>)}
                 </optgroup>
             </select>
             {fegyver == null && <span className='form-field-error'>Ismeretlen fegyver: {specialization}</span>}
-            {hasError && <span className='form-field-error'>Már {szint < 9 ? '' : 'kétszer is'} választottad ezt a fegyvert!</span>}
         </div>
     </>
 }

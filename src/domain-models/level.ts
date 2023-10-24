@@ -4,7 +4,12 @@ import {TulajdonsagIDs, TulajdonsagokTotal} from "./tulajdonsag";
 import {KarakterInputs} from "./karakter";
 import {GetFajDetails} from "./faj";
 import {Osztaly} from "./osztaly";
+import fegyverek from "./fegyver.json"
+import {AllowedFegyver} from "./allowed-fegyver";
 
+export function PickableSpecializationFilter(existingSpecilizations: string[], szint: number) {
+    return (fegyver: {Id: string}) => existingSpecilizations.filter(x => x === fegyver.Id).length < (szint < 9 ? 1 : 2)
+}
 
 export function LevelUp(karakter: KarakterInputs, changeKarakter: (input: KarakterInputs) => void) {
     const tulajdonsagokTotal = TulajdonsagokTotal(karakter)
@@ -24,11 +29,13 @@ export function LevelUp(karakter: KarakterInputs, changeKarakter: (input: Karakt
     }
     let harcosSpecializaciok = karakter.harcosSpecializaciok
     if(karakter.osztaly === Osztaly.Harcos && szint % 2 === 1) {
-        harcosSpecializaciok = [...harcosSpecializaciok, "csatabard"]
+        const nextPickableFegyverId = fegyverek.data.filter(PickableSpecializationFilter(karakter.harcosSpecializaciok, karakter.szint))[0].Id
+        harcosSpecializaciok = [...harcosSpecializaciok, nextPickableFegyverId]
     }
     let kalozKritikus = karakter.kalozKritikus
     if(karakter.osztaly === Osztaly.Kaloz && szint % 3 === 0) {
-        kalozKritikus = [...kalozKritikus, "szablya"]
+        const nextPickableFegyverId = AllowedFegyver(Osztaly.Kaloz, []).filter(PickableSpecializationFilter(karakter.kalozKritikus, szint))[0].Id
+        kalozKritikus = [...kalozKritikus, nextPickableFegyverId]
     }
     changeKarakter({...karakter, szint, hpRolls, tulajdonsagNovelesek, harcosSpecializaciok, kalozKritikus})
 }

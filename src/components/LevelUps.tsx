@@ -31,7 +31,6 @@ function LevelUp(props: {
 
     const specializationIndex = Math.floor((szint-1) / 2)
     const specialization = karakter.harcosSpecializaciok[specializationIndex]
-    console.log(specialization)
     const kritIndex = kalozKritIndex(szint)
     const krit = karakter.kalozKritikus[kritIndex]
 
