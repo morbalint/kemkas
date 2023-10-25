@@ -3,7 +3,7 @@ import {KarakterInputs} from "../domain-models/karakter";
 import BasicNewLevel from "./BasicNewLevel";
 import TulajdonsagNoveles from "./TulajdonsagNoveles";
 import {Tulajdonsag, TulajdonsagokTotal} from "../domain-models/tulajdonsag";
-import {arraySetN} from "../util";
+import {arraySetN} from "../../util";
 import {Osztaly} from "../domain-models/osztaly";
 import HarcosFegyverSpecializacio from "./HarcosFegyverSpecializacio";
 import KalozKritikus from "./KalozKritikus";

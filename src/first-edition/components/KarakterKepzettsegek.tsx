@@ -6,7 +6,7 @@ import {
     KepzettsegId,
     TolvajKepzettsegList,
 } from "../domain-models/kepzettsegek";
-import {arraySetN} from "../util";
+import {arraySetN} from "../../util";
 
 
 function InternalKepzettsegekSelector(props: {

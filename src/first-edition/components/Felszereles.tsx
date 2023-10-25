@@ -5,7 +5,7 @@ import {AllowedPancelTypes} from '../domain-models/allowed-pancel-types'
 import pancelok from '../domain-models/pancel.json'
 import pajzsok from '../domain-models/pajzs.json'
 import fegyverek from '../domain-models/fegyver.json'
-import {arraySetN} from "../util";
+import {arraySetN} from "../../util";
 import {AllowedFegyver} from "../domain-models/allowed-fegyver";
 
 export function FegyverLabel(fegyver: Fegyver): string {

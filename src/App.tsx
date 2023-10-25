@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import CreateCharacter from "./pages/CreateCharacter";
+import CreateCharacter from "./first-edition/pages/CreateCharacter";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {Faro} from "@grafana/faro-web-sdk";
 

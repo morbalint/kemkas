@@ -10,8 +10,7 @@ export function OsztalySkillsTordelt(osztaly: Osztaly) : Skill[] {
                 'egyszer választható, s arra is fölhasználható, hogy a harcos megtanulja egy egzotikus\n' +
                 'fegyver használatát, amire később specializálódhat is. 9. szinttől elérhető számukra a\n' +
                 'kettős specializáció: ezzel sebzésmódosítójukat az adott fegyverre +4-re emelhetik.'
-        }
-        ]
+        }]
         case Osztaly.Ijasz: return [
             {
                 Id: 's_harcos_ijasz',

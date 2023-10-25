@@ -24,7 +24,7 @@ function drawExtendedSkillDescription(skill: Skill, font: PDFFont, baseFontSize:
     return rows;
 }
 
-export function DrawOsztalySpecialsPage(page: PDFPage, font: PDFFont, fontBold: PDFFont, karakter: KarakterPdfView): number{
+export function DrawOsztalySpecialsPage(page: PDFPage, font: PDFFont, fontBold: PDFFont, karakter: KarakterPdfView): number {
     const baseFontSize = 12
     const titleFontSize = baseFontSize * 3
     const pageCenterX = page.getWidth()/2
