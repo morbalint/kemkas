@@ -3,7 +3,7 @@ import {Mentok, MentokAlap, MentoModositok} from "../domain-models/mentok";
 import {Kepzettseg, Kepzettsegek} from "../domain-models/kepzettsegek";
 import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
 import {Faj, FajLabel} from "../domain-models/faj";
-import {Osztaly, OsztalyLabel, OsztalySpecialSkills, Skill} from "../domain-models/osztaly";
+import {Osztaly, OsztalyLabel, Skill} from "../domain-models/osztaly";
 import {CelzoTB, KozelharciTB} from "../domain-models/tamadas_bonusz";
 import {KarakterInputs} from "../domain-models/karakter";
 import {CalculateVarazslatMentokNF, NapiVarazslatok} from "../domain-models/memorizalt_varazslatok";
@@ -84,7 +84,7 @@ export function KarakterInputToPdfView(karakter: KarakterInputs): KarakterPdfVie
         Nem: karakter.nem || "",
         Tulajdonsagok: karakter.tulajdonsagok,
         Osztaly: OsztalyLabel(karakter.osztaly),
-        OsztalySkills: OsztalySpecialSkills(karakter.osztaly),
+        OsztalySkills: OsztalySkillsTordelt(karakter.osztaly),
         Szint: karakter.szint.toString(),
         Kepzettsegek: karakter.kepzettsegek.map(id => mapKepzettsegToPdfView(Kepzettsegek[id], tulajdonsagok, karakter.szint)),
         TolvajKepzettsegek: karakter.tolvajKepzettsegek?.map(id => mapKepzettsegToPdfView(Kepzettsegek[id], tulajdonsagok, karakter.szint)) || [],

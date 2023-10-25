@@ -77,13 +77,6 @@ export function OsztalySkillsTordelt(osztaly: Osztaly) : Skill[] {
         ]
         case Osztaly.Pap: return [
             {
-                Id: 's_pap_varazslat',
-                Name: 'Varázslatok',
-                Description: 'A papi varázslatok általában gyógyításra, mások megsegítésére és vallási feladatok\n' +
-                    'ellátására szolgálnak. Minél magasabb szintűek, egy nap annál több varázslatot tudnak\n' +
-                    'alkalmazni. Ez a karakterlapon a Mágiánál megtalálható.'
-            },
-            {
                 Id: 's_pap_gyogyseb',
                 Name: 'Gyógyítás vagy sebokozás',
                 Description:
@@ -101,10 +94,10 @@ export function OsztalySkillsTordelt(osztaly: Osztaly) : Skill[] {
                 Name: 'Élőholtak elűzése vagy irányítása',
                 Description:
                     'A papok istenük dogmájának megfelelően képesek lehetnek arra, hogy élőholt szörnyeket\n' +
-                    '(mint például zombikat, lidérceket vagy vámpírokat) szimbólumuk felmutatásával elűzzenek\n' +
-                    'vagy szolgálatukba állítsanak. Ez a képesség naponta csak egyszer (5. szinttől kétszer, 10.\n' +
-                    'szinttől háromszor, 15. szinttől négyszer) használható. A cselekedet a következő módon\n' +
-                    'működik:',
+                    '(mint például zombikat, lidérceket vagy vámpírokat) szimbólumuk felmutatásával\n' +
+                    'elűzzenek vagy szolgálatukba állítsanak. Ez a képesség naponta csak egyszer (5. szinttől\n' +
+                    'kétszer, 10. szinttől háromszor, 15. szinttől négyszer) használható. A cselekedet a\n' +
+                    'következő módon működik:',
                 ExtendedDescription: [
                     'A pap [1d20+Kar bónusz] próbát tesz. Ennek az értékét összeveti a standard bónusztáblázattal. Az innen kiolvasható módosítót hozzáadja saját szintjéhez (ha negatív, akkor levonja). Az eredmény jelzi, hogy a pap legfeljebb milyen szintű élőholtakra lesz hatással. Ha tehát pl. a próba végeredménye 14 és a pap ötödik szintű, akkor 5+1, azaz 6. szintű a legerősebb élőhalott, amire a kísérlet sikeres. A 20-as dobás itt is automatikus siker, az 1-es automatikus kudarc.',
                     'A pap [2d6+szint] szintű élőhalottat űzhet el vagy irányíthat. Először a leggyengébb élőholtakra hat, azután a következő leggyengébbekre, stb. Az elűzött élőholtak elmenekülnek a pap szeme elől és addig nem is ártanak neki és társainak, amíg a pap csapata meg nem támadja őket! Ezzel szemben a gonosz papok parancsokat adhatnak az irányított szörnyeknek. Mindkét hatás legfeljebb pár óráig tart, az élőholtak szintjétől és a körülményektől függően.',
@@ -116,9 +109,9 @@ export function OsztalySkillsTordelt(osztaly: Osztaly) : Skill[] {
                 Id: 's_pap_invokacio',
                 Name: 'Invokáció',
                 Description:
-                    'A pap kérheti istene segítségét (általában nevének kimondásával), ami +1-et, ritkábban +2-t\n' +
-                    'ad hozzá dobásaihoz. A papok hetente annyiszor használhatják az invokációt, amekkora a \n' +
-                    'Bölcsességbónuszuk (de legalább egyszer).'
+                    'A pap kérheti istene segítségét (általában nevének kimondásával), ami +1-et, ritkábban\n' +
+                    ' +2-t ad hozzá dobásaihoz. A papok hetente annyiszor használhatják az invokációt,\n' +
+                    ' amekkora a Bölcsességbónuszuk (de legalább egyszer).'
             }
         ]
         case Osztaly.Tolvaj: return [
