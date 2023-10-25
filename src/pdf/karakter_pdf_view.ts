@@ -1,26 +1,27 @@
-import {
-    KarakterTulajdonsagok, Modifier,
-    TulajdonsagModosito,
-    TulajdonsagokTotal
-} from "../domain-models/tulajdonsag";
+import {KarakterTulajdonsagok, Modifier, TulajdonsagModosito, TulajdonsagokTotal} from "../domain-models/tulajdonsag";
 import {Mentok, MentokAlap, MentoModositok} from "../domain-models/mentok";
 import {Kepzettseg, Kepzettsegek} from "../domain-models/kepzettsegek";
 import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
 import {Faj, FajLabel} from "../domain-models/faj";
-import {
-    Osztaly,
-    OsztalyLabel, OsztalySkillsTordelt,
-    Skill
-} from "../domain-models/osztaly";
+import {Osztaly, OsztalyLabel, OsztalySkillsTordelt, Skill} from "../domain-models/osztaly";
 import {CelzoTB, KozelharciTB} from "../domain-models/tamadas_bonusz";
 import {KarakterInputs} from "../domain-models/karakter";
-import {NapiVarazslatok, CalculateVarazslatMentokNF} from "../domain-models/memorizalt_varazslatok";
+import {CalculateVarazslatMentokNF, NapiVarazslatok} from "../domain-models/memorizalt_varazslatok";
 import {GetJellem} from "../domain-models/jellem";
-import {GetPancel, GetPajzs, Fegyver, GetFegyverek} from '../domain-models/felszereles'
+import {Fegyver, GetFegyverek, GetPajzs, GetPancel} from '../domain-models/felszereles'
+import {SignedNumberToText} from "../components/Helpers";
 
 export interface KepzettsegPdfView {
     KepzettsegName: string
     KepzettsegModifier: number
+}
+
+export interface FegyverPdfView {
+    Name: string
+    TamadoBonusz: number
+    Damage: string
+    Crit: string
+    Range: string
 }
 
 export interface KarakterPdfView {
@@ -51,7 +52,7 @@ export interface KarakterPdfView {
     Felszereles: string[]
     PancelVO: number
     PajzsVO: number
-    Fegyverek: Fegyver[]
+    Fegyverek: FegyverPdfView[]
 }
 
 export function KarakterInputToPdfView(karakter: KarakterInputs): KarakterPdfView {
@@ -104,7 +105,7 @@ export function KarakterInputToPdfView(karakter: KarakterInputs): KarakterPdfVie
         Felszereles: felszereles,
         PajzsVO: pajzs?.VO ?? 0,
         PancelVO: pancel?.VO ?? 0,
-        Fegyverek: fegyverek,
+        Fegyverek: fegyverek.map(mapFegyverToPdfView(karakter)),
     }
 }
 
@@ -119,5 +120,32 @@ function mapKepzettsegToPdfView(kepzettseg: Kepzettseg, tulajdonsagok: KarakterT
     return {
         KepzettsegName: kepzettseg.Name,
         KepzettsegModifier: modifier,
+    }
+}
+
+function mapFegyverToPdfView(karakter: KarakterInputs) {
+    return (fegyver: Fegyver): FegyverPdfView => {
+        const simplifiedName = fegyver.Name.includes('és') ? fegyver.Name.split(' ')[0] : fegyver.Name
+        const tb = fegyver.Type === 'kozelharci' ? KozelharciTB(karakter)[0] : CelzoTB(karakter)[0]
+        const tulajdonsagModositok = TulajdonsagModosito(TulajdonsagokTotal(karakter))
+        let damageModifier = fegyver.Type === 'kozelharci' || (fegyver.Id === 'visszacsapo_ij' && tulajdonsagModositok.t_ero > 0) ? tulajdonsagModositok.t_ero : 0
+        damageModifier += karakter.harcosSpecializaciok.filter(x => x === fegyver.Id).length * 2
+        if (fegyver.Id === 'visszacsapo_ij' && tulajdonsagModositok.t_ero > 0) { // "hozzaadhato", so only add if positive
+            damageModifier += tulajdonsagModositok.t_ero
+        }
+        if (fegyver.Ketkezes) {
+            damageModifier += Math.floor(tulajdonsagModositok.t_ero / 2)
+        }
+        const damage = `${fegyver.NumberOfDamageDice > 1 ? fegyver.NumberOfDamageDice.toString() : ''}d${fegyver.DamageDice}${damageModifier !== 0 ? SignedNumberToText(damageModifier) : ''}`
+        const critStart = fegyver.CritRangeStart - karakter.kalozKritikus.filter(x => x === fegyver.Id).length
+        const crit = `${critStart < 20 ? `${critStart}-20` : '20'} x${fegyver.CritMultiplier}`
+        const range = fegyver.Range === 0 ? '-' : fegyver.Range.toString()
+        return {
+            Name: simplifiedName,
+            TamadoBonusz: tb,
+            Damage: damage,
+            Crit: crit,
+            Range: range,
+        }
     }
 }

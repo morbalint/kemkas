@@ -8,6 +8,7 @@ import {DrawMentok} from "./mentok.pdf";
 import {DrawMagic} from "./magic.pdf";
 import {DrawMasodlagosErtekek} from './masodlagos_ertekek.pdf'
 import {DrawOsztalySpecialsPage} from './osztaly_specials.pdf'
+import {DrawFegyverek} from "./fegyverek.pdf";
 
 function drawBaseInfo(karakter: KarakterPdfView, draw: (text: string, x : number ,y: number, scale: number) => void) {
     draw(karakter.Name, 60, 710, 1)
@@ -73,6 +74,8 @@ export async function CreatePDF(karakter: KarakterPdfView) {
     DrawKepzettsegek(drawText, karakter.TolvajKepzettsegek, nextKepzettsegFrom)
 
     DrawFelszereles(drawText, karakter.Felszereles)
+
+    DrawFegyverek(karakter, pdfFont, fontSizeBase, page)
 
     DrawMagic(page, fontSizeBase, pdfFont, karakter.NapiMemorizalhatoVarazslatok, karakter.VarazslatMentokNF)
 
