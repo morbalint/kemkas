@@ -80,7 +80,9 @@ export async function CreatePDF(karakter: KarakterPdfView) {
     DrawMagic(page, fontSizeBase, pdfFont, karakter.NapiMemorizalhatoVarazslatok, karakter.VarazslatMentokNF)
 
     const secondPage = pdfDoc.addPage()
-    DrawOsztalySpecialsPage(secondPage, pdfFont, karakter)
+    const fontBoldBytes = await fetch('/Merienda-Bold.ttf').then(res => res.arrayBuffer())
+    const fontBold = await pdfDoc.embedFont(fontBoldBytes)
+    DrawOsztalySpecialsPage(secondPage, pdfFont, fontBold, karakter)
 
     const pdfBytes = await pdfDoc.save();
     download(pdfBytes, karakter.Name + ".pdf", "application/pdf");
