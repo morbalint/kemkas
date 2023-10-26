@@ -17,8 +17,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18.x
-        cache: 'npm'
-        cache-dependency-path: frontend/yarn.lock
     - name: Cache NPM packages
       uses: actions/cache@v3
       with:
@@ -57,10 +55,11 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
         push: false
-        tags: kemkas/kemkas
+        load: true
+        tags: kemkas/kemkas:edge
     - name: Tag container image
       run: |
-        docker tag kemkas/kemkas registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8}
+        docker tag kemkas/kemkas:edge registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8}
     - name: Push image to Container Registry
       run: |
         docker push registry.digitalocean.com/kemkas/kemkas:latest
