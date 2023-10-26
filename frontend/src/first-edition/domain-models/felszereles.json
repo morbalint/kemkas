@@ -1,0 +1,419 @@
+{
+  "data": [
+    {
+      "Id": "acel_es_kova",
+      "Name": "Acél és kova",
+      "Type": "simple",
+      "PriceInGold": 0.1
+    },
+    {
+      "Id": "aso",
+      "Name": "Ásó",
+      "Type": "simple",
+      "PriceInGold": 1
+    },
+    {
+      "Id": "vas_bogracs",
+      "Name": "Bogrács, vas",
+      "Type": "simple",
+      "PriceInGold": 0.5
+    },
+    {
+      "Id": "borostomlo",
+      "Name": "Borostömlő",
+      "Type": "simple",
+      "PriceInGold": 1
+    },
+    {
+      "Id": "csakany",
+      "Name": "Csákány",
+      "Type": "simple",
+      "PriceInGold": 5
+    },
+    {
+      "Id": "elelem",
+      "Name": "Élelem, tartós úti, egy napra",
+      "Type": "simple",
+      "PriceInGold": 0.5
+    },
+    {
+      "Id": "faklya",
+      "Name": "Fáklya",
+      "Type": "simple",
+      "PriceInGold": 0.01
+    },
+
+    {
+      "Id": "farud",
+      "Name": "Farúd, 10’",
+      "Type": "simple",
+      "PriceInGold": 0.03
+    },
+    {
+      "Id": "feszitovas",
+      "Name": "Feszítővas",
+      "Type": "simple",
+      "PriceInGold": 2
+    },
+    {
+      "Id": "fustulo",
+      "Name": "Füstölő, rúd",
+      "Type": "simple",
+      "PriceInGold": 1
+    },
+    {
+      "Id": "gyertya_viasz",
+      "Name": "Gyertya, viasz",
+      "Type": "simple",
+      "PriceInGold": 0.1
+    },
+    {
+      "Id": "halasz_halo",
+      "Name": "Háló, halász, 5’*5’",
+      "Type": "simple",
+      "PriceInGold": 4
+    },
+    {
+      "Id": "hatizsak",
+      "Name": "Hátizsák",
+      "Type": "simple",
+      "PriceInGold": 2
+    },
+    {
+      "Id": "hordo_kicsi",
+      "Name": "Hordó, kicsi",
+      "Type": "simple",
+      "PriceInGold": 2
+    },
+    {
+      "Id": "illatszer",
+      "Name": "Illatszer",
+      "Type": "simple",
+      "PriceInGold": 5
+    },
+    {
+      "Id": "kotel_kender_50",
+      "Name": "Kötél, kender, 50’",
+      "Type": "simple",
+      "PriceInGold": 1
+    },
+    {
+      "Id": "kotel_selyem_50",
+      "Name": "Kötél, selyem, 50’",
+      "Type": "simple",
+      "PriceInGold": 10
+    },
+    {
+      "Id": "kreta",
+      "Name": "Kréta",
+      "Type": "simple",
+      "PriceInGold": 0.01
+    },
+    {
+      "Id": "lada_fa_kicsi",
+      "Name": "Láda, fa, kicsi",
+      "Type": "simple",
+      "PriceInGold": 2
+    },
+    {
+      "Id": "lada_fa_nagy",
+      "Name": "Láda, fa, nagy",
+      "Type": "simple",
+      "PriceInGold": 5
+    },
+    {
+      "Id": "lada_vas_kicsi",
+      "Name": "Láda, vas, kicsi",
+      "Type": "simple",
+      "PriceInGold": 9
+    },{
+      "Id": "lada_vas_nagy",
+      "Name": "Láda, vas, nagy",
+      "Type": "simple",
+      "PriceInGold": 28
+    },
+    {
+      "Id": "lakat_egyszeru",
+      "Name": "Lakat, egyszerű",
+      "Type": "simple",
+      "PriceInGold": 20
+    },
+    {
+      "Id": "lakat_kivalo",
+      "Name": "Lakat, kiváló",
+      "Type": "simple",
+      "PriceInGold": 80
+    },
+    {
+      "Id": "olaj_lampa_egyszeru",
+      "Name": "Lámpa, olaj, egyszerű",
+      "Type": "simple",
+      "PriceInGold": 1
+    },
+
+    {
+      "Id": "olaj_lampa_vedett",
+      "Name": "Lámpa, olaj, védett",
+      "Type": "simple",
+      "PriceInGold": 7
+    },
+    {
+      "Id": "olaj_lampa_nagy",
+      "Name": "Lámpa, olaj, nagy",
+      "Type": "simple",
+      "PriceInGold": 12
+    },
+    {
+      "Id": "lanc_10",
+      "Name": "Lánc, 10’",
+      "Type": "simple",
+      "PriceInGold": 10
+    },
+    {
+      "Id": "maszovas",
+      "Name": "Mászóvas",
+      "Type": "simple",
+      "PriceInGold": 1
+    },
+    {
+      "Id": "olaj_palck",
+      "Name": "Olaj, palack",
+      "Type": "simple",
+      "PriceInGold": 1
+    },
+    {
+      "Id": "palack_cserep",
+      "Name": "Palack, cserép",
+      "Type": "simple",
+      "PriceInGold": 0.03
+    },
+    {
+      "Id": "palack_uveg",
+      "Name": "Palack, üveg",
+      "Type": "simple",
+      "PriceInGold": 2
+    },
+    {
+      "Id": "papir",
+      "Name": "Papír, lap",
+      "Type": "simple",
+      "PriceInGold": 0.4
+    },
+    {
+      "Id": "pecsetgyuru",
+      "Name": "Pecsétgyűrű",
+      "Type": "simple",
+      "PriceInGold": 8
+    },
+    {
+      "Id": "pecsetviasz",
+      "Name": "Pecsétviasz",
+      "Type": "simple",
+      "PriceInGold": 1
+    },
+    {
+      "Id": "pergamen",
+      "Name": "Pergamen, lap",
+      "Type": "simple",
+      "PriceInGold": 0.2
+    },
+    {
+      "Id": "sator",
+      "Name": "Sátor",
+      "Type": "simple",
+      "PriceInGold": 10
+    },
+    {
+      "Id": "sav",
+      "Name": "Sav",
+      "Type": "simple",
+      "PriceInGold": 10
+    },
+    {
+      "Id": "szappan",
+      "Name": "Szappan",
+      "Type": "simple",
+      "PriceInGold": 0.5
+    },
+    {
+      "Id": "szentelt_viz",
+      "Name": "Szenteltvíz",
+      "Type": "simple",
+      "PriceInGold": 25
+    },
+    {
+      "Id": "szog",
+      "Name": "Szög",
+      "Type": "simple",
+      "PriceInGold": 0.01
+    },
+    {
+      "Id": "takaro",
+      "Name": "Takaró",
+      "Type": "simple",
+      "PriceInGold": 0.2
+    },
+    {
+      "Id": "tarsoly",
+      "Name": "Tarsoly",
+      "Type": "simple",
+      "PriceInGold": 1
+    },
+    {
+      "Id": "tegez",
+      "Name": "Tegez",
+      "Type": "simple",
+      "PriceInGold": 2
+    },
+    {
+      "Id": "telercstarto",
+      "Name": "Tekercstartó",
+      "Type": "simple",
+      "PriceInGold": 5
+    },
+    {
+      "Id": "tinta",
+      "Name": "Tinta",
+      "Type": "simple",
+      "PriceInGold": 8
+    },
+    {
+      "Id": "tukor",
+      "Name": "Tükör",
+      "Type": "simple",
+      "PriceInGold": 10
+    },
+    {
+      "Id": "uvegcse",
+      "Name": "Üvegcse",
+      "Type": "simple",
+      "PriceInGold": 1
+    },
+    {
+      "Id": "vodor",
+      "Name": "Vödör",
+      "Type": "simple",
+      "PriceInGold": 0.5
+    },
+    {
+      "Id": "zsak",
+      "Name": "Zsák",
+      "Type": "simple",
+      "PriceInGold": 0.1
+    },
+    {
+      "Id": "elokelo_ruha",
+      "Name": "Előkelő",
+      "Type": "clothes",
+      "PriceInGold": 75
+    },
+    {
+      "Id": "elokelo_ruha",
+      "Name": "Előkelő",
+      "Type": "clothes",
+      "PriceInGold": 75
+    },
+    {
+      "Id": "kozrendu_ruha",
+      "Name": "Közrendű",
+      "Type": "clothes",
+      "PriceInGold": 0.1
+    },
+    {
+      "Id": "meleg_ruha",
+      "Name": "Meleg",
+      "Type": "clothes",
+      "PriceInGold": 8
+    },
+    {
+      "Id": "mesterember_ruha",
+      "Name": "Mesterember",
+      "Type": "clothes",
+      "PriceInGold": 1
+    },
+    {
+      "Id": "nagyuri_ruha",
+      "Name": "Nagyúri",
+      "Type": "clothes",
+      "PriceInGold": 200
+    },
+    {
+      "Id": "papi_ruha",
+      "Name": "Papi",
+      "Type": "clothes",
+      "PriceInGold": 5
+    },
+    {
+      "Id": "utazo_ruha",
+      "Name": "Utazó",
+      "Type": "clothes",
+      "PriceInGold": 1
+    },
+    {
+      "Id": "alkimista_labor",
+      "Name": "Alkimista labor",
+      "Type": "special",
+      "PriceInGold": 500
+    },
+    {
+      "Id": "homokora",
+      "Name": "Homokóra",
+      "Type": "special",
+      "PriceInGold": 25
+    },
+    {
+      "Id": "merleg",
+      "Name": "Mérleg",
+      "Type": "special",
+      "PriceInGold": 2
+    },
+    {
+      "Id": "nagyito",
+      "Name": "Nagyító",
+      "Type": "special",
+      "PriceInGold": 100
+    },
+    {
+      "Id": "szent_szimbolum",
+      "Name": "Szent szimbólum",
+      "Type": "special",
+      "PriceInGold": 25
+    },
+    {
+      "Id": "tavcso",
+      "Name": "Távcső",
+      "Type": "special",
+      "PriceInGold": 1000
+    },
+    {
+      "Id": "tolvajszerszamok",
+      "Name": "Tolvajszerszámok",
+      "Type": "special",
+      "PriceInGold": 30
+    },
+    {
+      "Id": "varazskomponens_tarto",
+      "Name": "Varázskomponenstartó",
+      "Type": "special",
+      "PriceInGold": 5
+    },
+    {
+      "Id": "varazskonyv",
+      "Name": "Varázskönyv, üres",
+      "Type": "special",
+      "PriceInGold": 15
+    },
+    {
+      "Id": "vizora",
+      "Name": "Vízóra",
+      "Type": "special",
+      "PriceInGold": 500
+    },
+    {
+      "Id": "zeneszerszam",
+      "Name": "Zeneszerszám, egyszerű",
+      "Type": "special",
+      "PriceInGold": 5
+    }
+  ]
+}

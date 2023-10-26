@@ -1,6 +1,8 @@
 # TODO
 
 ## Fixes
+
+### Frontend
 - Kötelező képezettségek - Birodalmi tolvaj
 - Tolvaj 9.ik szinttől tiltott képzettségek
 - eloholtak eluzese PDF-be!
