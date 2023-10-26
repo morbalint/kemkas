@@ -25,6 +25,7 @@ jobs:
     - name: Cache NPM packages
       uses: actions/cache@v3
       with:
+        key: npm-${{ hashFiles('./frontend/node_modules/package-lock.json') }}
         path: |
           ./frontend/node_modules
         restore-keys: |
