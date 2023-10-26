@@ -28,9 +28,7 @@ jobs:
 
   docker-build:
     runs-on: ubuntu-latest
-    needs:
-      - ci-fe
-
+    
     steps:
     - uses: actions/checkout@v3
     - name: docker build
@@ -46,23 +44,38 @@ jobs:
     - name: Tag container image
       run: |
         docker tag kemkas:${GITHUB_SHA::8} registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8}
-    - name: Tag container image with latest tag
-      if: ${{ github.event_name == 'push' || ( github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged ) }}
-      run: |
-        docker tag kemkas:${GITHUB_SHA::8} registry.digitalocean.com/kemkas/kemkas:latest
     - name: Push image to Container Registry
       run: |
-        docker push --all-tags registry.digitalocean.com/kemkas/kemkas
-    - name: Get container image ID of the images just pushed
-      if: ${{ github.event_name == 'push' || ( github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged ) }}
-      run: |
-        docker images registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8} --format "{{.ID}}"
-        export DOCKER_IMAGE_ID=$(docker images registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8} --format "{{.ID}}")
-        export DOCKER_IMAGE_ID=DO-$DOCKER_IMAGE_ID
-        echo "DOCKER_IMAGE_ID=$DOCKER_IMAGE_ID" >> $GITHUB_ENV
-    - name: Tag commit
-      if: ${{ github.event_name == 'push' || ( github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged ) }}
-      uses: tvdias/github-tagger@v0.0.1
-      with:
-        repo-token: "${{ github.token }}"
-        tag: "${{ env.DOCKER_IMAGE_ID }}"
+        docker push registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: 
+      - ci-fe
+      - docker-build
+    if: ${{ github.event_name == 'push' || ( github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged ) }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_ACCESS_TOKEN }}
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 1200
+      - name: Tag container image with latest tag
+        run: |
+          docker tag registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8} registry.digitalocean.com/kemkas/kemkas:latest
+      - name: Push image to Container Registry
+        run: |
+          docker push registry.digitalocean.com/kemkas/kemkas:latest
+      - name: Get container image ID of the images just pushed
+        run: |
+          docker images registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8} --format "{{.ID}}"
+          export DOCKER_IMAGE_ID=$(docker images registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8} --format "{{.ID}}")
+          export DOCKER_IMAGE_ID=DO-$DOCKER_IMAGE_ID
+          echo "DOCKER_IMAGE_ID=$DOCKER_IMAGE_ID" >> $GITHUB_ENV
+      - name: Tag commit
+        uses: tvdias/github-tagger@v0.0.1
+        with:
+          repo-token: "${{ github.token }}"
+          tag: "${{ env.DOCKER_IMAGE_ID }}"
