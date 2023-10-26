@@ -18,19 +18,12 @@ jobs:
       with:
         node-version: 18.x
     
-    - run: |
+    - name: Yarn
+      run: |
         cd ./frontend
-    - name: install deps
-      run: |
         yarn install --frozen-lockfiles
-    - name: build css files
-      run: |
         ./compile-less.sh
-    - name: unit tests
-      run: |
         yarn test
-    - name: Build
-      run: |
         yarn build
 
   docker-build:
