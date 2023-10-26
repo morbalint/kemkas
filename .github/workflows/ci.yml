@@ -17,11 +17,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18.x
-    
-    - name: Yarn Install
-      run: |
-        cd ./frontend
-        yarn install --frozen-lockfiles
     - name: Cache NPM packages
       uses: actions/cache@v3
       with:
@@ -31,6 +26,10 @@ jobs:
         restore-keys: |
           npm-${{ hashFiles('./frontend/package-lock.json') }}  
           npm-
+    - name: Yarn Install
+      run: |
+        cd ./frontend
+        yarn install --frozen-lockfiles
     - name: Yarn Test
       run: |
         cd ./frontend
