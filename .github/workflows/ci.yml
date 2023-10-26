@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  ci:
+  ci-fe:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,7 +17,9 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18.x
-        
+    
+    - run: |
+        cd ./frontend
     - name: install deps
       run: |
         yarn install --frozen-lockfiles
@@ -39,5 +41,6 @@ jobs:
 
     - name: docker build
       run: |
+        cd ./frontend
         docker build .
   
