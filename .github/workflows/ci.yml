@@ -62,7 +62,7 @@ jobs:
         docker tag kemkas/kemkas:edge registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8}
     - name: Push image to Container Registry
       run: |
-        docker push registry.digitalocean.com/kemkas/kemkas:latest
+        docker push registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8}
 
   deploy:
     runs-on: ubuntu-latest
