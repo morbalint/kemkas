@@ -57,10 +57,10 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
         push: false
-        tags: kemkas:${GITHUB_SHA::8}
+        tags: kemkas/kemkas
     - name: Tag container image
       run: |
-        docker tag kemkas:${GITHUB_SHA::8} registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8}
+        docker tag kemkas:kemkas registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8}
     - name: Push image to Container Registry
       run: |
         docker push registry.digitalocean.com/kemkas/kemkas:latest
