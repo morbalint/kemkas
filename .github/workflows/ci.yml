@@ -44,22 +44,20 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-    - name: docker build
-      run: |
-        cd ./frontend
-        docker build . -t kemkas:${GITHUB_SHA::8}
+    - uses: docker/setup-buildx-action@v3
     - name: Install doctl
       uses: digitalocean/action-doctl@v2
       with:
         token: ${{ secrets.DO_ACCESS_TOKEN }}
     - name: Log in to DigitalOcean Container Registry with short-lived credentials
       run: doctl registry login --expiry-seconds 1200
-    - name: Tag container image
-      run: |
-        docker tag kemkas:${GITHUB_SHA::8} registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8}
-    - name: Push image to Container Registry
-      run: |
-        docker push registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8}
+    - uses: docker/build-push-action@v5
+      with:
+        context: frontend/
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        push: true
+        tags: registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8}
 
   deploy:
     runs-on: ubuntu-latest
