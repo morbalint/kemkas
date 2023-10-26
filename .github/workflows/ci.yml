@@ -17,14 +17,16 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18.x
+        cache: 'npm'
+        cache-dependency-path: frontend/yarn.lock
     - name: Cache NPM packages
       uses: actions/cache@v3
       with:
-        key: npm-${{ hashFiles('./frontend/package-lock.json') }}
+        key: npm-${{ hashFiles('./frontend/yarn.lock') }}
         path: |
           ./frontend/node_modules
         restore-keys: |
-          npm-${{ hashFiles('./frontend/package-lock.json') }}  
+          npm-${{ hashFiles('./frontend/yarn.lock') }}  
           npm-
     - name: Yarn Install
       run: |
