@@ -64,6 +64,7 @@ jobs:
         run: doctl registry login --expiry-seconds 1200
       - name: Tag container image with latest tag
         run: |
+          docker pull registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8}
           docker tag registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8} registry.digitalocean.com/kemkas/kemkas:latest
       - name: Push image to Container Registry
         run: |
