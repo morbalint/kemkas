@@ -18,10 +18,21 @@ jobs:
       with:
         node-version: 18.x
     
-    - name: Yarn
+    - name: Yarn Install
       run: |
         cd ./frontend
         yarn install --frozen-lockfiles
+    - name: Cache NPM packages
+      uses: actions/cache@v3
+      with:
+        path: |
+          ./frontend/node_modules
+        restore-keys: |
+          npm-${{ hashFiles('./frontend/node_modules/package-lock.json') }}  
+          npm-
+    - name: Yarn Test
+      run: |
+        cd ./frontend
         ./compile-less.sh
         yarn test
         yarn build
