@@ -22,17 +22,17 @@ jobs:
       with:
         key: npm-${{ hashFiles('./frontend/yarn.lock') }}
         path: |
-          ./frontend/node_modules
+          ./Kemkas.Web/frontend/node_modules
         restore-keys: |
           npm-${{ hashFiles('./frontend/yarn.lock') }}  
           npm-
     - name: Yarn Install
       run: |
-        cd ./frontend
+        cd ./Kemkas.Web/frontend
         yarn install --frozen-lockfiles
     - name: Yarn Test
       run: |
-        cd ./frontend
+        cd ./Kemkas.Web/frontend
         ./compile-less.sh
         yarn test
         yarn build
@@ -51,7 +51,8 @@ jobs:
       run: doctl registry login --expiry-seconds 1200
     - uses: docker/build-push-action@v5
       with:
-        context: frontend/
+        context: .
+        file: Kemkas.Web/Dockerfile
         cache-from: type=gha
         cache-to: type=gha,mode=max
         push: false
