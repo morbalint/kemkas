@@ -20,11 +20,11 @@ jobs:
     - name: Cache NPM packages
       uses: actions/cache@v3
       with:
-        key: npm-${{ hashFiles('./frontend/yarn.lock') }}
+        key: npm-${{ hashFiles('./Kemkas.Web/frontend/yarn.lock') }}
         path: |
           ./Kemkas.Web/frontend/node_modules
         restore-keys: |
-          npm-${{ hashFiles('./frontend/yarn.lock') }}  
+          npm-${{ hashFiles('./Kemkas.Web/frontend/yarn.lock') }}  
           npm-
     - name: Yarn Install
       run: |
