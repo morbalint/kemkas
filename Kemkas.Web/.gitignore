@@ -233,3 +233,6 @@ _Pvt_Extensions
 
 # temp sqlite db
 /app.db
+
+# local env vars
+.env

@@ -1,31 +1,39 @@
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
+using Kemkas.Web.Config;
 using Microsoft.EntityFrameworkCore;
-using Kemkas.Web.Data;
-using Kemkas.Web.Models;
+using Kemkas.Web.Db;
+using Kemkas.Web.Db.Models;
+using Kemkas.Web.Services.Character;
+using Kemkas.Web.Services.Identity;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
+
+builder.Services.Configure<MailgunOptions>(builder.Configuration.GetSection(MailgunOptions.Section));
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
                        throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(
     options =>
-        options.UseSqlite(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+        options.UseNpgsql(connectionString));
+
+builder.Services.AddDataProtection()
+    .SetApplicationName("kemkas")
+    .PersistKeysToDbContext<ApplicationDbContext>();
+
+builder.Services.AddHttpClient();
+builder.Services.AddSingleton<IEmailSender, MailgunEmailSender>();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddIdentityServer()
-    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
-
-// builder.Services.AddAuthentication()
-//     .AddIdentityServerJwt();
+builder.Services.AddAuthentication();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+builder.Services.AddCharacterServices();
 
 var app = builder.Build();
 
@@ -37,16 +45,20 @@ if (app.Environment.IsDevelopment())
 else
 {
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    app.UseHsts(); // TODO: check if this should be handled by proxy
 }
 
-// app.UseHttpsRedirection(); // reverse proxy should take care of that
+await using (var scope = app.Services.CreateAsyncScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    await db.Database.MigrateAsync();
+}
+
 app.UseStaticFiles();
 app.UseRouting();
 
-// app.UseAuthentication();
-// app.UseIdentityServer();
-// app.UseAuthorization();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",

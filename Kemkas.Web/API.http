@@ -1,0 +1,89 @@
+GET https://localhost:7251/WeatherForecast
+
+###
+
+# Simple character
+
+POST https://localhost:7251/Character
+Content-Type: application/json
+
+{
+  "name": "Névtelen Kalandozó",
+  "faj": "f_ember",
+  "kor": 20,
+  "jellem": "S",
+  "tulajdonsagok": {
+    "t_ero": 10,
+    "t_ugy": 10,
+    "t_egs": 10,
+    "t_int": 10,
+    "t_bol": 10,
+    "t_kar": 10
+  },
+  "osztaly": "o_kaloz",
+  "kepzettsegek": ["k_allatidomitas", "k_eloadas", "k_ertekbecsles", "k_gyogyitas"],
+  "Tolvajkepzettsegek": [],
+  "szint": 1,
+  "hpRolls": [],
+  "tulajdonsagNovelesek": [],
+  "harcosSpecializaciok": [],
+  "kalozKritikus": [],
+  "felszereles": {
+    "fegyverIDk": []
+  }
+}
+
+### Get simple character
+
+GET https://localhost:7251/Character/f43aecb5-c247-4d3f-a31b-c886cfeae54b
+Accept: application/json
+
+### Complex character
+
+POST https://localhost:7251/Character
+Content-Type: application/json
+
+{
+  "name": "Névtelen Kalandozó",
+  "faj": "f_ember",
+  "kor": 20,
+  "jellem": "S",
+  "tulajdonsagok": {
+    "t_ero": 12,
+    "t_ugy": 15,
+    "t_egs": 14,
+    "t_int": 11,
+    "t_bol": 8,
+    "t_kar": 11
+  },
+  "osztaly": "o_harcos",
+  "kepzettsegek": [
+    "k_allatidomitas",
+    "k_eloadas",
+    "k_ertekbecsles",
+    "k_gyogyitas"
+  ],
+  "szint": 5,
+  "hpRolls": [
+    9,
+    7,
+    9,
+    4
+  ],
+  "tulajdonsagNovelesek": [
+    "t_egs"
+  ],
+  "harcosSpecializaciok": ["szablya", "csatabard", "fejsze"],
+  "kalozKritikus": [],
+  "felszereles": {
+    "fegyverIDk": ["szablya"],
+    "pancelID": "kivert_bor",
+    "pajzsID": "nagy_fa"
+  }
+}
+
+### Get complex character
+
+GET https://localhost:7251/Character/a448f4d6-7a61-46a5-9453-c58093c58bd1
+Accept: application/json
+
