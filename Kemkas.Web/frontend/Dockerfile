@@ -1,4 +1,4 @@
-FROM node as builder
+FROM node:21.4-bookworm as builder
 
 WORKDIR "/src"
 
@@ -11,7 +11,7 @@ COPY . .
 RUN ./compile-less.sh
 RUN yarn build
 
-FROM nginx as proxy
+FROM nginx:latest as proxy
 
 # COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder "/src/build" "/usr/share/nginx/html"

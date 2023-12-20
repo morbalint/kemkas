@@ -1,9 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Kemkas.Web.Db.Models;
-using Kemkas.Web.Services;
 using Kemkas.Web.Services.Character;
 using Kemkas.Web.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kemkas.Web.Controllers;
@@ -20,6 +18,10 @@ public class CharacterController(
     [HttpPost]
     public async Task<ActionResult<Guid>> StoreNewCharacter([FromBody] CharacterDto dto)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
         var errors = validationService.Validate(dto);
         if (errors != null)
         {

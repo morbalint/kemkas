@@ -28,6 +28,7 @@ import HarcosFegyverSpecializacio from "../components/HarcosFegyverSpecializacio
 import Felszereles from '../components/Felszereles';
 import { KarakterFelszereles } from '../domain-models/felszereles';
 import {Faro} from "@grafana/faro-web-sdk";
+import {StoreNewCharacter} from "../api/character.api";
 
 function CreateCharacterPage(props: {faro?: Faro}) {
     const {faro} = props
@@ -56,33 +57,34 @@ function CreateCharacterPage(props: {faro?: Faro}) {
                 <h1>Karakter létrehozása</h1>
             </div>
             <div className='p-3'>
-                <form onSubmit={ async (event) => event.preventDefault() }>
+                <form onSubmit={async (event) => event.preventDefault()}>
                     <div className='row'>
                         <h5 className='col align-self-center'>Származás</h5>
                     </div>
                     <div className='row m-2'>
-                        <label className='col-md-2 col-sm-3 col-form-label' >Név</label>
+                        <label className='col-md-2 col-sm-3 col-form-label'>Név</label>
                         <input className='col form-control'
                                value={karakter.name}
                                onChange={(e) => changeKarakter({...karakter, name: e.target.value})}/>
                         {!karakter.name && <span className='form-field-error'>A karaktered nem mászkálhat névtelenül a világban!</span>}
                     </div>
                     <div className='row m-2'>
-                        <label className='col-md-2 col-sm-3 col-form-label' >Nem</label>
+                        <label className='col-md-2 col-sm-3 col-form-label'>Nem</label>
                         <input className='col form-control'
                                value={karakter.nem}
                                onChange={(e) => changeKarakter({...karakter, nem: e.target.value})}/>
                     </div>
                     <div className='row m-2'>
-                        <label className='col-md-2 col-sm-3 col-form-label' >Kor</label>
+                        <label className='col-md-2 col-sm-3 col-form-label'>Kor</label>
                         <input className='col form-control'
                                value={karakter.kor}
                                type={"number"}
                                onChange={(e) => changeKarakter({...karakter, kor: Number(e.target.value)})}/>
                     </div>
-                    <JellemSelector selected={karakter.jellem} changeJellem={(val) => changeKarakter({...karakter, jellem: val})} />
+                    <JellemSelector selected={karakter.jellem}
+                                    changeJellem={(val) => changeKarakter({...karakter, jellem: val})}/>
                     <div className='row m-2'>
-                        <label className='col-md-2 col-sm-3 col-form-label' >Választott istenség</label>
+                        <label className='col-md-2 col-sm-3 col-form-label'>Választott istenség</label>
                         <input className='col form-control'
                                value={karakter.isten}
                                onChange={(e) => changeKarakter({...karakter, isten: e.target.value})}/>
@@ -95,9 +97,12 @@ function CreateCharacterPage(props: {faro?: Faro}) {
                     <Tulajdonsagok
                         currentFaj={karakter.faj}
                         tulajdonsagok={karakter.tulajdonsagok}
-                        changeTulajdonsagok={(tul: KarakterTulajdonsagok) => changeKarakter({...karakter, tulajdonsagok: tul})}
+                        changeTulajdonsagok={(tul: KarakterTulajdonsagok) => changeKarakter({
+                            ...karakter,
+                            tulajdonsagok: tul
+                        })}
                     />
-                    <hr />
+                    <hr/>
                     <div className='row'>
                         <h5 className='col align-self-center'>Tanult</h5>
                     </div>
@@ -116,7 +121,10 @@ function CreateCharacterPage(props: {faro?: Faro}) {
                             <HarcosFegyverSpecializacio
                                 specialization={karakter.harcosSpecializaciok[0]}
                                 existingSpecializations={karakter.harcosSpecializaciok}
-                                changeSpecialization={(spec: string) => changeKarakter({...karakter, harcosSpecializaciok: [spec, ...karakter.harcosSpecializaciok.slice(1)]})}
+                                changeSpecialization={(spec: string) => changeKarakter({
+                                    ...karakter,
+                                    harcosSpecializaciok: [spec, ...karakter.harcosSpecializaciok.slice(1)]
+                                })}
                                 szint={1}
                             />
                         </div>}
@@ -129,34 +137,49 @@ function CreateCharacterPage(props: {faro?: Faro}) {
                         changeTolvajKepzettsegek={changeTolvajKepzettseg}
                     />
 
-                    <hr />
-                    <MasodlagosErtekek {...CalculateMasodlagosErtekek({...karakter, tulajdonsagok: tulajdonsagokFajjal, szint: 1, hpRolls: []})} />
+                    <hr/>
+                    <MasodlagosErtekek {...CalculateMasodlagosErtekek({
+                        ...karakter,
+                        tulajdonsagok: tulajdonsagokFajjal,
+                        szint: 1,
+                        hpRolls: []
+                    })} />
 
-                    <hr />
+                    <hr/>
 
-                    <LevelUps key={'level-ups'} karakter={karakter} changeKarakter={changeKarakter} />
+                    <LevelUps key={'level-ups'} karakter={karakter} changeKarakter={changeKarakter}/>
 
-                    {karakter.szint > 1 &&  <hr />}
+                    {karakter.szint > 1 && <hr/>}
                     <div className='d-grid gap-2 m-5'>
-                        {canLevelUp && <button className='btn btn-dark btn-lg' type='button' onClick={levelUp}>Szintlépés! ⇧</button> }
+                        {canLevelUp &&
+                            <button className='btn btn-dark btn-lg' type='button' onClick={levelUp}>Szintlépés!
+                                ⇧</button>}
                         {!canLevelUp && karakter.szint < 10 &&
                             <Card className='col text-center p-3'>Elérted a fajod szint limitjét</Card>}
-                        {karakter.szint > 1 && <button className='btn btn-dark btn-lg' type='button' onClick={levelDown}>Visszalépés! ⇩</button> }
+                        {karakter.szint > 1 &&
+                            <button className='btn btn-dark btn-lg' type='button' onClick={levelDown}>Visszalépés!
+                                ⇩</button>}
                     </div>
 
 
-                    <hr />
+                    <hr/>
 
-                    <Felszereles osztaly={karakter.osztaly} felszereles={karakter.felszereles} changeFelszereles={setFelszereles} harcosSpec={karakter.harcosSpecializaciok} />
+                    <Felszereles osztaly={karakter.osztaly} felszereles={karakter.felszereles}
+                                 changeFelszereles={setFelszereles} harcosSpec={karakter.harcosSpecializaciok}/>
 
                     <div className='d-grid gap-2 m-5'>
+                        <button className='btn btn-danger btn-lg' type='button' onClick={async () => {
+                            await StoreNewCharacter(karakter)
+                        }}>Mentés
+                        </button>
                         <button className='btn btn-danger btn-lg' type='button' onClick={async () => {
                             faro?.api.pushEvent('character_created', {
                                 osztaly: karakter.osztaly,
                                 szint: karakter.szint.toString()
                             })
                             await CreatePDF(KarakterInputToPdfView(karakter))
-                        }}>Létrehozás</button>
+                        }}>PDF
+                        </button>
                     </div>
                 </form>
             </div>

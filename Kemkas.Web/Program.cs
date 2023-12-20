@@ -1,3 +1,5 @@
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 using Kemkas.Web.Config;
 using Microsoft.EntityFrameworkCore;
 using Kemkas.Web.Db;
@@ -30,7 +32,11 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 
 builder.Services.AddAuthentication();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.AllowTrailingCommas = true;
+    options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
+});
 builder.Services.AddRazorPages();
 
 builder.Services.AddCharacterServices();
@@ -53,6 +59,8 @@ await using (var scope = app.Services.CreateAsyncScope())
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     await db.Database.MigrateAsync();
 }
+
+app.UseForwardedHeaders();
 
 app.UseStaticFiles();
 app.UseRouting();
