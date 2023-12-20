@@ -17,23 +17,29 @@ import {
     SetDefaultTolvajKepzettsegek,
 } from "../domain-models/kepzettsegek";
 import {CreatePDF} from "../pdf/character.pdf";
-import {KarakterDefaults} from "../domain-models/karakter";
+import {KarakterDefaults, KarakterInputs} from "../domain-models/karakter";
 import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
 import {KarakterInputToPdfView} from "../pdf/karakter_pdf_view";
 import JellemSelector from "../components/JellemSelector";
 import {CanLevelUp, LevelDown, LevelUp} from "../domain-models/level";
-import {Card} from "react-bootstrap";
+import {Card, OverlayTrigger} from "react-bootstrap";
 import LevelUps from "../components/LevelUps";
 import HarcosFegyverSpecializacio from "../components/HarcosFegyverSpecializacio";
 import Felszereles from '../components/Felszereles';
 import { KarakterFelszereles } from '../domain-models/felszereles';
 import {Faro} from "@grafana/faro-web-sdk";
 import {StoreNewCharacter} from "../api/character.api";
+import {useLoaderData} from "react-router-dom";
+import saveOverlayTooltip from "../components/SaveOverlayTooltip";
 
-function CreateCharacterPage(props: {faro?: Faro}) {
+function CreateCharacterPage(props: {
+    faro?: Faro,
+}) {
     const {faro} = props
 
-    let [karakter, changeKarakter] = useState(KarakterDefaults)
+    const initialKarakterInputs = useLoaderData() as KarakterInputs;
+
+    let [karakter, changeKarakter] = useState(initialKarakterInputs ?? KarakterDefaults)
 
     const tulajdonsagokFajjal = TulajdonsagokFajjal(karakter.tulajdonsagok, karakter.faj)
 
@@ -49,7 +55,6 @@ function CreateCharacterPage(props: {faro?: Faro}) {
     const levelDown = () => LevelDown(karakter, changeKarakter)
 
     const canLevelUp = CanLevelUp(karakter)
-
 
     return (
         <div>
@@ -167,19 +172,37 @@ function CreateCharacterPage(props: {faro?: Faro}) {
                     <Felszereles osztaly={karakter.osztaly} felszereles={karakter.felszereles}
                                  changeFelszereles={setFelszereles} harcosSpec={karakter.harcosSpecializaciok}/>
 
-                    <div className='d-grid gap-2 m-5'>
-                        <button className='btn btn-danger btn-lg' type='button' onClick={async () => {
-                            await StoreNewCharacter(karakter)
-                        }}>Mentés
-                        </button>
-                        <button className='btn btn-danger btn-lg' type='button' onClick={async () => {
-                            faro?.api.pushEvent('character_created', {
-                                osztaly: karakter.osztaly,
-                                szint: karakter.szint.toString()
-                            })
-                            await CreatePDF(KarakterInputToPdfView(karakter))
-                        }}>PDF
-                        </button>
+                    <div className="row">
+                        <div className="col-6">
+                            <div className='d-grid gap-2 m-5'>
+                                <OverlayTrigger placement='top' overlay={saveOverlayTooltip} delay={0} defaultShow={false} flip={false}>
+                                <button className='btn btn-danger btn-lg' type='button' onClick={async () => {
+                                    faro?.api.pushEvent('public_character_stored', {
+                                        osztaly: karakter.osztaly,
+                                        szint: karakter.szint.toString()
+                                    })
+                                    let newId = await StoreNewCharacter(karakter)
+                                    const win = window.open(`/${newId}`, '_blank');
+                                    if (win != null) {
+                                        win.focus();
+                                    }
+                                }}>Mentés
+                                </button>
+                                </OverlayTrigger>
+                            </div>
+                        </div>
+                        <div className="col-6">
+                            <div className='d-grid gap-2 m-5'>
+                                <button className='btn btn-danger btn-lg' type='button' onClick={async () => {
+                                    faro?.api.pushEvent('character_created', {
+                                        osztaly: karakter.osztaly,
+                                        szint: karakter.szint.toString()
+                                    })
+                                    await CreatePDF(KarakterInputToPdfView(karakter))
+                                }}>PDF
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

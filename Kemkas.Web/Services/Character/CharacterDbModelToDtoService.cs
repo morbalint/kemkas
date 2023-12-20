@@ -24,12 +24,12 @@ public class CharacterDbModelToDtoService : ICharacterDbModelToDtoService
             Osztaly = entity.Osztaly.Convert(),
             Tulajdonsagok = new KarakterTulajdonsagokDto
             {
-                T_Ero = entity.Ero,
-                T_Ugy = entity.Ugyesseg,
-                T_Egs = entity.Egeszseg,
-                T_Int = entity.Intelligencia,
-                T_Bol = entity.Bolcsesseg,
-                T_Kar = entity.Karizma,
+                Ero = entity.Ero,
+                Ugy = entity.Ugyesseg,
+                Egs = entity.Egeszseg,
+                Int = entity.Intelligencia,
+                Bol = entity.Bolcsesseg,
+                Kar = entity.Karizma,
             },
             Kepzettsegek = entity.KarakterKepzettsegek.Where(x => !x.IsTolvajKepzettseg).Select(x => x.Kepzettseg.Convert()).ToList(),
             Tolvajkepzettsegek = entity.KarakterKepzettsegek.Where(x => x.IsTolvajKepzettseg).Select(x => x.Kepzettseg.Convert()).ToList(),

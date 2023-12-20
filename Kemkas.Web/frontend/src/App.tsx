@@ -10,6 +10,11 @@ function App(props: {faro?: Faro}) {
             path: "/",
             element: <CreateCharacter faro={props.faro} />,
         },
+        {
+            path: "/:id",
+            element: <CreateCharacter faro={props.faro} />,
+            loader: args => fetch(`/Character/${args.params.id}`)
+        }
     ]);
 
     return (

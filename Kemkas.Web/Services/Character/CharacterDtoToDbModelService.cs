@@ -23,12 +23,12 @@ public class CharacterDtoToDbModelService : ICharacterDtoToDbModelService
             Isten = dto.Isten,
             Faj = FajExtensions.Convert(dto.Faj),
             Osztaly = OsztalyExtensions.Convert(dto.Osztaly),
-            Ero = dto.Tulajdonsagok.T_Ero,
-            Ugyesseg = dto.Tulajdonsagok.T_Ugy,
-            Egeszseg = dto.Tulajdonsagok.T_Egs,
-            Intelligencia = dto.Tulajdonsagok.T_Int,
-            Bolcsesseg = dto.Tulajdonsagok.T_Bol,
-            Karizma = dto.Tulajdonsagok.T_Kar,
+            Ero = dto.Tulajdonsagok.Ero,
+            Ugyesseg = dto.Tulajdonsagok.Ugy,
+            Egeszseg = dto.Tulajdonsagok.Egs,
+            Intelligencia = dto.Tulajdonsagok.Int,
+            Bolcsesseg = dto.Tulajdonsagok.Bol,
+            Karizma = dto.Tulajdonsagok.Kar,
             Szint = dto.Szint,
         };
         karakter.KarakterKepzettsegek = ConvertKepzettsegek(dto, karakter);
