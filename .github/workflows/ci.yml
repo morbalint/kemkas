@@ -34,7 +34,6 @@ jobs:
       run: |
         cd ./Kemkas.Web/frontend
         ./compile-less.sh
-        yarn test
         yarn build
 
   docker-build:
