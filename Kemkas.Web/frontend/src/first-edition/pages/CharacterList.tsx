@@ -25,8 +25,8 @@ function CharacterList(props: {faro?: Faro}) {
             </thead>
             <tbody>
             {characters.map(c => (
-                <tr>
-                    <CharacterListItem character={c} key={c.id}/>
+                <tr key={c.id}>
+                    <CharacterListItem character={c}/>
                 </tr>
             ))}
             </tbody>
