@@ -59,7 +59,7 @@ function CreateCharacterPage(props: {
     return (
         <div>
             <div className='container-fluid p-5 bg-black text-white text-center'>
-                <h1>Karakter létrehozása</h1>
+                <h1>Karakter {initialKarakterInputs ? "szerkesztése*" : "létrehozása"}</h1>
             </div>
             <div className='p-3'>
                 <form onSubmit={async (event) => event.preventDefault()}>
@@ -179,7 +179,8 @@ function CreateCharacterPage(props: {
                                 <button className='btn btn-danger btn-lg' type='button' onClick={async () => {
                                     faro?.api.pushEvent('public_character_stored', {
                                         osztaly: karakter.osztaly,
-                                        szint: karakter.szint.toString()
+                                        szint: karakter.szint.toString(),
+                                        faj: karakter.faj.toString(),
                                     })
                                     let newId = await StoreNewCharacter(karakter)
                                     const win = window.open(`/${newId}`, '_blank');
@@ -196,7 +197,8 @@ function CreateCharacterPage(props: {
                                 <button className='btn btn-danger btn-lg' type='button' onClick={async () => {
                                     faro?.api.pushEvent('character_created', {
                                         osztaly: karakter.osztaly,
-                                        szint: karakter.szint.toString()
+                                        szint: karakter.szint.toString(),
+                                        faj: karakter.faj.toString(),
                                     })
                                     await CreatePDF(KarakterInputToPdfView(karakter))
                                 }}>PDF

@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using Kemkas.Web.Db.Models;
 using Kemkas.Web.Services.Character;
 using Kemkas.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kemkas.Web.Controllers;
@@ -16,7 +17,7 @@ public class CharacterController(
     : ControllerBase
 {
     [HttpPost]
-    public async Task<ActionResult<Guid>> StoreNewCharacter([FromBody] CharacterDto dto)
+    public async Task<ActionResult<Guid>> StoreNewCharacter([FromBody] CharacterDto dto, bool isPublic = true)
     {
         if (!ModelState.IsValid)
         {
@@ -51,5 +52,12 @@ public class CharacterController(
         }
 
         return dbModelToDtoService.Convert(entity);
+    }
+    
+    [HttpGet]
+    [Authorize]
+    public async Task<List<CharacterListItemDto>> GetAllCharacters()
+    {
+        return await persistenceService.GetAllCharactersOfUser();
     }
 }
