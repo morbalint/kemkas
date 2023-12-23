@@ -17,7 +17,7 @@ function App(props: {faro?: Faro}) {
         },
         {
             path: "/karaktereim",
-            element: <CharacterList faro={props.faro} />,
+            element: <CharacterList />,
             loader: () => fetch(`api/Character`),
             ErrorBoundary: ErrorBoundary,
         },

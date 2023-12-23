@@ -1,10 +1,8 @@
 import * as React from "react";
 import {useLoaderData} from "react-router-dom";
 import CharacterListItem, {CharacterListItemDto} from "../components/CharacterListItem";
-import {Faro} from "@grafana/faro-web-sdk";
 
-function CharacterList(props: {faro?: Faro}) {
-    const {faro} = props
+function CharacterList(props: {}) {
     const characters = useLoaderData() as CharacterListItemDto[];
 
     return <div className="container">
