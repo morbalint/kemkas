@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import { getWebInstrumentations, initializeFaro } from '@grafana/faro-web-sdk';
 
 const faro = window.location.hostname === 'localhost' ? undefined : initializeFaro({

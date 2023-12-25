@@ -1,12 +1,7 @@
 import * as React from "react";
-import axios from "axios";
 import {useState} from "react";
 
 type LoadingState = "not-started" | "loading" | "finished"
-
-function logout() {
-    return axios.post("/Identity/Account/Logout?returnUrl=%2F")
-}
 
 function Header(props: {}) {
     
