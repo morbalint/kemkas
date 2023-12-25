@@ -38,7 +38,7 @@ public class CharacterController(
         {
             return BadRequest(ex.Message);
         }
-        var id = await persistenceService.StoreNewCharacter(model);
+        var id = await persistenceService.StoreNewCharacter(model, isPublic);
         return id;
     }
 
@@ -52,6 +52,32 @@ public class CharacterController(
         }
 
         return dbModelToDtoService.Convert(entity);
+    }
+    
+    [HttpPost("{id:guid}")]
+    public async Task<ActionResult<Guid>> UpdateCharacter([FromRoute] Guid id, [FromBody] CharacterDto dto, bool isPublic = true)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        var errors = validationService.Validate(dto);
+        if (errors != null)
+        {
+            return BadRequest(errors);
+        }
+
+        var original = await persistenceService.GetCharacterById(id, tracking: true);
+        if (original is null)
+        {
+            return NotFound();
+        }
+        
+        dtoToDbModelService.Update(original, dto);
+
+        await persistenceService.UpdateCharacter(original, isPublic);
+
+        return id;
     }
     
     [HttpGet]

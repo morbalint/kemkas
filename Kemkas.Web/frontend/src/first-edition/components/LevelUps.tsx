@@ -34,7 +34,7 @@ function LevelUp(props: {
     const kritIndex = kalozKritIndex(szint)
     const krit = karakter.kalozKritikus[kritIndex]
 
-    return <div key={`level-up-${szint}`}>
+    return <div>
         <div className='row mt-3'>
             <h5 className='col align-self-center'>{szint}. Szint</h5>
         </div>
@@ -87,8 +87,10 @@ export function LevelUps(props: {karakter: KarakterInputs, changeKarakter: (inpu
         changeKarakter({...karakter, kalozKritikus: arraySetN(karakter.kalozKritikus, kalozKritIndex(szint), krit)})
     }
 
+    const levels = karakter.hpRolls.map((_, i) => i+2); 
+    
     return <>
-        {karakter.hpRolls.map((_, i) => i+2).map(szint => <>
+        {levels.map(szint =>
             <LevelUp
                 key={`level-up-${szint}`}
                 szint={szint}
@@ -98,7 +100,6 @@ export function LevelUps(props: {karakter: KarakterInputs, changeKarakter: (inpu
                 changeHarcosSpec={changeHarcosSpecializacioAtSzint(szint)}
                 changeKalozKritikus={changeKalozKritikusAtSzint(szint)}
             />
-            </>
         )}
     </>
 }

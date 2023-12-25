@@ -22,14 +22,14 @@ import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
 import {KarakterInputToPdfView} from "../pdf/karakter_pdf_view";
 import JellemSelector from "../components/JellemSelector";
 import {CanLevelUp, LevelDown, LevelUp} from "../domain-models/level";
-import {Card, OverlayTrigger} from "react-bootstrap";
+import {Card, OverlayTrigger, Toast, ToastContainer} from "react-bootstrap";
 import LevelUps from "../components/LevelUps";
 import HarcosFegyverSpecializacio from "../components/HarcosFegyverSpecializacio";
 import Felszereles from '../components/Felszereles';
 import { KarakterFelszereles } from '../domain-models/felszereles';
 import {Faro} from "@grafana/faro-web-sdk";
-import {StoreNewCharacter} from "../api/character.api";
-import {useLoaderData} from "react-router-dom";
+import {StoreNewCharacter, UpdateCharacter} from "../api/character.api";
+import {useLoaderData, useParams} from "react-router-dom";
 import saveOverlayTooltip from "../components/SaveOverlayTooltip";
 
 function CreateCharacterPage(props: {
@@ -38,6 +38,7 @@ function CreateCharacterPage(props: {
     const {faro} = props
 
     const initialKarakterInputs = useLoaderData() as KarakterInputs;
+    const { id } = useParams();
 
     let [karakter, changeKarakter] = useState(initialKarakterInputs ?? KarakterDefaults)
 
@@ -55,12 +56,21 @@ function CreateCharacterPage(props: {
     const levelDown = () => LevelDown(karakter, changeKarakter)
 
     const canLevelUp = CanLevelUp(karakter)
+    
+    let [showSaved, setShowSaved] = useState(false);
+    
+     const hideSaved = () => setShowSaved(false);
 
     return (
         <div>
             <div className='container-fluid p-5 bg-black text-white text-center'>
-                <h1>Karakter {initialKarakterInputs ? "szerkesztése*" : "létrehozása"}</h1>
+                <h1>Karakter {initialKarakterInputs ? "szerkesztése" : "létrehozása"}</h1>
             </div>
+            <ToastContainer className="position-fixed" position="top-end">
+                <Toast show={showSaved} onClose={hideSaved} bg="success">
+                    <Toast.Header><strong>Karakter mentve!</strong></Toast.Header>
+                </Toast>
+            </ToastContainer>
             <div className='p-3'>
                 <form onSubmit={async (event) => event.preventDefault()}>
                     <div className='row'>
@@ -182,10 +192,18 @@ function CreateCharacterPage(props: {
                                         szint: karakter.szint.toString(),
                                         faj: karakter.faj.toString(),
                                     })
-                                    let newId = await StoreNewCharacter(karakter)
-                                    const win = window.open(`/${newId}`, '_blank');
-                                    if (win != null) {
-                                        win.focus();
+                                    if (id == null) {
+                                        let newId = await StoreNewCharacter(karakter);
+                                        const win = window.open(`/${newId}`, '_blank');
+                                        if (win != null) {
+                                            win.focus();
+                                        }
+                                    } else {
+                                        await UpdateCharacter(id, karakter);
+                                        setShowSaved(true);
+                                        setTimeout(() => {
+                                            hideSaved();
+                                        }, 5000)
                                     }
                                 }}>Mentés
                                 </button>

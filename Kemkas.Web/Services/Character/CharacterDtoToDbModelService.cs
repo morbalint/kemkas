@@ -8,6 +8,8 @@ namespace Kemkas.Web.Services.Character;
 public interface ICharacterDtoToDbModelService
 {
     public V1Karakter Convert(CharacterDto dto);
+
+    public void Update(V1Karakter original, CharacterDto dto);
 }
 
 public class CharacterDtoToDbModelService : ICharacterDtoToDbModelService
@@ -43,6 +45,34 @@ public class CharacterDtoToDbModelService : ICharacterDtoToDbModelService
         karakter.Szintlepesek = ConvertSzintLepes(dto, karakter);
         
         return karakter;
+    }
+
+    public void Update(V1Karakter original, CharacterDto dto)
+    {
+        original.Nev = dto.Name;
+        original.Nem = dto.Nem;
+        original.Kor = dto.Kor;
+        original.Jellem = JellemExtensions.Convert(dto.Jellem);
+        original.Isten = dto.Isten;
+        original.Faj = FajExtensions.Convert(dto.Faj);
+        original.Osztaly = OsztalyExtensions.Convert(dto.Osztaly);
+        original.Ero = dto.Tulajdonsagok.Ero;
+        original.Ugyesseg = dto.Tulajdonsagok.Ugy;
+        original.Egeszseg = dto.Tulajdonsagok.Egs;
+        original.Intelligencia = dto.Tulajdonsagok.Int;
+        original.Bolcsesseg = dto.Tulajdonsagok.Bol;
+        original.Karizma = dto.Tulajdonsagok.Kar;
+        original.Szint = dto.Szint;
+        original.Pajzs = dto.Felszereles.PajzsId;
+        original.Pancel = dto.Felszereles.PancelId;
+        original.KarakterKepzettsegek = ConvertKepzettsegek(dto, original);
+        original.Felszereles = dto.Felszereles.FegyverIds.Select(x => new V1Felszereles
+        {
+            Karakter = original,
+            IsFegyver = true,
+            Name = x,
+        }).ToList();
+        original.Szintlepesek = ConvertSzintLepes(dto, original);
     }
 
     // TODO: this is unnecessary duplication of business logic!!
