@@ -33,7 +33,13 @@ builder.Services.AddSingleton<IEmailSender, MailgunEmailSender>();
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddAuthentication();
+builder.Services.AddAuthentication()
+    .AddGoogle(options =>
+    {
+        var googleAuthNSection = builder.Configuration.GetSection("Authentication:Google");
+        options.ClientId = googleAuthNSection["ClientId"];
+        options.ClientSecret = googleAuthNSection["ClientSecret"];
+    });
 
 builder.Services.AddControllersWithViews().AddJsonOptions(options =>
 {
