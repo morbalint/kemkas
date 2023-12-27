@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Kemkas.Web.Areas.Identity.Pages.Account
 {
+    [IgnoreAntiforgeryToken(Order = 1001)]
     public class LogoutModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;

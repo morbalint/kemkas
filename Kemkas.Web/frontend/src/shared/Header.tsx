@@ -1,7 +1,14 @@
 import * as React from "react";
 import {useState} from "react";
+import axios from "axios";
+import {Container, Nav, Navbar} from "react-bootstrap";
 
 type LoadingState = "not-started" | "loading" | "finished"
+
+async function logout() {
+    await axios.post("/Identity/Account/Logout")
+    document.location.reload()
+} 
 
 function Header(props: {}) {
     
@@ -19,42 +26,39 @@ function Header(props: {}) {
             })
             .finally(() => setLoading("finished"))
     }
-
+    
     return <header>
-        <nav
-            className="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div className="container ps-4 pe-4">
-                <a className="navbar-brand" href={userName == null ? "/" : "/karaktereim"}>Kemkas</a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                {loading !== "finished" ? "Loading..." :
-                    userName == null
-                        ? <div className="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                            <ul className="navbar-nav">
-                                <li className="nav-item">
-                                    <a className="nav-link text-dark" href="/Identity/Account/Register">Register</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link text-dark" href="/Identity/Account/Login">Login</a>
-                                </li>
-                            </ul>
-                        </div>
-                        : <div className="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                            <ul className="navbar-nav">
-                                <li className="nav-item">
-                                    <a className="nav-link text-dark" href="/Identity/Account/Manage">Hello {userName}!</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link text-dark" href="/Identity/Account/Logout">Logout</a>
-                                </li>
-                            </ul>
-                        </div>
-                }
-            </div>
-        </nav>
+        <Navbar expand="sm" className="navbar-light bg-white border-bottom box-shadow mb-3">
+            <Container className="ps-4 pe-4">
+                <Navbar.Brand href="/">Kemkas</Navbar.Brand>
+                <Nav.Link className="text-dark" href="/karaktereim">Karaktereim</Nav.Link>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav" className="d-sm-inline-flex flex-sm-row-reverse">
+                    <Nav>
+                        {loading !== "finished" ? "Loading..." :
+                            userName == null
+                                ? <>
+                                    <li className="nav-item">
+                                        <a className="nav-link text-dark" href="/Identity/Account/Register">Register</a>
+                                    </li>
+                                    <li className="nav-item">
+                                        <a className="nav-link text-dark" href="/Identity/Account/Login">Login</a>
+                                    </li>
+                                </>
+                                : <>
+                                    <li className="nav-item">
+                                        <a className="nav-link text-dark"
+                                           href="/Identity/Account/Manage">Hello {userName}!</a>
+                                    </li>
+                                    <li className="nav-item">
+                                        <button className="nav-link nav text-dark" onClick={logout}>Logout</button>
+                                    </li>
+                                </>
+                        }
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     </header>
 }
 
