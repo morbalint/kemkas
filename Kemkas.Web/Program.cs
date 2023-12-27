@@ -1,3 +1,4 @@
+using System.Net;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using Kemkas.Web.Config;
@@ -7,7 +8,9 @@ using Kemkas.Web.Db.Models;
 using Kemkas.Web.Services.Character;
 using Kemkas.Web.Services.Identity;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using IPNetwork = Microsoft.AspNetCore.HttpOverrides.IPNetwork;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -42,11 +45,21 @@ builder.Services.AddRazorPages();
 builder.Services.AddCharacterServices();
 
 var app = builder.Build();
+app.UsePathBase("/api");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseForwardedHeaders(new ForwardedHeadersOptions
+    {
+        ForwardedForHeaderName = "X-Forwarded-For",
+        ForwardedHostHeaderName = "X-Forwarded-Host",
+        ForwardedProtoHeaderName = "X-Forwarded-Proto",
+        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedHost | ForwardedHeaders.XForwardedProto,
+        KnownNetworks = { new IPNetwork(new IPAddress([0,0,0,0]), 0) }
+    });
     app.UseMigrationsEndPoint();
+    app.UseDeveloperExceptionPage();
 }
 else
 {
@@ -60,8 +73,6 @@ await using (var scope = app.Services.CreateAsyncScope())
     await db.Database.MigrateAsync();
 }
 
-app.UseForwardedHeaders();
-
 app.UseStaticFiles();
 app.UseRouting();
 
@@ -70,7 +81,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "/api/{controller}/{action=Index}/{id?}");
+    pattern: "/{controller}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.MapFallbackToFile("index.html");

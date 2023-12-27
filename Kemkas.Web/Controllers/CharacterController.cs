@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Kemkas.Web.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class CharacterController(
     ICharacterValidationService validationService,
     ICharacterDtoToDbModelService dtoToDbModelService,
