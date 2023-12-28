@@ -2,6 +2,18 @@
   "version": 1,
   "dependencies": {
     "net8.0": {
+      "AspNet.Security.OAuth.Discord": {
+        "type": "Direct",
+        "requested": "[8.0.0, )",
+        "resolved": "8.0.0",
+        "contentHash": "+MtOHPctq1QT1c03h+7g4oBWtZ/buQYUJg4AR0DG+qjmD2cQRMGWXC1J6/ITeCc6xa5BcXzJmt1L/8pVXIB4kw=="
+      },
+      "Microsoft.AspNetCore.Authentication.Facebook": {
+        "type": "Direct",
+        "requested": "[8.0.0, )",
+        "resolved": "8.0.0",
+        "contentHash": "fniH775aegFKKbTGNtbjbczcs/DEEaYo8pSJNHwUoVQKaYgJ7C4YDHo30jeUk1XZrBaksSTEK8NFUmxPWQOBHg=="
+      },
       "Microsoft.AspNetCore.Authentication.Google": {
         "type": "Direct",
         "requested": "[8.0.0, )",

@@ -36,9 +36,21 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 builder.Services.AddAuthentication()
     .AddGoogle(options =>
     {
-        var googleAuthNSection = builder.Configuration.GetSection("Authentication:Google");
-        options.ClientId = googleAuthNSection["ClientId"];
-        options.ClientSecret = googleAuthNSection["ClientSecret"];
+        var section = builder.Configuration.GetSection("Authentication:Google");
+        options.ClientId = section["ClientId"];
+        options.ClientSecret = section["ClientSecret"];
+    })
+    .AddFacebook(options =>
+    {
+        var section = builder.Configuration.GetSection("Authentication:Facebook");
+        options.ClientId = section["ClientId"];
+        options.ClientSecret = section["ClientSecret"];
+    })
+    .AddDiscord(options =>
+    {
+        var section = builder.Configuration.GetSection("Authentication:Discord");
+        options.ClientId = section["ClientId"];
+        options.ClientSecret = section["ClientSecret"];
     });
 
 builder.Services.AddControllersWithViews().AddJsonOptions(options =>
