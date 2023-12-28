@@ -7,6 +7,8 @@ import CharacterList from "./first-edition/pages/CharacterList";
 import ErrorBoundary from "./shared/ErrorBoundary";
 import Header from "./shared/Header";
 import Footer from "./shared/Footer";
+import {useState} from "react";
+import {UserContext, userDefaults} from './shared/contexts/UserContext';
 
 function App(props: {faro?: Faro}) {
     const router = createBrowserRouter([
@@ -28,16 +30,41 @@ function App(props: {faro?: Faro}) {
             ErrorBoundary: ErrorBoundary,
         }
     ]);
+    
+    const [fetchedUser, setFetchedUser] = useState(userDefaults)
 
+    if (fetchedUser.state === "not-started") {
+        setFetchedUser({...fetchedUser, state: "loading"})
+        fetch('api/User/me')
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                }
+                console.log(response)
+            })
+            .then(userNameResponse => {
+                const userName = userNameResponse && userNameResponse.length  > 0 ? userNameResponse : null;
+                setFetchedUser({
+                    data: userName,
+                    state: "finished"
+                });
+            })
+            .catch(() => {
+                setFetchedUser({
+                    data: null,
+                    state: "finished"
+                })
+            })
+    }
     
     return (
-        <>
+        <UserContext.Provider value={fetchedUser}>
             <Header/>
             <div className='container'>
                 <RouterProvider router={router}/>
             </div>
             <Footer />
-        </>
+        </UserContext.Provider>
     );
 }
 

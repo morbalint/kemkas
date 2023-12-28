@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import './CreateCharacter.css'
 import {Faj} from "../domain-models/faj";
 import {Osztaly, SetFelszerelesForChangedOsztaly} from "../domain-models/osztaly"
@@ -31,14 +31,16 @@ import {Faro} from "@grafana/faro-web-sdk";
 import {StoreNewCharacter, UpdateCharacter} from "../api/character.api";
 import {useLoaderData, useParams} from "react-router-dom";
 import saveOverlayTooltip from "../components/SaveOverlayTooltip";
+import {UserContext} from "../../shared/contexts/UserContext";
 
 function CreateCharacterPage(props: {
     faro?: Faro,
 }) {
     const {faro} = props
 
-    const initialKarakterInputs = useLoaderData() as KarakterInputs;
+    const { isPublic: initialIsPublic, ...initialKarakterInputs} = useLoaderData() as KarakterInputs & { isPublic: boolean };
     const { id } = useParams();
+    const fetchedUser = useContext(UserContext);
 
     let [karakter, changeKarakter] = useState(initialKarakterInputs ?? KarakterDefaults)
 
@@ -58,8 +60,30 @@ function CreateCharacterPage(props: {
     const canLevelUp = CanLevelUp(karakter)
     
     let [showSaved, setShowSaved] = useState(false);
+    let [isPublic, setIsPublic] = useState(initialIsPublic);
     
-     const hideSaved = () => setShowSaved(false);
+    const hideSaved = () => setShowSaved(false);
+    const onSaveClicked = async () => {
+        faro?.api.pushEvent('character_stored', {
+            osztaly: karakter.osztaly,
+            szint: karakter.szint.toString(),
+            faj: karakter.faj.toString(),
+            is_public: isPublic.toString(),
+        })
+        if (id == null) {
+            let newId = await StoreNewCharacter(karakter, isPublic);
+            const win = window.open(`/${newId}`, '_blank');
+            if (win != null) {
+                win.focus();
+            }
+        } else {
+            await UpdateCharacter(id, karakter, isPublic);
+            setShowSaved(true);
+            setTimeout(() => {
+                hideSaved();
+            }, 5000)
+        }
+    }
 
     return (
         <div>
@@ -182,32 +206,34 @@ function CreateCharacterPage(props: {
                     <Felszereles osztaly={karakter.osztaly} felszereles={karakter.felszereles}
                                  changeFelszereles={setFelszereles} harcosSpec={karakter.harcosSpecializaciok}/>
 
+                    <hr/>
+                    <div className='row'>
+                        <h5 className='col align-self-center'>Véglegesítés</h5>
+                    </div>
+
+                    {fetchedUser.data != null &&
+                        <div className='row m-2'>
+                            <label className='col-md-2 col-sm-3 col-form-label'>Publikus karakterlap?</label>
+                            <select className="col form-select" value={isPublic.toString()}
+                                    onChange={(event) => setIsPublic(event.target.value === "true")}>
+                                <option value="true">Igen</option>
+                                <option value="false">Nem</option>
+                            </select>
+                        </div>
+                    }
                     <div className="row">
                         <div className="col-6">
                             <div className='d-grid gap-2 m-5'>
-                                <OverlayTrigger placement='top' overlay={saveOverlayTooltip} delay={0} defaultShow={false} flip={false}>
-                                <button className='btn btn-danger btn-lg' type='button' onClick={async () => {
-                                    faro?.api.pushEvent('public_character_stored', {
-                                        osztaly: karakter.osztaly,
-                                        szint: karakter.szint.toString(),
-                                        faj: karakter.faj.toString(),
-                                    })
-                                    if (id == null) {
-                                        let newId = await StoreNewCharacter(karakter);
-                                        const win = window.open(`/${newId}`, '_blank');
-                                        if (win != null) {
-                                            win.focus();
-                                        }
-                                    } else {
-                                        await UpdateCharacter(id, karakter);
-                                        setShowSaved(true);
-                                        setTimeout(() => {
-                                            hideSaved();
-                                        }, 5000)
-                                    }
-                                }}>Mentés
-                                </button>
-                                </OverlayTrigger>
+                                {fetchedUser.data == null
+                                    ? <OverlayTrigger placement='top' overlay={saveOverlayTooltip} delay={0}
+                                                      defaultShow={false} flip={false}>
+                                        <button className='btn btn-danger btn-lg' type='button'
+                                                onClick={onSaveClicked}>Mentés
+                                        </button>
+                                    </OverlayTrigger>
+                                    : <button className='btn btn-danger btn-lg' type='button'
+                                              onClick={onSaveClicked}>Mentés</button>
+                                }
                             </div>
                         </div>
                         <div className="col-6">

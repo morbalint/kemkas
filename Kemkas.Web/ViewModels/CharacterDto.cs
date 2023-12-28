@@ -53,4 +53,6 @@ public struct CharacterDto
     
     [JsonPropertyName("felszereles")]
     public KarakterFelszerelesDto Felszereles { get; set; }
+
+    public bool? IsPublic { get; set; }
 }

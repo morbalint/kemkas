@@ -17,7 +17,7 @@ public class CharacterController(
     : ControllerBase
 {
     [HttpPost]
-    public async Task<ActionResult<Guid>> StoreNewCharacter([FromBody] CharacterDto dto, bool isPublic = true)
+    public async Task<ActionResult<Guid>> StoreNewCharacter([FromBody] CharacterDto dto, [FromQuery]bool isPublic = true)
     {
         if (!ModelState.IsValid)
         {
@@ -55,7 +55,7 @@ public class CharacterController(
     }
     
     [HttpPost("{id:guid}")]
-    public async Task<ActionResult<Guid>> UpdateCharacter([FromRoute] Guid id, [FromBody] CharacterDto dto, bool isPublic = true)
+    public async Task<ActionResult<Guid>> UpdateCharacter([FromRoute] Guid id, [FromBody] CharacterDto dto, [FromQuery]bool isPublic = true)
     {
         if (!ModelState.IsValid)
         {

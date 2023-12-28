@@ -44,6 +44,7 @@ public class CharacterDbModelToDtoService : ICharacterDbModelToDtoService
                 PancelId = entity.Pancel,
                 FegyverIds = entity.Felszereles.Where(x => x.IsFegyver).Select(x => x.Name).ToList(),
             },
+            IsPublic = entity.IsPublic,
         };
     }
 }

@@ -1,9 +1,12 @@
 import {KarakterInputs} from "../domain-models/karakter";
 import axios from "axios";
 
-export async function StoreNewCharacter(karakter: KarakterInputs) {
+export async function StoreNewCharacter(karakter: KarakterInputs, isPublic: boolean = false) {
     let response = await axios.post(`${window.location.origin}/api/Character/`, karakter, {
         withCredentials: true,
+        params: {
+            isPublic,
+        }
     })
     if (response.status < 300){
         return response.data as string
@@ -13,9 +16,12 @@ export async function StoreNewCharacter(karakter: KarakterInputs) {
     }
 }
 
-export async function UpdateCharacter(id: string, karakter: KarakterInputs) {
+export async function UpdateCharacter(id: string, karakter: KarakterInputs, isPublic: boolean = false) {
     let response = await axios.post(`${window.location.origin}/api/Character/${id}`, karakter, {
         withCredentials: true,
+        params: {
+            isPublic,
+        }
     })
     if (response.status < 300){
         return response.data as string
