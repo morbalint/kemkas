@@ -38,11 +38,17 @@ function CreateCharacterPage(props: {
 }) {
     const {faro} = props
 
-    const { isPublic: initialIsPublic, ...initialKarakterInputs} = useLoaderData() as KarakterInputs & { isPublic: boolean };
+    const loaderData = useLoaderData() as KarakterInputs & { isPublic: boolean } | undefined;
+    const initialIsPublic = loaderData?.isPublic ?? false;
+    let initialKarakterInputs = KarakterDefaults;
+    if (loaderData != null) {
+        const { isPublic: t1, ...t2 } = loaderData;
+        initialKarakterInputs = t2
+    }
     const { id } = useParams();
     const fetchedUser = useContext(UserContext);
 
-    let [karakter, changeKarakter] = useState(initialKarakterInputs ?? KarakterDefaults)
+    let [karakter, changeKarakter] = useState(initialKarakterInputs)
 
     const tulajdonsagokFajjal = TulajdonsagokFajjal(karakter.tulajdonsagok, karakter.faj)
 
