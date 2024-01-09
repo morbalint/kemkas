@@ -1,6 +1,6 @@
 import {PDFFont, PDFPage, rgb} from "pdf-lib";
-import {KarakterTulajdonsagok, Modifier} from "../domain-models/tulajdonsag";
 import {SignedNumberToText} from "../components/Helpers";
+import {KarakterTulajdonsagok, Modifier} from "../domain-models/tulajdonsag";
 
 export function DrawTulajdonsagok(page: PDFPage, tulajdonsagok: KarakterTulajdonsagok, fontSizeBase: number, pdfFont: PDFFont) {
     page.drawText(tulajdonsagok.t_ero.toString(), {

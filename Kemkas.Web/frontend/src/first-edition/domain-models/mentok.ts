@@ -1,6 +1,6 @@
 import {Osztaly} from "./osztaly";
-import {KarakterTulajdonsagok, TulajdonsagModosito} from "./tulajdonsag";
 import {KarakterInputs} from "./karakter";
+import {KarakterTulajdonsagok, TulajdonsagModosito} from "./tulajdonsag";
 
 export interface Mentok {
     kitartas: number

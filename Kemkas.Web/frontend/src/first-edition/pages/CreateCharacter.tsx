@@ -1,12 +1,11 @@
 import React, {useContext, useState} from 'react';
 import './CreateCharacter.css'
-import {Faj} from "../domain-models/faj";
+import {Faj, TulajdonsagokFajjal} from "../domain-models/faj";
 import {Osztaly, SetFelszerelesForChangedOsztaly} from "../domain-models/osztaly"
 import FajSelector from "../components/FajSelector";
 import Tulajdonsagok from "../components/Tulajdonsagok";
 import OsztalySelector from "../components/OsztalySelector";
 import KarakterKepzettsegek from "../components/KarakterKepzettsegek";
-import {KarakterTulajdonsagok, TulajdonsagokFajjal} from "../domain-models/tulajdonsag";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
 import {
     AvailableKezpettsegList,
@@ -32,6 +31,7 @@ import {StoreNewCharacter, UpdateCharacter} from "../api/character.api";
 import {useLoaderData, useParams} from "react-router-dom";
 import saveOverlayTooltip from "../components/SaveOverlayTooltip";
 import {UserContext} from "../../shared/contexts/UserContext";
+import {KarakterTulajdonsagok} from "../domain-models/tulajdonsag";
 
 function CreateCharacterPage(props: {
     faro?: Faro,
@@ -94,7 +94,7 @@ function CreateCharacterPage(props: {
     return (
         <div>
             <div className='container-fluid p-5 bg-black text-white text-center'>
-                <h1>Karakter {initialKarakterInputs ? "szerkesztése" : "létrehozása"}</h1>
+                <h1>Karakter {!!id ? "szerkesztése" : "létrehozása"}</h1>
             </div>
             <ToastContainer className="position-fixed" position="top-end">
                 <Toast show={showSaved} onClose={hideSaved} bg="success">

@@ -1,9 +1,6 @@
-import {TulajdonsagokFajjal} from "./faj";
-import {KarakterInputs} from "./karakter";
-
 import {d6} from "../../shared/domain-models/kockak";
 
-export enum Tulajdonsag {
+export enum Tulajdonsag2E {
     Ero = 't_ero',
     Ugyesseg = 't_ugy',
     Egeszseg = 't_egs',
@@ -12,15 +9,15 @@ export enum Tulajdonsag {
     Karizma = 't_kar',
 }
 
-export type KarakterTulajdonsagok = Record<Tulajdonsag, number>
+export type KarakterTulajdonsagok = Record<Tulajdonsag2E, number>
 
 export const TulajdonsagIDs = [
-    Tulajdonsag.Ero,
-    Tulajdonsag.Ugyesseg,
-    Tulajdonsag.Egeszseg,
-    Tulajdonsag.Intelligencia,
-    Tulajdonsag.Bolcsesseg,
-    Tulajdonsag.Karizma
+    Tulajdonsag2E.Ero,
+    Tulajdonsag2E.Ugyesseg,
+    Tulajdonsag2E.Egeszseg,
+    Tulajdonsag2E.Intelligencia,
+    Tulajdonsag2E.Bolcsesseg,
+    Tulajdonsag2E.Karizma
 ]
 
 export const TulajdonsagDefaults: KarakterTulajdonsagok = {
@@ -32,14 +29,14 @@ export const TulajdonsagDefaults: KarakterTulajdonsagok = {
     t_kar: 10,
 }
 
-export function TulajdonsagLabel(tul: Tulajdonsag) : string {
+export function TulajdonsagLabel(tul: Tulajdonsag2E) : string {
     switch (tul) {
-        case Tulajdonsag.Bolcsesseg: return 'Bölcsesség';
-        case Tulajdonsag.Ero: return 'Erő';
-        case Tulajdonsag.Ugyesseg: return 'Ügyesség';
-        case Tulajdonsag.Egeszseg: return 'Egészség';
-        case Tulajdonsag.Intelligencia: return 'Intelligencia';
-        case Tulajdonsag.Karizma: return 'Karizma';
+        case Tulajdonsag2E.Bolcsesseg: return 'Bölcsesség';
+        case Tulajdonsag2E.Ero: return 'Erő';
+        case Tulajdonsag2E.Ugyesseg: return 'Ügyesség';
+        case Tulajdonsag2E.Egeszseg: return 'Egészség';
+        case Tulajdonsag2E.Intelligencia: return 'Intelligencia';
+        case Tulajdonsag2E.Karizma: return 'Karizma';
     }
 }
 
@@ -74,15 +71,6 @@ export function TulajdonsagModosito(tulajdonsagok: KarakterTulajdonsagok): Karak
     let response: KarakterTulajdonsagok = { ...tulajdonsagok }
     for (const key of TulajdonsagIDs) {
         response[key] = Modifier(tulajdonsagok[key])
-    }
-    return response
-}
-
-export function TulajdonsagokTotal(karakter: Pick<KarakterInputs, 'tulajdonsagok' | 'faj' | 'tulajdonsagNovelesek'>): KarakterTulajdonsagok {
-    const response = TulajdonsagokFajjal(karakter.tulajdonsagok, karakter.faj)
-    for (const tulajdonsag of karakter.tulajdonsagNovelesek) {
-        // @ts-ignore // Trust me bro!
-        response[tulajdonsag] += 1
     }
     return response
 }

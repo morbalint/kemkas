@@ -9,12 +9,24 @@ import Header from "./shared/Header";
 import Footer from "./shared/Footer";
 import {useState} from "react";
 import {UserContext, userDefaults} from './shared/contexts/UserContext';
+import CreateCharacter2E from "./second-edition/pages/CreateCharacter2E";
 
 function App(props: {faro?: Faro}) {
     const router = createBrowserRouter([
         {
             path: "/",
             element: <CreateCharacter faro={props.faro} />,
+            ErrorBoundary: ErrorBoundary,
+        },
+        {
+            path: "/2e",
+            element: <CreateCharacter2E />,
+            ErrorBoundary: ErrorBoundary,
+        },
+        {
+            path: "/2e/:id",
+            element: <CreateCharacter faro={props.faro}/>,
+            loader: args => fetch(`api/Character/${args.params.id}`),
             ErrorBoundary: ErrorBoundary,
         },
         {
@@ -28,7 +40,7 @@ function App(props: {faro?: Faro}) {
             element: <CreateCharacter faro={props.faro}/>,
             loader: args => fetch(`api/Character/${args.params.id}`),
             ErrorBoundary: ErrorBoundary,
-        }
+        },
     ]);
     
     const [fetchedUser, setFetchedUser] = useState(userDefaults)
