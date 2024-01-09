@@ -2,13 +2,13 @@ import React from "react";
 import {
     KarakterTulajdonsagok,
     RollAllAbilities,
-    Tulajdonsag,
-} from "../domain-models/tulajdonsag";
-import TulajdonsagInput from "./TulajdonsagInput";
-import {Faj, TulajdonsagModositokFajokra} from "../domain-models/faj";
+    Tulajdonsag2E,
+} from "../domain-models/tulajdonsag2E";
+import TulajdonsagInput from "./TulajdonsagInput2E";
+import {Faj2E, TulajdonsagModositokFajokra} from "../domain-models/faj2E";
 
 function Tulajdonsagok(props: {
-    currentFaj: Faj,
+    currentFaj: Faj2E,
     tulajdonsagok: KarakterTulajdonsagok
     changeTulajdonsagok: (tulajdonsagok: KarakterTulajdonsagok) => void
 }) {
@@ -26,7 +26,7 @@ function Tulajdonsagok(props: {
             tulajdonsag='Erő'
             currentValue={tulajdonsagok.t_ero}
             currentFaj={currentFaj}
-            fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag.Ero)}
+            fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag2E.Ero)}
             changeValue={(val: number) => changeTulajdonsagok({...tulajdonsagok, t_ero: val})}
             tooLowError='Túl gyenge vagy, nem bírtad felemelni a kezed a jelentkezéshez!'
             tooHighError='Szét szakadtak az izmaid!'
@@ -35,7 +35,7 @@ function Tulajdonsagok(props: {
             tulajdonsag='Ügyesség'
             currentValue={tulajdonsagok.t_ugy}
             currentFaj={currentFaj}
-            fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag.Ugyesseg)}
+            fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag2E.Ugyesseg)}
             changeValue={(val: number) => changeTulajdonsagok({...tulajdonsagok, t_ugy: val})}
             tooLowError='Orrabuktál jelentkezés helyett!'
             tooHighError='Emberfeletti zsonglörködésedre záptojással válaszoltak a helyiek!'
@@ -44,7 +44,7 @@ function Tulajdonsagok(props: {
             tulajdonsag='Egészség'
             currentValue={tulajdonsagok.t_egs}
             currentFaj={currentFaj}
-            fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag.Egeszseg)}
+            fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag2E.Egeszseg)}
             changeValue={(val: number) => changeTulajdonsagok({...tulajdonsagok, t_egs: val})}
             tooLowError='Túl beteg vagy ahhoz, hogy kalandozni menj!'
             tooHighError='Kicsattanó egészségedet csak a diambroid állíthatja meg, minő véletlen, hogy pont az arcodba robbant...'
@@ -53,7 +53,7 @@ function Tulajdonsagok(props: {
             tulajdonsag='Intelligencia'
             currentValue={tulajdonsagok.t_int}
             currentFaj={currentFaj}
-            fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag.Intelligencia)}
+            fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag2E.Intelligencia)}
             changeValue={(val: number) => changeTulajdonsagok({...tulajdonsagok, t_int: val})}
             tooLowError='Elfelejtetted, hogy mikor is kéne kalandozni indulni!'
             tooHighError='Ilyen tudás és logika birtokában mi szükséged van új információkra? Mindent le tudsz vezetni a már meglévő ismereteidből, és ezt azonnal beláttad.'
@@ -62,7 +62,7 @@ function Tulajdonsagok(props: {
             tulajdonsag='Bölcsesség'
             currentValue={tulajdonsagok.t_bol}
             currentFaj={currentFaj}
-            fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag.Bolcsesseg)}
+            fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag2E.Bolcsesseg)}
             changeValue={(val: number) => changeTulajdonsagok({...tulajdonsagok, t_bol: val})}
             tooLowError='Nem bírtál ellenállni a kíváncsiságodnak, hogy közelebbről is megvizsgáld a tőr hegyét. Nagyon közelről.'
             tooHighError='Hatalmas bölcsességedben beláttad a kalandozás veszélyeit és inkább más tevékenységbe fogtál.'
@@ -71,7 +71,7 @@ function Tulajdonsagok(props: {
             tulajdonsag='Karizma'
             currentValue={tulajdonsagok.t_kar}
             currentFaj={currentFaj}
-            fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag.Karizma)}
+            fajiModosito={TulajdonsagModositokFajokra(Tulajdonsag2E.Karizma)}
             changeValue={(val: number) => changeTulajdonsagok({...tulajdonsagok, t_kar: val})}
             tooLowError='Mintha taszítanád az embereket, sose sikerült kalandozó csapatot találnod.'
             tooHighError='Az ellenkező nem tagjai nem engedték, hogy útnak indulj.'

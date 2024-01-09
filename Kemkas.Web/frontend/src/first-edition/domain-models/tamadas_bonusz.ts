@@ -1,7 +1,7 @@
 import {Osztaly} from "./osztaly";
 import TamadasBonuszTabla from "./tamadas_bonus_tabla.json";
-import {Modifier} from "./tulajdonsag";
 import {KarakterInputs} from "./karakter";
+import {Modifier} from "./tulajdonsag";
 
 export function TamadasBonusz(osztaly: Osztaly, szint: number = 1) : number[] {
     let base = []

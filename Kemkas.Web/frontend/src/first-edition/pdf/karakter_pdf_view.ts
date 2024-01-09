@@ -1,4 +1,4 @@
-import {KarakterTulajdonsagok, Modifier, TulajdonsagModosito, TulajdonsagokTotal} from "../domain-models/tulajdonsag";
+import {TulajdonsagokTotal} from "../domain-models/tulajdonsag";
 import {Mentok, MentokAlap, MentoModositok} from "../domain-models/mentok";
 import {Kepzettseg, Kepzettsegek} from "../domain-models/kepzettsegek";
 import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
@@ -11,6 +11,11 @@ import {GetJellem} from "../domain-models/jellem";
 import {Fegyver, GetFegyverek, GetPajzs, GetPancel} from '../domain-models/felszereles'
 import {SignedNumberToText} from "../components/Helpers";
 import {OsztalySkillsTordelt} from "./osztaly_skills";
+import {
+    KarakterTulajdonsagok,
+    Modifier,
+    TulajdonsagModosito
+} from "../domain-models/tulajdonsag";
 
 export interface KepzettsegPdfView {
     KepzettsegName: string
@@ -112,7 +117,7 @@ export function KarakterInputToPdfView(karakter: KarakterInputs): KarakterPdfVie
 
 function mapKepzettsegToPdfView(kepzettseg: Kepzettseg, tulajdonsagok: KarakterTulajdonsagok, szint: number) {
     const tulajdonsagErtek = kepzettseg.Tulajdonsag.reduce((maxTulajdonsagErtek, currentTulajdonsag) =>
-            (tulajdonsagok[currentTulajdonsag] > maxTulajdonsagErtek)
+            tulajdonsagok[currentTulajdonsag] > maxTulajdonsagErtek
                 ? tulajdonsagok[currentTulajdonsag]
                 : maxTulajdonsagErtek,
         tulajdonsagok[kepzettseg.Tulajdonsag[0]])

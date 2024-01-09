@@ -1,9 +1,9 @@
 import {Faj} from "./faj";
 import {Osztaly} from "./osztaly";
-import {KarakterTulajdonsagok, Tulajdonsag, TulajdonsagDefaults} from "./tulajdonsag";
 import {KepzettsegId} from "./kepzettsegek";
 import {JellemID} from "./jellem";
 import { DefaultFelszereles, KarakterFelszereles } from './felszereles'
+import {KarakterTulajdonsagok, Tulajdonsag, TulajdonsagDefaults} from "./tulajdonsag";
 
 export interface KarakterInputs {
     name: string,

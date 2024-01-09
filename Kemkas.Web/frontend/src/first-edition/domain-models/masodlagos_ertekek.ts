@@ -1,10 +1,10 @@
 import {Mentok, MentokTotal} from "./mentok";
 import {Osztaly} from "./osztaly";
 import {KarakterInputs} from "./karakter";
-import {Modifier} from "./tulajdonsag";
 import {CelzoTB, KozelharciTB} from "./tamadas_bonusz";
 import {Faj} from "./faj";
 import { GetPajzs, GetPancel, MaxAbilityVO } from "./felszereles";
+import {Modifier} from "./tulajdonsag";
 
 export interface MasodlagosErtekekView {
     HP: number

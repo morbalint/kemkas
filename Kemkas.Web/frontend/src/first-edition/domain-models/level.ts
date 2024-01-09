@@ -1,11 +1,12 @@
 import {BaseHP} from "./masodlagos_ertekek";
-import {dAny} from "./kockak";
-import {TulajdonsagIDs, TulajdonsagokTotal} from "./tulajdonsag";
 import {KarakterInputs} from "./karakter";
 import {GetFajDetails} from "./faj";
 import {Osztaly} from "./osztaly";
 import fegyverek from "./fegyver.json"
 import {AllowedFegyver} from "./allowed-fegyver";
+import {TulajdonsagokTotal} from "./tulajdonsag";
+import {dAny} from "../../shared/domain-models/kockak";
+import {TulajdonsagIDs} from "./tulajdonsag";
 
 export function PickableSpecializationFilter(existingSpecilizations: string[], szint: number) {
     return (fegyver: {Id: string}) => existingSpecilizations.filter(x => x === fegyver.Id).length < (szint < 9 ? 1 : 2)

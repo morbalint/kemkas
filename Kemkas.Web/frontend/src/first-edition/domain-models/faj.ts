@@ -1,10 +1,5 @@
-import {
-    KarakterTulajdonsagok,
-    Tulajdonsag,
-    TulajdonsagModositokFajokra,
-} from "./tulajdonsag";
 import {Osztaly} from "./osztaly";
-
+import {KarakterTulajdonsagok, Tulajdonsag} from "./tulajdonsag";
 
 export enum Faj {
     Ember = 'f_ember',
@@ -138,6 +133,77 @@ export function GetFajDetails(faj: Faj): FajDetails {
         Specials: FajSpecials(faj),
         TulajdonsagModifiers: fajiTulajdonsagModositok(faj),
         Szintkorlatok: SzintKorlatokFajokra(faj),
+    }
+}
+
+// noinspection OverlyComplexFunctionJS,FunctionTooLongJS
+function tulajdonsagModositokPerFaj(tul: Tulajdonsag, faj: Faj) : number {
+    switch (faj) {
+        case Faj.Birodalmi: switch (tul) {
+            case Tulajdonsag.Egeszseg: return -1;
+            case Tulajdonsag.Intelligencia: return +1;
+            default: return 0;
+        }
+        case Faj.Eszaki: switch (tul) {
+            case Tulajdonsag.Ero: return +1;
+            case Tulajdonsag.Bolcsesseg: return -1;
+            default: return 0;
+        }
+        case Faj.Etuniai: switch (tul) {
+            case Tulajdonsag.Egeszseg: return +1;
+            case Tulajdonsag.Bolcsesseg: return -1;
+            default: return 0
+        }
+        case Faj.Osember: switch (tul) {
+            case Tulajdonsag.Ero: return +1;
+            case Tulajdonsag.Egeszseg: return +1;
+            case Tulajdonsag.Intelligencia: return -1;
+            case Tulajdonsag.Bolcsesseg: return -1;
+            default: return 0
+        }
+        case Faj.Elf: switch (tul) {
+            case Tulajdonsag.Egeszseg: return -1;
+            case Tulajdonsag.Ugyesseg: return +1;
+            default: return 0;
+        }
+        case Faj.Felork: switch (tul) {
+            case Tulajdonsag.Ero: return +1;
+            case Tulajdonsag.Egeszseg: return +1;
+            case Tulajdonsag.Karizma: return -2;
+            default: return 0;
+        }
+        case Faj.Felszerzet: switch (tul) {
+            case Tulajdonsag.Ero: return -1;
+            case Tulajdonsag.Ugyesseg: return +1;
+            default: return 0;
+        }
+        case Faj.Gnom: switch (tul) {
+            case Tulajdonsag.Ero: return -1;
+            case Tulajdonsag.Intelligencia: return +1;
+            default: return 0;
+        }
+        case Faj.Torpe: switch (tul) {
+            case Tulajdonsag.Egeszseg: return +1;
+            case Tulajdonsag.Karizma: return -1;
+            default: return 0;
+        }
+
+        default: return 0;
+    }
+}
+
+export function TulajdonsagModositokFajokra(tul: Tulajdonsag) {
+    return (faj: Faj) => tulajdonsagModositokPerFaj(tul, faj);
+}
+
+export function TulajdonsagokFajjal(tulajdonsagok: KarakterTulajdonsagok, faj: Faj): KarakterTulajdonsagok {
+    return {
+        [Tulajdonsag.Ero]: tulajdonsagok.t_ero + tulajdonsagModositokPerFaj(Tulajdonsag.Ero, faj),
+        [Tulajdonsag.Ugyesseg]: tulajdonsagok.t_ugy + tulajdonsagModositokPerFaj(Tulajdonsag.Ugyesseg, faj),
+        [Tulajdonsag.Egeszseg]: tulajdonsagok.t_egs + tulajdonsagModositokPerFaj(Tulajdonsag.Egeszseg, faj),
+        [Tulajdonsag.Intelligencia]: tulajdonsagok.t_int + tulajdonsagModositokPerFaj(Tulajdonsag.Intelligencia, faj),
+        [Tulajdonsag.Bolcsesseg]: tulajdonsagok.t_bol + tulajdonsagModositokPerFaj(Tulajdonsag.Bolcsesseg, faj),
+        [Tulajdonsag.Karizma]: tulajdonsagok.t_kar + tulajdonsagModositokPerFaj(Tulajdonsag.Karizma, faj),
     }
 }
 
