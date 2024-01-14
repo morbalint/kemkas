@@ -6,7 +6,7 @@ import {
     TulajdonsagIDs,
     TulajdonsagLabel
 } from "../domain-models/tulajdonsag";
-import {SignedNumberToText} from "./Helpers";
+import {SignedNumberToText} from "../../shared/components/Helpers";
 
 function TulajdonsagNoveles(props: {tulajdonsagok: KarakterTulajdonsagok, szint: number, tulajdonsagNovelesek: Tulajdonsag[], changeTulajdonsagNoveles: (tulajdonsag: Tulajdonsag) => void}) {
     const {tulajdonsagok, szint, tulajdonsagNovelesek, changeTulajdonsagNoveles} = props

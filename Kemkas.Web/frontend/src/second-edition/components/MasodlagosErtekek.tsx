@@ -20,11 +20,11 @@ function MasodlagosErtekek(props: MasodlagosErtekekView) {
         <div className='row'>
             <div className='col-lg-6'>
                 <div className='row m-2'>
-                        <label className='col-sm-6 col-8 col-form-label'>Életerő{' '}
-                            <OverlayTrigger placement='top' overlay={tooltip} delay={0} defaultShow={false} flip={false}>
-                                <span>(HP)</span>
-                            </OverlayTrigger>
-                        </label>
+                    <label className='col-sm-6 col-8 col-form-label'>Életerő{' '}
+                        <OverlayTrigger placement='top' overlay={tooltip} delay={0} defaultShow={false} flip={false}>
+                            <span>(HP)</span>
+                        </OverlayTrigger>
+                    </label>
                     <p className='col col-form-label'>{HP}</p>
                 </div>
                 <div className='row m-2'>

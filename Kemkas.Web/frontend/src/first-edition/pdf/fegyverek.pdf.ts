@@ -1,6 +1,6 @@
 import {KarakterPdfView} from "./karakter_pdf_view";
 import {PDFFont, PDFPage} from "pdf-lib";
-import {SignedNumberToText} from "../components/Helpers";
+import {SignedNumberToText} from "../../shared/components/Helpers";
 
 function fitTextInWidth(font: PDFFont, text: string, startingSize: number, maxWidth: number): number {
     let size = startingSize

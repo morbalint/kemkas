@@ -1,6 +1,6 @@
 import React from "react";
 import {KarakterInputs} from "../domain-models/karakter";
-import {SignedNumberToText} from "./Helpers";
+import {SignedNumberToText} from "../../shared/components/Helpers";
 import {Mentok, MentoTipus, MentoTipusLabel, MentokTotal} from "../domain-models/mentok";
 import {BaseHP, HP} from "../domain-models/masodlagos_ertekek";
 import {TamadasBonusz} from "../domain-models/tamadas_bonusz";

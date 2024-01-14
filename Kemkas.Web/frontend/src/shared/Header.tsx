@@ -17,7 +17,7 @@ function Header(props: {}) {
         <Navbar expand="sm" className="navbar-light bg-white border-bottom box-shadow mb-3">
             <Container className="ps-4 pe-4">
                 <Navbar.Brand href="/">Kemkas</Navbar.Brand>
-                <Nav.Link className="text-dark" href="/karaktereim">Karaktereim</Nav.Link>
+                {fetchedUser.data != null && <Nav.Link className="text-dark" href="/karaktereim">Karaktereim</Nav.Link>}
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="d-sm-inline-flex flex-sm-row-reverse">
                     <Nav>
