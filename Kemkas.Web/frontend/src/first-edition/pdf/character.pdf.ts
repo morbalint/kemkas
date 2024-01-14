@@ -1,7 +1,7 @@
 import {KarakterPdfView, KepzettsegPdfView} from "./karakter_pdf_view";
 import {PDFDocument, rgb} from "pdf-lib";
 import fontkit from '@pdf-lib/fontkit'
-import {SignedNumberToText} from "../components/Helpers";
+import {SignedNumberToText} from "../../shared/components/Helpers";
 import download from "downloadjs";
 import {DrawTulajdonsagok} from "./tulajdonsagok.pdf";
 import {DrawMentok} from "./mentok.pdf";

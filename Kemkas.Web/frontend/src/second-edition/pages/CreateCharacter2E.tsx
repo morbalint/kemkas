@@ -16,6 +16,8 @@ import {
 import KarakterKepzettsegek from "../components/KarakterKepzettsegek2E";
 import {TulajdonsagokFajjal} from "../domain-models/faj2E";
 import JellemSelector from "../components/JellemSelector";
+import MasodlagosErtekek from "../components/MasodlagosErtekek";
+import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
 
 function CreateCharacter2E(props: {}) {
 
@@ -108,6 +110,14 @@ function CreateCharacter2E(props: {}) {
                     tolvajKepzettsegek={karakter.tolvajKepzettsegek || []}
                     changeTolvajKepzettsegek={changeTolvajKepzettseg}
                 />
+                <hr />
+                {/* 1. szinten */}
+                <MasodlagosErtekek {...CalculateMasodlagosErtekek({
+                    ...karakter,
+                    tulajdonsagok: tulajdonsagokFajjal,
+                    szint: 1,
+                    hpRolls: []
+                })} />
                 <hr />
             </form>
         </div>

@@ -1,6 +1,6 @@
 import {PDFFont, PDFPage, rgb} from "pdf-lib";
 import {KarakterPdfView} from "./karakter_pdf_view";
-import {SignedNumberToText} from "../components/Helpers";
+import {SignedNumberToText} from "../../shared/components/Helpers";
 import {Modifier} from "../domain-models/tulajdonsag";
 
 export function DrawMentok(page: PDFPage, karakter: KarakterPdfView, fontSizeBase: number, pdfFont: PDFFont) {

@@ -9,7 +9,7 @@ import {KarakterInputs} from "../domain-models/karakter";
 import {CalculateVarazslatMentokNF, NapiVarazslatok} from "../domain-models/memorizalt_varazslatok";
 import {GetJellem} from "../domain-models/jellem";
 import {Fegyver, GetFegyverek, GetPajzs, GetPancel} from '../domain-models/felszereles'
-import {SignedNumberToText} from "../components/Helpers";
+import {SignedNumberToText} from "../../shared/components/Helpers";
 import {OsztalySkillsTordelt} from "./osztaly_skills";
 import {
     KarakterTulajdonsagok,

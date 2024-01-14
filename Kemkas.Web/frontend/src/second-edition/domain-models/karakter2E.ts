@@ -17,6 +17,8 @@ export interface Karakter2E {
     kalozKritikus: string[],
     kepzettsegek: KepzettsegId[]
     tolvajKepzettsegek?: KepzettsegId[]
+    szint: number,
+    hpRolls: number[]
 }
 export const DefaultKarakter: Karakter2E = {
     name: 'Névtelen Kalandozó',
@@ -29,4 +31,6 @@ export const DefaultKarakter: Karakter2E = {
     kalozKritikus: [],
     kepzettsegek: [],
     tolvajKepzettsegek: [],
+    szint: 1,
+    hpRolls: []
 } 

@@ -1,6 +1,6 @@
 import {PDFFont, PDFPage} from "pdf-lib";
 import {KarakterPdfView} from "./karakter_pdf_view";
-import {SignedNumberToText} from "../components/Helpers";
+import {SignedNumberToText} from "../../shared/components/Helpers";
 
 export function DrawMasodlagosErtekek(
     page: PDFPage,

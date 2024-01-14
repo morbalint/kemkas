@@ -2,7 +2,7 @@ import React from "react";
 
 import {Faj, FajLabel} from "../domain-models/faj";
 import {Modifier} from "../domain-models/tulajdonsag";
-import {SignedNumberToText} from "./Helpers";
+import {SignedNumberToText} from "../../shared/components/Helpers";
 
 
 function fajiModositoText(faj: Faj, szamolas: (f: Faj) => number) : string {
