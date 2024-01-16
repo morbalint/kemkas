@@ -3,8 +3,8 @@ import {Osztaly2E} from "./osztaly2E";
 import {Karakter2E} from "./karakter2E";
 import {CelzoTB, KozelharciTB} from "./tamadas_bonusz";
 import {Faj2E} from "./faj2E";
-// import { GetPajzs, GetPancel, MaxAbilityVO } from "./felszereles";
 import {Modifier} from "./tulajdonsag2E";
+import {GetPajzs, GetPancel, MaxAbilityVO} from "./felszereles";
 
 export interface MasodlagosErtekekView {
     HP: number
@@ -14,7 +14,7 @@ export interface MasodlagosErtekekView {
     Mentok: Mentok
 }
 
-export type KarakterpickForMasodlagosErtekek = Pick<Karakter2E, 'osztaly' | 'hpRolls' | 'tulajdonsagok' | 'szint' | 'faj'>
+export type KarakterpickForMasodlagosErtekek = Pick<Karakter2E, 'osztaly' | 'hpRolls' | 'tulajdonsagok' | 'szint' | 'faj' | 'felszereles'>
 
 export function BaseHP(osztaly: Osztaly2E) {
     let base = 4;
@@ -53,13 +53,15 @@ export function HP(karakter: Pick<Karakter2E, 'osztaly' | 'tulajdonsagok' | 'hpR
         .reduce((sum, val) => sum + val, 0)
 }
 
-export function VO(karakter: Pick<Karakter2E, 'tulajdonsagok' | 'faj' | 'osztaly' | 'szint'>): number {
-    // const pancel = GetPancel(karakter.felszereles.pancelID)
-    // const pancelVO = pancel?.VO ?? 0
-    // const pajzsVO = GetPajzs(karakter.felszereles.pajzsID)?.VO ?? 0
-    // let vo = 10 + pajzsVO + pancelVO
-    let vo = 10
+export function VO(karakter: Pick<Karakter2E, 'tulajdonsagok' | 'faj' | 'osztaly' | 'szint' | 'felszereles'>): number {
+    const pancel = GetPancel(karakter.felszereles.pancelID)
+    const pancelVO = pancel?.VO ?? 0
+    const pajzsVO = GetPajzs(karakter.felszereles.pajzsID)?.VO ?? 0
+    let vo = 10 + pajzsVO + pancelVO
     let abilityVO = Modifier(karakter.tulajdonsagok.t_ugy)
+    if (pancel) {
+        abilityVO = Math.min(MaxAbilityVO(pancel.Type), abilityVO)
+    }
     if (karakter.osztaly === Osztaly2E.Tengeresz) {
         vo += Math.floor(karakter.szint / 3)
     }
@@ -72,9 +74,6 @@ export function VO(karakter: Pick<Karakter2E, 'tulajdonsagok' | 'faj' | 'osztaly
     if (karakter.faj === Faj2E.Felszerzet || karakter.faj === Faj2E.Gnom){
         vo += 1
     }
-    // if (pancel) {
-    //     abilityVO = Math.min(MaxAbilityVO(pancel.Type), abilityVO)
-    // }
     vo += abilityVO
 
     return vo

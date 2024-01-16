@@ -1,0 +1,92 @@
+{
+    "pancel": [
+        {
+            "Id": "csuha",
+            "Name": "Vastag ruha, csuha, stb",
+            "Type": "konnyu",
+            "VO": 1,
+            "Price": 1,
+            "Size": 1
+        },
+        {
+            "Id": "bor",
+            "Name": "Bőrvért, bőrruha, fegyverkabát",
+            "Type": "konnyu",
+            "VO": 2,
+            "Price": 5,
+            "Size": 1
+        },
+        {
+            "Id": "kivert_bor",
+            "Name": "Kivert bőrvért, brigantin",
+            "Type": "konnyu",
+            "VO": 3,
+            "Price": 15,
+            "Size": 1
+        },
+        {
+            "Id": "prem",
+            "Name": "Prémruha, bunda",
+            "Type": "konnyu",
+            "VO": 3,
+            "Price": 12,
+            "Size": 2
+        },
+        {
+            "Id": "len",
+            "Name": "Linothorax, ragasztott lenpáncél",
+            "Type": "konnyu",
+            "VO": 4,
+            "Price": 20,
+            "Size": 2
+        },
+        {
+            "Id": "lancing",
+            "Name": "Láncing",
+            "Type": "konnyu",
+            "VO": 4,
+            "Price": 50,
+            "Size": 1
+        },
+        {
+            "Id": "pikkelyvert",
+            "Name": "Pikkelyvért",
+            "Type": "nehez",
+            "VO": 5,
+            "Price": 30,
+            "Size": 3
+        },
+        {
+            "Id": "lancvert",
+            "Name": "Láncvért",
+            "Type": "nehez",
+            "VO": 5,
+            "Price": 75,
+            "Size": 2
+        },
+        {
+            "Id": "mellvert",
+            "Name": "Mellvért, lorica musculata",
+            "Type": "nehez",
+            "VO": 5,
+            "Price": 100,
+            "Size": 2
+        },
+        {
+            "Id": "szalagvert",
+            "Name": "Szalagvért, lorica segmentata",
+            "Type": "nehez",
+            "VO": 6,
+            "Price": 250,
+            "Size": 2
+        },
+        {
+            "Id": "lemezvert",
+            "Name": "Lemezvért",
+            "Type": "nehez",
+            "VO": 7,
+            "Price": 400,
+            "Size": 3
+        }
+    ]
+}
