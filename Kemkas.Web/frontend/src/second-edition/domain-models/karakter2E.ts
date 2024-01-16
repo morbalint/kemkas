@@ -3,6 +3,7 @@ import {Faj2E} from "./faj2E";
 import {Osztaly2E} from "./osztaly2E";
 import {KepzettsegId} from "./kepzettsegek2E";
 import {JellemID} from "./jellem";
+import {DefaultFelszereles, KarakterFelszereles} from "./felszereles";
 
 export interface Karakter2E {
     name: string,
@@ -19,7 +20,9 @@ export interface Karakter2E {
     tolvajKepzettsegek?: KepzettsegId[]
     szint: number,
     hpRolls: number[]
+    felszereles: KarakterFelszereles,
 }
+
 export const DefaultKarakter: Karakter2E = {
     name: 'Névtelen Kalandozó',
     kor: 20,
@@ -32,5 +35,6 @@ export const DefaultKarakter: Karakter2E = {
     kepzettsegek: [],
     tolvajKepzettsegek: [],
     szint: 1,
-    hpRolls: []
-} 
+    hpRolls: [],
+    felszereles: DefaultFelszereles,
+}

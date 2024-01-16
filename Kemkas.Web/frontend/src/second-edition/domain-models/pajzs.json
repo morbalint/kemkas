@@ -1,0 +1,20 @@
+{
+    "pajzs": [
+        {
+            "Id": "pajzs_fa",
+            "Name": "Pajzs, fa",
+            "Type": "pajzs",
+            "VO": 2,
+            "Price": 8,
+            "Size": 1
+        },
+        {
+            "Id": "pajzs_fem",
+            "Name": "Pajzs, fém",
+            "Type": "pajzs",
+            "VO": 2,
+            "Price": 20,
+            "Size": 1
+        }
+    ]
+}
