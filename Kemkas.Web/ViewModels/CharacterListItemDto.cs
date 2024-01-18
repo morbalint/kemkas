@@ -2,20 +2,23 @@ using System.Text.Json.Serialization;
 
 namespace Kemkas.Web.ViewModels;
 
-public struct CharacterListItemDto
+public struct CharacterListItemDto()
 {
     [JsonPropertyName("id")]
-    public Guid Id { get; set; }
-    
+    public required Guid Id { get; set; }
+
     [JsonPropertyName("name")]
-    public string Name { get; set; }
-    
+    public required string Name { get; set; }
+
     [JsonPropertyName("szint")]
-    public byte Szint { get; set; }
-    
+    public required byte Szint { get; set; }
+
     [JsonPropertyName("faj")]
-    public string Faj { get; set; }
-    
+    public required string Faj { get; set; }
+
     [JsonPropertyName("osztaly")]
-    public string Osztaly { get; set; }
+    public required string Osztaly { get; set; }
+
+    [JsonPropertyName("edition")] 
+    public required string Edition { get; set; }
 }

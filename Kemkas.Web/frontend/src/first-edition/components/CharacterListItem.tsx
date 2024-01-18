@@ -8,6 +8,7 @@ export interface CharacterListItemDto {
     szint: number,
     faj: Faj,
     osztaly: Osztaly,
+    edition: "1e" | "2e"
 }
 
 function CharacterListItem(props: {
@@ -15,7 +16,7 @@ function CharacterListItem(props: {
 }) {
     const {character:c} = props
     return <>
-        <td><a href={`/${c.id}`}>{c.name}</a></td>
+        <td><a href={`/${c.edition}/karakter/${c.id}`}>{c.name}</a></td>
         <td>{c.szint}. szintű</td>
         <td>{FajLabel(c.faj)}</td>
         <td>{OsztalyLabel(c.osztaly)}</td>
