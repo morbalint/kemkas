@@ -72,6 +72,7 @@ public class CharacterPersistenceService(
                 Szint = k.Szint,
                 Faj = k.Faj.Convert(),
                 Osztaly = k.Osztaly.Convert(),
+                Edition = "1e"
             })
             .ToListAsync();
 
