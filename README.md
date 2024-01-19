@@ -8,6 +8,8 @@ Kard és Mágia karakter alkotó segédlet (https://app.kemkas.hu)
 
 ## Coding readmes
 
+For frontend only see: [Frontend README](./Kemkas.Web/frontend/README.md)
+
 To start development, spin up the docker-compose.yaml file and use the launchSettings.json to start the backend and frontend dev servers.
 
 For the first time setup:
@@ -17,5 +19,6 @@ For the first time setup:
 
 Later start the docker compose first and the project launch settings after the DB is up and running. 
 
-[Frontend README](./frontend/README.md)
+## Deployment
 
+See deployment repo at: [https://github.com/morbalint/kemkas-deployment](https://github.com/morbalint/kemkas-deployment)
