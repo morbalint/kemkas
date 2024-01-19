@@ -6,6 +6,12 @@ Kard és Mágia karakter alkotó segédlet (https://app.kemkas.hu)
 
 \[HU] Kérlek nézd el a kevert angol kifejezeséket, ugyan a szerepáték nyelve magyar, de a programozás szakmai nyelve angol.
 
+## Deployment
+
+See deployment repo at: [https://github.com/morbalint/kemkas-deployment](https://github.com/morbalint/kemkas-deployment)
+
+![CI workflow](https://github.com/morbalint/kemkas/actions/workflows/ci.yml/badge.svg)
+
 ## Coding readmes
 
 For frontend only see: [Frontend README](./Kemkas.Web/frontend/README.md)
@@ -18,7 +24,3 @@ For the first time setup:
 3. spin up the proxy from docker compose (needs the SSL certs)
 
 Later start the docker compose first and the project launch settings after the DB is up and running. 
-
-## Deployment
-
-See deployment repo at: [https://github.com/morbalint/kemkas-deployment](https://github.com/morbalint/kemkas-deployment)
