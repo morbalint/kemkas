@@ -62,11 +62,11 @@ jobs:
     - name: Tag container image
       run: |
         docker tag kemkas/kemkas:edge registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8}
-        docker tag kemkas/kemkas:edge ghcr.io/kemkas/kemkas:${GITHUB_SHA::8}
+        docker tag kemkas/kemkas:edge ghcr.io/${{ github.repository_owner }}/kemkas:${GITHUB_SHA::8}
     - name: Push image to Container Registry
       run: |
         docker push registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8}
-        docker push ghcr.io/kemkas/kemkas:${GITHUB_SHA::8}
+        docker push ghcr.io/${{ github.repository_owner }}/kemkas:${GITHUB_SHA::8}
 
   deploy:
     runs-on: ubuntu-latest
