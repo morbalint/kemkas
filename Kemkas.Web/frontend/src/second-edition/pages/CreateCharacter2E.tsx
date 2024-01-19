@@ -18,6 +18,8 @@ import {TulajdonsagokFajjal} from "../domain-models/faj2E";
 import JellemSelector from "../components/JellemSelector";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
 import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
+import Felszereles from "../components/Felszereles";
+import {KarakterFelszereles} from "../domain-models/felszereles";
 
 function CreateCharacter2E(props: {}) {
 
@@ -30,6 +32,8 @@ function CreateCharacter2E(props: {}) {
     SetDefaultTolvajKepzettsegek(karakter, changeTolvajKepzettseg)
     SetDefaultKepzettsegek({...karakter, tulajdonsagok: tulajdonsagokFajjal}, changeKepzettseg)
 
+    const changeFelszereles = (f: KarakterFelszereles) => setKarakter({...karakter, felszereles: f})
+    
     let [showSaved, setShowSaved] = useState(false);
     const hideSaved = () => setShowSaved(false);
     
@@ -119,6 +123,10 @@ function CreateCharacter2E(props: {}) {
                     hpRolls: []
                 })} />
                 <hr />
+                <Felszereles osztaly={karakter.osztaly} felszereles={karakter.felszereles}
+                             changeFelszereles={changeFelszereles}/>
+
+                <hr/>
             </form>
         </div>
         <hr/>
