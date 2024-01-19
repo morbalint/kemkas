@@ -48,6 +48,8 @@ jobs:
         token: ${{ secrets.DO_ACCESS_TOKEN }}
     - name: Log in to DigitalOcean Container Registry with short-lived credentials
       run: doctl registry login --expiry-seconds 1200
+    - name: Log in to GitHub Container Registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
     - uses: docker/build-push-action@v5
       with:
         context: .
@@ -60,9 +62,11 @@ jobs:
     - name: Tag container image
       run: |
         docker tag kemkas/kemkas:edge registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8}
+        docker tag kemkas/kemkas:edge ghcr.io/${{ github.repository_owner }}/kemkas:${GITHUB_SHA::8}
     - name: Push image to Container Registry
       run: |
         docker push registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8}
+        docker push ghcr.io/${{ github.repository_owner }}/kemkas:${GITHUB_SHA::8}
 
   deploy:
     runs-on: ubuntu-latest
@@ -78,18 +82,23 @@ jobs:
           token: ${{ secrets.DO_ACCESS_TOKEN }}
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 1200
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Tag container image with latest tag
         run: |
+          docker pull ghcr.io/${{ github.repository_owner }}/kemkas:${GITHUB_SHA::8}
           docker pull registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8}
           docker tag registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8} registry.digitalocean.com/kemkas/kemkas:latest
+          docker tag ghcr.io/${{ github.repository_owner }}/kemkas:${GITHUB_SHA::8} ghcr.io/${{ github.repository_owner }}/kemkas:latest
       - name: Push image to Container Registry
         run: |
           docker push registry.digitalocean.com/kemkas/kemkas:latest
+          docker push ghcr.io/${{ github.repository_owner }}/kemkas:latest
       - name: Get container image ID of the images just pushed
         run: |
-          docker images registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8} --format "{{.ID}}"
-          export DOCKER_IMAGE_ID=$(docker images registry.digitalocean.com/kemkas/kemkas:${GITHUB_SHA::8} --format "{{.ID}}")
-          export DOCKER_IMAGE_ID=DO-$DOCKER_IMAGE_ID
+          docker images ghcr.io/${{ github.repository_owner }}/kemkas:${GITHUB_SHA::8} --format "{{.ID}}"
+          export DOCKER_IMAGE_ID=$(docker images ghcr.io/${{ github.repository_owner }}/kemkas:${GITHUB_SHA::8} --format "{{.ID}}")
+          export DOCKER_IMAGE_ID=GHCR-$DOCKER_IMAGE_ID
           echo "DOCKER_IMAGE_ID=$DOCKER_IMAGE_ID" >> $GITHUB_ENV
       - name: Tag commit
         uses: tvdias/github-tagger@v0.0.1
