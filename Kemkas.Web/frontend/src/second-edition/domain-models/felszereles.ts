@@ -27,7 +27,7 @@ export interface Pajzs {
 export interface Fegyver {
     Id: string,
     Name: string,
-    Type: 'kozelharci' | 'lofegyver',
+    Type: 'kozelharci' | 'dobhato' | 'lofegyver',
     Harcos: boolean,
     CsakNemHarcos: boolean,
     Masfelkezes: boolean,
@@ -48,7 +48,7 @@ export interface Fegyver {
     DamageMultiplier: number,
     DamageDice: number,
     NumberOfDamageDice: number,
-    DamageBonusz: number,
+    DamageBonus: number,
     CritRangeStart: number,
     CritMultiplier: number,
     Range: number,
