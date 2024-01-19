@@ -78,7 +78,7 @@ function CreateCharacterPage(props: {
         })
         if (id == null) {
             let newId = await StoreNewCharacter(karakter, isPublic);
-            const win = window.open(`/${newId}`, '_blank');
+            const win = window.open(`/1e/karakter/${newId}`, '_blank');
             if (win != null) {
                 win.focus();
             }
