@@ -115,6 +115,12 @@ namespace Kemkas.Web.Areas.Identity.Pages.Account
             returnUrl ??= Url.Content("~/");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            
+            // Disable not yet approved external login providers in production 
+            if (!_environment.IsDevelopment())
+            {
+                ExternalLogins = ExternalLogins.Where(el => el.Name == "Discord").ToList();
+            }
 
             if (ModelState.IsValid)
             {

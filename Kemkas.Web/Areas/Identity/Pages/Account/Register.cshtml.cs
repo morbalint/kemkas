@@ -30,13 +30,15 @@ namespace Kemkas.Web.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IWebHostEnvironment _environment;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IWebHostEnvironment environment)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +46,7 @@ namespace Kemkas.Web.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _environment = environment;
         }
 
         /// <summary>
@@ -105,12 +108,22 @@ namespace Kemkas.Web.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            // Disable not yet approved external login providers in production 
+            if (!_environment.IsDevelopment())
+            {
+                ExternalLogins = ExternalLogins.Where(el => el.Name == "Discord").ToList();
+            }
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            // Disable not yet approved external login providers in production 
+            if (!_environment.IsDevelopment())
+            {
+                ExternalLogins = ExternalLogins.Where(el => el.Name == "Discord").ToList();
+            }
             if (!ModelState.IsValid)
             {
                 return Page();

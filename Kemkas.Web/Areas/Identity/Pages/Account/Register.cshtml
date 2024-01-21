@@ -49,7 +49,8 @@
                     <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
                         <div>
                             <p>
-                                @foreach (var provider in Model.ExternalLogins!)
+                                <button type="submit" class="btn" name="provider" value="Discord" title="Log in using your Discord account"><img height="24px" alt="Discord" src="/img/discord-logo-blue.svg" /></button> 
+                                @foreach (var provider in Model.ExternalLogins!.Where(el => el.Name != "Discord"))
                                 {
                                     <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
                                 }
