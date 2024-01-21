@@ -22,11 +22,13 @@ namespace Kemkas.Web.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IWebHostEnvironment _environment;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, IWebHostEnvironment environment)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _environment = environment;
         }
 
         /// <summary>
@@ -98,6 +100,12 @@ namespace Kemkas.Web.Areas.Identity.Pages.Account
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            
+            // Disable not yet approved external login providers in production 
+            if (!_environment.IsDevelopment())
+            {
+                ExternalLogins = ExternalLogins.Where(el => el.Name == "Discord").ToList();
+            }
 
             ReturnUrl = returnUrl;
         }
