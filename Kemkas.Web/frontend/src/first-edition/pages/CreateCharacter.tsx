@@ -28,7 +28,7 @@ import Felszereles from '../components/Felszereles';
 import { KarakterFelszereles } from '../domain-models/felszereles';
 import {Faro} from "@grafana/faro-web-sdk";
 import {StoreNewCharacter, UpdateCharacter} from "../api/character.api";
-import {redirect, useLoaderData, useNavigate, useParams} from "react-router-dom";
+import {useLoaderData, useNavigate, useParams} from "react-router-dom";
 import saveOverlayTooltip from "../components/SaveOverlayTooltip";
 import {UserContext} from "../../shared/contexts/UserContext";
 import {KarakterTulajdonsagok} from "../domain-models/tulajdonsag";
