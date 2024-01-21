@@ -28,7 +28,7 @@ import Felszereles from '../components/Felszereles';
 import { KarakterFelszereles } from '../domain-models/felszereles';
 import {Faro} from "@grafana/faro-web-sdk";
 import {StoreNewCharacter, UpdateCharacter} from "../api/character.api";
-import {useLoaderData, useParams} from "react-router-dom";
+import {redirect, useLoaderData, useNavigate, useParams} from "react-router-dom";
 import saveOverlayTooltip from "../components/SaveOverlayTooltip";
 import {UserContext} from "../../shared/contexts/UserContext";
 import {KarakterTulajdonsagok} from "../domain-models/tulajdonsag";
@@ -47,6 +47,7 @@ function CreateCharacterPage(props: {
     }
     const { id } = useParams();
     const fetchedUser = useContext(UserContext);
+    const navigate = useNavigate();
 
     let [karakter, changeKarakter] = useState(initialKarakterInputs)
 
@@ -78,10 +79,8 @@ function CreateCharacterPage(props: {
         })
         if (id == null) {
             let newId = await StoreNewCharacter(karakter, isPublic);
-            const win = window.open(`/1e/karakter/${newId}`, '_blank');
-            if (win != null) {
-                win.focus();
-            }
+            setShowSaved(true);
+            navigate(`/1e/karakter/${newId}`)
         } else {
             await UpdateCharacter(id, karakter, isPublic);
             setShowSaved(true);
