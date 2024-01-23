@@ -54,22 +54,29 @@ public static class WebApplicationBuilderExtensions
             {
                 tracerProviderBuilder
                     .SetResourceBuilder(otlResourceBuilder)
-                    .AddAspNetCoreInstrumentation()
-                    .AddConsoleExporter();
+                    .AddAspNetCoreInstrumentation();
                 if (openTelemetryEndpoint != null)
                 {
                     tracerProviderBuilder.AddOtlpExporter(opt => opt.Endpoint = new Uri(openTelemetryEndpoint));
                 }
+                else
+                {
+                    tracerProviderBuilder.AddConsoleExporter();
+                }
+                    
             })
             .WithMetrics(meterProviderBuilder =>
             {
                 meterProviderBuilder
                     .SetResourceBuilder(otlResourceBuilder)
-                    .AddAspNetCoreInstrumentation()
-                    .AddConsoleExporter();
+                    .AddAspNetCoreInstrumentation();
                 if (openTelemetryEndpoint != null)
                 {
                     meterProviderBuilder.AddOtlpExporter(opt => opt.Endpoint = new Uri(openTelemetryEndpoint));
+                }
+                else
+                {
+                    meterProviderBuilder.AddConsoleExporter();
                 }
             });
     }
