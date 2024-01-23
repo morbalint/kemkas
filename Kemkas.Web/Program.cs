@@ -11,6 +11,9 @@ using Kemkas.Web.Services.Identity;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using IPNetwork = Microsoft.AspNetCore.HttpOverrides.IPNetwork;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,25 +37,7 @@ builder.Services.AddSingleton<IEmailSender, MailgunEmailSender>();
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddAuthentication()
-    .AddGoogle(options =>
-    {
-        var section = builder.Configuration.GetSection("Authentication:Google");
-        options.ClientId = section["ClientId"];
-        options.ClientSecret = section["ClientSecret"];
-    })
-    .AddFacebook(options =>
-    {
-        var section = builder.Configuration.GetSection("Authentication:Facebook");
-        options.ClientId = section["ClientId"];
-        options.ClientSecret = section["ClientSecret"];
-    })
-    .AddDiscord(options =>
-    {
-        var section = builder.Configuration.GetSection("Authentication:Discord");
-        options.ClientId = section["ClientId"];
-        options.ClientSecret = section["ClientSecret"];
-    });
+builder.AddAuth();
 
 builder.Services.AddControllersWithViews().AddJsonOptions(options =>
 {
@@ -61,6 +46,10 @@ builder.Services.AddControllersWithViews().AddJsonOptions(options =>
     options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
 });
 builder.Services.AddRazorPages();
+
+builder.AddOpenTelemetry();
+
+builder.Services.AddHealthChecks();
 
 builder.Services.AddCharacterServices();
 
@@ -92,6 +81,8 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts(); // TODO: check if this should be handled by proxy
 }
+
+app.UseHealthChecks("/health");
 
 await using (var scope = app.Services.CreateAsyncScope())
 {
