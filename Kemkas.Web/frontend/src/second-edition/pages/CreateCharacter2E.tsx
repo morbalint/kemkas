@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {useParams} from "react-router-dom";
 import {Toast, ToastContainer} from "react-bootstrap";
-import {DefaultKarakter} from "../domain-models/karakter2E";
+import {ChangeLvl1Osztaly, DefaultKarakter} from "../domain-models/karakter2E";
 import {KarakterTulajdonsagok} from "../domain-models/tulajdonsag2E";
 import FajSelector2E from "../components/FajSelector2E";
 import Tulajdonsagok2E from "../components/Tulajdonsagok2E";
@@ -20,6 +20,10 @@ import MasodlagosErtekek from "../components/MasodlagosErtekek";
 import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
 import Felszereles from "../components/Felszereles";
 import {KarakterFelszereles} from "../domain-models/felszereles";
+import LevelUps from "../components/LevelUps";
+import {LevelDown, LevelUp} from "../domain-models/szintlepes";
+import HarcosFegyverSpecializacio from "../components/HarcosFegyverSpec";
+import {arraySetN} from "../../util";
 
 function CreateCharacter2E(props: {}) {
 
@@ -100,12 +104,15 @@ function CreateCharacter2E(props: {}) {
                 <OsztalySelector2E
                     currentFaj={karakter.faj}
                     currentOsztaly={karakter.osztaly}
-                    changeOsztaly={osztaly => setKarakter({...karakter, osztaly})}
+                    changeOsztaly={o => setKarakter(ChangeLvl1Osztaly(karakter, o))}
                 />
-                {karakter.osztaly === Osztaly2E.Harcos &&
-                    <div className='mb-6'>
-                        TODO: Harcos fegyver specializaciok!!
-                    </div>}
+                {karakter.szintlepesek[0].osztaly === Osztaly2E.Harcos &&
+                    <HarcosFegyverSpecializacio 
+                        specialization={karakter.szintlepesek[0].harcosFegyver || 'kard_hosszu'}
+                        szint={1}
+                        changeSpecialization={(spec) => setKarakter({...karakter, szintlepesek: arraySetN(karakter.szintlepesek, 0, {...karakter.szintlepesek[0], harcosFegyver: spec})})}
+                        existingSpecializations={karakter.szintlepesek.map(x => x.harcosFegyver)}
+                    />}
                 <KarakterKepzettsegek
                     getKepzettsegListaN={GetKepzettsegListaN(karakter)}
                     numberOfKepzettsegek={GetNumberOfKepzettsegek(tulajdonsagokFajjal.t_int, karakter.faj)}
@@ -120,10 +127,21 @@ function CreateCharacter2E(props: {}) {
                     ...karakter,
                     tulajdonsagok: tulajdonsagokFajjal,
                     szint: 1,
-                    hpRolls: []
+                    szintlepesek: karakter.szintlepesek.slice(0,1)
                 })} />
                 <hr />
-                <Felszereles osztaly={karakter.osztaly} felszereles={karakter.felszereles}
+                <LevelUps karakter={karakter} changeKarakter={setKarakter}/>
+                {karakter.szint > 1 && <hr/>}
+                <div className='d-grid gap-2 m-5'>
+                    {karakter.szint < 12 &&
+                        <button className='btn btn-dark btn-lg' type='button' onClick={() => LevelUp(karakter, setKarakter)}>Szintlépés!
+                            ⇧</button>}
+                    {karakter.szint > 1 &&
+                        <button className='btn btn-dark btn-lg' type='button' onClick={() => LevelDown(karakter, setKarakter)}>Visszalépés!
+                            ⇩</button>}
+                </div>
+                <hr/>
+                <Felszereles osztaly={karakter.szintlepesek[0].osztaly} felszereles={karakter.felszereles}
                              changeFelszereles={changeFelszereles}/>
 
                 <hr/>

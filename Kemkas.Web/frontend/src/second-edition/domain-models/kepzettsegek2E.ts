@@ -228,7 +228,7 @@ export function GetNumberOfKepzettsegek(t_int: number, faj: Faj2E, max: number =
     return numberOfKepzettseg;
 }
 
-export function SetDefaultTolvajKepzettsegek(karakter: Pick<Karakter2E, 'osztaly' | 'tolvajKepzettsegek'>, changeTolvajKepzettsegek: (tolvajKepzettsegek?: KepzettsegId[]) => void) {
+export function SetDefaultTolvajKepzettsegek(karakter: Pick<Karakter2E, 'osztaly' | 'szintlepesek' | 'tolvajKepzettsegek'>, changeTolvajKepzettsegek: (tolvajKepzettsegek?: KepzettsegId[]) => void) {
     if (karakter.osztaly !== Osztaly2E.Tolvaj && karakter.tolvajKepzettsegek != null) {
         changeTolvajKepzettsegek(undefined)
     }

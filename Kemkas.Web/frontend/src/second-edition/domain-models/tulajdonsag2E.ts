@@ -1,4 +1,6 @@
 import {d6} from "../../shared/domain-models/kockak";
+import {Karakter2E} from "./karakter2E";
+import {TulajdonsagokFajjal} from "./faj2E";
 
 export enum Tulajdonsag2E {
     Ero = 't_ero',
@@ -73,4 +75,16 @@ export function TulajdonsagModosito(tulajdonsagok: KarakterTulajdonsagok): Karak
         response[key] = Modifier(tulajdonsagok[key])
     }
     return response
+}
+
+export function TulajdonsagokTotal(karakter: Pick<Karakter2E, 'tulajdonsagok' | 'faj' | 'szintlepesek'>): KarakterTulajdonsagok {
+    const level1 = TulajdonsagokFajjal(karakter.tulajdonsagok, karakter.faj)
+    return {
+        t_ero: level1.t_ero + karakter.szintlepesek.filter(s => s.tulajdonsagNoveles === 't_ero').length,
+        t_ugy: level1.t_ugy + karakter.szintlepesek.filter(s => s.tulajdonsagNoveles === 't_ugy').length,
+        t_egs: level1.t_egs + karakter.szintlepesek.filter(s => s.tulajdonsagNoveles === 't_egs').length,
+        t_int: level1.t_int + karakter.szintlepesek.filter(s => s.tulajdonsagNoveles === 't_int').length,
+        t_bol: level1.t_bol + karakter.szintlepesek.filter(s => s.tulajdonsagNoveles === 't_bol').length,
+        t_kar: level1.t_kar + karakter.szintlepesek.filter(s => s.tulajdonsagNoveles === 't_kar').length,
+    }
 }

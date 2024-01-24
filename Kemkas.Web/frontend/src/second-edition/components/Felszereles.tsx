@@ -5,64 +5,7 @@ import {AllowedPajzsTypes, AllowedPancelTypes} from '../domain-models/allowed-pa
 import fegyverek from '../domain-models/fegyver.json'
 import {arraySetN} from "../../util";
 import {AllowedFegyver} from "../domain-models/allowed-fegyver";
-
-export function FegyverLabel(fegyver: Fegyver): string {
-    const flags = [] as string[]
-    if (fegyver.Harcos) {
-        flags.push("H")
-    }
-    if (fegyver.Masfelkezes) {
-        flags.push("1½K")
-    }
-    if (fegyver.Ketkezes) {
-        if (fegyver.Type === "kozelharci") {
-            flags.push("2K")
-        } else {
-            if (fegyver.KetkezesBonusz) {
-                flags.push("2KB")
-            } else {
-                flags.push("2KN")
-            }
-        }
-    }
-    if (fegyver.HarciManover) {
-        flags.push("+2 HM")
-    }
-    if (fegyver.Alakzat){
-        flags.push("AL")
-    }
-    if (fegyver.Hosszu) {
-        flags.push("HO")
-    }
-    if (fegyver.Kabito) {
-        flags.push("KO")
-    }
-    if (fegyver.LovasRoham) {
-        flags.push("LR")
-    }
-    if (fegyver.PancelToro) {
-        flags.push("PT")
-    }
-    if (fegyver.PajzsZuzo) {
-        flags.push("PZ")
-    }
-    if (fegyver.Rohamtoro) {
-        flags.push("RT")
-    }
-    // if (fegyver.EroBonusz) {
-    //     flags.push("ER")
-    // }
-    if (fegyver.Megjegyzes != null && fegyver.Megjegyzes.length > 0) {
-        flags.push(fegyver.Megjegyzes)
-    }
-    const serializedFlags = flags.reduce((p,c) => `${p}${c} `, '');
-    const sizeLabel = fegyver.Size < 1 && fegyver.Size > 0 ? ` [1/${Math.round(1 / fegyver.Size)}]` : (fegyver.Size > 1 ? ` [${fegyver.Size}]` : '');
-    return `${fegyver.Name}${sizeLabel} ${serializedFlags.length > 0 ? "| " + serializedFlags : ''}| ${
-        fegyver.DamageMultiplier > 1 ? `${fegyver.DamageMultiplier}*` : ''}${fegyver.NumberOfDamageDice}d${fegyver.DamageDice}${fegyver.DamageBonus > 0 ? ` +${fegyver.DamageBonus}` : ''} ${
-        fegyver.CritRangeStart < 20 ? `${fegyver.CritRangeStart}-20` : ''}x${fegyver.CritMultiplier}${
-        fegyver.Price > 0 ? ` | ár: ${fegyver.Price} at ` : ''}${
-        fegyver.Range > 10 ? ` | táv: ${fegyver.Range}` : ''}`
-}
+import FegyverSelector from "./FegyverSelector";
 
 function Felszereles(props: {felszereles: KarakterFelszereles, changeFelszereles: (felszereles: KarakterFelszereles) => void, osztaly: Osztaly2E}) {
     const { felszereles, changeFelszereles, osztaly } = props;
@@ -116,21 +59,7 @@ function Felszereles(props: {felszereles: KarakterFelszereles, changeFelszereles
         {valasztottFegyverek.map(({idx, fegyver}) => (
             <div key={`fegyver-${idx}`} className='row m-2'>
                 <label className='col-md-2 col-sm-3 col-form-label'>Fegyver</label>
-                <select className='col form-select' value={fegyver.Id}
-                        onChange={e => changeFegyver(idx, e.target.value)}>
-                    <optgroup label="Közelharci">
-                        {allowedFegyverek.filter(f => f.Type === 'kozelharci').map(f => <option
-                            key={f.Id} value={f.Id}>{FegyverLabel(f)}</option>)}
-                    </optgroup>
-                    <optgroup label="Közelharci, dobható">
-                        {allowedFegyverek.filter(f => f.Type === 'dobhato').map(f => <option
-                            key={f.Id} value={f.Id}>{FegyverLabel(f)}</option>)}
-                    </optgroup>
-                    <optgroup label="Távolsági">
-                        {allowedFegyverek.filter(f => f.Type === 'lofegyver').map(f => <option 
-                            key={f.Id} value={f.Id}>{FegyverLabel(f)}</option>)}
-                    </optgroup>
-                </select>
+                <FegyverSelector fegyverek={allowedFegyverek} selectedId={fegyver.Id} onChange={(fegyverId) => changeFegyver(idx, fegyverId)} />
                 <button className='col-md-2 col-sm-3 btn btn-outline-dark btn-lg ms-2' type='button'
                         onClick={() => changeFelszereles({
                             ...felszereles,
