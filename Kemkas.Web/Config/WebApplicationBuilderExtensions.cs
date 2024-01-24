@@ -49,6 +49,7 @@ public static class WebApplicationBuilderExtensions
     {
         var otlResourceBuilder = ResourceBuilder.CreateDefault().AddService("kemkas-api");
         var openTelemetryEndpoint = builder.Configuration.GetSection("monitoring")["url"];
+        var consoleEnabled = builder.Configuration.GetSection("monitoring")["console"] == "true";
 
         builder.Services.AddOpenTelemetry().WithTracing(tracerProviderBuilder =>
             {
@@ -59,11 +60,10 @@ public static class WebApplicationBuilderExtensions
                 {
                     tracerProviderBuilder.AddOtlpExporter(opt => opt.Endpoint = new Uri(openTelemetryEndpoint));
                 }
-                else
+                else if (consoleEnabled)
                 {
                     tracerProviderBuilder.AddConsoleExporter();
                 }
-                    
             })
             .WithMetrics(meterProviderBuilder =>
             {
@@ -74,7 +74,7 @@ public static class WebApplicationBuilderExtensions
                 {
                     meterProviderBuilder.AddOtlpExporter(opt => opt.Endpoint = new Uri(openTelemetryEndpoint));
                 }
-                else
+                else if (consoleEnabled)
                 {
                     meterProviderBuilder.AddConsoleExporter();
                 }
