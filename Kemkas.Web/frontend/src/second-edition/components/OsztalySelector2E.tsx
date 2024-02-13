@@ -8,21 +8,16 @@ import {
 } from "../domain-models/osztaly2E";
 import {Faj2E, SzintKorlatokFajokra} from "../domain-models/faj2E";
 
-function OsztalySelector2E(props: {
-    currentFaj: Faj2E, 
-    currentOsztaly: Osztaly2E, 
-    changeOsztaly: (newOsztaly: Osztaly2E) => void
-}) {
-    const {currentFaj, currentOsztaly, changeOsztaly} = props;
-
+export function BasicOsztalySelector2E(props: {faj: Faj2E, osztaly: Osztaly2E, changeOsztaly: (osztaly: Osztaly2E) => void}) {
+    const {faj, osztaly, changeOsztaly} = props;
     return <>
         <div className='row m-2'>
             <label className='col-md-2 col-sm-3 col-form-label'>Osztály</label>
-            <select className="col form-select" value={currentOsztaly}
+            <select className="col form-select" value={osztaly}
                     onChange={(e) => changeOsztaly(e.target.value as Osztaly2E)}>
                 <optgroup label='Harcos'>
                     <option value={Osztaly2E.Harcos}>{OsztalyLabel(Osztaly2E.Harcos)}</option>
-                    {SzintKorlatokFajokra(currentFaj)[Osztaly2E.Amazon] > 0 && (
+                    {SzintKorlatokFajokra(faj)[Osztaly2E.Amazon] > 0 && (
                         <option value={Osztaly2E.Amazon}>{OsztalyLabel(Osztaly2E.Amazon)}</option>)}
                     <option value={Osztaly2E.Barbar}>{OsztalyLabel(Osztaly2E.Barbar)}</option>
                     <option value={Osztaly2E.Ijasz}>{OsztalyLabel(Osztaly2E.Ijasz)}</option>
@@ -41,6 +36,18 @@ function OsztalySelector2E(props: {
                 </optgroup>
             </select>
         </div>
+    </>
+}
+
+function OsztalySelector2E(props: {
+    currentFaj: Faj2E,
+    currentOsztaly: Osztaly2E,
+    changeOsztaly: (newOsztaly: Osztaly2E) => void
+}) {
+    const {currentFaj, currentOsztaly, changeOsztaly} = props;
+
+    return <>
+        <BasicOsztalySelector2E faj={currentFaj} osztaly={currentOsztaly} changeOsztaly={changeOsztaly} />
         <div className='row m-2'>
         <label className='col-md-2 col-sm-3 form-label'></label>
             <div className='col'>

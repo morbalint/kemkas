@@ -103,7 +103,7 @@ function CreateCharacter2E(props: {}) {
                 </div>
                 <OsztalySelector2E
                     currentFaj={karakter.faj}
-                    currentOsztaly={karakter.osztaly}
+                    currentOsztaly={karakter.szintlepesek[0].osztaly}
                     changeOsztaly={o => setKarakter(ChangeLvl1Osztaly(karakter, o))}
                 />
                 {karakter.szintlepesek[0].osztaly === Osztaly2E.Harcos &&

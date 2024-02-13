@@ -14,7 +14,7 @@ export interface MasodlagosErtekekView {
     Mentok: Mentok
 }
 
-export type KarakterpickForMasodlagosErtekek = Pick<Karakter2E, 'osztaly' | 'tulajdonsagok' | 'szint' | 'szintlepesek' | 'faj' | 'felszereles'>
+export type KarakterpickForMasodlagosErtekek = Pick<Karakter2E, 'tulajdonsagok' | 'szint' | 'szintlepesek' | 'faj' | 'felszereles'>
 
 export function BaseHP(osztaly: Osztaly2E) {
     let base = 4;
@@ -45,7 +45,7 @@ export function BaseHP(osztaly: Osztaly2E) {
     return base
 }
 
-export function HP(karakter: Pick<Karakter2E, 'osztaly' | 'tulajdonsagok' | 'szintlepesek'>): number {
+export function HP(karakter: Pick<Karakter2E, 'tulajdonsagok' | 'szintlepesek'>): number {
     const egeszsegModifier = Modifier(karakter.tulajdonsagok.t_egs)
     return karakter.szintlepesek
         // https://lfg.hu/forum/topic/15079-kard-es-magia/page/219/#comment-2218333
@@ -53,7 +53,8 @@ export function HP(karakter: Pick<Karakter2E, 'osztaly' | 'tulajdonsagok' | 'szi
         .reduce((sum, val) => sum + val, 0)
 }
 
-export function VO(karakter: Pick<Karakter2E, 'tulajdonsagok' | 'faj' | 'osztaly' | 'szint' | 'felszereles'>): number {
+export function VO(karakter: Pick<Karakter2E, 'tulajdonsagok' | 'faj' | 'szintlepesek' | 'szint' | 'felszereles'>): number {
+    const osztalyok = new Set(karakter.szintlepesek.map(x => x.osztaly))
     const pancel = GetPancel(karakter.felszereles.pancelID)
     const pancelVO = pancel?.VO ?? 0
     const pajzsVO = GetPajzs(karakter.felszereles.pajzsID)?.VO ?? 0
@@ -62,14 +63,16 @@ export function VO(karakter: Pick<Karakter2E, 'tulajdonsagok' | 'faj' | 'osztaly
     if (pancel) {
         abilityVO = Math.min(MaxAbilityVO(pancel.Type), abilityVO)
     }
-    if (karakter.osztaly === Osztaly2E.Tengeresz) {
-        vo += Math.floor(karakter.szint / 3)
+    if (osztalyok.has(Osztaly2E.Tengeresz)) {
+        const kalozSzintek = karakter.szintlepesek.filter(x => x.osztaly === Osztaly2E.Tengeresz).length
+        vo += Math.floor(kalozSzintek / 3)
     }
-    if (karakter.osztaly === Osztaly2E.Amazon) {
+    if (osztalyok.has(Osztaly2E.Amazon)) {
         if (karakter.tulajdonsagok.t_kar > karakter.tulajdonsagok.t_ugy) {
             abilityVO = Modifier(karakter.tulajdonsagok.t_kar)
         }
-        vo += Math.floor(karakter.szint / 2)
+        const amazonSzintek = karakter.szintlepesek.filter(x => x.osztaly === Osztaly2E.Amazon).length
+        vo += Math.floor(amazonSzintek / 2)
     }
     if (karakter.faj === Faj2E.Felszerzet || karakter.faj === Faj2E.Gnom){
         vo += 1

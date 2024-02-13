@@ -3,7 +3,8 @@ import {Karakter2E} from "../domain-models/karakter2E";
 import {SignedNumberToText} from "../../shared/components/Helpers";
 import {Mentok, MentoTipus, MentoTipusLabel, MentokTotal} from "../domain-models/mentok";
 import {BaseHP, HP} from "../domain-models/masodlagos_ertekek";
-import {TamadasBonusz} from "../domain-models/tamadas_bonusz";
+import {MultiClassTamadasBonusz} from "../domain-models/tamadas_bonusz";
+import {Osztaly2E} from "../domain-models/osztaly2E";
 
 function MentoNovekedes(props : {tipus: MentoTipus, ujMentok: Mentok, regiMentok: Mentok}) {
     const {tipus, ujMentok, regiMentok} = props
@@ -28,16 +29,17 @@ function UjMento(props : {tipus: MentoTipus, ujMentok: Mentok, regiMentok: Mento
 }
 
 function BasicNewLevel(props: {
-    karakter: Pick<Karakter2E, 'osztaly' | 'tulajdonsagok' | 'szintlepesek'>
+    karakter: Pick<Karakter2E, 'tulajdonsagok' | 'szintlepesek'>
     szint: number
+    osztaly: Osztaly2E
     changeRolledHP: (hp: number) => void,
 }) {
-    const {karakter, szint, changeRolledHP} = props
-    const regiMentok = MentokTotal({...karakter, szint: szint - 1})
-    const ujMentok = MentokTotal({...karakter, szint: szint})
+    const {karakter, szint, osztaly, changeRolledHP} = props
+    const regiMentok = MentokTotal({...karakter, szintlepesek: karakter.szintlepesek.slice(0, szint - 1)})
+    const ujMentok = MentokTotal({...karakter, szintlepesek: karakter.szintlepesek.slice(0, szint)})
 
-    const regiTB = TamadasBonusz(karakter.osztaly, szint-1)
-    const ujTB = TamadasBonusz(karakter.osztaly, szint)
+    const regiTB = MultiClassTamadasBonusz(karakter.szintlepesek.slice(0, szint-1))
+    const ujTB = MultiClassTamadasBonusz(karakter.szintlepesek.slice(0, szint))
     if (regiTB.length < ujTB.length) {
         regiTB.push(0)
     }
@@ -48,7 +50,7 @@ function BasicNewLevel(props: {
         <div className='row'>
             <div className='col-lg-6'>
                 <div className='row m-2'>
-                    <label className='col-sm-6 col-8 col-form-label'>Plusz dobott HP (d{BaseHP(karakter.osztaly)}){' '}</label>
+                    <label className='col-sm-6 col-8 col-form-label'>Plusz dobott HP (d{BaseHP(osztaly)}){' '}</label>
                     <div className='col-sm-2 col'>
                         <input
                             className='form-control'
@@ -71,7 +73,7 @@ function BasicNewLevel(props: {
             <div className='col-lg-6'>
                 <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label'>Új HP{' '}</label>
-                    <span className='col col-form-label'>{HP({...karakter, szintlepesek: karakter.szintlepesek.slice(0, szint-1)})}</span>
+                    <span className='col col-form-label'>{HP({...karakter, szintlepesek: karakter.szintlepesek.slice(0, szint)})}</span>
                 </div>
                 {isTBincreased && <div className='row m-2'>
                     <label className='col-sm-6 col-8 col-form-label'>Új Támadás bónusz{' '}</label>

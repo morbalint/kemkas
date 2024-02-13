@@ -1,6 +1,7 @@
 import {Osztaly2E} from "./osztaly2E";
 import {Karakter2E} from "./karakter2E";
 import {KarakterTulajdonsagok, TulajdonsagModosito} from "./tulajdonsag2E";
+import {Szintlepes} from "./szintlepes";
 
 export interface Mentok {
     kitartas: number
@@ -73,8 +74,26 @@ export function MentoModositok(tulajdonsagModositok: KarakterTulajdonsagok) {
     }
 }
 
-export function MentokTotal(karakter: Pick<Karakter2E, 'osztaly' | 'szint' | 'tulajdonsagok'>) {
-    const alap = MentokAlap(karakter.osztaly, karakter.szint)
+export function MultiClassMentokAlap(szintlepesek: Szintlepes[]) : Mentok {
+    const osztalyok = new Set(szintlepesek.map(x => x.osztaly))
+    let mentok = {
+        kitartas: 0,
+        reflex: 0,
+        akaratero: 0
+    }
+    for (const osztaly of osztalyok) {
+        const szint = szintlepesek.filter(x => x.osztaly === osztaly).length
+        const uj_mentok = MentokAlap(osztaly, szint)
+        mentok.akaratero += uj_mentok.akaratero
+        mentok.reflex += uj_mentok.reflex
+        mentok.kitartas += uj_mentok.kitartas
+    }
+    
+    return mentok
+}
+
+export function MentokTotal(karakter: Pick<Karakter2E, 'szintlepesek' | 'tulajdonsagok'>) {
+    const alap = MultiClassMentokAlap(karakter.szintlepesek)
     const modositok = MentoModositok(TulajdonsagModosito(karakter.tulajdonsagok))
     return {
         kitartas: alap.kitartas + modositok.kitartas,

@@ -13,12 +13,21 @@
 
 ## Features
 - multiclass characters
+  - 2e -ben félig működik
+    - druidáknál tiltani kell
+    - PDF-ben varazshasznalok
+    - tolvaj 9ik szintű képessége
 
 ## Epics
 - Backend
 - Varazslatok
 - Felszerelés
-- KéM 2.0-ra felkészülés
+  - 1e-ben fel van már véve az adat. Gergő neki veselkedik.
+  - 2e-ben teljesen hiányzik
+- KéM 2e
+  - frontend oldalon úgy, ahogy megvan
+  - PDF hiányzik
+  - backend hiányzik
 - Klikkelésre dobás
 
 

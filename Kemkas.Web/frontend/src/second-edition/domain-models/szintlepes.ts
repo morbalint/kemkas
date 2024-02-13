@@ -20,14 +20,15 @@ export function PickableSpecializationFilter(existingSpecilizations: (string | u
 }
 
 export function LevelUp(karakter: Karakter2E, changeKarakter: (input: Karakter2E) => void) {
+    const osztaly = karakter.szintlepesek[0].osztaly 
     const tulajdonsagokTotal = TulajdonsagokTotal(karakter)
     const szint = karakter.szint + 1
-    const dice = BaseHP(karakter.osztaly)
+    const dice = BaseHP(osztaly)
     const roll = dAny(dice)
     console.log(`Level ${szint} HP roll on d${dice} is: ${roll}`)
     
     const szintlepes: Szintlepes = {
-        osztaly: karakter.osztaly,
+        osztaly: osztaly,
         HProll: roll
     }
     
@@ -39,14 +40,24 @@ export function LevelUp(karakter: Karakter2E, changeKarakter: (input: Karakter2E
             }
         }
     }
-    if(karakter.osztaly === Osztaly2E.Harcos && szint % 2 === 1) {
-        const harcosSpecializaciok = karakter.szintlepesek.map(x => x.harcosFegyver)
-        szintlepes.harcosFegyver = AllowedFegyver(Osztaly2E.Harcos).filter(PickableSpecializationFilter(harcosSpecializaciok, karakter.szint))[0].Id
+    if(osztaly === Osztaly2E.Harcos) {
+        const harcosSzint = karakter.szintlepesek.filter(x => x.osztaly === Osztaly2E.Harcos).length + 1
+        if (harcosSzint % 2 === 1) {
+            const harcosSpecializaciok = karakter.szintlepesek.map(x => x.harcosFegyver)
+            let specializationFilter = PickableSpecializationFilter(harcosSpecializaciok, harcosSzint)
+            szintlepes.harcosFegyver = AllowedFegyver(Osztaly2E.Harcos).filter(specializationFilter)[0].Id
+        }
     }
-    if(karakter.osztaly === Osztaly2E.Tengeresz && szint % 3 === 0) {
-        let kalozKritikus = karakter.szintlepesek.map(x => x.kalozKritikus)
-        szintlepes.kalozKritikus = AllowedFegyver(Osztaly2E.Tengeresz).filter(PickableSpecializationFilter(kalozKritikus, szint))[0].Id
+    if(osztaly === Osztaly2E.Tengeresz) {
+        const kalozSzint = karakter.szintlepesek.filter(x => x.osztaly === Osztaly2E.Tengeresz).length + 1
+        if (kalozSzint % 3 === 0) {
+            let kalozKritikus = karakter.szintlepesek.map(x => x.kalozKritikus)
+            let specializationFilter = PickableSpecializationFilter(kalozKritikus, kalozSzint)
+            szintlepes.kalozKritikus = AllowedFegyver(Osztaly2E.Tengeresz).filter(specializationFilter)[0].Id
+        }
     }
+    console.log(`picked harcos specializacio ${szintlepes.harcosFegyver}`)
+    console.log(`picked kaloz krit ${szintlepes.kalozKritikus}`)
     changeKarakter({...karakter, szint, szintlepesek: [...karakter.szintlepesek, szintlepes]})
 }
 

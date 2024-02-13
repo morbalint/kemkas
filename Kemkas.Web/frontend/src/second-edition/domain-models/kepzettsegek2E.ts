@@ -209,12 +209,12 @@ export const Kepzettsegek: Record<KepzettsegId, Kepzettseg> =
         (acc: Record<KepzettsegId, Kepzettseg>, k) => { acc[k.Id] = k; return acc; },
         {} as Record<KepzettsegId, Kepzettseg>);
 
-export function AvailableKezpettsegList(osztaly: Osztaly2E): Kepzettseg[] {
-    return KepzettsegLista.filter(k => k.Osztalyok == null || k.Osztalyok.includes(osztaly))
+export function AvailableKezpettsegList(...osztalyok: Osztaly2E[]): Kepzettseg[] {
+    return KepzettsegLista.filter(k => k.Osztalyok == null || k.Osztalyok.some(o => osztalyok.includes(o)))
 }
 
 export function GetNumberOfKepzettsegek(t_int: number, faj: Faj2E, max: number = 11) {
-    //max = 3 + 1 + 3 + 4 // 3 base, 1 human, 3 from max ability modifier, 4 from Thief
+    //max = 3 + 1 + 3 + 5 = 12 // 3 base, 1 human, 3 from max ability modifier, 5 from Thief at 9th level
     let numberOfKepzettseg = 3 + Modifier(t_int) + (faj === Faj2E.Ember ? 1 : 0)
 
     if (numberOfKepzettseg < 1) {
@@ -228,18 +228,20 @@ export function GetNumberOfKepzettsegek(t_int: number, faj: Faj2E, max: number =
     return numberOfKepzettseg;
 }
 
-export function SetDefaultTolvajKepzettsegek(karakter: Pick<Karakter2E, 'osztaly' | 'szintlepesek' | 'tolvajKepzettsegek'>, changeTolvajKepzettsegek: (tolvajKepzettsegek?: KepzettsegId[]) => void) {
-    if (karakter.osztaly !== Osztaly2E.Tolvaj && karakter.tolvajKepzettsegek != null) {
+export function SetDefaultTolvajKepzettsegek(karakter: Pick<Karakter2E, 'szintlepesek' | 'tolvajKepzettsegek'>, changeTolvajKepzettsegek: (tolvajKepzettsegek?: KepzettsegId[]) => void) {
+    const hasTolvajSzint = karakter.szintlepesek.some(szint => szint.osztaly === Osztaly2E.Tolvaj)
+    if (!hasTolvajSzint && karakter.tolvajKepzettsegek != null) {
         changeTolvajKepzettsegek(undefined)
     }
-    if (karakter.osztaly === Osztaly2E.Tolvaj && (karakter.tolvajKepzettsegek == null || karakter.tolvajKepzettsegek.length === 0)) {
+    if (hasTolvajSzint && (karakter.tolvajKepzettsegek == null || karakter.tolvajKepzettsegek.length === 0)) {
         const tolvajKepzettsegek = TolvajKepzettsegList.slice(0, 4).map(x => x.Id)
         changeTolvajKepzettsegek(tolvajKepzettsegek)
     }
 }
 
-export function GetKepzettsegListaN(karakter: Pick<Karakter2E, 'osztaly' | 'faj' | 'kepzettsegek' | 'tolvajKepzettsegek'>) {
-    const availableKepzettsegList = AvailableKezpettsegList(karakter.osztaly)
+export function GetKepzettsegListaN(karakter: Pick<Karakter2E, 'szintlepesek' | 'faj' | 'kepzettsegek' | 'tolvajKepzettsegek'>) {
+    const osztalyok = new Set(karakter.szintlepesek.map(x => x.osztaly))
+    const availableKepzettsegList = AvailableKezpettsegList(...osztalyok)
     return (n: number): Kepzettseg[] => {
         let available = [...availableKepzettsegList]
         if (n === 0) {
@@ -249,7 +251,8 @@ export function GetKepzettsegListaN(karakter: Pick<Karakter2E, 'osztaly' | 'faj'
             if (karakter.faj === Faj2E.Nomad) {
                 return [Kepzettsegek.k_lovaglas]
             }
-            if (karakter.faj === Faj2E.Birodalmi && karakter.osztaly !== Osztaly2E.Tolvaj) {
+            // TODO birodalmi tolvaj, tolvajképzettségek!
+            if (karakter.faj === Faj2E.Birodalmi) {
                 return [Kepzettsegek.k_alkimia, Kepzettsegek.k_meregkeveres, Kepzettsegek.k_okkultizmus]
             }
             if (karakter.faj === Faj2E.Torpe) {
@@ -258,30 +261,38 @@ export function GetKepzettsegListaN(karakter: Pick<Karakter2E, 'osztaly' | 'faj'
             if (karakter.faj === Faj2E.Elf || karakter.faj === Faj2E.Felelf) {
                 return [Kepzettsegek.k_vadonjaras]
             }
-            if (karakter.osztaly === Osztaly2E.Druida || karakter.osztaly === Osztaly2E.Vandor) {
+            if (osztalyok.has(Osztaly2E.Druida) || osztalyok.has(Osztaly2E.Vandor)) {
                 return [Kepzettsegek.k_vadonjaras]
             }
-            if (karakter.osztaly === Osztaly2E.Dalnok) {
+            if (osztalyok.has(Osztaly2E.Dalnok)) {
                 return [Kepzettsegek.k_eloadas]
             }
         }
         if (n === 1) {
-            if (karakter.osztaly === Osztaly2E.Dalnok 
-                && [Faj2E.Eszaki, Faj2E.Nomad, Faj2E.Birodalmi, Faj2E.Torpe, Faj2E.Elf, Faj2E.Felelf].includes(karakter.faj)) {
-                return [Kepzettsegek.k_eloadas]
-            }
-            if ([Osztaly2E.Druida, Osztaly2E.Vandor].includes(karakter.osztaly)
-                && [Faj2E.Eszaki, Faj2E.Nomad, Faj2E.Birodalmi, Faj2E.Torpe].includes(karakter.faj)) {
+            if ((osztalyok.has(Osztaly2E.Vandor) || osztalyok.has(Osztaly2E.Druida))
+                && karakter.kepzettsegek[0] !== Kepzettsegek.k_vadonjaras.Id) {
                 return [Kepzettsegek.k_vadonjaras]
             }
+            if (osztalyok.has(Osztaly2E.Dalnok)
+                && karakter.kepzettsegek[0] !== Kepzettsegek.k_eloadas.Id) {
+                return [Kepzettsegek.k_eloadas]
+            }
+        }
+        if (n === 2) { // maybe write a better abstraction?
+            if (osztalyok.has(Osztaly2E.Dalnok)
+                && karakter.kepzettsegek[0] !== Kepzettsegek.k_eloadas.Id 
+                && karakter.kepzettsegek[1] !== Kepzettsegek.k_eloadas.Id) {
+                return [Kepzettsegek.k_eloadas]
+            } 
         }
         const kepzettsegekWithoutN = [...karakter.kepzettsegek.slice(0, n), ...karakter.kepzettsegek.slice(n + 1)]
         return available.filter(x => !kepzettsegekWithoutN.includes(x.Id) && !karakter.tolvajKepzettsegek?.includes(x.Id))
     }
 }
 
-export function SetDefaultKepzettsegek(karakter: Pick<Karakter2E, 'osztaly' | 'faj' | 'tulajdonsagok' | 'kepzettsegek' | 'tolvajKepzettsegek'>, changeKepzettsegek: (k: KepzettsegId[]) => void) {
-    const availableKepzettsegList = AvailableKezpettsegList(karakter.osztaly)
+export function SetDefaultKepzettsegek(karakter: Pick<Karakter2E, 'szintlepesek' | 'faj' | 'tulajdonsagok' | 'kepzettsegek' | 'tolvajKepzettsegek'>, changeKepzettsegek: (k: KepzettsegId[]) => void) {
+    const osztalyok = karakter.szintlepesek.map(x => x.osztaly)
+    const availableKepzettsegList = AvailableKezpettsegList(...osztalyok)
     const numberOfKepzettsegek = GetNumberOfKepzettsegek(karakter.tulajdonsagok.t_int, karakter.faj, availableKepzettsegList.length)
     let kepzettsegek = [...karakter.kepzettsegek]
 
