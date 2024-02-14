@@ -56,8 +56,7 @@ export function LevelUp(karakter: Karakter2E, changeKarakter: (input: Karakter2E
             szintlepes.kalozKritikus = AllowedFegyver(Osztaly2E.Tengeresz).filter(specializationFilter)[0].Id
         }
     }
-    console.log(`picked harcos specializacio ${szintlepes.harcosFegyver}`)
-    console.log(`picked kaloz krit ${szintlepes.kalozKritikus}`)
+
     changeKarakter({...karakter, szint, szintlepesek: [...karakter.szintlepesek, szintlepes]})
 }
 
@@ -68,4 +67,33 @@ export function LevelDown(karakter: Karakter2E, changeKarakter: (input: Karakter
     else {
         console.error(`Can't level down character: ${karakter}`)
     }
+}
+
+export type ClassLevels = {
+    [key in Osztaly2E]: number;
+};
+
+const defaultClassLevels: ClassLevels = {
+    [Osztaly2E.Amazon]: 0,
+    [Osztaly2E.Barbar]: 0,
+    [Osztaly2E.Ijasz]: 0,
+    [Osztaly2E.Harcos]: 0,
+    [Osztaly2E.Tengeresz]: 0,
+    
+    [Osztaly2E.Tolvaj]: 0,
+    [Osztaly2E.Pap]: 0,
+
+    [Osztaly2E.Varazslo]: 0,
+    [Osztaly2E.Illuzionista]: 0,
+
+    [Osztaly2E.Dalnok]: 0,
+    [Osztaly2E.Druida]: 0,
+    [Osztaly2E.Vandor]: 0,
+}
+
+export function getClassLevels(szintlepesek: Szintlepes[]) : ClassLevels {
+    return szintlepesek.map(x => x.osztaly).reduce((classLevels, osztaly) => {
+        classLevels[osztaly]++
+        return classLevels
+    }, {...defaultClassLevels})
 }

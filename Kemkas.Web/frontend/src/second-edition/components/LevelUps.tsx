@@ -7,7 +7,9 @@ import {arraySetN} from "../../util";
 import {Osztaly2E} from "../domain-models/osztaly2E";
 import KalozKritikus from "./KalozKritikus";
 import HarcosFegyverSpecializacio from "./HarcosFegyverSpec";
-import {BasicOsztalySelector2E} from "./OsztalySelector2E";
+
+import MultiClassOsztalySelector2E from "./MultiClassOsztalySelector2E";
+import {getClassLevels} from "../domain-models/szintlepes";
 
 function LevelUp(props: {
     szint: number,
@@ -30,22 +32,30 @@ function LevelUp(props: {
         changeOsztaly
     } = props
 
-    const harcosSzint = karakter.szintlepesek.filter(x => x.osztaly === Osztaly2E.Harcos).length
-    const kalozSzint = karakter.szintlepesek.filter(x => x.osztaly === Osztaly2E.Tengeresz).length
+    const classLevels = getClassLevels(karakter.szintlepesek)
+    
+    const harcosSzint = classLevels[Osztaly2E.Harcos]
+    const kalozSzint = classLevels[Osztaly2E.Tengeresz]
     const specialization = karakter.szintlepesek[szint-1].harcosFegyver
     const krit = karakter.szintlepesek[szint-1].kalozKritikus
-
+    
     return <div>
         <div className='row mt-3'>
             <h5 className='col align-self-center'>{szint}. Szint</h5>
         </div>
-        <BasicOsztalySelector2E faj={karakter.faj} osztaly={osztaly} changeOsztaly={changeOsztaly} />
-        {szint % 4 === 0 
-            && <TulajdonsagNoveles
-            tulajdonsagok={karakter.tulajdonsagok}
-            tulajdonsagNoveles={karakter.szintlepesek[szint-1].tulajdonsagNoveles!}
-            changeTulajdonsagNoveles={changeTulajdonsagNoveles}
-        />}
+        {osztaly !== Osztaly2E.Druida && 
+            <MultiClassOsztalySelector2E 
+                faj={karakter.faj} 
+                osztaly={osztaly}
+                changeOsztaly={changeOsztaly}
+                osztalySzint={classLevels[osztaly]}
+            /> }
+        {szint % 4 === 0 && 
+            <TulajdonsagNoveles
+                tulajdonsagok={karakter.tulajdonsagok}
+                tulajdonsagNoveles={karakter.szintlepesek[szint-1].tulajdonsagNoveles!}
+                changeTulajdonsagNoveles={changeTulajdonsagNoveles}
+            /> }
         <BasicNewLevel
             szint={szint}
             karakter={karakter}
@@ -60,9 +70,9 @@ function LevelUp(props: {
                 szint={harcosSzint}
             />
         }
-        {osztaly === Osztaly2E.Tengeresz && kalozSzint % 3 === 0 && !!krit &&
+        {osztaly === Osztaly2E.Tengeresz && kalozSzint % 3 === 0 &&
             <KalozKritikus
-                kritFegyverId={krit}
+                kritFegyverId={krit!}
                 existingKrits={karakter.szintlepesek.map(x => x.kalozKritikus)}
                 changeKrit={changeKalozKritikus}
                 szint={kalozSzint}
