@@ -10,7 +10,7 @@ import {BaseHP} from "./masodlagos_ertekek";
 import {dAny} from "../../shared/domain-models/kockak";
 
 export interface Karakter2E {
-    name: string,
+    nev: string,
     nem?: string,
     kor: number,
     isten?: string,
@@ -25,7 +25,7 @@ export interface Karakter2E {
 }
 
 export const DefaultKarakter: Karakter2E = {
-    name: 'Névtelen Kalandozó',
+    nev: 'Névtelen Kalandozó',
     kor: 20,
     jellem: 'S',
     tulajdonsagok: TulajdonsagDefaults,

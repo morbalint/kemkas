@@ -58,9 +58,9 @@ function CreateCharacter2E(props: {}) {
                 <div className='row m-2'>
                     <label className='col-md-2 col-sm-3 col-form-label'>Név</label>
                     <input className='col form-control'
-                           value={karakter.name}
+                           value={karakter.nev}
                            onChange={(e) => setKarakter({...karakter, name: e.target.value})}/>
-                    {!karakter.name &&
+                    {!karakter.nev &&
                         <span className='form-field-error'>A karaktered nem mászkálhat névtelenül a világban!</span>}
                 </div>
                 <div className='row m-2'>
