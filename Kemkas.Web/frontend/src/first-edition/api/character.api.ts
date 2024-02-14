@@ -2,7 +2,7 @@ import {KarakterInputs} from "../domain-models/karakter";
 import axios from "axios";
 
 export async function StoreNewCharacter(karakter: KarakterInputs, isPublic: boolean = false) {
-    let response = await axios.post(`${window.location.origin}/api/Character/`, karakter, {
+    let response = await axios.post(`${window.location.origin}/api/Character1E/`, karakter, {
         withCredentials: true,
         params: {
             isPublic,
@@ -17,7 +17,7 @@ export async function StoreNewCharacter(karakter: KarakterInputs, isPublic: bool
 }
 
 export async function UpdateCharacter(id: string, karakter: KarakterInputs, isPublic: boolean = false) {
-    let response = await axios.post(`${window.location.origin}/api/Character/${id}`, karakter, {
+    let response = await axios.post(`${window.location.origin}/api/Character1E/${id}`, karakter, {
         withCredentials: true,
         params: {
             isPublic,

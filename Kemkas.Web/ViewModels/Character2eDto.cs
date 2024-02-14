@@ -3,11 +3,11 @@ using System.Text.Json.Serialization;
 
 namespace Kemkas.Web.ViewModels;
 
-public struct CharacterDto
+public struct Character2eDto
 {
     [Required]
-    [JsonPropertyName("name")]
-    public string Name { get; set; }
+    [JsonPropertyName("nev")]
+    public string Nev { get; set; }
     
     [JsonPropertyName("nem")]
     public string? Nem { get; set; }
@@ -24,9 +24,6 @@ public struct CharacterDto
     [JsonPropertyName("faj")]
     public string Faj { get; set; }
     
-    [JsonPropertyName("osztaly")]
-    public string Osztaly { get; set; }
-    
     [JsonPropertyName("tulajdonsagok")]
     public KarakterTulajdonsagokDto Tulajdonsagok { get; set; }
     
@@ -38,18 +35,9 @@ public struct CharacterDto
     
     [JsonPropertyName("szint")]
     public byte Szint { get; set; }
-    
-    [JsonPropertyName("hpRolls")]
-    public IList<byte> HpRolls { get; set; }
-    
-    [JsonPropertyName("tulajdonsagNovelesek")]
-    public IList<string> TulajdonsagNovelesek { get; set; }
-    
-    [JsonPropertyName("harcosSpecializaciok")]
-    public IList<string> HarcosSpecializaciok { get; set; }
-    
-    [JsonPropertyName("kalozKritikus")]
-    public IList<string> KalozKritikus { get; set; }
+ 
+    [JsonPropertyName("szintlepesek")]
+    public IList<Szintlepes> Szintlepesek { get; set; }
     
     [JsonPropertyName("felszereles")]
     public KarakterFelszerelesDto Felszereles { get; set; }

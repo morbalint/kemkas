@@ -13,6 +13,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
     
     public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
     
+    // 1st edition character
+    
     public DbSet<V1Karakter> Karakterek { get; set; }
     
     public DbSet<V1KarakterKepzettseg> KarakterKepzettsegek { get; set; }
@@ -21,4 +23,13 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
     
     public DbSet<V1Felszereles> Felszerelesek { get; set; }
     
+    // 2nd edition character
+    
+    public DbSet<V2Karakter> Karakterek2E { get; set; }
+    
+    public DbSet<V2KarakterKepzettseg> KarakterKepzettsegek2E { get; set; }
+    
+    public DbSet<V2Szintlepes> Szintlepesek2E { get; set; }
+    
+    public DbSet<V2Felszereles> Felszerelesek2E { get; set; }
 }

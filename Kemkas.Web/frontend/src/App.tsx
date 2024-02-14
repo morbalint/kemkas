@@ -62,7 +62,7 @@ function App(props: {faro?: Faro}) {
         {
             path: "/1e/karakter/:id",
             element: <CreateCharacter faro={props.faro}/>,
-            loader: args => fetch(`${window.location.origin}/api/Character/${args.params.id}`),
+            loader: args => fetch(`${window.location.origin}/api/Character1E/${args.params.id}`),
             ErrorBoundary: ErrorBoundary,
         },
         {
@@ -77,7 +77,7 @@ function App(props: {faro?: Faro}) {
         {
             path: "/2e/karakter/:id",
             element: <CreateCharacter faro={props.faro}/>,
-            loader: args => fetch(`${window.location.origin}/api/Character/${args.params.id}`),
+            loader: args => fetch(`${window.location.origin}/api/Character2E/${args.params.id}`),
             ErrorBoundary: ErrorBoundary,
         },
     ]);

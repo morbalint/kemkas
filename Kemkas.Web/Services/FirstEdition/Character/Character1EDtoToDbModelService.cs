@@ -3,18 +3,18 @@ using Kemkas.Web.Db.Enums;
 using Kemkas.Web.Db.Models;
 using Kemkas.Web.ViewModels;
 
-namespace Kemkas.Web.Services.Character;
+namespace Kemkas.Web.Services.FirstEdition.Character;
 
-public interface ICharacterDtoToDbModelService
+public interface ICharacter1EDtoToDbModelService
 {
-    public V1Karakter Convert(CharacterDto dto);
+    public V1Karakter Convert(Character1eDto dto);
 
-    public void Update(V1Karakter original, CharacterDto dto);
+    public void Update(V1Karakter original, Character1eDto dto);
 }
 
-public class CharacterDtoToDbModelService : ICharacterDtoToDbModelService
+public class Character1EDtoToDbModelService : ICharacter1EDtoToDbModelService
 {
-    public V1Karakter Convert(CharacterDto dto)
+    public V1Karakter Convert(Character1eDto dto)
     {
         var karakter = new V1Karakter
         {
@@ -23,8 +23,8 @@ public class CharacterDtoToDbModelService : ICharacterDtoToDbModelService
             Kor = dto.Kor,
             Jellem = JellemExtensions.Convert(dto.Jellem),
             Isten = dto.Isten,
-            Faj = FajExtensions.Convert(dto.Faj),
-            Osztaly = OsztalyExtensions.Convert(dto.Osztaly),
+            Faj = FajExtensions.Convert1E(dto.Faj),
+            Osztaly = OsztalyExtensions.Convert1E(dto.Osztaly),
             Ero = dto.Tulajdonsagok.Ero,
             Ugyesseg = dto.Tulajdonsagok.Ugy,
             Egeszseg = dto.Tulajdonsagok.Egs,
@@ -32,10 +32,10 @@ public class CharacterDtoToDbModelService : ICharacterDtoToDbModelService
             Bolcsesseg = dto.Tulajdonsagok.Bol,
             Karizma = dto.Tulajdonsagok.Kar,
             Szint = dto.Szint,
+            Pajzs = dto.Felszereles.PajzsId,
+            Pancel = dto.Felszereles.PancelId
         };
         karakter.KarakterKepzettsegek = ConvertKepzettsegek(dto, karakter);
-        karakter.Pajzs = dto.Felszereles.PajzsId;
-        karakter.Pancel = dto.Felszereles.PancelId;
         karakter.Felszereles = dto.Felszereles.FegyverIds.Select(x => new V1Felszereles
         {
             Karakter = karakter,
@@ -47,15 +47,15 @@ public class CharacterDtoToDbModelService : ICharacterDtoToDbModelService
         return karakter;
     }
 
-    public void Update(V1Karakter original, CharacterDto dto)
+    public void Update(V1Karakter original, Character1eDto dto)
     {
         original.Nev = dto.Name;
         original.Nem = dto.Nem;
         original.Kor = dto.Kor;
         original.Jellem = JellemExtensions.Convert(dto.Jellem);
         original.Isten = dto.Isten;
-        original.Faj = FajExtensions.Convert(dto.Faj);
-        original.Osztaly = OsztalyExtensions.Convert(dto.Osztaly);
+        original.Faj = FajExtensions.Convert1E(dto.Faj);
+        original.Osztaly = OsztalyExtensions.Convert1E(dto.Osztaly);
         original.Ero = dto.Tulajdonsagok.Ero;
         original.Ugyesseg = dto.Tulajdonsagok.Ugy;
         original.Egeszseg = dto.Tulajdonsagok.Egs;
@@ -76,7 +76,7 @@ public class CharacterDtoToDbModelService : ICharacterDtoToDbModelService
     }
 
     // TODO: this is unnecessary duplication of business logic!!
-    private static List<V1Szintlepes> ConvertSzintLepes(CharacterDto dto, V1Karakter karakter)
+    private static List<V1Szintlepes> ConvertSzintLepes(Character1eDto dto, V1Karakter karakter)
     {
         if (dto.HpRolls.Count < dto.Szint - 2)
         {
@@ -103,15 +103,15 @@ public class CharacterDtoToDbModelService : ICharacterDtoToDbModelService
             // OsztalySzint = 1,
             HpRoll = karakter.Osztaly switch // TODO: duplication of logic!!
             {
-                Osztaly.Barbar => 12,
-                Osztaly.Amazon or Osztaly.Harcos or Osztaly.Kaloz or Osztaly.Ijasz => 10,
-                Osztaly.Pap => 8,
-                Osztaly.Tolvaj => 6,
-                Osztaly.Varazslo or Osztaly.Illuzionista => 4,
+                Osztaly1E.Barbar => 12,
+                Osztaly1E.Amazon or Osztaly1E.Harcos or Osztaly1E.Kaloz or Osztaly1E.Ijasz => 10,
+                Osztaly1E.Pap => 8,
+                Osztaly1E.Tolvaj => 6,
+                Osztaly1E.Varazslo or Osztaly1E.Illuzionista => 4,
                 _ => throw new ArgumentOutOfRangeException(nameof(karakter.Osztaly), karakter.Osztaly,
                     "invalid osztaly!")
             },
-            FegyverSpecializacio = karakter.Osztaly == Osztaly.Harcos ? dto.HarcosSpecializaciok[0] : null,
+            FegyverSpecializacio = karakter.Osztaly == Osztaly1E.Harcos ? dto.HarcosSpecializaciok[0] : null,
         };
         
         return Enumerable.Range(2, count: dto.Szint - 1).Select(szint =>
@@ -131,13 +131,13 @@ public class CharacterDtoToDbModelService : ICharacterDtoToDbModelService
         }).Prepend(level1).ToList();
     }
 
-    private static List<V1KarakterKepzettseg> ConvertKepzettsegek(CharacterDto dto, V1Karakter karakter)
+    private static List<V1KarakterKepzettseg> ConvertKepzettsegek(Character1eDto dto, V1Karakter karakter)
     {
         var kepzettsegek = dto.Kepzettsegek.Select(x => new V1KarakterKepzettseg
         {
             Karakter = karakter,
             IsTolvajKepzettseg = false,
-            Kepzettseg = KepzettsegExtensions.Convert(x),
+            Kepzettseg = KepzettsegExtensions.Convert1E(x),
         }).ToList();
         if (dto.Tolvajkepzettsegek != null) 
         {
@@ -145,7 +145,7 @@ public class CharacterDtoToDbModelService : ICharacterDtoToDbModelService
             {
                 Karakter = karakter,
                 IsTolvajKepzettseg = true,
-                Kepzettseg = KepzettsegExtensions.Convert(x),
+                Kepzettseg = KepzettsegExtensions.Convert1E(x),
             }));
         }
         return kepzettsegek;

@@ -2,6 +2,9 @@ using System.Text.Json.Serialization;
 
 namespace Kemkas.Web.ViewModels;
 
+/// <summary>
+/// currently the same for 1st edition and 2nd edition, be cautious!
+/// </summary>
 public struct KarakterFelszerelesDto
 {
     [JsonPropertyName("pancelID")]

@@ -5,9 +5,9 @@ using Kemkas.Web.Db.Enums;
 namespace Kemkas.Web.Db.Models;
 
 /// <summary>
-/// 1st edition character sheet
+/// 2nd edition character sheet
 /// </summary>
-public class V1Karakter
+public class V2Karakter
 {
     [Key] public Guid Id { get; set; }
     public bool IsPublic { get; set; } = false;
@@ -18,8 +18,7 @@ public class V1Karakter
     public double? Kor { get; set; }
     public Jellem Jellem { get; set; } = Jellem.Semleges;
     public string? Isten { get; set; }
-    public Faj1E Faj { get; set; } = Faj1E.Ember;
-    public Osztaly1E Osztaly { get; set; }
+    public Faj2E Faj { get; set; } = Faj2E.Ember;
     public byte Ero { get; set; }
     public byte Ugyesseg { get; set; }
     public byte Egeszseg { get; set; }
@@ -34,12 +33,12 @@ public class V1Karakter
     [ForeignKey(nameof(OwnerUserId))]
     public ApplicationUser? OwnerUser { get; set; }
     
-    [InverseProperty(nameof(V1KarakterKepzettseg.Karakter))]
-    public virtual IEnumerable<V1KarakterKepzettseg> KarakterKepzettsegek { get; set; }
+    [InverseProperty(nameof(V2KarakterKepzettseg.Karakter))]
+    public virtual IEnumerable<V2KarakterKepzettseg> KarakterKepzettsegek { get; set; }
     
-    [InverseProperty(nameof(V1Szintlepes.Karakter))]
-    public virtual IEnumerable<V1Szintlepes> Szintlepesek { get; set; }
+    [InverseProperty(nameof(V2Szintlepes.Karakter))]
+    public virtual IEnumerable<V2Szintlepes> Szintlepesek { get; set; }
     
-    [InverseProperty(nameof(V1Felszereles.Karakter))]
-    public virtual IEnumerable<V1Felszereles> Felszereles { get; set; }
+    [InverseProperty(nameof(V2Felszereles.Karakter))]
+    public virtual IEnumerable<V2Felszereles> Felszereles { get; set; }
 }

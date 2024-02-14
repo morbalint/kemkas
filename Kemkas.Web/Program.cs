@@ -6,14 +6,14 @@ using Kemkas.Web.Config;
 using Microsoft.EntityFrameworkCore;
 using Kemkas.Web.Db;
 using Kemkas.Web.Db.Models;
-using Kemkas.Web.Services.Character;
+using Kemkas.Web.Services.FirstEdition.Character;
 using Kemkas.Web.Services.Identity;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using OpenTelemetry.Metrics;
-using OpenTelemetry.Resources;
-using OpenTelemetry.Trace;
+// using OpenTelemetry.Metrics;
+// using OpenTelemetry.Resources;
+// using OpenTelemetry.Trace;
 using IPNetwork = Microsoft.AspNetCore.HttpOverrides.IPNetwork;
 
 var builder = WebApplication.CreateBuilder(args);

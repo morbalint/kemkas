@@ -4,14 +4,14 @@ using Kemkas.Web.Db.Enums;
 
 namespace Kemkas.Web.Db.Models;
 
-public class V1KarakterKepzettseg
+public class V2KarakterKepzettseg
 {
     [Key]
     public Guid Id { get; set; }
     public Guid KarakterId { get; set; }
-    public Kepzettseg1E Kepzettseg { get; set; }
+    public Kepzettseg2E Kepzettseg { get; set; }
     public bool IsTolvajKepzettseg { get; set; } = false;
     
     [ForeignKey(nameof(KarakterId))]
-    public virtual V1Karakter Karakter { get; set; }
+    public virtual V2Karakter Karakter { get; set; }
 }
