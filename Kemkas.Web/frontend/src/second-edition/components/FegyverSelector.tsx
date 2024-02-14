@@ -3,6 +3,9 @@ import {Fegyver} from "../domain-models/felszereles";
 
 export function FegyverLabel(fegyver: Fegyver): string {
     const flags = [] as string[]
+    if (fegyver.Megterheltseg) {
+        flags.push("M")
+    }
     if (fegyver.Harcos) {
         flags.push("H")
     }

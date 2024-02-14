@@ -487,7 +487,7 @@
       "Harcos": true,
       "CsakNemHarcos": false,
       "Masfelkezes": false,
-      "Ketkezes": false,
+      "Ketkezes": true,
       "KetkezesBonusz": false,
       "HarciManover": false,
       "Alakzat": false,
