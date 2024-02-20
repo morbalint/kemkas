@@ -20,7 +20,7 @@ public enum Osztaly2E
     Harcos = 1,
     Ijasz = 2,
     Amazon = 3,
-    Kaloz = 4,
+    Tengeresz = 4,
     Barbar = 5,
     Pap = 6,
     Tolvaj = 7,

@@ -54,13 +54,13 @@ public class CharacterPersistenceService(
 
     public async Task<V1Karakter?> GetCharacter1EById(Guid id, bool tracking = false)
     {
-        IQueryable<V1Karakter> queriable = dbContext.Karakterek.Include(x => x.KarakterKepzettsegek)
+        IQueryable<V1Karakter> queryable = dbContext.Karakterek.Include(x => x.KarakterKepzettsegek)
             .Include(x => x.Szintlepesek)
             .Include(x => x.Felszereles);
 
-        queriable = tracking ? queriable.AsTracking() : queriable.AsNoTracking(); 
+        queryable = tracking ? queryable.AsTracking() : queryable.AsNoTracking(); 
         
-        var entity = await queriable
+        var entity = await queryable
             .FirstOrDefaultAsync(x => x.Id == id);
         
         if (entity?.OwnerUserId is null || entity.IsPublic)
@@ -74,13 +74,13 @@ public class CharacterPersistenceService(
 
     public async Task<V2Karakter?> GetCharacter2EById(Guid id, bool tracking = false)
     {
-        IQueryable<V2Karakter> queriable = dbContext.Karakterek2E.Include(x => x.KarakterKepzettsegek)
+        IQueryable<V2Karakter> queryable = dbContext.Karakterek2E.Include(x => x.KarakterKepzettsegek)
             .Include(x => x.Szintlepesek)
             .Include(x => x.Felszereles);
 
-        queriable = tracking ? queriable.AsTracking() : queriable.AsNoTracking(); 
+        queryable = tracking ? queryable.AsTracking() : queryable.AsNoTracking(); 
         
-        var entity = await queriable
+        var entity = await queryable
             .FirstOrDefaultAsync(x => x.Id == id);
         
         if (entity?.OwnerUserId is null || entity.IsPublic)
@@ -113,18 +113,27 @@ public class CharacterPersistenceService(
             })
             .ToListAsync();
         
-        var characters2E = await dbContext.Karakterek2E
+        var characters2ERaw = await dbContext.Karakterek2E.Include(k => k.Szintlepesek)
             .Where(k => k.OwnerUserId == currentUser.Id)
-            .Select(k => new CharacterListItemDto
+            .Select(k => new
             {
-                Id = k.Id,
-                Name = k.Nev,
-                Szint = k.Szint,
-                Faj = k.Faj.Convert(),
-                Osztaly = "TODO!", // TODO: support for multiclass characters
-                Edition = "2e"
+                k.Id,
+                k.Nev,
+                k.Szint,
+                k.Faj,
+                Osztalyok = k.Szintlepesek.Select(x => x.Osztaly).ToList(),
             })
             .ToListAsync();
+
+        var characters2E = characters2ERaw.Select(k => new CharacterListItemDto
+        {
+            Id = k.Id,
+            Name = k.Nev,
+            Szint = k.Szint,
+            Faj = k.Faj.Convert(),
+            Osztaly = string.Join('/', k.Osztalyok.Select(o => o.Convert())),
+            Edition = "2e"
+        });
 
         characters.AddRange(characters2E);
         

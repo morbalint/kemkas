@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
-import {useParams} from "react-router-dom";
-import {Toast, ToastContainer} from "react-bootstrap";
-import {ChangeLvl1Osztaly, DefaultKarakter} from "../domain-models/karakter2E";
+import React, {useContext, useState} from 'react'
+import {useLoaderData, useNavigate, useParams} from "react-router-dom";
+import {Button, InputGroup, Modal, OverlayTrigger, Toast, ToastContainer, Tooltip} from "react-bootstrap";
+import {ChangeLvl1Osztaly, DefaultKarakter, Karakter2E} from "../domain-models/karakter2E";
 import {KarakterTulajdonsagok} from "../domain-models/tulajdonsag2E";
 import FajSelector2E from "../components/FajSelector2E";
 import Tulajdonsagok2E from "../components/Tulajdonsagok2E";
@@ -24,12 +24,31 @@ import LevelUps from "../components/LevelUps";
 import {LevelDown, LevelUp} from "../domain-models/szintlepes";
 import HarcosFegyverSpecializacio from "../components/HarcosFegyverSpec";
 import {arraySetN} from "../../util";
+import saveOverlayTooltip from "../../first-edition/components/SaveOverlayTooltip";
+import {UserContext} from "../../shared/contexts/UserContext";
+import {
+    StoreNewCharacter2E,
+    UpdateCharacter2E
+} from "../api/character.api";
+import {Faro} from "@grafana/faro-web-sdk";
+import Form from "react-bootstrap/Form";
 
-function CreateCharacter2E(props: {}) {
-
+function CreateCharacter2E(props: {
+    faro?: Faro
+}) {
+    const {faro} = props
     const { id } = useParams();
+    const fetchedUser = useContext(UserContext);
+    const loaderData = useLoaderData() as Karakter2E & { isPublic: boolean } | undefined;
+    let initialKarakterInputs = DefaultKarakter;
+    if (loaderData != null) {
+        const { isPublic: t1, ...t2 } = loaderData;
+        initialKarakterInputs = t2
+    }
+    const initialIsPublic = loaderData?.isPublic ?? fetchedUser?.data == null;
+    const navigate = useNavigate();
     
-    const [karakter, setKarakter] = useState(DefaultKarakter)
+    const [karakter, setKarakter] = useState(initialKarakterInputs)
     const tulajdonsagokFajjal = TulajdonsagokFajjal(karakter.tulajdonsagok, karakter.faj)
     const changeKepzettseg = (k: KepzettsegId[]) => setKarakter({...karakter, kepzettsegek: k})
     const changeTolvajKepzettseg = (tk?: KepzettsegId[]) => setKarakter({...karakter, tolvajKepzettsegek: tk})
@@ -37,9 +56,44 @@ function CreateCharacter2E(props: {}) {
     SetDefaultKepzettsegek({...karakter, tulajdonsagok: tulajdonsagokFajjal}, changeKepzettseg)
 
     const changeFelszereles = (f: KarakterFelszereles) => setKarakter({...karakter, felszereles: f})
-    
+
+    let [showSaveModal, setShowSaveModal] = useState(false);
+    let [newId, setNewId] = useState(null as string | null)
     let [showSaved, setShowSaved] = useState(false);
+    let [isPublic, setIsPublic] = useState(initialIsPublic);
+    const newCharacterUrl = () => `${window.location.origin}/2e/karakter/${newId}`
+
+    const handleSaveModalCopyAndClose = async () => {
+
+        await navigator.clipboard.writeText(newCharacterUrl());
+        handleSaveModalClose()
+    }
+
+    const handleSaveModalClose = () => {
+        setShowSaveModal(false);
+        navigate(`/2e/karakter/${newId}`)
+    }
     const hideSaved = () => setShowSaved(false);
+    const onSaveClicked = async () => {
+        faro?.api.pushEvent('character_stored', {
+            osztaly: karakter.szintlepesek[0].osztaly.toString(),
+            szint: karakter.szint.toString(),
+            faj: karakter.faj.toString(),
+            is_public: isPublic.toString(),
+            edition: "2e",
+        })
+        if (id == null) {
+            let recievedId = await StoreNewCharacter2E(karakter, isPublic);
+            setNewId(recievedId)
+            setShowSaveModal(true);
+        } else {
+            await UpdateCharacter2E(id, karakter, isPublic);
+            setShowSaved(true);
+            setTimeout(() => {
+                hideSaved();
+            }, 5000)
+        }
+    }
     
     return <div>
         <div className='container-fluid p-5 bg-black text-white text-center'>
@@ -50,6 +104,28 @@ function CreateCharacter2E(props: {}) {
                 <Toast.Header><strong>Karakter mentve!</strong></Toast.Header>
             </Toast>
         </ToastContainer>
+        <Modal show={showSaveModal} onHide={handleSaveModalClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>Karakter mentve!</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <p>Karaktered az alábbi {isPublic ? 'publikus' : 'privát'} URLen érhető el.</p>
+                <p><a href={newCharacterUrl()}>{newCharacterUrl()}</a></p>
+                <InputGroup className="mb-3">
+                    <Form.Control id="input" value={newCharacterUrl()} />
+                    <Button variant={"outline-dark"} onClick={() => {
+                        let copyText = document.querySelector("#input") as any;
+                        copyText?.select()
+                        document.execCommand("copy");
+                    }}>Másolás</Button>
+                </InputGroup>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="danger" onClick={handleSaveModalCopyAndClose}>
+                    Másolás és bezárás
+                </Button>
+            </Modal.Footer>
+        </Modal>
         <div className='p-3'>
             <form onSubmit={async (event) => event.preventDefault()}>
                 <div className='row'>
@@ -107,10 +183,15 @@ function CreateCharacter2E(props: {}) {
                     changeOsztaly={o => setKarakter(ChangeLvl1Osztaly(karakter, o))}
                 />
                 {karakter.szintlepesek[0].osztaly === Osztaly2E.Harcos &&
-                    <HarcosFegyverSpecializacio 
+                    <HarcosFegyverSpecializacio
                         specialization={karakter.szintlepesek[0].harcosFegyver || 'kard_hosszu'}
                         szint={1}
-                        changeSpecialization={(spec) => setKarakter({...karakter, szintlepesek: arraySetN(karakter.szintlepesek, 0, {...karakter.szintlepesek[0], harcosFegyver: spec})})}
+                        changeSpecialization={(spec) => setKarakter({...karakter,
+                            szintlepesek: arraySetN(karakter.szintlepesek, 0, {
+                                ...karakter.szintlepesek[0],
+                                harcosFegyver: spec
+                            })
+                        })}
                         existingSpecializations={karakter.szintlepesek.map(x => x.harcosFegyver)}
                     />}
                 <KarakterKepzettsegek
@@ -121,23 +202,25 @@ function CreateCharacter2E(props: {}) {
                     tolvajKepzettsegek={karakter.tolvajKepzettsegek || []}
                     changeTolvajKepzettsegek={changeTolvajKepzettseg}
                 />
-                <hr />
+                <hr/>
                 {/* 1. szinten */}
                 <MasodlagosErtekek {...CalculateMasodlagosErtekek({
                     ...karakter,
                     tulajdonsagok: tulajdonsagokFajjal,
                     szint: 1,
-                    szintlepesek: karakter.szintlepesek.slice(0,1)
+                    szintlepesek: karakter.szintlepesek.slice(0, 1)
                 })} />
-                <hr />
+                <hr/>
                 <LevelUps karakter={karakter} changeKarakter={setKarakter}/>
                 {karakter.szint > 1 && <hr/>}
                 <div className='d-grid gap-2 m-5'>
                     {karakter.szint < 12 &&
-                        <button className='btn btn-dark btn-lg' type='button' onClick={() => LevelUp(karakter, setKarakter)}>Szintlépés!
+                        <button className='btn btn-dark btn-lg' type='button'
+                                onClick={() => LevelUp(karakter, setKarakter)}>Szintlépés!
                             ⇧</button>}
                     {karakter.szint > 1 &&
-                        <button className='btn btn-dark btn-lg' type='button' onClick={() => LevelDown(karakter, setKarakter)}>Visszalépés!
+                        <button className='btn btn-dark btn-lg' type='button'
+                                onClick={() => LevelDown(karakter, setKarakter)}>Visszalépés!
                             ⇩</button>}
                 </div>
                 <hr/>
@@ -145,9 +228,66 @@ function CreateCharacter2E(props: {}) {
                              changeFelszereles={changeFelszereles}/>
 
                 <hr/>
+                <div className='row'>
+                    <h5 className='col align-self-center'>Véglegesítés</h5>
+                </div>
+
+                {fetchedUser.data != null &&
+                    <div className='row m-2'>
+                        <label className='col-md-2 col-sm-3 col-form-label'>Publikus karakterlap?</label>
+                        <select className="col form-select" value={isPublic.toString()}
+                                onChange={(event) => setIsPublic(event.target.value === "true")}>
+                            <option value="true">Igen</option>
+                            <option value="false">Nem</option>
+                        </select>
+                    </div>
+                }
+                <div className="row">
+                    <div className="col-6">
+                        <div className='d-grid gap-2 m-5'>
+                            {fetchedUser.data == null
+                                ? <OverlayTrigger 
+                                    placement='top'
+                                    overlay={saveOverlayTooltip}
+                                    delay={0}
+                                    defaultShow={false}
+                                    flip={false}
+                                >
+                                    <button 
+                                        className='btn btn-danger btn-lg'
+                                        type='button'
+                                        onClick={onSaveClicked}
+                                    >
+                                        Mentés
+                                    </button>
+                                </OverlayTrigger>
+                                : <button 
+                                    className='btn btn-danger btn-lg'
+                                    type='button'  
+                                    onClick={onSaveClicked}
+                                >
+                                    Mentés
+                                </button>
+                            }
+                        </div>
+                    </div>
+                    <div className="col-6">
+                        <OverlayTrigger
+                            placement='top'
+                            overlay={<Tooltip id="pdf-btn-tooltip">Hamarosan!</Tooltip>}
+                            delay={0}
+                            defaultShow={false}
+                            flip={false}
+                            trigger={"hover"}
+                        >
+                            <div className='d-grid gap-2 m-5'>
+                                <button className='btn btn-secondary btn-lg' disabled={true} type='button'>PDF</button>
+                            </div>
+                        </OverlayTrigger>
+                    </div>
+                </div>
             </form>
         </div>
-        <hr/>
     </div>
 }
 

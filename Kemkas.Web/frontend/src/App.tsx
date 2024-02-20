@@ -71,12 +71,12 @@ function App(props: {faro?: Faro}) {
         },
         {
             path: "/2e/karakter",
-            element: <CreateCharacter2E />,
+            element: <CreateCharacter2E faro={props.faro}/>,
             ErrorBoundary: ErrorBoundary,
         },
         {
             path: "/2e/karakter/:id",
-            element: <CreateCharacter faro={props.faro}/>,
+            element: <CreateCharacter2E faro={props.faro}/>,
             loader: args => fetch(`${window.location.origin}/api/Character2E/${args.params.id}`),
             ErrorBoundary: ErrorBoundary,
         },

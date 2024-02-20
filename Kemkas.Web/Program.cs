@@ -8,6 +8,7 @@ using Kemkas.Web.Db;
 using Kemkas.Web.Db.Models;
 using Kemkas.Web.Services.FirstEdition.Character;
 using Kemkas.Web.Services.Identity;
+using Kemkas.Web.Services.SecondEdition.Character;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -51,7 +52,8 @@ builder.AddOpenTelemetry();
 
 builder.Services.AddHealthChecks();
 
-builder.Services.AddCharacterServices();
+builder.Services.AddCharacter1EServices();
+builder.Services.AddCharacter2EServices();
 
 var app = builder.Build();
 app.UsePathBase("/api");

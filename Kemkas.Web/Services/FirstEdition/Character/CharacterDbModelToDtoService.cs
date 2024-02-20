@@ -4,12 +4,12 @@ using Kemkas.Web.ViewModels;
 
 namespace Kemkas.Web.Services.FirstEdition.Character;
 
-public interface ICharacterDbModelToDtoService
+public interface ICharacterDbModelToDto1EService
 {
     public Character1eDto Convert(V1Karakter entity);
 }
 
-public class CharacterDbModelToDtoService : ICharacterDbModelToDtoService
+public class CharacterDbModelToDto1EService : ICharacterDbModelToDto1EService
 {
     public Character1eDto Convert(V1Karakter entity)
     {

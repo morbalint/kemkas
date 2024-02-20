@@ -12,14 +12,14 @@ namespace Kemkas.Web.Controllers;
 /// </summary>
 /// <param name="validationService"></param>
 /// <param name="dtoToDbModelService"></param>
-/// <param name="dbModelToDtoService"></param>
+/// <param name="dbModelToDto1EService"></param>
 /// <param name="persistenceService"></param>
 [ApiController]
 [Route("[controller]")]
 public class Character1EController(
     ICharacterValidationService validationService,
     ICharacter1EDtoToDbModelService dtoToDbModelService,
-    ICharacterDbModelToDtoService dbModelToDtoService,
+    ICharacterDbModelToDto1EService dbModelToDto1EService,
     ICharacterPersistenceService persistenceService)
     : ControllerBase
 {
@@ -58,7 +58,7 @@ public class Character1EController(
             return NotFound();
         }
 
-        return dbModelToDtoService.Convert(entity);
+        return dbModelToDto1EService.Convert(entity);
     }
     
     [HttpPost("{id:guid}")]
