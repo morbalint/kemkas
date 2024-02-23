@@ -113,27 +113,18 @@ public class CharacterPersistenceService(
             })
             .ToListAsync();
         
-        var characters2ERaw = await dbContext.Karakterek2E.Include(k => k.Szintlepesek)
+        var characters2E = await dbContext.Karakterek2E.Include(k => k.Szintlepesek)
             .Where(k => k.OwnerUserId == currentUser.Id)
-            .Select(k => new
+            .Select(k => new CharacterListItemDto
             {
-                k.Id,
-                k.Nev,
-                k.Szint,
-                k.Faj,
-                Osztalyok = k.Szintlepesek.Select(x => x.Osztaly).ToList(),
+                Id = k.Id,
+                Name = k.Nev,
+                Szint = k.Szint,
+                Faj = k.Faj.Convert(),
+                Osztaly = k.Szintlepesek.OrderBy(x => x.KarakterSzint).Select(x => x.Osztaly).First().Convert(),
+                Edition = "2e"
             })
             .ToListAsync();
-
-        var characters2E = characters2ERaw.Select(k => new CharacterListItemDto
-        {
-            Id = k.Id,
-            Name = k.Nev,
-            Szint = k.Szint,
-            Faj = k.Faj.Convert(),
-            Osztaly = string.Join('/', k.Osztalyok.Select(o => o.Convert())),
-            Edition = "2e"
-        });
 
         characters.AddRange(characters2E);
         

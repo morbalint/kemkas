@@ -3,7 +3,7 @@ import './App.css';
 import {Faro} from "@grafana/faro-web-sdk";
 import {createBrowserRouter, redirect, RouterProvider} from "react-router-dom";
 import CreateCharacter from "./first-edition/pages/CreateCharacter";
-import CharacterList from "./first-edition/pages/CharacterList";
+import CharacterList from "./shared/pages/CharacterList";
 import ErrorBoundary from "./shared/ErrorBoundary";
 import Header from "./shared/Header";
 import Footer from "./shared/Footer";
@@ -42,7 +42,7 @@ function App(props: {faro?: Faro}) {
     const router = createBrowserRouter([
         {
             path: "/",
-            loader: () => fetchedUser.data == null ? redirect("/1e/karakter") : redirect("/karaktereim")
+            loader: () => fetchedUser.data == null ? redirect("/2e/karakter") : redirect("/karaktereim")
         },
         {
             path: "/karaktereim",
