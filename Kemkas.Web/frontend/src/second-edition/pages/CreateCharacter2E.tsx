@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import {useLoaderData, useNavigate, useParams} from "react-router-dom";
-import {Button, InputGroup, Modal, OverlayTrigger, Toast, ToastContainer, Tooltip} from "react-bootstrap";
+import {Button, InputGroup, Modal, OverlayTrigger, Toast, ToastContainer} from "react-bootstrap";
 import {ChangeLvl1Osztaly, DefaultKarakter, Karakter2E} from "../domain-models/karakter2E";
 import {KarakterTulajdonsagok} from "../domain-models/tulajdonsag2E";
 import FajSelector2E from "../components/FajSelector2E";
@@ -32,6 +32,8 @@ import {
 } from "../api/character.api";
 import {Faro} from "@grafana/faro-web-sdk";
 import Form from "react-bootstrap/Form";
+import {CreatePDF} from "../pdf/character.pdf";
+import {KarakterInputToPdfView} from "../pdf/karakter_pdf_view";
 
 function CreateCharacter2E(props: {
     faro?: Faro
@@ -272,18 +274,16 @@ function CreateCharacter2E(props: {
                         </div>
                     </div>
                     <div className="col-6">
-                        <OverlayTrigger
-                            placement='top'
-                            overlay={<Tooltip id="pdf-btn-tooltip">Hamarosan!</Tooltip>}
-                            delay={0}
-                            defaultShow={false}
-                            flip={false}
-                            trigger={"hover"}
-                        >
-                            <div className='d-grid gap-2 m-5'>
-                                <button className='btn btn-secondary btn-lg' disabled={true} type='button'>PDF</button>
-                            </div>
-                        </OverlayTrigger>
+                        <div className='d-grid gap-2 m-5'>
+                            <button className='btn btn-danger btn-lg' type='button' onClick={async () => {
+                                faro?.api.pushEvent('character_created', {
+                                    osztaly: karakter.szintlepesek[0].osztaly,
+                                    szint: karakter.szint.toString(),
+                                    faj: karakter.faj.toString(),
+                                })
+                                await CreatePDF(KarakterInputToPdfView(karakter))
+                            }}>PDF</button>
+                        </div>
                     </div>
                 </div>
             </form>

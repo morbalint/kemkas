@@ -53,6 +53,24 @@ export function HP(karakter: Pick<Karakter2E, 'tulajdonsagok' | 'szintlepesek'>)
         .reduce((sum, val) => sum + val, 0)
 }
 
+export function VOegyeb(karakter: Pick<Karakter2E, 'faj'| 'szintlepesek'>): number {
+    const osztalyok = new Set(karakter.szintlepesek.map(x => x.osztaly))
+    let vo = 0;
+    if (osztalyok.has(Osztaly2E.Tengeresz)) {
+        const kalozSzintek = karakter.szintlepesek.filter(x => x.osztaly === Osztaly2E.Tengeresz).length
+        vo += Math.floor(kalozSzintek / 3)
+    }
+    if (osztalyok.has(Osztaly2E.Amazon)) {
+        
+        const amazonSzintek = karakter.szintlepesek.filter(x => x.osztaly === Osztaly2E.Amazon).length
+        vo += Math.floor(amazonSzintek / 2)
+    }
+    if (karakter.faj === Faj2E.Felszerzet || karakter.faj === Faj2E.Gnom){
+        vo += 1
+    }
+    return vo;
+}
+
 export function VO(karakter: Pick<Karakter2E, 'tulajdonsagok' | 'faj' | 'szintlepesek' | 'szint' | 'felszereles'>): number {
     const osztalyok = new Set(karakter.szintlepesek.map(x => x.osztaly))
     const pancel = GetPancel(karakter.felszereles.pancelID)
@@ -63,20 +81,12 @@ export function VO(karakter: Pick<Karakter2E, 'tulajdonsagok' | 'faj' | 'szintle
     if (pancel) {
         abilityVO = Math.min(MaxAbilityVO(pancel.Type), abilityVO)
     }
-    if (osztalyok.has(Osztaly2E.Tengeresz)) {
-        const kalozSzintek = karakter.szintlepesek.filter(x => x.osztaly === Osztaly2E.Tengeresz).length
-        vo += Math.floor(kalozSzintek / 3)
-    }
-    if (osztalyok.has(Osztaly2E.Amazon)) {
+    if (osztalyok.has(Osztaly2E.Amazon)){
         if (karakter.tulajdonsagok.t_kar > karakter.tulajdonsagok.t_ugy) {
             abilityVO = Modifier(karakter.tulajdonsagok.t_kar)
         }
-        const amazonSzintek = karakter.szintlepesek.filter(x => x.osztaly === Osztaly2E.Amazon).length
-        vo += Math.floor(amazonSzintek / 2)
     }
-    if (karakter.faj === Faj2E.Felszerzet || karakter.faj === Faj2E.Gnom){
-        vo += 1
-    }
+    vo += VOegyeb(karakter)
     vo += abilityVO
 
     return vo

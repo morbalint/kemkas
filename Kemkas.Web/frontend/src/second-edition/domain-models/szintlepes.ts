@@ -9,9 +9,12 @@ import {AllowedFegyver} from "./allowed-fegyver";
 export interface Szintlepes {
     osztaly: Osztaly2E;
     HProll: number;
-    tolvajExtraKepzettseg?: KepzettsegId; // only at level 5 and 9
-    harcosFegyver?: string; // every 3rd level
-    kalozKritikus?: string; // every odd level
+    // only at level 5 and 9
+    tolvajExtraKepzettseg?: KepzettsegId;
+    // every odd level
+    harcosFegyver?: string;
+    // every 3rd level
+    kalozKritikus?: string;
     tulajdonsagNoveles?: Tulajdonsag2E;
 }
 

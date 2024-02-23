@@ -46,7 +46,6 @@ export async function CreatePDF(karakter: KarakterPdfView) {
 
     const fontBytes = await fetch('/Merienda-Regular.ttf').then(res => res.arrayBuffer())
     const pdfFont = await pdfDoc.embedFont(fontBytes)
-    // const pdfFont = await pdfDoc.embedFont(StandardFonts.TimesNewRoman)
     const fontSizeBase = 12
 
     const page = pdfDoc.getPage(0)

@@ -120,7 +120,7 @@ function setOsztalyForSzintLepes(szintlepesek: Szintlepes[], osztaly: Osztaly2E,
 export function ChangeLvl1Osztaly(karakter: Karakter2E, osztaly: Osztaly2E): Karakter2E {
     return {
         ...karakter,
-        szintlepesek: [{...karakter.szintlepesek[0], osztaly}, ...karakter.szintlepesek.slice(1)]
+        szintlepesek: [{...karakter.szintlepesek[0], HProll: BaseHP(osztaly) , osztaly}, ...karakter.szintlepesek.slice(1)]
     }
 }
 
