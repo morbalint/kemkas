@@ -40,11 +40,11 @@ function DrawFelszereles(draw: (text: string, x: number, y:number) => void, fels
 
 export async function CreatePDF(karakter: KarakterPdfView) {
 
-    const existingPdfBytes = await fetch('/km_karakterlap_hysteria_1.2.pdf').then(res => res.arrayBuffer())
+    const existingPdfBytes = await fetch('/pdfs/km_karakterlap_hysteria_1.2.pdf').then(res => res.arrayBuffer())
     const pdfDoc = await PDFDocument.load(existingPdfBytes)
     pdfDoc.registerFontkit(fontkit)
 
-    const fontBytes = await fetch('/Merienda-Regular.ttf').then(res => res.arrayBuffer())
+    const fontBytes = await fetch('/fonts/Merienda-Regular.ttf').then(res => res.arrayBuffer())
     const pdfFont = await pdfDoc.embedFont(fontBytes)
     const fontSizeBase = 12
 
@@ -79,7 +79,7 @@ export async function CreatePDF(karakter: KarakterPdfView) {
     DrawMagic(page, fontSizeBase, pdfFont, karakter.NapiMemorizalhatoVarazslatok, karakter.VarazslatMentokNF)
 
     const secondPage = pdfDoc.addPage()
-    const fontBoldBytes = await fetch('/Merienda-Bold.ttf').then(res => res.arrayBuffer())
+    const fontBoldBytes = await fetch('/fonts/Merienda-Bold.ttf').then(res => res.arrayBuffer())
     const fontBold = await pdfDoc.embedFont(fontBoldBytes)
     DrawOsztalySpecialsPage(secondPage, pdfFont, fontBold, karakter)
 

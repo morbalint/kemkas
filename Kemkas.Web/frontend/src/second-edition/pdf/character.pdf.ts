@@ -5,11 +5,11 @@ import download from "downloadjs";
 import {SignedNumberToText} from "../../shared/components/Helpers";
 
 export async function CreatePDF(karakter: KarakterPdfView) {
-    const existingPdfBytes = await fetch('/kem2karakterlap_form.pdf').then(res => res.arrayBuffer())
+    const existingPdfBytes = await fetch('/pdfs/kem2karakterlap_form.pdf').then(res => res.arrayBuffer())
     const pdfDoc = await PDFDocument.load(existingPdfBytes)
     pdfDoc.registerFontkit(fontkit)
 
-    const fontBytes = await fetch('/Milonga-Regular.ttf').then(res => res.arrayBuffer())
+    const fontBytes = await fetch('/fonts/Milonga-Regular.ttf').then(res => res.arrayBuffer())
     const pdfFont = await pdfDoc.embedFont(fontBytes)
     
     const form = pdfDoc.getForm()
