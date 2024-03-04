@@ -162,8 +162,13 @@ jobs:
           export DOCKER_IMAGE_ID=$(docker images ghcr.io/${{ github.repository_owner }}/kemkas:${GITHUB_SHA::8} --format "{{.ID}}")
           export DOCKER_IMAGE_ID=GHCR-$DOCKER_IMAGE_ID
           echo "DOCKER_IMAGE_ID=$DOCKER_IMAGE_ID" >> $GITHUB_ENV
-      - name: Tag commit
-        uses: tvdias/github-tagger@v0.0.1
+      - name: Tag commit with docker image ID
+        uses: actions/github-script@v5
         with:
-          repo-token: "${{ github.token }}"
-          tag: "${{ env.DOCKER_IMAGE_ID }}"
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/${{ env.DOCKER_IMAGE_ID }}",
+              sha: context.sha
+            })
