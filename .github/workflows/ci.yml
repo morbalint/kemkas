@@ -82,7 +82,7 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - uses: docker/build-push-action@v5
         with:
-          context: Kemkas.Web/frontend
+          context: ./Kemkas.Web/frontend/
           file: Dockerfile
           cache-from: type=gha
           cache-to: type=gha,mode=max
