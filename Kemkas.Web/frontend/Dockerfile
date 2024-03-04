@@ -13,5 +13,5 @@ RUN yarn build
 
 FROM nginx:latest as proxy
 
-# COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder "/src/build" "/usr/share/nginx/html"
+COPY ./nginx.conf /etc/nginx/nginx.conf
