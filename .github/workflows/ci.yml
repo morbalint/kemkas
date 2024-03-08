@@ -148,7 +148,7 @@ jobs:
         with:
           context: .
           file: Kemkas.Web/Composite.Dockerfile
-          args: FE_TAG=${{ env.GITHUB_SHA_SHORT }},BE_TAG=${{ env.GITHUB_SHA_SHORT }}
+          build-args: FE_TAG=${{ env.GITHUB_SHA_SHORT }},BE_TAG=${{ env.GITHUB_SHA_SHORT }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           push: false
