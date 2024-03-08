@@ -153,7 +153,7 @@ jobs:
           cache-to: type=gha,mode=max
           push: false
           load: true
-          tags: ghcr.io/${{ github.repository_owner }}/kemkas/kemkas-composite:${GITHUB_SHA::8}
+          tags: ghcr.io/${{ github.repository_owner }}/kemkas/kemkas-composite:${{ env.GITHUB_SHA_SHORT }}
 
   deploy:
     runs-on: ubuntu-latest
