@@ -142,11 +142,13 @@ jobs:
       - uses: docker/setup-buildx-action@v3
       - name: Log in to GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - run: |
+          echo "GITHUB_SHA_SHORT=$(echo ${GITHUB_SHA::8})" >> $GITHUB_ENV
       - uses: docker/build-push-action@v5
         with:
           context: .
           file: Kemkas.Web/Composite.Dockerfile
-          args: FE_TAG=${GITHUB_SHA::8},BE_TAG=${GITHUB_SHA::8}
+          args: FE_TAG=${{ env.GITHUB_SHA_SHORT }},BE_TAG=${{ env.GITHUB_SHA_SHORT }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           push: false
@@ -185,7 +187,11 @@ jobs:
           export DOCKER_IMAGE_ID=$(docker images ghcr.io/${{ github.repository_owner }}/kemkas:${GITHUB_SHA::8} --format "{{.ID}}")
           export DOCKER_IMAGE_ID=GHCR-$DOCKER_IMAGE_ID
           echo "DOCKER_IMAGE_ID=$DOCKER_IMAGE_ID" >> $GITHUB_ENV
+      - uses: mukunku/tag-exists-action@v1.6.0
+        with:
+          tag: ${{ env.DOCKER_IMAGE_ID }}
       - name: Tag commit with docker image ID
+        if: steps.check-tag.outputs.exists == 'false'
         uses: actions/github-script@v5
         with:
           script: |
