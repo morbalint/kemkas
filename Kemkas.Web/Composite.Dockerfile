@@ -6,8 +6,8 @@ EXPOSE 443
 ARG FE_TAG=latest
 ARG BE_TAG=latest
 
-FROM ghcr.io/morbalint/kemkas-fe:${FE_TAG} as frontend
-FROM ghcr.io/morbalint/kemkas-be:${BE_TAG} as backend
+FROM ghcr.io/morbalint/kemkas-fe:$FE_TAG as frontend
+FROM ghcr.io/morbalint/kemkas-be:$BE_TAG as backend
 
 FROM base AS final
 COPY --from=backend /app .
