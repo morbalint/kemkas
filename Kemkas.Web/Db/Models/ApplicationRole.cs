@@ -1,8 +1,0 @@
-using Microsoft.AspNetCore.Identity;
-
-namespace Kemkas.Web.Db.Models;
-
-public class ApplicationRole : IdentityRole<int>
-{
-    
-}

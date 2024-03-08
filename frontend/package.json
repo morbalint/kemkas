@@ -49,7 +49,6 @@
     "less-loader": "^11.1.3"
   },
   "scripts": {
-    "prestart": "node aspnetcore-https && node aspnetcore-react",
     "start": "rimraf ./build && react-scripts start",
     "build": "react-scripts build",
     "test": "cross-env CI=true react-scripts test --env=jsdom",
