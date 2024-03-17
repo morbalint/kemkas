@@ -36,7 +36,8 @@ jobs:
 
   docker-fe-build:
     runs-on: ubuntu-latest
-    
+    outputs:
+       image_tag: ${{ steps.get_image_tag.outputs.image_tag }}
     steps:
       - uses: actions/checkout@v4
       - uses: docker/setup-buildx-action@v3
@@ -48,6 +49,12 @@ jobs:
         run: doctl registry login --expiry-seconds 1200
       - name: Log in to GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - id: get_image_tag
+        run: |
+          echo "GITHUB_SHA_SHORT=$(echo ${GITHUB_SHA::8})" >> $GITHUB_ENV
+          echo "registry.digitalocean.com/kemkas/kemkas-fe:${GITHUB_SHA::8}"
+          echo "ghcr.io/${{ github.repository_owner }}/kemkas-frontend:${GITHUB_SHA::8}"
+          echo "image_tag=registry.digitalocean.com/kemkas/kemkas-fe:${GITHUB_SHA::8}" >> $GITHUB_OUTPUT
       - uses: docker/build-push-action@v5
         with:
           context: ./frontend/
@@ -56,12 +63,30 @@ jobs:
           cache-to: type=gha,mode=max
           push: false
           load: true
-          tags: kemkas/kemkas-fe:edge
-      - name: Tag container image
-        run: |
-          docker tag kemkas/kemkas-fe:edge registry.digitalocean.com/kemkas/kemkas-fe:${GITHUB_SHA::8}
-          docker tag kemkas/kemkas-fe:edge ghcr.io/${{ github.repository_owner }}/kemkas-frontend:${GITHUB_SHA::8}
+          tags: |
+            registry.digitalocean.com/kemkas/kemkas-fe:${{ env.GITHUB_SHA_SHORT }}
+            ghcr.io/${{ github.repository_owner }}/kemkas-frontend:${{ env.GITHUB_SHA_SHORT }}
       - name: Push image to Container Registry
         run: |
           docker push registry.digitalocean.com/kemkas/kemkas-fe:${GITHUB_SHA::8}
           docker push ghcr.io/${{ github.repository_owner }}/kemkas-frontend:${GITHUB_SHA::8}
+
+  deploy-to-beta:
+    runs-on: ubuntu-latest
+    needs:
+      - docker-fe-build
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/kemkas-deployment
+          refs: refs/heads/main
+          ssh-key: ${{ secrets.DEPLOYMENT_REPO_DEPLOY_KEY }}
+      - uses: mikefarah/yq@v4
+        with:
+          cmd: yq -i '.spec.template.spec.containers[0].image = "${{ needs.docker-fe-build.outputs.image_tag }}"' ./dkemkas-beta/kemkas-fe-deployment.yaml
+      - run: |
+          cd ./deployment-repo
+          git config --add user.email "beta-fe-deployment-bot@kemkas.hu"
+          git config --add user.name "Deployment Bot Beta FE"
+          git commit -a -m "deploy ${{ needs.docker-fe-build.outputs.image_tag }}" 
+          git push
