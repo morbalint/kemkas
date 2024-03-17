@@ -83,7 +83,7 @@ jobs:
           ssh-key: ${{ secrets.DEPLOYMENT_REPO_DEPLOY_KEY }}
       - uses: mikefarah/yq@v4
         with:
-          cmd: yq -i '.spec.template.spec.containers[0].image = "${{ needs.docker-fe-build.outputs.image_tag }}"' ./dkemkas-beta/kemkas-fe-deployment.yaml
+          cmd: yq -i '.spec.template.spec.containers[0].image = "${{ needs.docker-fe-build.outputs.image_tag }}"' ./kemkas-beta/kemkas-fe-deployment.yaml
       - run: |
           cd ./deployment-repo
           git config --add user.email "beta-fe-deployment-bot@kemkas.hu"
