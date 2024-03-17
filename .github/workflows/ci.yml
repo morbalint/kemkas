@@ -85,7 +85,6 @@ jobs:
         with:
           cmd: yq -i '.spec.template.spec.containers[0].image = "${{ needs.docker-fe-build.outputs.image_tag }}"' ./kemkas-beta/kemkas-fe-deployment.yaml
       - run: |
-          cd ./deployment-repo
           git config --add user.email "beta-fe-deployment-bot@kemkas.hu"
           git config --add user.name "Deployment Bot Beta FE"
           git commit -a -m "deploy ${{ needs.docker-fe-build.outputs.image_tag }}" 
