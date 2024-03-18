@@ -32,7 +32,7 @@ jobs:
       run: |
         cd ./frontend
         ./compile-less.sh
-        yarn build
+        yarn run test
 
   docker-fe-build:
     runs-on: ubuntu-latest
