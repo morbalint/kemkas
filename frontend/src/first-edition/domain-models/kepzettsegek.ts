@@ -19,7 +19,7 @@ export const KepzettsegLista: Kepzettseg[] = [
         Name: 'Alkímia',
         Description: 'Különféle különleges anyagok, pl. savak, görögtűz, stb. kikeverésére szolgál. Használatához gyakran jól felszerelt laboratórium szükséges. Az Alkímia képzettséggel a karakter képes beazonosítani a különféle vegyi anyagokat és mérgeket, bizonyos esetekben varázsitalokat is.',
         Tulajdonsag: [Tulajdonsag.Intelligencia],
-        Osztalyok: [Osztaly.Varazslo, Osztaly.Illuzionista],
+        Osztalyok: [Osztaly.Varazslo, Osztaly.Illuzionista, Osztaly.Pap],
     },
     {
         Id: 'k_alcazas',
@@ -46,7 +46,7 @@ export const KepzettsegLista: Kepzettseg[] = [
         Name: 'Csillagjóslás',
         Description: 'A karakter a képzettséggel egyrészt képes meghatározni a karakterek hozzávetőleges pozícióját a térképen, másrészt egyszerűbb jóslatokat készíthet.',
         Tulajdonsag: [Tulajdonsag.Bolcsesseg],
-        Osztalyok: [Osztaly.Varazslo, Osztaly.Illuzionista],
+        Osztalyok: [Osztaly.Varazslo, Osztaly.Illuzionista, Osztaly.Pap],
     },
     {
         Id: 'k_egyensulyozas',
@@ -97,14 +97,14 @@ export const KepzettsegLista: Kepzettseg[] = [
         Name: 'Jelek Olvasása',
         Description: 'A képzettséggel a karakter el tud olvasni más nyelven írt írásokat és feliratokat.',
         Tulajdonsag: [Tulajdonsag.Intelligencia],
-        Osztalyok: [Osztaly.Tolvaj, Osztaly.Varazslo, Osztaly.Illuzionista],
+        Osztalyok: [Osztaly.Tolvaj, Osztaly.Varazslo, Osztaly.Illuzionista, Osztaly.Pap],
     },
     {
         Id: 'k_koncentracio',
         Name: 'Koncentráció',
         Description: 'Ez a képesség arra teszi alkalmassá a varázshasználót, hogy nehéz körülmények között – sebesülten, vágtató lovon, hánykolódó hajón, stb. – is alkalmazhassa varázslatait.',
         Tulajdonsag: [Tulajdonsag.Bolcsesseg],
-        Osztalyok: [Osztaly.Varazslo, Osztaly.Illuzionista],
+        Osztalyok: [Osztaly.Varazslo, Osztaly.Illuzionista, Osztaly.Pap],
     },
     {
         Id: 'k_lovaglas',
@@ -185,7 +185,7 @@ export const KepzettsegLista: Kepzettseg[] = [
         Name: 'Varázslatismeret',
         Description: 'A Mágiaismerettel ellentétben ez a képzettség nem a mágia elméletében, hanem a konkrét varázslatokban való ismereteket méri. Sikeres próbával a karakter azonosíthatja az elmondás alatt álló varázslatokat (NF= a mentődobás nehézsége), bizonyos mágikus effektusokat, csapdákat, stb.',
         Tulajdonsag: [Tulajdonsag.Intelligencia],
-        Osztalyok: [Osztaly.Illuzionista, Osztaly.Varazslo],
+        Osztalyok: [Osztaly.Illuzionista, Osztaly.Varazslo, Osztaly.Pap],
     },
     {
         Id: 'k_zarnyitas',
