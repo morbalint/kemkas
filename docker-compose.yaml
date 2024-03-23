@@ -8,7 +8,16 @@ services:
     environment:
       POSTGRES_USER: "kemkas"
       POSTGRES_PASSWORD: "kemkas-dev42"
-      
+
+  backend:
+    image: registry.digitalocean.com/kemkas/kemkas-be:e74196e6
+    ports:
+      - "8080:8080"
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=db;User Id=kemkas;Password=kemkas-dev42"
+      Email__DomainName: "mail.kemkas.hu"
+      Email__ApiKey: ""
+
   proxy:
     image: nginx:latest
     ports:
