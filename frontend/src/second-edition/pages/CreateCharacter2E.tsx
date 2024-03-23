@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useState} from 'react'
 import {useLoaderData, useNavigate, useParams} from "react-router-dom";
 import {Button, InputGroup, Modal, OverlayTrigger, Toast, ToastContainer} from "react-bootstrap";
 import {ChangeLvl1Osztaly, DefaultKarakter, Karakter2E} from "../domain-models/karakter2E";
@@ -25,7 +25,6 @@ import {LevelDown, LevelUp} from "../domain-models/szintlepes";
 import HarcosFegyverSpecializacio from "../components/HarcosFegyverSpec";
 import {arraySetN} from "../../util";
 import saveOverlayTooltip from "../../first-edition/components/SaveOverlayTooltip";
-import {UserContext} from "../../shared/contexts/UserContext";
 import {
     StoreNewCharacter2E,
     UpdateCharacter2E
@@ -34,20 +33,23 @@ import {Faro} from "@grafana/faro-web-sdk";
 import Form from "react-bootstrap/Form";
 import {CreatePDF} from "../pdf/character.pdf";
 import {KarakterInputToPdfView} from "../pdf/karakter_pdf_view";
+import {useSelector} from "react-redux";
+import {RootState} from "../../store";
+import {userSelector} from "../../shared/domain-models/userSlice";
 
 function CreateCharacter2E(props: {
     faro?: Faro
 }) {
     const {faro} = props
     const { id } = useParams();
-    const fetchedUser = useContext(UserContext);
+    const fetchedUser = useSelector.withTypes<RootState>()(userSelector);
     const loaderData = useLoaderData() as Karakter2E & { isPublic: boolean } | undefined;
     let initialKarakterInputs = DefaultKarakter;
     if (loaderData != null) {
         const { isPublic: t1, ...t2 } = loaderData;
         initialKarakterInputs = t2
     }
-    const initialIsPublic = loaderData?.isPublic ?? fetchedUser?.data == null;
+    const initialIsPublic = loaderData?.isPublic ?? fetchedUser?.email == null;
     const navigate = useNavigate();
     
     const [karakter, setKarakter] = useState(initialKarakterInputs)
@@ -234,7 +236,7 @@ function CreateCharacter2E(props: {
                     <h5 className='col align-self-center'>Véglegesítés</h5>
                 </div>
 
-                {fetchedUser.data != null &&
+                {fetchedUser.email != null &&
                     <div className='row m-2'>
                         <label className='col-md-2 col-sm-3 col-form-label'>Publikus karakterlap?</label>
                         <select className="col form-select" value={isPublic.toString()}
@@ -247,7 +249,7 @@ function CreateCharacter2E(props: {
                 <div className="row">
                     <div className="col-6">
                         <div className='d-grid gap-2 m-5'>
-                            {fetchedUser.data == null
+                            {fetchedUser.email == null
                                 ? <OverlayTrigger 
                                     placement='top'
                                     overlay={saveOverlayTooltip}

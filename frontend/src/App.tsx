@@ -1,5 +1,5 @@
-import * as React from 'react';
-import './App.css';
+import * as React from "react";
+import "./App.css";
 import {Faro} from "@grafana/faro-web-sdk";
 import {createBrowserRouter, redirect, RouterProvider} from "react-router-dom";
 import CreateCharacter from "./first-edition/pages/CreateCharacter";
@@ -7,16 +7,18 @@ import CharacterList from "./shared/pages/CharacterList";
 import ErrorBoundary from "./shared/ErrorBoundary";
 import Header from "./shared/Header";
 import Footer from "./shared/Footer";
-import {useState} from "react";
-import {UserContext, userDefaults} from './shared/contexts/UserContext';
 import CreateCharacter2E from "./second-edition/pages/CreateCharacter2E";
+import store, {AppDispatch, RootState} from './store'
+import { Provider } from "react-redux"
+import { useSelector, useDispatch } from 'react-redux'
+import {load, setUser, unsetUser, userSelector} from './shared/domain-models/userSlice'
 
-function App(props: {faro?: Faro}) {
-
-    const [fetchedUser, setFetchedUser] = useState(userDefaults)
+function Router(props: {faro?: Faro}) {
+    const dispatch = useDispatch.withTypes<AppDispatch>()()
+    const fetchedUser = useSelector.withTypes<RootState>()(userSelector)
 
     if (fetchedUser.state === "not-started") {
-        setFetchedUser({...fetchedUser, state: "loading"})
+        dispatch(load())
         fetch(`${window.location.origin}/api/User/me`)
             .then(response => {
                 if (response.ok) {
@@ -26,23 +28,19 @@ function App(props: {faro?: Faro}) {
             })
             .then(userNameResponse => {
                 const userName = userNameResponse && userNameResponse.length  > 0 ? userNameResponse : null;
-                setFetchedUser({
-                    data: userName,
-                    state: "finished"
-                });
+                dispatch(setUser(userName))
             })
             .catch(() => {
-                setFetchedUser({
-                    data: null,
-                    state: "finished"
-                })
+                dispatch(unsetUser())
             })
     }
-    
+
+
+
     const router = createBrowserRouter([
         {
             path: "/",
-            loader: () => fetchedUser.data == null ? redirect("/2e/karakter") : redirect("/karaktereim")
+            loader: () => fetchedUser.email == null ? redirect("/2e/karakter") : redirect("/karaktereim")
         },
         {
             path: "/karaktereim",
@@ -81,15 +79,22 @@ function App(props: {faro?: Faro}) {
             ErrorBoundary: ErrorBoundary,
         },
     ]);
-    
+
     return (
-        <UserContext.Provider value={fetchedUser}>
+        <div className='container'>
+            <RouterProvider router={router}/>
+        </div>
+    )
+}
+
+function App(props: { faro?: Faro }) {
+
+    return (
+        <Provider store={store}>
             <Header/>
-            <div className='container'>
-                <RouterProvider router={router}/>
-            </div>
+            <Router faro={props.faro} />
             <Footer />
-        </UserContext.Provider>
+        </Provider>
     );
 }
 

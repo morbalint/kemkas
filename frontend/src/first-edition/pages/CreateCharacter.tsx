@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import './CreateCharacter.css'
 import {Faj, TulajdonsagokFajjal} from "../domain-models/faj";
 import {Osztaly, SetFelszerelesForChangedOsztaly} from "../domain-models/osztaly"
@@ -31,8 +31,10 @@ import {Faro} from "@grafana/faro-web-sdk";
 import {StoreNewCharacter, UpdateCharacter} from "../api/character.api";
 import {useLoaderData, useNavigate, useParams} from "react-router-dom";
 import saveOverlayTooltip from "../components/SaveOverlayTooltip";
-import {UserContext} from "../../shared/contexts/UserContext";
 import {KarakterTulajdonsagok} from "../domain-models/tulajdonsag";
+import {useSelector} from "react-redux";
+import {RootState} from "../../store";
+import {userSelector} from "../../shared/domain-models/userSlice";
 
 function CreateCharacterPage(props: {
     faro?: Faro,
@@ -46,9 +48,9 @@ function CreateCharacterPage(props: {
         initialKarakterInputs = t2
     }
     const { id } = useParams();
-    const fetchedUser = useContext(UserContext);
+    const fetchedUser = useSelector.withTypes<RootState>()(userSelector);
     
-    const initialIsPublic = loaderData?.isPublic ?? fetchedUser?.data == null;
+    const initialIsPublic = loaderData?.isPublic ?? fetchedUser?.email == null;
     
     const navigate = useNavigate();
 
@@ -257,7 +259,7 @@ function CreateCharacterPage(props: {
                         <h5 className='col align-self-center'>Véglegesítés</h5>
                     </div>
 
-                    {fetchedUser.data != null &&
+                    {fetchedUser.email != null &&
                         <div className='row m-2'>
                             <label className='col-md-2 col-sm-3 col-form-label'>Publikus karakterlap?</label>
                             <select className="col form-select" value={isPublic.toString()}
@@ -270,7 +272,7 @@ function CreateCharacterPage(props: {
                     <div className="row">
                         <div className="col-6">
                             <div className='d-grid gap-2 m-5'>
-                                {fetchedUser.data == null
+                                {fetchedUser.email == null
                                     ? <OverlayTrigger placement='top' overlay={saveOverlayTooltip} delay={0}
                                                       defaultShow={false} flip={false}>
                                         <button className='btn btn-danger btn-lg' type='button'
