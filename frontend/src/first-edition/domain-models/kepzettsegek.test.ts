@@ -10,8 +10,8 @@ import {Faj} from "./faj";
 describe('AvailableKezpettsegList', ()=> {
 
     const commonKepzettsegek = ['k_allatidomitas', 'k_eloadas', 'k_ertekbecsles', 'k_gyogyitas', 'k_hajozas',
-    'k_hallgatozas', 'k_lovaglas', 'k_maszas', 'k_megfigyeles', 'k_mesterseg', 'k_nyomkereses', 'k_osonas', 'k_rejtozes',
-    'k_tudas', 'k_ugras', 'k_uszas']
+    'k_hallgatozas', 'k_lovaglas', 'k_maszas', 'k_megfigyeles', 'k_mesterseg', 'k_nyomkereses', 'k_osonas',
+        'k_rejtozes', 'k_tudas', 'k_ugras', 'k_uszas']
 
     test.each([
         [Osztaly.Amazon, commonKepzettsegek],
@@ -19,10 +19,14 @@ describe('AvailableKezpettsegList', ()=> {
         [Osztaly.Harcos, commonKepzettsegek],
         [Osztaly.Kaloz, commonKepzettsegek],
         [Osztaly.Barbar, commonKepzettsegek],
-        [Osztaly.Tolvaj, ['k_alcazas', 'k_csapdak', 'k_egyensulyozas', 'k_hamisitas', 'k_jelek_olvasasa', 'k_meregkeveres', 'k_szabadulomuveszet', 'k_zarnyitas', 'k_zsebmetszes', ...commonKepzettsegek]],
-        [Osztaly.Pap, ['k_varazslatismeret', 'k_koncentracio', 'k_csillagjoslas', 'k_alkimia', 'k_jelek_olvasasa', ...commonKepzettsegek]],
-        [Osztaly.Varazslo, ['k_varazslatismeret', 'k_koncentracio', 'k_csillagjoslas', 'k_alkimia', 'k_jelek_olvasasa', ...commonKepzettsegek]],
-        [Osztaly.Illuzionista, ['k_varazslatismeret', 'k_koncentracio', 'k_csillagjoslas', 'k_alkimia', 'k_jelek_olvasasa', ...commonKepzettsegek]],
+        [Osztaly.Tolvaj, ['k_alcazas', 'k_csapdak', 'k_egyensulyozas', 'k_hamisitas', 'k_jelek_olvasasa',
+            'k_meregkeveres', 'k_szabadulomuveszet', 'k_zarnyitas', 'k_zsebmetszes', ...commonKepzettsegek]],
+        [Osztaly.Pap, ['k_varazslatismeret', 'k_koncentracio', 'k_csillagjoslas', 'k_alkimia', 'k_jelek_olvasasa',
+            ...commonKepzettsegek]],
+        [Osztaly.Varazslo, ['k_varazslatismeret', 'k_koncentracio', 'k_csillagjoslas', 'k_alkimia', 'k_jelek_olvasasa',
+            ...commonKepzettsegek]],
+        [Osztaly.Illuzionista, ['k_varazslatismeret', 'k_koncentracio', 'k_csillagjoslas', 'k_alkimia',
+            'k_jelek_olvasasa', ...commonKepzettsegek]],
     ])('%s has %s', (osztaly: Osztaly, expected: string[]) => {
         const availableKezpettsegList = AvailableKezpettsegList(osztaly).map(x => x.Id)
         expect(availableKezpettsegList).toHaveLength(expected.length)
