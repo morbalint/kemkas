@@ -21,8 +21,7 @@ import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
 import {KarakterInputToPdfView} from "../pdf/karakter_pdf_view";
 import JellemSelector from "../components/JellemSelector";
 import {CanLevelUp, LevelDown, LevelUp} from "../domain-models/level";
-import {Button, Card, InputGroup, Modal, OverlayTrigger, Toast, ToastContainer} from "react-bootstrap";
-import Form from "react-bootstrap/Form";
+import {Card, OverlayTrigger, Toast, ToastContainer} from "react-bootstrap";
 import LevelUps from "../components/LevelUps";
 import HarcosFegyverSpecializacio from "../components/HarcosFegyverSpecializacio";
 import Felszereles from '../components/Felszereles';
@@ -35,6 +34,7 @@ import {KarakterTulajdonsagok} from "../domain-models/tulajdonsag";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store";
 import {userSelector} from "../../shared/domain-models/userSlice";
+import {SaveModal} from "../../shared/components/SaveModal";
 
 function CreateCharacterPage(props: {
     faro?: Faro,
@@ -121,28 +121,13 @@ function CreateCharacterPage(props: {
                     <Toast.Body className="text-light">Karakter mentve!</Toast.Body>
                 </Toast>
             </ToastContainer>
-            <Modal show={showSaveModal} onHide={handleSaveModalClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Karakter mentve!</Modal.Title>
-                </Modal.Header>
-                <Modal.Body> 
-                    <p>Karaktered az alábbi {isPublic ? 'publikus' : 'privát'} URLen érhető el.</p>
-                    <p><a href={newCharacterUrl()}>{newCharacterUrl()}</a></p>
-                    <InputGroup className="mb-3">
-                        <Form.Control id="input" value={newCharacterUrl()} />
-                        <Button variant={"outline-dark"} onClick={() => {
-                            let copyText = document.querySelector("#input") as any;
-                            copyText?.select()
-                            document.execCommand("copy");
-                        }}>Másolás</Button>
-                    </InputGroup>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="danger" onClick={handleSaveModalCopyAndClose}>
-                        Másolás és bezárás
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            <SaveModal
+                showSaveModal={showSaveModal}
+                handleSaveModalClose={handleSaveModalClose}
+                isPublic={isPublic}
+                newCharacterUrl={newCharacterUrl()}
+                handleSaveModalCopyAndClose={handleSaveModalCopyAndClose}
+            />
             <div className='p-3'>
                 <form onSubmit={async (event) => event.preventDefault()}>
                     <div className='row'>

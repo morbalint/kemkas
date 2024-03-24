@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useLoaderData, useNavigate, useParams} from "react-router-dom";
-import {Button, InputGroup, Modal, OverlayTrigger, Toast, ToastContainer} from "react-bootstrap";
+import {OverlayTrigger, Toast, ToastContainer} from "react-bootstrap";
 import {ChangeLvl1Osztaly, DefaultKarakter, Karakter2E} from "../domain-models/karakter2E";
 import {KarakterTulajdonsagok} from "../domain-models/tulajdonsag2E";
 import FajSelector2E from "../components/FajSelector2E";
@@ -10,7 +10,8 @@ import {Osztaly2E} from "../domain-models/osztaly2E";
 import {
     GetKepzettsegListaN,
     GetNumberOfKepzettsegek,
-    KepzettsegId, SetDefaultKepzettsegek,
+    KepzettsegId,
+    SetDefaultKepzettsegek,
     SetDefaultTolvajKepzettsegek
 } from "../domain-models/kepzettsegek2E";
 import KarakterKepzettsegek from "../components/KarakterKepzettsegek2E";
@@ -25,17 +26,14 @@ import {LevelDown, LevelUp} from "../domain-models/szintlepes";
 import HarcosFegyverSpecializacio from "../components/HarcosFegyverSpec";
 import {arraySetN} from "../../util";
 import saveOverlayTooltip from "../../first-edition/components/SaveOverlayTooltip";
-import {
-    StoreNewCharacter2E,
-    UpdateCharacter2E
-} from "../api/character.api";
+import {StoreNewCharacter2E, UpdateCharacter2E} from "../api/character.api";
 import {Faro} from "@grafana/faro-web-sdk";
-import Form from "react-bootstrap/Form";
 import {CreatePDF} from "../pdf/character.pdf";
 import {KarakterInputToPdfView} from "../pdf/karakter_pdf_view";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store";
 import {userSelector} from "../../shared/domain-models/userSlice";
+import {SaveModal} from "../../shared/components/SaveModal";
 
 function CreateCharacter2E(props: {
     faro?: Faro
@@ -108,28 +106,13 @@ function CreateCharacter2E(props: {
                 <Toast.Header><strong>Karakter mentve!</strong></Toast.Header>
             </Toast>
         </ToastContainer>
-        <Modal show={showSaveModal} onHide={handleSaveModalClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Karakter mentve!</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <p>Karaktered az alábbi {isPublic ? 'publikus' : 'privát'} URLen érhető el.</p>
-                <p><a href={newCharacterUrl()}>{newCharacterUrl()}</a></p>
-                <InputGroup className="mb-3">
-                    <Form.Control id="input" value={newCharacterUrl()} />
-                    <Button variant={"outline-dark"} onClick={() => {
-                        let copyText = document.querySelector("#input") as any;
-                        copyText?.select()
-                        document.execCommand("copy");
-                    }}>Másolás</Button>
-                </InputGroup>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="danger" onClick={handleSaveModalCopyAndClose}>
-                    Másolás és bezárás
-                </Button>
-            </Modal.Footer>
-        </Modal>
+        <SaveModal
+            showSaveModal={showSaveModal}
+            handleSaveModalClose={handleSaveModalClose}
+            isPublic={isPublic}
+            newCharacterUrl={newCharacterUrl()}
+            handleSaveModalCopyAndClose={handleSaveModalCopyAndClose}
+        />
         <div className='p-3'>
             <form onSubmit={async (event) => event.preventDefault()}>
                 <div className='row'>
@@ -190,7 +173,8 @@ function CreateCharacter2E(props: {
                     <HarcosFegyverSpecializacio
                         specialization={karakter.szintlepesek[0].harcosFegyver || 'kard_hosszu'}
                         szint={1}
-                        changeSpecialization={(spec) => setKarakter({...karakter,
+                        changeSpecialization={(spec) => setKarakter({
+                            ...karakter,
                             szintlepesek: arraySetN(karakter.szintlepesek, 0, {
                                 ...karakter.szintlepesek[0],
                                 harcosFegyver: spec
@@ -250,14 +234,14 @@ function CreateCharacter2E(props: {
                     <div className="col-6">
                         <div className='d-grid gap-2 m-5'>
                             {fetchedUser.email == null
-                                ? <OverlayTrigger 
+                                ? <OverlayTrigger
                                     placement='top'
                                     overlay={saveOverlayTooltip}
                                     delay={0}
                                     defaultShow={false}
                                     flip={false}
                                 >
-                                    <button 
+                                    <button
                                         className='btn btn-danger btn-lg'
                                         type='button'
                                         onClick={onSaveClicked}
@@ -265,9 +249,9 @@ function CreateCharacter2E(props: {
                                         Mentés
                                     </button>
                                 </OverlayTrigger>
-                                : <button 
+                                : <button
                                     className='btn btn-danger btn-lg'
-                                    type='button'  
+                                    type='button'
                                     onClick={onSaveClicked}
                                 >
                                     Mentés
@@ -284,7 +268,8 @@ function CreateCharacter2E(props: {
                                     faj: karakter.faj.toString(),
                                 })
                                 await CreatePDF(KarakterInputToPdfView(karakter))
-                            }}>PDF</button>
+                            }}>PDF
+                            </button>
                         </div>
                     </div>
                 </div>
