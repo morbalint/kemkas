@@ -5,19 +5,22 @@ import React from "react";
 function MultiClassOsztalySelector2E(props: {
     faj: Faj2E,
     osztaly: Osztaly2E,
-    changeOsztaly: (o: Osztaly2E) => void
-    osztalySzint: number
+    changeOsztaly: (o: Osztaly2E) => void,
+    osztalySzint: number,
+    dataTestId?: string,
 }) {
-    const {faj, osztaly, changeOsztaly, osztalySzint} = props
-    
+    const {faj, osztaly, changeOsztaly, osztalySzint, dataTestId} = props
     return <>
         <div className='row'>
             <div className="col-lg-6">
                 <div className="row m-md-2">
                     <label className='col-8 col-sm-6 col-form-label'>Osztály</label>
                     <div className="col">
-                        <select className="col form-select" value={osztaly}
-                                onChange={(e) => changeOsztaly(e.target.value as Osztaly2E)}>
+                        <select className="col form-select"
+                                value={osztaly}
+                                onChange={(e) => changeOsztaly(e.target.value as Osztaly2E)}
+                                data-testid={dataTestId}
+                        >
                             <optgroup label='Harcos'>
                                 <option value={Osztaly2E.Harcos}>{OsztalyLabel(Osztaly2E.Harcos)}</option>
                                 {SzintKorlatokFajokra(faj)[Osztaly2E.Amazon] > 0 && (

@@ -20,7 +20,12 @@ function KalozKritikus(props: {
     return <>
         <div className='row m-2'>
             <label className='col-md-2 col-sm-3 col-form-label'>Kritikus</label>
-            <FegyverSelector fegyverek={fegyverek} selectedId={kritFegyverId} onChange={changeKrit} />
+            <FegyverSelector
+                fegyverek={fegyverek}
+                selectedId={kritFegyverId}
+                onChange={changeKrit}
+                dataTestId={`kaloz-krit-${szint}`}
+            />
         </div>
     </>
 }

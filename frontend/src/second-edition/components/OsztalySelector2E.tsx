@@ -18,8 +18,12 @@ function OsztalySelector2E(props: {
     return <>
         <div className='row m-2'>
             <label className='col-md-2 col-sm-3 col-form-label'>Osztály</label>
-            <select className="col form-select" value={currentOsztaly}
-                    onChange={(e) => changeOsztaly(e.target.value as Osztaly2E)}>
+            <select
+                className="col form-select"
+                value={currentOsztaly}
+                onChange={(e) => changeOsztaly(e.target.value as Osztaly2E)}
+                data-testid="osztaly"
+            >
                 <optgroup label='Harcos'>
                     <option value={Osztaly2E.Harcos}>{OsztalyLabel(Osztaly2E.Harcos)}</option>
                     {SzintKorlatokFajokra(currentFaj)[Osztaly2E.Amazon] > 0 && (
@@ -44,15 +48,15 @@ function OsztalySelector2E(props: {
         <div className='row m-2'>
         <label className='col-md-2 col-sm-3 form-label'></label>
             <div className='col'>
-                <p className='row pt-2'>
+                <p className='row pt-2' data-testid="osztaly-description">
                     {OsztalyDescription(currentOsztaly)}
                 </p>
-                <ul>
+                <ul data-testid="osztaly-properties">
                     {OsztalyProperties(currentOsztaly).map(((special, i) => (<li key={currentOsztaly + i}>{special}</li>)))}
                 </ul>
-                <div className='col'>
+                <div className='col' data-testid="osztaly-specials">
                     {OsztalySpecialSkills(currentOsztaly).map(skill =>
-                        <div key={skill.Id} >
+                        <div key={skill.Id}>
                             <strong className='d-inline'>
                                 {skill.Name}
                             </strong>

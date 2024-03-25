@@ -49,13 +49,15 @@ function LevelUp(props: {
                 osztaly={osztaly}
                 changeOsztaly={changeOsztaly}
                 osztalySzint={classLevels[osztaly]}
-            /> }
+                dataTestId={`osztaly-${szint}`}
+            />}
         {szint % 4 === 0 && 
             <TulajdonsagNoveles
                 tulajdonsagok={karakter.tulajdonsagok}
                 tulajdonsagNoveles={karakter.szintlepesek[szint-1].tulajdonsagNoveles!}
                 changeTulajdonsagNoveles={changeTulajdonsagNoveles}
-            /> }
+                dataTestId={`tulajdonsag-${szint}`}
+            />}
         <BasicNewLevel
             szint={szint}
             karakter={karakter}

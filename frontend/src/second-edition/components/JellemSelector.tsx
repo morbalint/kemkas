@@ -7,7 +7,12 @@ function JellemSelector(props: {selected: JellemID, changeJellem: (val: JellemID
     return <>
         <div className='row m-2'>
             <label className='col-md-2 col-sm-3 col-form-label'>Jellem</label>
-            <select className='col form-select' value={selected} onChange={e => changeJellem(e.target.value as JellemID)}>
+            <select
+                className='col form-select'
+                value={selected}
+                data-testid="jellem"
+                onChange={e => changeJellem(e.target.value as JellemID)}
+            >
                 {AllJellemIDs.map((id) => (
                     <option key={id} value={id}>{GetJellem(id).Label}</option>
                 ))}
@@ -16,7 +21,7 @@ function JellemSelector(props: {selected: JellemID, changeJellem: (val: JellemID
         <div className='row m-2'>
             <label className='col-md-2 col-sm-3 form-label'></label>
             <div className='col'>
-                <p className='row pt-2'>
+                <p className='row pt-2' data-testid="jellem-description">
                     {jellem.Description}
                 </p>
             </div>

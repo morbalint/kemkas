@@ -122,22 +122,10 @@ function CreateCharacter2E(props: {
                     <label className='col-md-2 col-sm-3 col-form-label'>Név</label>
                     <input className='col form-control'
                            value={karakter.nev}
+                           data-testid="nev"
                            onChange={(e) => setKarakter({...karakter, nev: e.target.value})}/>
                     {!karakter.nev &&
                         <span className='form-field-error'>A karaktered nem mászkálhat névtelenül a világban!</span>}
-                </div>
-                <div className='row m-2'>
-                    <label className='col-md-2 col-sm-3 col-form-label'>Nem</label>
-                    <input className='col form-control'
-                           value={karakter.nem}
-                           onChange={(e) => setKarakter({...karakter, nem: e.target.value})}/>
-                </div>
-                <div className='row m-2'>
-                    <label className='col-md-2 col-sm-3 col-form-label'>Kor</label>
-                    <input className='col form-control'
-                           value={karakter.kor}
-                           type={"number"}
-                           onChange={(e) => setKarakter({...karakter, kor: Number(e.target.value)})}/>
                 </div>
                 <JellemSelector selected={karakter.jellem}
                                 changeJellem={(val) => setKarakter({...karakter, jellem: val})}/>
@@ -145,6 +133,7 @@ function CreateCharacter2E(props: {
                     <label className='col-md-2 col-sm-3 col-form-label'>Választott istenség</label>
                     <input className='col form-control'
                            value={karakter.isten}
+                           data-testid="isten"
                            onChange={(e) => setKarakter({...karakter, isten: e.target.value})}/>
                 </div>
                 <FajSelector2E
@@ -212,8 +201,11 @@ function CreateCharacter2E(props: {
                             ⇩</button>}
                 </div>
                 <hr/>
-                <Felszereles osztaly={karakter.szintlepesek[0].osztaly} felszereles={karakter.felszereles}
-                             changeFelszereles={changeFelszereles}/>
+                <Felszereles
+                    osztaly={karakter.szintlepesek[0].osztaly}
+                    felszereles={karakter.felszereles}
+                    changeFelszereles={changeFelszereles}
+                />
 
                 <hr/>
                 <div className='row'>
@@ -223,8 +215,11 @@ function CreateCharacter2E(props: {
                 {fetchedUser.email != null &&
                     <div className='row m-2'>
                         <label className='col-md-2 col-sm-3 col-form-label'>Publikus karakterlap?</label>
-                        <select className="col form-select" value={isPublic.toString()}
-                                onChange={(event) => setIsPublic(event.target.value === "true")}>
+                        <select
+                            className="col form-select" value={isPublic.toString()}
+                            onChange={(event) => setIsPublic(event.target.value === "true")}
+                            data-testid={"karakter-publikus"}
+                        >
                             <option value="true">Igen</option>
                             <option value="false">Nem</option>
                         </select>

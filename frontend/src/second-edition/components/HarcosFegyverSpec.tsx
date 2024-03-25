@@ -23,7 +23,12 @@ function HarcosFegyverSpecializacio(props: {
     return <>
         <div className='row m-2'>
             <label className='col-md-2 col-sm-3 col-form-label' >Fegyver specializáció</label>
-            <FegyverSelector fegyverek={pickableFegyverek} selectedId={specialization} onChange={changeSpecialization} />
+            <FegyverSelector
+                fegyverek={pickableFegyverek}
+                selectedId={specialization}
+                onChange={changeSpecialization}
+                dataTestId={"harcos-specialization-" + szint}
+            />
             {fegyver == null && <span className='form-field-error'>Ismeretlen fegyver: {specialization}</span>}
         </div>
     </>

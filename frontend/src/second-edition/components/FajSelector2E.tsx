@@ -6,7 +6,12 @@ function FajSelector2E(props: { faj: Faj2E, changeFaj: (val: Faj2E) => void }) {
     return <>
         <div className='row m-2'>
             <label className='col-md-2 col-sm-3 col-form-label'>Faj</label>
-            <select className='col form-select' value={faj} onChange={e => changeFaj(e.target.value as Faj2E)}>
+            <select
+                className='col form-select'
+                value={faj}
+                onChange={e => changeFaj(e.target.value as Faj2E)}
+                data-testid="faj"
+            >
                 <option key={Faj2E.Ember} value={Faj2E.Ember}>{FajLabel(Faj2E.Ember)}</option>
                 <optgroup label='más emberi népek'>
                     <option key={Faj2E.Amazon} value={Faj2E.Amazon}>{FajLabel(Faj2E.Amazon)}</option>
@@ -29,10 +34,10 @@ function FajSelector2E(props: { faj: Faj2E, changeFaj: (val: Faj2E) => void }) {
         <div className='row m-2'>
             <label className='col-md-2 col-sm-3 form-label'></label>
             <div className='col'>
-                <p className='row pt-2'>
+                <p className='row pt-2' data-testid="faj-description">
                     {FajDescription(faj)}
                 </p>
-                <ul>
+                <ul data-testid="faj-specials">
                     {FajSpecials(faj).map(((special, i) => (<li key={faj + i}>{special}</li>)))}
                 </ul>
             </div>

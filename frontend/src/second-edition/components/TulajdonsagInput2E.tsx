@@ -18,6 +18,7 @@ function TulajdonsagInput(props: {
     currentValue: number
     tooLowError: string,
     tooHighError: string
+    dataTestId?: string
 }) {
     const {
         tulajdonsag,
@@ -27,11 +28,19 @@ function TulajdonsagInput(props: {
         fajiModosito,
         tooLowError,
         tooHighError,
+        dataTestId
     } = props;
     return (<div className='row m-2'>
         <label className='col-lg-1 col-sm-2 col-form-label'>{tulajdonsag}</label>
         <div className='col-lg-1 col-sm-2 m-2'>
-            <input className='form-control' maxLength={2} type='number' value={currentValue} onChange={e => changeValue(Number(e.target.value))} />
+            <input
+                className='form-control'
+                maxLength={2}
+                type='number'
+                value={currentValue}
+                onChange={e => changeValue(Number(e.target.value))}
+                data-testid={dataTestId}
+            />
         </div>
         <span className='col-sm-2 m-2'>
                             {fajiModositoText(currentFaj, fajiModosito)}

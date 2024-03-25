@@ -8,14 +8,21 @@ function kepzettsegOptionText(k: Kepzettseg) {
     return k.Name + ' (' + k.Tulajdonsag.reduce((acc, k) => (acc === '' ? acc : acc + ' / ') + TulajdonsagLabel(k), '') + ')' + (osztalyok == null ? '' : (' - ' + osztalyok));
 }
 
-function KepzettsegSelector (props: {kepzettsegek: Kepzettseg[], changeKepzettseg: (newKepzettseg: KepzettsegId) => void, selected : Kepzettseg}) {
-
-    const { kepzettsegek, changeKepzettseg, selected } = props
-
+function KepzettsegSelector (props: {
+    kepzettsegek: Kepzettseg[],
+    changeKepzettseg: (newKepzettseg: KepzettsegId) => void,
+    selected : Kepzettseg,
+    dataTestId?: string,
+}) {
+    const { kepzettsegek, changeKepzettseg, selected, dataTestId } = props
     return <>
         <div className='row'>
-            <select className='form-control'
-                    value={selected.Id} onChange={e => changeKepzettseg(e.target.value as KepzettsegId)}>
+            <select
+                className='form-control'
+                value={selected.Id}
+                onChange={e => changeKepzettseg(e.target.value as KepzettsegId)}
+                data-testid={dataTestId}
+            >
                 {kepzettsegek.map(k =>(
                     <option key={k.Id} value={k.Id}>
                         {kepzettsegOptionText(k)}

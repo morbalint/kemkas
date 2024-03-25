@@ -8,16 +8,22 @@ import {
 } from "../domain-models/kepzettsegek2E";
 import {arraySetN} from "../../util";
 
-
 function InternalKepzettsegekSelector(props: {
     title: string,
     numberOfKepzettseg: number,
     getKepzettsegListaN: (n: number) => Kepzettseg[],
     kepzettsegek: KepzettsegId[],
-    changeKepzettsegek: (newKepzettsegek: KepzettsegId[]) => void
+    changeKepzettsegek: (newKepzettsegek: KepzettsegId[]) => void,
+    dataTestId?: string,
 }) {
-    const {title, numberOfKepzettseg, getKepzettsegListaN, kepzettsegek, changeKepzettsegek} = props
-
+    const {
+        title,
+        numberOfKepzettseg,
+        getKepzettsegListaN,
+        kepzettsegek,
+        changeKepzettsegek,
+        dataTestId,
+    } = props
     const klist = Array.from(new Array(numberOfKepzettseg).keys())
 
     const preCalculated: {
@@ -44,6 +50,7 @@ function InternalKepzettsegekSelector(props: {
                         kepzettsegek={preCalculated[idx].kepzettsegek}
                         selected={preCalculated[idx].selected}
                         changeKepzettseg={preCalculated[idx].changeKepzettseg}
+                        dataTestId={`${dataTestId}-${idx}`}
                     />)
                 }
             </div>
@@ -75,14 +82,18 @@ function KarakterKepzettsegek (props: {
             numberOfKepzettseg={numberOfKepzettsegek}
             getKepzettsegListaN={getKepzettsegListaN}
             changeKepzettsegek={changeKepzettsegek}
-            kepzettsegek={kepzettsegek} />
+            kepzettsegek={kepzettsegek}
+            dataTestId={"kepzettseg"}
+        />
 
         {tolvajKepzettsegek.length > 0 && <InternalKepzettsegekSelector
             title="Tolvaj képzettségek"
             numberOfKepzettseg={4}
             getKepzettsegListaN={getTolvajKepzettsegListaN}
             changeKepzettsegek={changeTolvajKepzettsegek}
-            kepzettsegek={tolvajKepzettsegek} />}
+            kepzettsegek={tolvajKepzettsegek}
+            dataTestId={"tolvaj-kepzettseg"}
+        />}
     </>
 }
 

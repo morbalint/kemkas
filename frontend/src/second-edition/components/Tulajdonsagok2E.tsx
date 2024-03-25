@@ -17,7 +17,7 @@ function Tulajdonsagok(props: {
         <div className='row'>
             <h5 className='col-lg-2 col-sm-4 align-self-center'>Tulajdonságok</h5>
             <div className='col-sm-2 m-2'>
-                <button className='btn btn-dark' type='button'
+                <button className='btn btn-dark' type='button' data-testid="tulajdonsag-dobas"
                         onClick={() => changeTulajdonsagok(RollAllAbilities())}>Dobás
                 </button>
             </div>
@@ -30,6 +30,7 @@ function Tulajdonsagok(props: {
             changeValue={(val: number) => changeTulajdonsagok({...tulajdonsagok, t_ero: val})}
             tooLowError='Túl gyenge vagy, nem bírtad felemelni a kezed a jelentkezéshez!'
             tooHighError='Szét szakadtak az izmaid!'
+            dataTestId={"t_ero"}
         />
         <TulajdonsagInput
             tulajdonsag='Ügyesség'
@@ -39,6 +40,7 @@ function Tulajdonsagok(props: {
             changeValue={(val: number) => changeTulajdonsagok({...tulajdonsagok, t_ugy: val})}
             tooLowError='Orrabuktál jelentkezés helyett!'
             tooHighError='Emberfeletti zsonglörködésedre záptojással válaszoltak a helyiek!'
+            dataTestId={"t_ugy"}
         />
         <TulajdonsagInput
             tulajdonsag='Egészség'
@@ -48,6 +50,7 @@ function Tulajdonsagok(props: {
             changeValue={(val: number) => changeTulajdonsagok({...tulajdonsagok, t_egs: val})}
             tooLowError='Túl beteg vagy ahhoz, hogy kalandozni menj!'
             tooHighError='Kicsattanó egészségedet csak a diambroid állíthatja meg, minő véletlen, hogy pont az arcodba robbant...'
+            dataTestId={"t_egs"}
         />
         <TulajdonsagInput
             tulajdonsag='Intelligencia'
@@ -57,6 +60,7 @@ function Tulajdonsagok(props: {
             changeValue={(val: number) => changeTulajdonsagok({...tulajdonsagok, t_int: val})}
             tooLowError='Elfelejtetted, hogy mikor is kéne kalandozni indulni!'
             tooHighError='Ilyen tudás és logika birtokában mi szükséged van új információkra? Mindent le tudsz vezetni a már meglévő ismereteidből, és ezt azonnal beláttad.'
+            dataTestId={"t_int"}
         />
         <TulajdonsagInput
             tulajdonsag='Bölcsesség'
@@ -66,6 +70,7 @@ function Tulajdonsagok(props: {
             changeValue={(val: number) => changeTulajdonsagok({...tulajdonsagok, t_bol: val})}
             tooLowError='Nem bírtál ellenállni a kíváncsiságodnak, hogy közelebbről is megvizsgáld a tőr hegyét. Nagyon közelről.'
             tooHighError='Hatalmas bölcsességedben beláttad a kalandozás veszélyeit és inkább más tevékenységbe fogtál.'
+            dataTestId={"t_bol"}
         />
         <TulajdonsagInput
             tulajdonsag='Karizma'
@@ -75,8 +80,8 @@ function Tulajdonsagok(props: {
             changeValue={(val: number) => changeTulajdonsagok({...tulajdonsagok, t_kar: val})}
             tooLowError='Mintha taszítanád az embereket, sose sikerült kalandozó csapatot találnod.'
             tooHighError='Az ellenkező nem tagjai nem engedték, hogy útnak indulj.'
+            dataTestId={"t_kar"}
         />
-
     </>
 }
 

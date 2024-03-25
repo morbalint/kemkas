@@ -59,7 +59,9 @@ function BasicNewLevel(props: {
                             value={karakter.szintlepesek[szint-1].HProll || 1}
                             min={1}
                             max={12}
-                            onChange={e => changeRolledHP(Number(e.target.value))} />
+                            onChange={e => changeRolledHP(Number(e.target.value))}
+                            data-testid={`HP-${szint}`}
+                        />
                     </div>
                 </div>
                 { isTBincreased && <div className='row m-2'>

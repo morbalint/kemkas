@@ -61,13 +61,19 @@ export function FegyverLabel(fegyver: Fegyver): string {
         fegyver.Range > 10 ? ` | táv: ${fegyver.Range}` : ''}`
 }
 
-function FegyverSelector(props: {fegyverek: Fegyver[], selectedId: string, onChange: (id: string) => void}) {
-    
-    const { fegyverek, selectedId, onChange } = props
-    
+function FegyverSelector(props: {
+    fegyverek: Fegyver[],
+    selectedId: string,
+    onChange: (id: string) => void,
+    dataTestId?: string,
+}) {
+    const { fegyverek, selectedId, onChange, dataTestId } = props
     return <>
-        <select className='col form-select' value={selectedId}
-                onChange={e => onChange(e.target.value)}>
+        <select className='col form-select'
+                value={selectedId}
+                onChange={e => onChange(e.target.value)}
+                data-testid={dataTestId}
+        >
             <optgroup label="Közelharci">
                 {fegyverek.filter(f => f.Type === 'kozelharci').map(f => <option
                     key={f.Id} value={f.Id}>{FegyverLabel(f)}</option>)}
