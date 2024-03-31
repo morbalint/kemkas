@@ -1,5 +1,6 @@
 import React from "react";
 import {
+    KarakterTulajdonsagok,
     Tulajdonsag2E,
 } from "../domain-models/tulajdonsag2E";
 import TulajdonsagInput from "./TulajdonsagInput2E";
@@ -18,10 +19,12 @@ import {
 
 function Tulajdonsagok(props: {
     currentFaj: Faj2E,
+    tulajdonsagok?: KarakterTulajdonsagok
+    dispatch?: (action: any) => any
 }) {
     const {currentFaj} = props
-    const dispatch = useDispatch.withTypes<AppDispatch>()()
-    const tulajdonsagok = useSelector.withTypes<RootState>()(tulajdonsagSelector)
+    const dispatch = props.dispatch ?? useDispatch.withTypes<AppDispatch>()()
+    const tulajdonsagok = props.tulajdonsagok ?? useSelector.withTypes<RootState>()(tulajdonsagSelector)
     return <>
         <div className='row'>
             <h5 className='col-lg-2 col-sm-4 align-self-center'>Tulajdonságok</h5>
