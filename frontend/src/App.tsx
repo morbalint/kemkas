@@ -27,8 +27,12 @@ function Router(props: {faro?: Faro}) {
                 console.log(response)
             })
             .then(userNameResponse => {
-                const userName = userNameResponse && userNameResponse.length  > 0 ? userNameResponse : null;
-                dispatch(setUser(userName))
+                if (userNameResponse && userNameResponse.length  > 0) {
+                    dispatch(setUser(userNameResponse))
+                } else {
+                    dispatch(unsetUser())
+                }
+
             })
             .catch(() => {
                 dispatch(unsetUser())

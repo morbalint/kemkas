@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit"
 import userReducer from './shared/domain-models/userSlice'
+import tulajdonsag2eReducer from './second-edition/domain-models/tulajdonsagSlice';
 
 const store = configureStore({
     reducer: {
-        user: userReducer
+        user: userReducer,
+        tulajdonsag2E: tulajdonsag2eReducer
     },
 });
 

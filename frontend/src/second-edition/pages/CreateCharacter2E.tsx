@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import {useLoaderData, useNavigate, useParams} from "react-router-dom";
 import {OverlayTrigger, Toast, ToastContainer} from "react-bootstrap";
 import {ChangeLvl1Osztaly, DefaultKarakter, Karakter2E} from "../domain-models/karakter2E";
-import {KarakterTulajdonsagok} from "../domain-models/tulajdonsag2E";
 import FajSelector2E from "../components/FajSelector2E";
 import Tulajdonsagok2E from "../components/Tulajdonsagok2E";
 import OsztalySelector2E from "../components/OsztalySelector2E";
@@ -34,6 +33,7 @@ import {useSelector} from "react-redux";
 import {RootState} from "../../store";
 import {userSelector} from "../../shared/domain-models/userSlice";
 import {SaveModal} from "../../shared/components/SaveModal";
+import {tulajdonsagSelector} from "../domain-models/tulajdonsagSlice";
 
 function CreateCharacter2E(props: {
     faro?: Faro
@@ -51,6 +51,7 @@ function CreateCharacter2E(props: {
     const navigate = useNavigate();
     
     const [karakter, setKarakter] = useState(initialKarakterInputs)
+    karakter.tulajdonsagok = useSelector.withTypes<RootState>()(tulajdonsagSelector)
     const tulajdonsagokFajjal = TulajdonsagokFajjal(karakter.tulajdonsagok, karakter.faj)
     const changeKepzettseg = (k: KepzettsegId[]) => setKarakter({...karakter, kepzettsegek: k})
     const changeTolvajKepzettseg = (tk?: KepzettsegId[]) => setKarakter({...karakter, tolvajKepzettsegek: tk})
@@ -143,11 +144,6 @@ function CreateCharacter2E(props: {
                 <hr/>
                 <Tulajdonsagok2E
                     currentFaj={karakter.faj}
-                    tulajdonsagok={karakter.tulajdonsagok}
-                    changeTulajdonsagok={(tul: KarakterTulajdonsagok) => setKarakter({
-                        ...karakter,
-                        tulajdonsagok: tul
-                    })}
                 />
                 <hr/>
                 <div className='row'>
