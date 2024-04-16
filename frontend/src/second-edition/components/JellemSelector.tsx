@@ -1,8 +1,14 @@
 import React from "react";
 import {AllJellemIDs, GetJellem, JellemID} from "../domain-models/jellem";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "../../store";
+import {characterSelector, setJellem} from "../domain-models/characterSlice";
 
-function JellemSelector(props: {selected: JellemID, changeJellem: (val: JellemID) => void}) {
-    const { selected, changeJellem } = props
+function JellemSelector(props: {selected?: JellemID, changeJellem?: (val: JellemID) => void}) {
+    const character = useSelector.withTypes<RootState>()(characterSelector)
+    const selected = props.selected ?? character.jellem
+    const dispatch = useDispatch.withTypes<AppDispatch>()()
+    const changeJellem = props.changeJellem ?? (val => dispatch(setJellem(val)))
     const jellem = GetJellem(selected)
     return <>
         <div className='row m-2'>

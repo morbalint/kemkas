@@ -5,7 +5,7 @@ import {AllowedPajzsTypes, AllowedPancelTypes} from '../domain-models/allowed-pa
 import fegyverek from '../domain-models/fegyver.json'
 import {arraySetN} from "../../util";
 import {AllowedFegyver} from "../domain-models/allowed-fegyver";
-import FegyverSelector from "./FegyverSelector";
+import FegyverSelector from "../display-components/FegyverSelector";
 
 function Felszereles(props: {felszereles: KarakterFelszereles, changeFelszereles: (felszereles: KarakterFelszereles) => void, osztaly: Osztaly2E}) {
     const { felszereles, changeFelszereles, osztaly } = props;

@@ -1,10 +1,32 @@
 import React from "react";
 import {OverlayTrigger, Tooltip} from "react-bootstrap";
 import {SignedNumberToText} from "../../shared/components/Helpers";
-import {MasodlagosErtekekView} from "../domain-models/masodlagos_ertekek";
+import {CalculateMasodlagosErtekek, MasodlagosErtekekView} from "../domain-models/masodlagos_ertekek";
+import {useSelector} from "react-redux";
+import {RootState} from "../../store";
+import {characterSelector} from "../domain-models/characterSlice";
+import {TulajdonsagokTotal} from "../domain-models/tulajdonsag2E";
 
-function MasodlagosErtekek(props: MasodlagosErtekekView) {
+export function MasodlagosErtekek(props: {szint?: number}) {
+    let karakter = useSelector.withTypes<RootState>()(characterSelector);
+    if (props.szint !== karakter.szint && props.szint !== undefined) {
+        const szintlepesek = karakter.szintlepesek.slice(0, props.szint)
+        karakter = {
+            ...karakter,
+            tulajdonsagok: TulajdonsagokTotal({
+                tulajdonsagok: karakter.tulajdonsagok,
+                faj: karakter.faj,
+                szintlepesek,
+            }),
+            szint: props.szint,
+            szintlepesek,
+        }
+    }
+    const masodlagosErtekek = CalculateMasodlagosErtekek(karakter)
+    return <MasodlagosErtekekPresenter {...masodlagosErtekek}/>
+}
 
+export function MasodlagosErtekekPresenter(props: MasodlagosErtekekView) {
     const { HP, VO, CelzoTB, Mentok, KozelharciTB } = props
 
     const tooltip = (

@@ -5,7 +5,7 @@ import {Faj2E} from "../domain-models/faj2E";
 import {TulajdonsagDefaults} from "../domain-models/tulajdonsag2E";
 import {
     setEro,
-} from "../domain-models/tulajdonsagSlice";
+} from "../domain-models/characterSlice";
 import '@testing-library/jest-dom'
 import {Provider} from "react-redux";
 import store from "../../store";

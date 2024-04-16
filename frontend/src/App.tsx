@@ -12,6 +12,7 @@ import store, {AppDispatch, RootState} from './store'
 import { Provider } from "react-redux"
 import { useSelector, useDispatch } from 'react-redux'
 import {load, setUser, unsetUser, userSelector} from './shared/domain-models/userSlice'
+import {setCharacter} from "./second-edition/domain-models/characterSlice";
 
 function Router(props: {faro?: Faro}) {
     const dispatch = useDispatch.withTypes<AppDispatch>()()
@@ -79,7 +80,18 @@ function Router(props: {faro?: Faro}) {
         {
             path: "/2e/karakter/:id",
             element: <CreateCharacter2E faro={props.faro}/>,
-            loader: args => fetch(`${window.location.origin}/api/Character2E/${args.params.id}`),
+            loader: async args => {
+                const response = await fetch(`${window.location.origin}/api/Character2E/${args.params.id}`)
+                if (response.ok) {
+                    const loaded2Echaracter = await response.json()
+                    dispatch(setCharacter(loaded2Echaracter))
+                    return loaded2Echaracter;
+                }
+                return {
+                    isPublic: false,
+                    error: response.statusText,
+                };
+            },
             ErrorBoundary: ErrorBoundary,
         },
     ]);

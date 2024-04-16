@@ -3,7 +3,7 @@ import {
     KarakterTulajdonsagok,
     Tulajdonsag2E,
 } from "../domain-models/tulajdonsag2E";
-import TulajdonsagInput from "./TulajdonsagInput2E";
+import TulajdonsagInput from "../display-components/TulajdonsagInput2E";
 import {Faj2E, TulajdonsagModositokFajokra} from "../domain-models/faj2E";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../store";
@@ -12,19 +12,21 @@ import {
     setBolcsesseg,
     setEgeszseg,
     setEro,
-    setIntelligencia, setKarizma,
+    setIntelligencia,
+    setKarizma,
     setUgyesseg,
-    tulajdonsagSelector
-} from "../domain-models/tulajdonsagSlice";
+} from "../domain-models/characterSlice";
+import {characterSelector} from "../domain-models/characterSlice";
 
 function Tulajdonsagok(props: {
-    currentFaj: Faj2E,
+    currentFaj?: Faj2E,
     tulajdonsagok?: KarakterTulajdonsagok
     dispatch?: (action: any) => any
 }) {
-    const {currentFaj} = props
+    const karakter = useSelector.withTypes<RootState>()(characterSelector)
     const dispatch = props.dispatch ?? useDispatch.withTypes<AppDispatch>()()
-    const tulajdonsagok = props.tulajdonsagok ?? useSelector.withTypes<RootState>()(tulajdonsagSelector)
+    const currentFaj = props.currentFaj ?? karakter.faj
+    const tulajdonsagok = props.tulajdonsagok ?? karakter.tulajdonsagok
     return <>
         <div className='row'>
             <h5 className='col-lg-2 col-sm-4 align-self-center'>Tulajdonságok</h5>

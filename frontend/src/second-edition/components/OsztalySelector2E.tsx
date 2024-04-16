@@ -7,8 +7,24 @@ import {
     OsztalySpecialSkills
 } from "../domain-models/osztaly2E";
 import {Faj2E, SzintKorlatokFajokra} from "../domain-models/faj2E";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "../../store";
+import {characterSelector, setLevel1Osztaly} from "../domain-models/characterSlice";
 
-function OsztalySelector2E(props: {
+export function OsztalySelector2E() {
+    const karakter = useSelector.withTypes<RootState>()(characterSelector)
+    const dispatch = useDispatch.withTypes<AppDispatch>()()
+    const currentFaj = karakter.faj
+    const currentOsztaly = karakter.szintlepesek[0].osztaly
+    const changeOsztaly = (o: Osztaly2E) => dispatch(setLevel1Osztaly(o))
+    return <OsztalySelector2EPresenter
+        currentOsztaly={currentOsztaly}
+        changeOsztaly={changeOsztaly}
+        currentFaj={currentFaj}
+    />
+}
+
+export function OsztalySelector2EPresenter(props: {
     currentFaj: Faj2E,
     currentOsztaly: Osztaly2E,
     changeOsztaly: (newOsztaly: Osztaly2E) => void

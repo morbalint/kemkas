@@ -241,104 +241,60 @@ export function SetDefaultTolvajKepzettsegek(karakter: Pick<Karakter2E, 'szintle
 
 export function GetKepzettsegListaN(karakter: Pick<Karakter2E, 'szintlepesek' | 'faj' | 'kepzettsegek' | 'tolvajKepzettsegek'>) {
     const osztalyok = new Set(karakter.szintlepesek.map(x => x.osztaly))
-    const availableKepzettsegList = AvailableKezpettsegList(...osztalyok)
+    let availableKepzettsegList = AvailableKezpettsegList(...osztalyok)
+    if (karakter.faj === Faj2E.Birodalmi && availableKepzettsegList.every(x => x.Id !== "k_okkultizmus")) {
+        availableKepzettsegList = [Kepzettsegek.k_okkultizmus, ...availableKepzettsegList]
+    }
+    if (karakter.faj === Faj2E.Birodalmi && availableKepzettsegList.every(x => x.Id !== "k_meregkeveres")) {
+        availableKepzettsegList = [Kepzettsegek.k_meregkeveres, ...availableKepzettsegList]
+    }
+    if (karakter.faj === Faj2E.Birodalmi && availableKepzettsegList.every(x => x.Id !== "k_alkimia")) {
+        availableKepzettsegList = [Kepzettsegek.k_alkimia, ...availableKepzettsegList]
+    }
     return (n: number): Kepzettseg[] => {
         let available = [...availableKepzettsegList]
-        if (n === 0) {
-            if (karakter.faj === Faj2E.Eszaki) {
-                return [Kepzettsegek.k_hajozas]
-            }
-            if (karakter.faj === Faj2E.Nomad) {
-                return [Kepzettsegek.k_lovaglas]
-            }
-            // TODO birodalmi tolvaj, tolvajképzettségek!
-            if (karakter.faj === Faj2E.Birodalmi) {
-                return [Kepzettsegek.k_alkimia, Kepzettsegek.k_meregkeveres, Kepzettsegek.k_okkultizmus]
-            }
-            if (karakter.faj === Faj2E.Torpe) {
-                return [Kepzettsegek.k_ertekbecsles]
-            }
-            if (karakter.faj === Faj2E.Elf || karakter.faj === Faj2E.Felelf) {
-                return [Kepzettsegek.k_vadonjaras]
-            }
-            if (osztalyok.has(Osztaly2E.Druida) || osztalyok.has(Osztaly2E.Vandor)) {
-                return [Kepzettsegek.k_vadonjaras]
-            }
-            if (osztalyok.has(Osztaly2E.Dalnok)) {
-                return [Kepzettsegek.k_eloadas]
-            }
-        }
-        if (n === 1) {
-            if ((osztalyok.has(Osztaly2E.Vandor) || osztalyok.has(Osztaly2E.Druida))
-                && karakter.kepzettsegek[0] !== Kepzettsegek.k_vadonjaras.Id) {
-                return [Kepzettsegek.k_vadonjaras]
-            }
-            if (osztalyok.has(Osztaly2E.Dalnok)
-                && karakter.kepzettsegek[0] !== Kepzettsegek.k_eloadas.Id) {
-                return [Kepzettsegek.k_eloadas]
-            }
-        }
-        if (n === 2) { // maybe write a better abstraction?
-            if (osztalyok.has(Osztaly2E.Dalnok)
-                && karakter.kepzettsegek[0] !== Kepzettsegek.k_eloadas.Id 
-                && karakter.kepzettsegek[1] !== Kepzettsegek.k_eloadas.Id) {
-                return [Kepzettsegek.k_eloadas]
-            } 
-        }
+        // if (n === 0) {
+        //     if (karakter.faj === Faj2E.Eszaki) {
+        //         return [Kepzettsegek.k_hajozas]
+        //     }
+        //     if (karakter.faj === Faj2E.Nomad) {
+        //         return [Kepzettsegek.k_lovaglas]
+        //     }
+        //     // TODO birodalmi tolvaj, tolvajképzettségek!
+        //     if (karakter.faj === Faj2E.Birodalmi) {
+        //         return [Kepzettsegek.k_alkimia, Kepzettsegek.k_meregkeveres, Kepzettsegek.k_okkultizmus]
+        //     }
+        //     if (karakter.faj === Faj2E.Torpe) {
+        //         return [Kepzettsegek.k_ertekbecsles]
+        //     }
+        //     if (karakter.faj === Faj2E.Elf || karakter.faj === Faj2E.Felelf) {
+        //         return [Kepzettsegek.k_vadonjaras]
+        //     }
+        //     if (osztalyok.has(Osztaly2E.Druida) || osztalyok.has(Osztaly2E.Vandor)) {
+        //         return [Kepzettsegek.k_vadonjaras]
+        //     }
+        //     if (osztalyok.has(Osztaly2E.Dalnok)) {
+        //         return [Kepzettsegek.k_eloadas]
+        //     }
+        // }
+        // if (n === 1) {
+        //     if ((osztalyok.has(Osztaly2E.Vandor) || osztalyok.has(Osztaly2E.Druida))
+        //         && karakter.kepzettsegek[0] !== Kepzettsegek.k_vadonjaras.Id) {
+        //         return [Kepzettsegek.k_vadonjaras]
+        //     }
+        //     if (osztalyok.has(Osztaly2E.Dalnok)
+        //         && karakter.kepzettsegek[0] !== Kepzettsegek.k_eloadas.Id) {
+        //         return [Kepzettsegek.k_eloadas]
+        //     }
+        // }
+        // if (n === 2) { // maybe write a better abstraction?
+        //     if (osztalyok.has(Osztaly2E.Dalnok)
+        //         && karakter.kepzettsegek[0] !== Kepzettsegek.k_eloadas.Id
+        //         && karakter.kepzettsegek[1] !== Kepzettsegek.k_eloadas.Id) {
+        //         return [Kepzettsegek.k_eloadas]
+        //     }
+        // }
         const kepzettsegekWithoutN = [...karakter.kepzettsegek.slice(0, n), ...karakter.kepzettsegek.slice(n + 1)]
         return available.filter(x => !kepzettsegekWithoutN.includes(x.Id) && !karakter.tolvajKepzettsegek?.includes(x.Id))
-    }
-}
-
-export function SetDefaultKepzettsegek(karakter: Pick<Karakter2E, 'szintlepesek' | 'faj' | 'tulajdonsagok' | 'kepzettsegek' | 'tolvajKepzettsegek'>, changeKepzettsegek: (k: KepzettsegId[]) => void) {
-    const osztalyok = karakter.szintlepesek.map(x => x.osztaly)
-    const availableKepzettsegList = AvailableKezpettsegList(...osztalyok)
-    const numberOfKepzettsegek = GetNumberOfKepzettsegek(karakter.tulajdonsagok.t_int, karakter.faj, availableKepzettsegList.length)
-    let kepzettsegek = [...karakter.kepzettsegek]
-
-    let mustChangeKepzettsegek = false
-
-    const restrictedKepzettsegek = GetKepzettsegListaN(karakter)(0)
-    if (kepzettsegek.length === 0) {
-        if (restrictedKepzettsegek.length > 0) {
-            kepzettsegek.push(restrictedKepzettsegek[0].Id)
-            mustChangeKepzettsegek = true
-        }
-    } else {
-        if (!restrictedKepzettsegek.includes(Kepzettsegek[kepzettsegek[0]])) {
-            kepzettsegek[0] = restrictedKepzettsegek[0].Id
-            mustChangeKepzettsegek = true
-        }
-    }
-
-    // // TODO: really fix this sometimes.
-    // const uglyDoubleRestrictedKepzettsegek = GetKepzettsegListaN(karakter)(1)
-    // if (kepzettsegek.length === 1) {
-    //     if (uglyDoubleRestrictedKepzettsegek.length > 0) {
-    //         kepzettsegek.push(uglyDoubleRestrictedKepzettsegek[0].Id)
-    //         mustChangeKepzettsegek = true
-    //     }
-    // } else {
-    //     if (!uglyDoubleRestrictedKepzettsegek.includes(Kepzettsegek[kepzettsegek[1]])) {
-    //         kepzettsegek[1] = uglyDoubleRestrictedKepzettsegek[0].Id
-    //         mustChangeKepzettsegek = true
-    //     }
-    // }
-
-    if (kepzettsegek.length < numberOfKepzettsegek) {
-        for (let i = kepzettsegek.length; i < numberOfKepzettsegek; i++) {
-            const kepzettsegLista = GetKepzettsegListaN({...karakter, kepzettsegek})(i)
-            if (kepzettsegLista.length > 0) {
-                kepzettsegek.push(kepzettsegLista[0].Id)
-            }
-        }
-        mustChangeKepzettsegek = true
-    }
-    if (kepzettsegek.length > numberOfKepzettsegek){
-        kepzettsegek = kepzettsegek.slice(0, numberOfKepzettsegek)
-        mustChangeKepzettsegek = true
-    }
-    if (mustChangeKepzettsegek){
-        changeKepzettsegek(kepzettsegek)
     }
 }

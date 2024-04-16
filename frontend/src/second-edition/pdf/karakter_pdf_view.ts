@@ -14,7 +14,7 @@ import {
 import {SignedNumberToText} from "../../shared/components/Helpers";
 import {Kepzettseg, Kepzettsegek} from "../domain-models/kepzettsegek2E";
 import {getClassLevels} from "../domain-models/szintlepes";
-import {FegyverFlags} from "../components/FegyverSelector";
+import {FegyverFlags} from "../domain-models/fegyver";
 
 interface KepzettsegPdfView {
     nev: string,
