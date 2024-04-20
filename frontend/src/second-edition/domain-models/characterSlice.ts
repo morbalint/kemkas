@@ -66,6 +66,7 @@ export const characterSlice = createSlice({
         setCharacter: (state, action: {payload: Karakter2E}) => {
             state = action.payload
             SetDefaultTolvajKepzettsegek(state, t => state.tolvajKepzettsegek = t)
+            state.kepzettsegek = AdjustKepzettsegek(state)
             const osztalyok = new Set(state.szintlepesek.map(x => x.osztaly))
             state.kepzettsegOsztalyError = getKepzettsegErrorForOsztaly(osztalyok, state.kepzettsegek);
             state.kepzettsegFajError = getKepzettsegErrorForFaj(action.payload.faj, action.payload.kepzettsegek)
