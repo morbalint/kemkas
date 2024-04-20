@@ -2,6 +2,10 @@ import {Fegyver} from "./felszereles";
 import fegyverDB from "./fegyver.json";
 import {Osztaly2E} from "./osztaly2E";
 
+export function AllowedFegyverek(osztalyok: Osztaly2E[]): Fegyver[] {
+    return [...new Set(osztalyok.flatMap(AllowedFegyver))]
+}
+
 export function AllowedFegyver(o: Osztaly2E): Fegyver[] {
     const fegyverek = fegyverDB.data.map(x => x as Fegyver)
     const varazslo = fegyverek.filter(f => ['okol', 'bot', 'bot_vasalt' , 'bunko', 'tor', 'parittya', 'dobotu'].includes(f.Id))

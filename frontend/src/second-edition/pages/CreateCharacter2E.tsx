@@ -8,7 +8,6 @@ import {Osztaly2E} from "../domain-models/osztaly2E";
 import KarakterKepzettsegek from "../components/KarakterKepzettsegek2E";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
 import Felszereles from "../components/Felszereles";
-import {KarakterFelszereles} from "../domain-models/felszereles";
 import LevelUps from "../components/LevelUps";
 import {LevelDown, LevelUp} from "../domain-models/szintlepes";
 import HarcosFegyverSpecializacio from "../components/HarcosFegyverSpec";
@@ -37,9 +36,6 @@ function CreateCharacter2E(props: {
 
     const karakter = useSelector.withTypes<RootState>()(characterSelector)
     const setKarakter = (newState: Karakter2E) => dispatch(setCharacter(newState));
-
-
-    const changeFelszereles = (f: KarakterFelszereles) => setKarakter({...karakter, felszereles: f})
 
     let [showSaveModal, setShowSaveModal] = useState(false);
     let [newId, setNewId] = useState(null as string | null)
@@ -126,11 +122,7 @@ function CreateCharacter2E(props: {
                             ⇩</button>}
                 </div>
                 <hr/>
-                <Felszereles
-                    osztaly={karakter.szintlepesek[0].osztaly}
-                    felszereles={karakter.felszereles}
-                    changeFelszereles={changeFelszereles}
-                />
+                <Felszereles />
 
                 <hr/>
                 <div className='row'>

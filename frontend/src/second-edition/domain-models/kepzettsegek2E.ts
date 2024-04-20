@@ -1,5 +1,5 @@
 import {Osztaly2E} from "./osztaly2E";
-import {Faj2E} from "./faj2E";
+import {Faj2E, TulajdonsagokFajjal} from "./faj2E";
 import {Karakter2E} from "./karakter2E";
 import {Modifier, Tulajdonsag2E} from "./tulajdonsag2E";
 
@@ -213,6 +213,14 @@ export function AvailableKezpettsegList(...osztalyok: Osztaly2E[]): Kepzettseg[]
     return KepzettsegLista.filter(k => k.Osztalyok == null || k.Osztalyok.some(o => osztalyok.includes(o)))
 }
 
+export function AvailableKezpettsegListFajjal(faj: Faj2E, ...osztalyok: Osztaly2E[]): Kepzettseg[] {
+    const birodalmiKepzettsegek : KepzettsegId[] = ["k_alkimia", "k_meregkeveres", "k_okkultizmus"]
+    return KepzettsegLista.filter(k =>
+        k.Osztalyok == null || k.Osztalyok.some(o => osztalyok.includes(o))
+        || (faj === Faj2E.Birodalmi && birodalmiKepzettsegek.some(x => x === k.Id))
+    )
+}
+
 export function GetNumberOfKepzettsegek(t_int: number, faj: Faj2E, max: number = 11) {
     //max = 3 + 1 + 3 + 5 = 12 // 3 base, 1 human, 3 from max ability modifier, 5 from Thief at 9th level
     let numberOfKepzettseg = 3 + Modifier(t_int) + (faj === Faj2E.Ember ? 1 : 0)
@@ -239,18 +247,16 @@ export function SetDefaultTolvajKepzettsegek(karakter: Pick<Karakter2E, 'szintle
     }
 }
 
+export function GetKepzettsegAtN(karakter: Pick<Karakter2E, 'szintlepesek' | 'faj' | 'kepzettsegek' | 'tolvajKepzettsegek'>, n: number): Kepzettseg | undefined {
+    const osztalyok = new Set(karakter.szintlepesek.map(x => x.osztaly))
+    let availableKepzettsegList = AvailableKezpettsegListFajjal(karakter.faj, ...osztalyok)
+    const kepzettsegekWithoutN = [...karakter.kepzettsegek.slice(0, n), ...karakter.kepzettsegek.slice(n + 1)]
+    return availableKepzettsegList.find(x => !kepzettsegekWithoutN.includes(x.Id) && !karakter.tolvajKepzettsegek?.includes(x.Id))
+}
+
 export function GetKepzettsegListaN(karakter: Pick<Karakter2E, 'szintlepesek' | 'faj' | 'kepzettsegek' | 'tolvajKepzettsegek'>) {
     const osztalyok = new Set(karakter.szintlepesek.map(x => x.osztaly))
-    let availableKepzettsegList = AvailableKezpettsegList(...osztalyok)
-    if (karakter.faj === Faj2E.Birodalmi && availableKepzettsegList.every(x => x.Id !== "k_okkultizmus")) {
-        availableKepzettsegList = [Kepzettsegek.k_okkultizmus, ...availableKepzettsegList]
-    }
-    if (karakter.faj === Faj2E.Birodalmi && availableKepzettsegList.every(x => x.Id !== "k_meregkeveres")) {
-        availableKepzettsegList = [Kepzettsegek.k_meregkeveres, ...availableKepzettsegList]
-    }
-    if (karakter.faj === Faj2E.Birodalmi && availableKepzettsegList.every(x => x.Id !== "k_alkimia")) {
-        availableKepzettsegList = [Kepzettsegek.k_alkimia, ...availableKepzettsegList]
-    }
+    let availableKepzettsegList = AvailableKezpettsegListFajjal(karakter.faj, ...osztalyok)
     return (n: number): Kepzettseg[] => {
         let available = [...availableKepzettsegList]
         // if (n === 0) {
@@ -296,5 +302,24 @@ export function GetKepzettsegListaN(karakter: Pick<Karakter2E, 'szintlepesek' | 
         // }
         const kepzettsegekWithoutN = [...karakter.kepzettsegek.slice(0, n), ...karakter.kepzettsegek.slice(n + 1)]
         return available.filter(x => !kepzettsegekWithoutN.includes(x.Id) && !karakter.tolvajKepzettsegek?.includes(x.Id))
+    }
+}
+
+export function AdjustKepzettsegek(karakter: Pick<Karakter2E, 'faj' | 'tulajdonsagok' | 'szintlepesek' | 'kepzettsegek' | 'tolvajKepzettsegek'>): KepzettsegId[] {
+    const tulajdonsagokFajjal = TulajdonsagokFajjal(karakter.tulajdonsagok, karakter.faj)
+    const numberOfKepzettsegek = GetNumberOfKepzettsegek(tulajdonsagokFajjal.t_int, karakter.faj)
+    const diff = numberOfKepzettsegek - karakter.kepzettsegek.length
+    if (diff > 0) {
+        const kepzettsegek = [...karakter.kepzettsegek]
+        for (let i = 0; i < diff; i++) {
+            const next = GetKepzettsegAtN({
+                ...karakter,
+                kepzettsegek,
+            }, kepzettsegek.length + 1)!.Id;
+            kepzettsegek.push(next)
+        }
+        return kepzettsegek;
+    } else {
+        return karakter.kepzettsegek.slice(0, numberOfKepzettsegek);
     }
 }

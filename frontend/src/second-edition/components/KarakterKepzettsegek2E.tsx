@@ -41,7 +41,7 @@ function InternalKepzettsegekSelector(props: {
     for (let i = 0; i < numberOfKepzettseg; i++) {
         preCalculated.push({
             kepzettsegek: getKepzettsegListaN(i),
-            selected: Kepzettsegek[kepzettsegek[i]],
+            selected: Kepzettsegek[kepzettsegek[i]] || getKepzettsegListaN(i)[0],
             changeKepzettseg: (newKepzettseg: KepzettsegId) => changeKepzettsegek(arraySetN(kepzettsegek, i, newKepzettseg))
         })
     }

@@ -1,12 +1,17 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {Faj2E, TulajdonsagokFajjal} from "./faj2E";
+import {Faj2E} from "./faj2E";
 import {JellemID} from "./jellem";
 import {DefaultKarakter, Karakter2E} from "./karakter2E";
 import {RollAllAbilities} from "./tulajdonsag2E";
 import {Osztaly2E} from "./osztaly2E";
 import {arraySetN} from "../../util";
-import {GetNumberOfKepzettsegek, KepzettsegId} from "./kepzettsegek2E";
+import {
+    AdjustKepzettsegek,
+    KepzettsegId,
+    SetDefaultTolvajKepzettsegek
+} from "./kepzettsegek2E";
 import {BaseHP} from "./masodlagos_ertekek";
+import {KarakterFelszereles} from "./felszereles";
 
 export const characterSlice = createSlice({
     name: "character2E",
@@ -23,13 +28,12 @@ export const characterSlice = createSlice({
         },
         setFaj: (state, action: { payload: Faj2E }) => {
             state.faj = action.payload;
-            const tulajdonsagokFajjal = TulajdonsagokFajjal(state.tulajdonsagok, state.faj)
-            const numberOfKepzettsegek = GetNumberOfKepzettsegek(tulajdonsagokFajjal.t_int, state.faj)
-            state.kepzettsegek = state.kepzettsegek.slice(0, numberOfKepzettsegek);
+            state.kepzettsegek = AdjustKepzettsegek(state)
             state.kepzettsegFajError = getKepzettsegErrorForFaj(action.payload, [...state.kepzettsegek, ...(state.tolvajKepzettsegek || [])])
         },
         rollAbilities: (state) => {
             state.tulajdonsagok = RollAllAbilities()
+            state.kepzettsegek = AdjustKepzettsegek(state)
         },
         setEro: (state, action: {payload: number}) => {
             state.tulajdonsagok.t_ero = action.payload;
@@ -42,9 +46,7 @@ export const characterSlice = createSlice({
         },
         setIntelligencia: (state, action: {payload: number}) => {
             state.tulajdonsagok.t_int = action.payload;
-            const tulajdonsagokFajjal = TulajdonsagokFajjal(state.tulajdonsagok, state.faj)
-            const numberOfKepzettsegek = GetNumberOfKepzettsegek(tulajdonsagokFajjal.t_int, state.faj)
-            state.kepzettsegek = state.kepzettsegek.slice(0, numberOfKepzettsegek);
+            state.kepzettsegek = AdjustKepzettsegek(state);
         },
         setBolcsesseg: (state, action: {payload: number}) => {
             state.tulajdonsagok.t_bol = action.payload;
@@ -56,17 +58,17 @@ export const characterSlice = createSlice({
             const szintlepesek = [{...state.szintlepesek[0], HProll: BaseHP(action.payload) , osztaly: action.payload}, ...state.szintlepesek.slice(1)]
             state.szintlepesek = szintlepesek
             // if character is not a tolvaj anymore remove all tolvaj kepzettsegek
-            if (szintlepesek.every(l => l.osztaly !== Osztaly2E.Tolvaj)){
-                state.tolvajKepzettsegek = [];
-                state.kepzettsegFajError = getKepzettsegErrorForFaj(state.faj, [...state.kepzettsegek])
-            }
+            SetDefaultTolvajKepzettsegek(state, t => state.tolvajKepzettsegek = t)
+            state.kepzettsegFajError = getKepzettsegErrorForFaj(state.faj, [...state.kepzettsegek])
             const osztalyok = new Set(szintlepesek.map(x => x.osztaly))
             state.kepzettsegOsztalyError = getKepzettsegErrorForOsztaly(osztalyok, state.kepzettsegek);
         },
         setCharacter: (state, action: {payload: Karakter2E}) => {
             state = action.payload
+            SetDefaultTolvajKepzettsegek(state, t => state.tolvajKepzettsegek = t)
             const osztalyok = new Set(state.szintlepesek.map(x => x.osztaly))
             state.kepzettsegOsztalyError = getKepzettsegErrorForOsztaly(osztalyok, state.kepzettsegek);
+            state.kepzettsegFajError = getKepzettsegErrorForFaj(action.payload.faj, action.payload.kepzettsegek)
             return state;
         },
         setHarcosSpecialization: (state, action: {payload: {szint: number, fegyver: string}}) => {
@@ -85,8 +87,12 @@ export const characterSlice = createSlice({
         },
         setTolvajKepzettsegek: (state, action: {payload: KepzettsegId[]}) => {
             state.tolvajKepzettsegek = action.payload;
+            // birodalmi
             state.kepzettsegFajError = getKepzettsegErrorForFaj(state.faj, [...state.kepzettsegek, ...action.payload])
         },
+        setFelszereles: (state, action: {payload: KarakterFelszereles}) => {
+            state.felszereles = action.payload;
+        }
     }
 })
 
@@ -140,6 +146,7 @@ export const {
     setHarcosSpecialization,
     setKepzettsegek,
     setTolvajKepzettsegek,
+    setFelszereles,
 } = characterSlice.actions
 
 export const characterSelector = characterSlice.selectSlice
