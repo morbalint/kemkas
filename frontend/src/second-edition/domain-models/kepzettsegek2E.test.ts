@@ -1,4 +1,5 @@
-import {GetAvailableKepzettsegek, GetNumberOfKepzettsegek, Kepzettsegek, KepzettsegLista} from "./kepzettsegek2E";
+import {GetAvailableKepzettsegek, GetNumberOfKepzettsegek} from "./kepzettsegek2E";
+import { Kepzettsegek, KepzettsegLista } from './kepzettsegek2E.data'
 import {Faj2E} from "./faj2E";
 import {DefaultKarakter} from "./karakter2E";
 import {Osztaly2E} from "./osztaly2E";

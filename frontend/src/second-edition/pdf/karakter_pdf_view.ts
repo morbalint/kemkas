@@ -12,7 +12,7 @@ import {
     TulajdonsagModosito
 } from "../domain-models/tulajdonsag2E";
 import {SignedNumberToText} from "../../shared/components/Helpers";
-import {Kepzettseg, Kepzettsegek} from "../domain-models/kepzettsegek2E";
+import {Kepzettseg, KepzettsegId, Kepzettsegek} from "../domain-models/kepzettsegek2E.data";
 import {getClassLevels} from "../domain-models/szintlepes";
 import {FegyverFlags} from "../domain-models/fegyver";
 
@@ -118,9 +118,9 @@ export function KarakterInputToPdfView(karakter: Karakter2E): KarakterPdfView {
         EgyebVO: SignedNumberToText(VOegyeb(karakter)),
         
         Kepzettsegek: 
-            karakter.kepzettsegek.map(k => 
+            karakter.kepzettsegek.map((k : KepzettsegId) =>
                 mapKepzettsegToPdfView(Kepzettsegek[k], tulajdonsagok, karakter.szint))
-                .concat(karakter.tolvajKepzettsegek?.map(k => 
+                .concat(karakter.tolvajKepzettsegek?.map((k: KepzettsegId) =>
                     mapKepzettsegToPdfView(Kepzettsegek[k], tulajdonsagok, classLevels[Osztaly2E.Tolvaj])) || []),
         
         Fegyverek: karakter.felszereles.fegyverIDk.slice(0, 4).map(fid => {

@@ -11,7 +11,8 @@ import HarcosFegyverSpecializacio from "./HarcosFegyverSpec";
 import MultiClassOsztalySelector2E from "./MultiClassOsztalySelector2E";
 import {getClassLevels} from "../domain-models/szintlepes";
 import KepzettsegSelector from "../display-components/KepzettsegSelector2E";
-import {GetAvailableKepzettsegek, Kepzettsegek, KepzettsegId} from "../domain-models/kepzettsegek2E";
+import {GetAvailableKepzettsegek} from "../domain-models/kepzettsegek2E";
+import { Kepzettsegek, KepzettsegId } from "../domain-models/kepzettsegek2E.data"
 
 function LevelUp(props: {
     szint: number,

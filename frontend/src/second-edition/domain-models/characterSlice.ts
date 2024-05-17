@@ -7,9 +7,11 @@ import {Osztaly2E} from "./osztaly2E";
 import {arraySetN} from "../../util";
 import {
     AdjustKepzettsegek,
-    KepzettsegId,
     SetDefaultTolvajKepzettsegek
 } from "./kepzettsegek2E";
+import {
+    KepzettsegId,
+} from  "./kepzettsegek2E.data"
 import {BaseHP} from "./masodlagos_ertekek";
 import {KarakterFelszereles} from "./felszereles";
 

@@ -1,7 +1,7 @@
 import {KarakterTulajdonsagok, TulajdonsagDefaults} from "./tulajdonsag2E";
 import {Faj2E} from "./faj2E";
 import {Osztaly2E} from "./osztaly2E";
-import {KepzettsegId} from "./kepzettsegek2E";
+import {KepzettsegId} from "./kepzettsegek2E.data";
 import {JellemID} from "./jellem";
 import {DefaultFelszereles, KarakterFelszereles} from "./felszereles";
 import {Szintlepes} from "./szintlepes";

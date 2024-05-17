@@ -3,10 +3,12 @@ import KepzettsegSelector from "../display-components/KepzettsegSelector2E";
 import {
     GetKepzettsegListaN,
     GetNumberOfKepzettsegek, GetTolvajKepzettsegListaN,
+} from "../domain-models/kepzettsegek2E";
+import {
     Kepzettseg,
     Kepzettsegek,
     KepzettsegId,
-} from "../domain-models/kepzettsegek2E";
+} from "../domain-models/kepzettsegek2E.data"
 import {arraySetN} from "../../util";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../store";

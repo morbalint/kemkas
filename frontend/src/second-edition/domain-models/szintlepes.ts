@@ -1,10 +1,11 @@
 import {Tulajdonsag2E, TulajdonsagIDs, TulajdonsagokTotal} from "./tulajdonsag2E";
-import {GetAvailableKepzettsegek, KepzettsegId} from "./kepzettsegek2E";
+import {GetAvailableKepzettsegek} from "./kepzettsegek2E";
 import {Osztaly2E} from "./osztaly2E";
 import {Karakter2E} from "./karakter2E";
 import {BaseHP} from "./masodlagos_ertekek";
 import {dAny} from "../../shared/domain-models/kockak";
 import {AllowedFegyver} from "./allowed-fegyver";
+import {KepzettsegId} from "./kepzettsegek2E.data";
 
 export interface Szintlepes {
     osztaly: Osztaly2E;

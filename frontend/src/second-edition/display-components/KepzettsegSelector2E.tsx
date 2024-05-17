@@ -1,5 +1,5 @@
 import React from "react";
-import {Kepzettseg, KepzettsegId} from "../domain-models/kepzettsegek2E";
+import {Kepzettseg, KepzettsegId} from "../domain-models/kepzettsegek2E.data";
 import {TulajdonsagLabel} from "../domain-models/tulajdonsag2E";
 import {OsztalyLabel} from "../domain-models/osztaly2E";
 
