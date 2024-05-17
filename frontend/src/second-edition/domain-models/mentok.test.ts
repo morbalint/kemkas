@@ -2,7 +2,7 @@ import {ElsodlegesMento, MasodlagosMento, MentokTotal, MultiClassMentokAlap} fro
 import {Osztaly2E} from "./osztaly2E";
 import {Szintlepes} from "./szintlepes";
 
-describe("mentok", () => {
+describe("mentok 2E", () => {
     test.each([
         [1, 2],
         [2, 3],

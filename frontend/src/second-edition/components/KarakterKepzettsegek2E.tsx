@@ -2,11 +2,10 @@ import React from "react";
 import KepzettsegSelector from "../display-components/KepzettsegSelector2E";
 import {
     GetKepzettsegListaN,
-    GetNumberOfKepzettsegek,
+    GetNumberOfKepzettsegek, GetTolvajKepzettsegListaN,
     Kepzettseg,
     Kepzettsegek,
     KepzettsegId,
-    TolvajKepzettsegList,
 } from "../domain-models/kepzettsegek2E";
 import {arraySetN} from "../../util";
 import {useDispatch, useSelector} from "react-redux";
@@ -79,13 +78,6 @@ function KarakterKepzettsegek () {
     const changeKepzettsegek = (k: KepzettsegId[]) => dispatch(setKepzettsegek(k))
     const changeTolvajKepzettsegek = (k: KepzettsegId[]) => dispatch(setTolvajKepzettsegek(k))
 
-    // TODO: Birodalmi tolvajnal az Alikmia, vagy Meregkeveres kezelese
-
-    const getTolvajKepzettsegListaN = (n: number) : Kepzettseg[] => {
-        const tolvajKepzettsegekWithoutN = [...tolvajKepzettsegek.slice(0, n), ...tolvajKepzettsegek.slice(n+1)]
-        return TolvajKepzettsegList.filter(x => !kepzettsegek.includes(x.Id) && !tolvajKepzettsegekWithoutN.includes(x.Id))
-    }
-
     return <>
         <InternalKepzettsegekSelector
             title="Képzettségek"
@@ -102,7 +94,7 @@ function KarakterKepzettsegek () {
         {tolvajKepzettsegek.length > 0 && <InternalKepzettsegekSelector
             title="Tolvaj képzettségek"
             numberOfKepzettseg={4}
-            getKepzettsegListaN={getTolvajKepzettsegListaN}
+            getKepzettsegListaN={GetTolvajKepzettsegListaN(karakter)}
             changeKepzettsegek={changeTolvajKepzettsegek}
             kepzettsegek={tolvajKepzettsegek}
             dataTestId={"tolvaj-kepzettseg"}

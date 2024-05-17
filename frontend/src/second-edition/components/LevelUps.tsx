@@ -10,6 +10,8 @@ import HarcosFegyverSpecializacio from "./HarcosFegyverSpec";
 
 import MultiClassOsztalySelector2E from "./MultiClassOsztalySelector2E";
 import {getClassLevels} from "../domain-models/szintlepes";
+import KepzettsegSelector from "../display-components/KepzettsegSelector2E";
+import {GetAvailableKepzettsegek, Kepzettsegek, KepzettsegId} from "../domain-models/kepzettsegek2E";
 
 function LevelUp(props: {
     szint: number,
@@ -18,7 +20,8 @@ function LevelUp(props: {
     changeTulajdonsagNoveles: (t: Tulajdonsag2E) => void,
     changeRolledHP: (rolledHP: number) => void,
     changeKalozKritikus: (krit: string) => void,
-    changeOsztaly: (osztaly: Osztaly2E) => void
+    changeOsztaly: (osztaly: Osztaly2E) => void,
+    changeExtraTolvajKepzettseg: (kepzettseg: KepzettsegId) => void,
 }) {
     const {
         szint,
@@ -27,14 +30,16 @@ function LevelUp(props: {
         changeTulajdonsagNoveles,
         changeRolledHP,
         changeKalozKritikus,
-        changeOsztaly
+        changeOsztaly,
+        changeExtraTolvajKepzettseg
     } = props
 
     const classLevels = getClassLevels(karakter.szintlepesek)
     
     const harcosSzint = classLevels[Osztaly2E.Harcos]
     const kalozSzint = classLevels[Osztaly2E.Tengeresz]
-    const krit = karakter.szintlepesek[szint-1].kalozKritikus
+    const tolvajSzint = classLevels[Osztaly2E.Tolvaj]
+    const szintlepes = karakter.szintlepesek[szint-1];
     
     return <div>
         <div className='row mt-3'>
@@ -68,12 +73,25 @@ function LevelUp(props: {
         }
         {osztaly === Osztaly2E.Tengeresz && kalozSzint % 3 === 0 &&
             <KalozKritikus
-                kritFegyverId={krit!}
+                kritFegyverId={szintlepes.kalozKritikus!}
                 existingKrits={karakter.szintlepesek.map(x => x.kalozKritikus)}
                 changeKrit={changeKalozKritikus}
                 szint={kalozSzint}
             />
         }
+        {osztaly === Osztaly2E.Tolvaj
+            && (tolvajSzint === 5 || tolvajSzint === 9)
+            && szintlepes.tolvajExtraKepzettseg != null &&
+            <div className='row m-2'>
+                <label className='col-md-2 col-sm-3 col-form-label'>Extra képzettség</label>
+                <KepzettsegSelector
+                    selected={Kepzettsegek[szintlepes.tolvajExtraKepzettseg]}
+                    kepzettsegek={[Kepzettsegek[szintlepes.tolvajExtraKepzettseg], ...GetAvailableKepzettsegek(karakter)]}
+                    dataTestId={`tolvaj-extra-kepzettseg-${szint}`}
+                    changeKepzettseg={changeExtraTolvajKepzettseg}
+                />
+            </div>
+    }
     </div>
 }
 
@@ -109,6 +127,18 @@ export function LevelUps(props: {karakter: Karakter2E, changeKarakter: (inputs: 
         };
     }
 
+    const changeExtraTolvajKepzettseg = (szint: number) => {
+        return (k: KepzettsegId) => {
+            changeKarakter({
+                ...karakter,
+                szintlepesek: arraySetN(karakter.szintlepesek, szint-1, {
+                    ...karakter.szintlepesek[szint-1],
+                    tolvajExtraKepzettseg: k,
+                })
+            })
+        }
+    }
+
     const levels = karakter.szintlepesek.map((_, i) => i+1);
 
     return <>
@@ -122,6 +152,7 @@ export function LevelUps(props: {karakter: Karakter2E, changeKarakter: (inputs: 
                 changeRolledHP={changeRolledHPAtSzint(szint)}
                 changeKalozKritikus={changeKalozKritikusAtSzint(szint)}
                 changeOsztaly={(o) => changeKarakter(ChangeOsztalyAtSzint(karakter, o, szint))}
+                changeExtraTolvajKepzettseg={changeExtraTolvajKepzettseg(szint)}
             />
         )}
     </>

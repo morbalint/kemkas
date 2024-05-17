@@ -1,5 +1,5 @@
 import {Tulajdonsag2E, TulajdonsagIDs, TulajdonsagokTotal} from "./tulajdonsag2E";
-import {KepzettsegId} from "./kepzettsegek2E";
+import {GetAvailableKepzettsegek, KepzettsegId} from "./kepzettsegek2E";
 import {Osztaly2E} from "./osztaly2E";
 import {Karakter2E} from "./karakter2E";
 import {BaseHP} from "./masodlagos_ertekek";
@@ -23,15 +23,15 @@ export function PickableSpecializationFilter(existingSpecilizations: (string | u
 }
 
 export function LevelUp(karakter: Karakter2E, changeKarakter: (input: Karakter2E) => void) {
-    const osztaly = karakter.szintlepesek[0].osztaly 
+    const autoPickedOsztaly = karakter.szintlepesek[karakter.szintlepesek.length - 1].osztaly
     const tulajdonsagokTotal = TulajdonsagokTotal(karakter)
     const szint = karakter.szint + 1
-    const dice = BaseHP(osztaly)
+    const dice = BaseHP(autoPickedOsztaly)
     const roll = dAny(dice)
     console.log(`Level ${szint} HP roll on d${dice} is: ${roll}`)
     
     const szintlepes: Szintlepes = {
-        osztaly: osztaly,
+        osztaly: autoPickedOsztaly,
         HProll: roll
     }
     
@@ -43,20 +43,31 @@ export function LevelUp(karakter: Karakter2E, changeKarakter: (input: Karakter2E
             }
         }
     }
-    if(osztaly === Osztaly2E.Harcos) {
-        const harcosSzint = karakter.szintlepesek.filter(x => x.osztaly === Osztaly2E.Harcos).length + 1
+
+    if (autoPickedOsztaly === Osztaly2E.Harcos){
+        const harcosSzint = 1 + karakter.szintlepesek.filter(x => x.osztaly === Osztaly2E.Harcos).length
         if (harcosSzint % 2 === 1) {
             const harcosSpecializaciok = karakter.szintlepesek.map(x => x.harcosFegyver)
             let specializationFilter = PickableSpecializationFilter(harcosSpecializaciok, harcosSzint)
             szintlepes.harcosFegyver = AllowedFegyver(Osztaly2E.Harcos).filter(specializationFilter)[0].Id
         }
     }
-    if(osztaly === Osztaly2E.Tengeresz) {
-        const kalozSzint = karakter.szintlepesek.filter(x => x.osztaly === Osztaly2E.Tengeresz).length + 1
+
+    if(autoPickedOsztaly === Osztaly2E.Tengeresz)
+    {
+        const kalozSzint = 1 + karakter.szintlepesek.filter(x => x.osztaly === Osztaly2E.Tengeresz).length
         if (kalozSzint % 3 === 0) {
             let kalozKritikus = karakter.szintlepesek.map(x => x.kalozKritikus)
             let specializationFilter = PickableSpecializationFilter(kalozKritikus, kalozSzint)
             szintlepes.kalozKritikus = AllowedFegyver(Osztaly2E.Tengeresz).filter(specializationFilter)[0].Id
+        }
+    }
+
+    if (autoPickedOsztaly === Osztaly2E.Tolvaj){
+        const tolvajSzint = 1 + karakter.szintlepesek.filter(x => x.osztaly === Osztaly2E.Tolvaj).length
+        if (tolvajSzint === 5 || tolvajSzint === 9) {
+            const availableKepzettsegek = GetAvailableKepzettsegek(karakter)
+            szintlepes.tolvajExtraKepzettseg = availableKepzettsegek[0].Id;
         }
     }
 
