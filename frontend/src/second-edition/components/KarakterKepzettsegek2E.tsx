@@ -1,12 +1,18 @@
 import React from "react";
-import KepzettsegSelector from "./KepzettsegSelector2E";
+import KepzettsegSelector from "../display-components/KepzettsegSelector2E";
 import {
+    GetKepzettsegListaN,
+    GetNumberOfKepzettsegek,
     Kepzettseg,
     Kepzettsegek,
     KepzettsegId,
     TolvajKepzettsegList,
 } from "../domain-models/kepzettsegek2E";
 import {arraySetN} from "../../util";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "../../store";
+import {characterSelector, setKepzettsegek, setTolvajKepzettsegek} from "../domain-models/characterSlice";
+import {TulajdonsagokFajjal} from "../domain-models/faj2E";
 
 function InternalKepzettsegekSelector(props: {
     title: string,
@@ -35,7 +41,7 @@ function InternalKepzettsegekSelector(props: {
     for (let i = 0; i < numberOfKepzettseg; i++) {
         preCalculated.push({
             kepzettsegek: getKepzettsegListaN(i),
-            selected: Kepzettsegek[kepzettsegek[i]],
+            selected: Kepzettsegek[kepzettsegek[i]] || getKepzettsegListaN(i)[0],
             changeKepzettseg: (newKepzettseg: KepzettsegId) => changeKepzettsegek(arraySetN(kepzettsegek, i, newKepzettseg))
         })
     }
@@ -59,15 +65,19 @@ function InternalKepzettsegekSelector(props: {
 
 }
 
-function KarakterKepzettsegek (props: {
-    numberOfKepzettsegek: number
-    kepzettsegek: KepzettsegId[],
-    changeKepzettsegek: (newKepzettsegek: KepzettsegId[]) => void
-    tolvajKepzettsegek: KepzettsegId[],
-    changeTolvajKepzettsegek: (newKepzettsegek: KepzettsegId[]) => void
-    getKepzettsegListaN: (n: number) => Kepzettseg[]
-}) {
-    const { kepzettsegek, numberOfKepzettsegek, getKepzettsegListaN, changeKepzettsegek, tolvajKepzettsegek, changeTolvajKepzettsegek} = props
+function KarakterKepzettsegek () {
+    const karakter = useSelector.withTypes<RootState>()(characterSelector);
+    const dispatch = useDispatch.withTypes<AppDispatch>()();
+
+    const tulajdonsagokFajjal = TulajdonsagokFajjal(karakter.tulajdonsagok, karakter.faj)
+    const numberOfKepzettsegek = GetNumberOfKepzettsegek(tulajdonsagokFajjal.t_int, karakter.faj)
+    const kepzettsegek = karakter.kepzettsegek
+    const fajError = karakter.kepzettsegFajError
+    const osztalyError = karakter.kepzettsegOsztalyError
+    const tolvajKepzettsegek = karakter.tolvajKepzettsegek || []
+    const getKepzettsegListaN = GetKepzettsegListaN(karakter)
+    const changeKepzettsegek = (k: KepzettsegId[]) => dispatch(setKepzettsegek(k))
+    const changeTolvajKepzettsegek = (k: KepzettsegId[]) => dispatch(setTolvajKepzettsegek(k))
 
     // TODO: Birodalmi tolvajnal az Alikmia, vagy Meregkeveres kezelese
 
@@ -85,7 +95,10 @@ function KarakterKepzettsegek (props: {
             kepzettsegek={kepzettsegek}
             dataTestId={"kepzettseg"}
         />
-
+        {fajError && (
+            <span className='form-field-error'>{fajError}</span>)}
+        {osztalyError && (
+            <span className='form-field-error'>{osztalyError}</span>)}
         {tolvajKepzettsegek.length > 0 && <InternalKepzettsegekSelector
             title="Tolvaj képzettségek"
             numberOfKepzettseg={4}

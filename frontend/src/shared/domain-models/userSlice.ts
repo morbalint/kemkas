@@ -6,19 +6,22 @@ export const userSlice = createSlice({
     name: 'user',
     initialState: {
         state: "not-started" as LoadingState,
-        email: null,
+        email: null as string | null,
     },
     reducers: {
         load: (state) => {
             state.state = "loading"
+            return state
         },
-        setUser: (state, action) => {
+        setUser: (state, action: {payload: string}) => {
             state.state = "finished"
             state.email = action.payload
+            return state
         },
         unsetUser: (state) => {
             state.state = "finished"
             state.email = null
+            return state
         }
     },
 })

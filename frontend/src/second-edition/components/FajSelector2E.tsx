@@ -1,8 +1,13 @@
 import React from "react";
 import {Faj2E, FajDescription, FajLabel, FajSpecials} from "../domain-models/faj2E";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "../../store";
+import {characterSelector, setFaj} from "../domain-models/characterSlice";
 
-function FajSelector2E(props: { faj: Faj2E, changeFaj: (val: Faj2E) => void }) {
-    const {faj, changeFaj} = props
+function FajSelector2E(props: { faj?: Faj2E, changeFaj?: (val: Faj2E) => void }) {
+    const dispatch = useDispatch.withTypes<AppDispatch>()()
+    const faj = props.faj ?? useSelector.withTypes<RootState>()(characterSelector).faj
+    const changeFaj = props.changeFaj ?? (faj => dispatch(setFaj(faj)));
     return <>
         <div className='row m-2'>
             <label className='col-md-2 col-sm-3 col-form-label'>Faj</label>

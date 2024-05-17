@@ -1,39 +1,27 @@
 import React, {useState} from 'react'
 import {useLoaderData, useNavigate, useParams} from "react-router-dom";
 import {OverlayTrigger, Toast, ToastContainer} from "react-bootstrap";
-import {ChangeLvl1Osztaly, DefaultKarakter, Karakter2E} from "../domain-models/karakter2E";
-import {KarakterTulajdonsagok} from "../domain-models/tulajdonsag2E";
-import FajSelector2E from "../components/FajSelector2E";
+import {Karakter2E} from "../domain-models/karakter2E";
 import Tulajdonsagok2E from "../components/Tulajdonsagok2E";
 import OsztalySelector2E from "../components/OsztalySelector2E";
 import {Osztaly2E} from "../domain-models/osztaly2E";
-import {
-    GetKepzettsegListaN,
-    GetNumberOfKepzettsegek,
-    KepzettsegId,
-    SetDefaultKepzettsegek,
-    SetDefaultTolvajKepzettsegek
-} from "../domain-models/kepzettsegek2E";
 import KarakterKepzettsegek from "../components/KarakterKepzettsegek2E";
-import {TulajdonsagokFajjal} from "../domain-models/faj2E";
-import JellemSelector from "../components/JellemSelector";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
-import {CalculateMasodlagosErtekek} from "../domain-models/masodlagos_ertekek";
 import Felszereles from "../components/Felszereles";
-import {KarakterFelszereles} from "../domain-models/felszereles";
 import LevelUps from "../components/LevelUps";
 import {LevelDown, LevelUp} from "../domain-models/szintlepes";
 import HarcosFegyverSpecializacio from "../components/HarcosFegyverSpec";
-import {arraySetN} from "../../util";
 import saveOverlayTooltip from "../../first-edition/components/SaveOverlayTooltip";
 import {StoreNewCharacter2E, UpdateCharacter2E} from "../api/character.api";
 import {Faro} from "@grafana/faro-web-sdk";
 import {CreatePDF} from "../pdf/character.pdf";
 import {KarakterInputToPdfView} from "../pdf/karakter_pdf_view";
-import {useSelector} from "react-redux";
-import {RootState} from "../../store";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "../../store";
 import {userSelector} from "../../shared/domain-models/userSlice";
 import {SaveModal} from "../../shared/components/SaveModal";
+import {characterSelector, setCharacter} from "../domain-models/characterSlice";
+import KarakterSzarmazas from "../components/KarakterSzarmazas";
 
 function CreateCharacter2E(props: {
     faro?: Faro
@@ -42,22 +30,12 @@ function CreateCharacter2E(props: {
     const { id } = useParams();
     const fetchedUser = useSelector.withTypes<RootState>()(userSelector);
     const loaderData = useLoaderData() as Karakter2E & { isPublic: boolean } | undefined;
-    let initialKarakterInputs = DefaultKarakter;
-    if (loaderData != null) {
-        const { isPublic: t1, ...t2 } = loaderData;
-        initialKarakterInputs = t2
-    }
+    const dispatch = useDispatch.withTypes<AppDispatch>()()
     const initialIsPublic = loaderData?.isPublic ?? fetchedUser?.email == null;
     const navigate = useNavigate();
-    
-    const [karakter, setKarakter] = useState(initialKarakterInputs)
-    const tulajdonsagokFajjal = TulajdonsagokFajjal(karakter.tulajdonsagok, karakter.faj)
-    const changeKepzettseg = (k: KepzettsegId[]) => setKarakter({...karakter, kepzettsegek: k})
-    const changeTolvajKepzettseg = (tk?: KepzettsegId[]) => setKarakter({...karakter, tolvajKepzettsegek: tk})
-    SetDefaultTolvajKepzettsegek(karakter, changeTolvajKepzettseg)
-    SetDefaultKepzettsegek({...karakter, tulajdonsagok: tulajdonsagokFajjal}, changeKepzettseg)
 
-    const changeFelszereles = (f: KarakterFelszereles) => setKarakter({...karakter, felszereles: f})
+    const karakter = useSelector.withTypes<RootState>()(characterSelector)
+    const setKarakter = (newState: Karakter2E) => dispatch(setCharacter(newState));
 
     let [showSaveModal, setShowSaveModal] = useState(false);
     let [newId, setNewId] = useState(null as string | null)
@@ -66,7 +44,6 @@ function CreateCharacter2E(props: {
     const newCharacterUrl = () => `${window.location.origin}/2e/karakter/${newId}`
 
     const handleSaveModalCopyAndClose = async () => {
-
         await navigator.clipboard.writeText(newCharacterUrl());
         handleSaveModalClose()
     }
@@ -118,75 +95,19 @@ function CreateCharacter2E(props: {
                 <div className='row'>
                     <h5 className='col align-self-center'>Származás</h5>
                 </div>
-                <div className='row m-2'>
-                    <label className='col-md-2 col-sm-3 col-form-label'>Név</label>
-                    <input className='col form-control'
-                           value={karakter.nev}
-                           data-testid="nev"
-                           onChange={(e) => setKarakter({...karakter, nev: e.target.value})}/>
-                    {!karakter.nev &&
-                        <span className='form-field-error'>A karaktered nem mászkálhat névtelenül a világban!</span>}
-                </div>
-                <JellemSelector selected={karakter.jellem}
-                                changeJellem={(val) => setKarakter({...karakter, jellem: val})}/>
-                <div className='row m-2'>
-                    <label className='col-md-2 col-sm-3 col-form-label'>Választott istenség</label>
-                    <input className='col form-control'
-                           value={karakter.isten}
-                           data-testid="isten"
-                           onChange={(e) => setKarakter({...karakter, isten: e.target.value})}/>
-                </div>
-                <FajSelector2E
-                    changeFaj={faj => setKarakter({...karakter, faj})}
-                    faj={karakter.faj}
-                />
+                <KarakterSzarmazas/>
                 <hr/>
-                <Tulajdonsagok2E
-                    currentFaj={karakter.faj}
-                    tulajdonsagok={karakter.tulajdonsagok}
-                    changeTulajdonsagok={(tul: KarakterTulajdonsagok) => setKarakter({
-                        ...karakter,
-                        tulajdonsagok: tul
-                    })}
-                />
+                <Tulajdonsagok2E/>
                 <hr/>
                 <div className='row'>
                     <h5 className='col align-self-center'>Tanult</h5>
                 </div>
-                <OsztalySelector2E
-                    currentFaj={karakter.faj}
-                    currentOsztaly={karakter.szintlepesek[0].osztaly}
-                    changeOsztaly={o => setKarakter(ChangeLvl1Osztaly(karakter, o))}
-                />
-                {karakter.szintlepesek[0].osztaly === Osztaly2E.Harcos &&
-                    <HarcosFegyverSpecializacio
-                        specialization={karakter.szintlepesek[0].harcosFegyver || 'kard_hosszu'}
-                        szint={1}
-                        changeSpecialization={(spec) => setKarakter({
-                            ...karakter,
-                            szintlepesek: arraySetN(karakter.szintlepesek, 0, {
-                                ...karakter.szintlepesek[0],
-                                harcosFegyver: spec
-                            })
-                        })}
-                        existingSpecializations={karakter.szintlepesek.map(x => x.harcosFegyver)}
-                    />}
-                <KarakterKepzettsegek
-                    getKepzettsegListaN={GetKepzettsegListaN(karakter)}
-                    numberOfKepzettsegek={GetNumberOfKepzettsegek(tulajdonsagokFajjal.t_int, karakter.faj)}
-                    kepzettsegek={karakter.kepzettsegek}
-                    changeKepzettsegek={changeKepzettseg}
-                    tolvajKepzettsegek={karakter.tolvajKepzettsegek || []}
-                    changeTolvajKepzettsegek={changeTolvajKepzettseg}
-                />
+                <OsztalySelector2E />
+                {karakter.szintlepesek[0].osztaly === Osztaly2E.Harcos && <HarcosFegyverSpecializacio szint={1}/>}
+                <KarakterKepzettsegek />
                 <hr/>
                 {/* 1. szinten */}
-                <MasodlagosErtekek {...CalculateMasodlagosErtekek({
-                    ...karakter,
-                    tulajdonsagok: tulajdonsagokFajjal,
-                    szint: 1,
-                    szintlepesek: karakter.szintlepesek.slice(0, 1)
-                })} />
+                <MasodlagosErtekek szint={1} />
                 <hr/>
                 <LevelUps karakter={karakter} changeKarakter={setKarakter}/>
                 {karakter.szint > 1 && <hr/>}
@@ -201,11 +122,7 @@ function CreateCharacter2E(props: {
                             ⇩</button>}
                 </div>
                 <hr/>
-                <Felszereles
-                    osztaly={karakter.szintlepesek[0].osztaly}
-                    felszereles={karakter.felszereles}
-                    changeFelszereles={changeFelszereles}
-                />
+                <Felszereles />
 
                 <hr/>
                 <div className='row'>

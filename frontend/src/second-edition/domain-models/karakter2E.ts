@@ -10,6 +10,7 @@ import {BaseHP} from "./masodlagos_ertekek";
 import {dAny} from "../../shared/domain-models/kockak";
 
 export interface Karakter2E {
+    id?: string,
     nev: string,
     nem?: string,
     kor: number,
@@ -17,7 +18,9 @@ export interface Karakter2E {
     jellem: JellemID,
     tulajdonsagok: KarakterTulajdonsagok
     faj: Faj2E
-    kepzettsegek: KepzettsegId[]
+    kepzettsegek: KepzettsegId[],
+    kepzettsegFajError?: string,
+    kepzettsegOsztalyError?: string,
     tolvajKepzettsegek?: KepzettsegId[]
     szint: number,
     felszereles: KarakterFelszereles,
@@ -30,7 +33,12 @@ export const DefaultKarakter: Karakter2E = {
     jellem: 'S',
     tulajdonsagok: TulajdonsagDefaults,
     faj: Faj2E.Ember,
-    kepzettsegek: [],
+    kepzettsegek: [
+        "k_maszas",
+        "k_ugras",
+        "k_uszas",
+        "k_osonas"
+    ],
     tolvajKepzettsegek: [],
     szint: 1,
     felszereles: DefaultFelszereles,

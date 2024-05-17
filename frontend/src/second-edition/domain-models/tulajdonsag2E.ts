@@ -1,6 +1,6 @@
-import {d6} from "../../shared/domain-models/kockak";
 import {Karakter2E} from "./karakter2E";
 import {TulajdonsagokFajjal} from "./faj2E";
+import {RollAbility} from "../../shared/domain-models/rollAbility";
 
 export enum Tulajdonsag2E {
     Ero = 't_ero',
@@ -42,27 +42,10 @@ export function TulajdonsagLabel(tul: Tulajdonsag2E) : string {
     }
 }
 
-function rollAbility() {
-    let min = 6;
-    let sum = 0;
-    let rolls: number[] = []
-    for (let i = 0; i < 4; i++) {
-        const roll = d6();
-        if (roll < min) {
-            min = roll;
-        }
-        sum += roll;
-        rolls.push(roll)
-    }
-    const result = sum - min;
-    console.log("Rolled: " + rolls + " got: " + result)
-    return result;
-}
-
 export function RollAllAbilities() : KarakterTulajdonsagok {
     const response = {...TulajdonsagDefaults}
     for (const key of TulajdonsagIDs) {
-        response[key] = rollAbility()
+        response[key] = RollAbility()
     }
     return response
 }

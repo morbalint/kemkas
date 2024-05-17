@@ -1,7 +1,7 @@
 import React from "react";
 import {Osztaly2E} from "../domain-models/osztaly2E";
 import {AllowedFegyver} from "../domain-models/allowed-fegyver";
-import FegyverSelector from "./FegyverSelector";
+import FegyverSelector from "../display-components/FegyverSelector";
 
 function KalozKritikus(props: {
     kritFegyverId: string,

@@ -1,57 +1,10 @@
 import React from "react";
 import {Fegyver} from "../domain-models/felszereles";
+import {FegyverFlags} from "../domain-models/fegyver";
 
-export function FegyverFlags(fegyver: Fegyver): string {
-    const flags = [] as string[]
-    if (fegyver.Megterheltseg) {
-        flags.push("M")
-    }
-    if (fegyver.Harcos) {
-        flags.push("H")
-    }
-    if (fegyver.Masfelkezes) {
-        flags.push("1½K")
-    }
-    if (fegyver.Ketkezes) {
-        if (fegyver.Type === "kozelharci") {
-            flags.push("2K")
-        } else {
-            if (fegyver.KetkezesBonusz) {
-                flags.push("2KB")
-            } else {
-                flags.push("2KN")
-            }
-        }
-    }
-    if (fegyver.HarciManover) {
-        flags.push("+2 HM")
-    }
-    if (fegyver.Alakzat){
-        flags.push("AL")
-    }
-    if (fegyver.Hosszu) {
-        flags.push("HO")
-    }
-    if (fegyver.Kabito) {
-        flags.push("KO")
-    }
-    if (fegyver.LovasRoham) {
-        flags.push("LR")
-    }
-    if (fegyver.PancelToro) {
-        flags.push("PT")
-    }
-    if (fegyver.PajzsZuzo) {
-        flags.push("PZ")
-    }
-    if (fegyver.Rohamtoro) {
-        flags.push("RT")
-    }
-    return flags.join(' ');
-}
 
 export function FegyverLabel(fegyver: Fegyver): string {
-    const serializedFlags = FegyverFlags(fegyver) + (fegyver.Megjegyzes != null ? " " + fegyver.Megjegyzes : "");
+    const serializedFlags = (FegyverFlags(fegyver) + (fegyver.Megjegyzes != null ? " " + fegyver.Megjegyzes : "")).trim();
     const sizeLabel = fegyver.Size < 1 && fegyver.Size > 0 ? ` [1/${Math.round(1 / fegyver.Size)}]` : (fegyver.Size > 1 ? ` [${fegyver.Size}]` : '');
     return `${fegyver.Name}${sizeLabel} | ${serializedFlags.length > 0 ? serializedFlags + " |" : ''}${
         fegyver.DamageMultiplier > 1 ? `${fegyver.DamageMultiplier}*` : ''}${
