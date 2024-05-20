@@ -1,7 +1,7 @@
 import {Pajzs, Pancel} from "./felszereles";
 import {Osztaly2E} from "./osztaly2E";
-import pancelDB from "./pancel.json";
-import pajzsDB from "./pajzs.json"
+import pancelDB from "../data/pancel.json";
+import pajzsDB from "../data/pajzs.json"
 
 export function AllowedPajzsTypes(osztalyok: Osztaly2E[]): Pajzs[] {
     return [...new Set(osztalyok.flatMap(osztalyAllowedPajzs))]

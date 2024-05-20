@@ -1,5 +1,5 @@
 import {Fegyver} from "./felszereles";
-import fegyverDB from "./fegyver.json";
+import fegyverDB from "../data/fegyver.json";
 import {Osztaly2E} from "./osztaly2E";
 
 export function AllowedFegyverek(osztalyok: Osztaly2E[]): Fegyver[] {

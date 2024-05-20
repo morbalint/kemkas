@@ -5,7 +5,7 @@ import {Karakter2E} from "../domain-models/karakter2E";
 import Tulajdonsagok2E from "../components/Tulajdonsagok2E";
 import OsztalySelector2E from "../components/OsztalySelector2E";
 import {Osztaly2E} from "../domain-models/osztaly2E";
-import KarakterKepzettsegek from "../components/KarakterKepzettsegek2E";
+import KarakterKepzettsegek from "../components/Kepzettsegek2E";
 import MasodlagosErtekek from "../components/MasodlagosErtekek";
 import Felszereles from "../components/Felszereles";
 import LevelUps from "../components/LevelUps";
@@ -21,7 +21,7 @@ import {AppDispatch, RootState} from "../../store";
 import {userSelector} from "../../shared/domain-models/userSlice";
 import {SaveModal} from "../../shared/components/SaveModal";
 import {characterSelector, setCharacter} from "../domain-models/characterSlice";
-import KarakterSzarmazas from "../components/KarakterSzarmazas";
+import Szarmazas from "../components/Szarmazas";
 
 function CreateCharacter2E(props: {
     faro?: Faro
@@ -95,7 +95,7 @@ function CreateCharacter2E(props: {
                 <div className='row'>
                     <h5 className='col align-self-center'>Származás</h5>
                 </div>
-                <KarakterSzarmazas/>
+                <Szarmazas/>
                 <hr/>
                 <Tulajdonsagok2E/>
                 <hr/>

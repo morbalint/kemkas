@@ -1,6 +1,9 @@
-import pancelok from './pancel.json'
-import pajzsok from './pajzs.json'
-import fegyverek from './fegyver.json'
+import pancelok from '../data/pancel.json'
+import pajzsok from '../data/pajzs.json'
+import fegyverek from '../data/fegyver.json'
+import felszereles from '../data/felszereles.json'
+import {Modifier, TulajdonsagokTotal} from "./tulajdonsag2E";
+import {Karakter2E} from "./karakter2E";
 
 export type PancelType = 'konnyu' | 'nehez'
 
@@ -55,14 +58,62 @@ export interface Fegyver {
     Size: number
 }
 
+export interface FelszerelesContainer {
+    id: string,
+    nev: string,
+    size: number,
+    price: number,
+    type: "container",
+    capacity: number
+}
+
+export interface FelszerelesItem {
+    id: string,
+    nev: string,
+    size: number,
+    price: number,
+    type: "items" | "spec" | "clothes"
+}
+
+export type FelszerelesDto = FelszerelesItem | FelszerelesContainer;
+
+export function NumberOfSizedItems(karakter: Pick<Karakter2E, "tulajdonsagok" | "faj" | "szintlepesek">) {
+    const tulajdonsagok = TulajdonsagokTotal(karakter)
+    return 13 + Modifier(tulajdonsagok.t_ero)
+}
+
+export const AllFelszereles : FelszerelesDto[] = [
+    ...(felszereles.items as FelszerelesItem[]),
+    ...(felszereles.containers as FelszerelesContainer[]),
+    ...(felszereles.clothes as FelszerelesItem[]),
+    ...(felszereles.specialis as FelszerelesItem[])
+]
+
 export interface KarakterFelszereles {
     pancelID?: string
     pajzsID?: string
     fegyverIDk: string[]
+    viseltFelszerelesIDk: string[]
+    cipeltFelszerelesIDk: string[]
+    aprosagFelszerelesIDk: string[]
 }
 
 export const DefaultFelszereles: KarakterFelszereles = {
     fegyverIDk: [],
+    viseltFelszerelesIDk: [],
+    cipeltFelszerelesIDk: [],
+    aprosagFelszerelesIDk: [],
+}
+
+export function ViseltSize(felszereles: KarakterFelszereles): number {
+    let sum = 0;
+    sum += GetPajzs(felszereles.pajzsID)?.Size ?? 0;
+    sum += GetPancel(felszereles.pancelID)?.Size ?? 0;
+
+    sum += felszereles.fegyverIDk.map(GetFegyver).reduce((acc, item) => acc + (item?.Size ?? 0),0)
+    sum += felszereles.viseltFelszerelesIDk.map(GetFelszereles).reduce((acc, item) => acc + (item?.size ?? 0),0)
+
+    return sum;
 }
 
 export function PancelTypeLabel(type: PancelType): string {
@@ -108,8 +159,28 @@ export function GetFegyver(id: string): Fegyver | undefined {
     return fegyverek.data.find(f => f.Id === id) as Fegyver | undefined
 }
 
-export function GetFegyverek(ids: string[]): Fegyver[] {
-    return ids.map(GetFegyver).filter(x => x != null).map(x => x as Fegyver)
+export function GetFelszereles(id?: string): FelszerelesItem | FelszerelesContainer | undefined {
+    return GetFelszerelesItem(id) || GetFelszerelesContainer(id);
 }
-export const defaultFegyverID = 'okol'
-export const defaultFegyver = GetFegyver('okol')!
+
+export function GetFelszerelesItem(id?: string): FelszerelesItem | undefined {
+    if (id == null) {
+        return undefined
+    }
+    const item = felszereles.items.find(f => f.id === id) as FelszerelesItem | undefined
+    if (item != null) {
+        return item;
+    }
+    const cloth = felszereles.clothes.find(f => f.id === id) as FelszerelesItem | undefined
+    if (cloth != null) {
+        return cloth;
+    }
+    return felszereles.specialis.find(f => f.id === id) as FelszerelesItem | undefined
+}
+
+export function GetFelszerelesContainer(id?: string): FelszerelesContainer | undefined {
+    if (id == null) {
+        return undefined
+    }
+    return felszereles.containers.find(f => f.id === id) as FelszerelesContainer | undefined
+}

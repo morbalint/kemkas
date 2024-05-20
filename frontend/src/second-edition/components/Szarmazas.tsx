@@ -5,9 +5,7 @@ import FajSelector2E from "./FajSelector2E";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../store";
 
-function KarakterSzarmazas(props: {
-
-}) {
+function Szarmazas() {
     const karakter = useSelector.withTypes<RootState>()(characterSelector)
     const dispatch = useDispatch.withTypes<AppDispatch>()()
     return <>
@@ -32,4 +30,4 @@ function KarakterSzarmazas(props: {
     </>
 }
 
-export default KarakterSzarmazas;
+export default Szarmazas;

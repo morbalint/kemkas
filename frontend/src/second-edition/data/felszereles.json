@@ -1,0 +1,611 @@
+{
+  "containers": [
+    {
+      "id": "hatizsak",
+      "nev": "Hátizsák",
+      "size": 1,
+      "price": 2,
+      "type": "container",
+      "capacity": 5
+    },
+    {
+      "id": "lada_fa_kicsi",
+      "nev": "Láda, fa, kicsi",
+      "size": 1,
+      "price": 2,
+      "type": "container",
+      "capacity": 1
+    },
+    {
+      "id": "lada_fa_nagy",
+      "nev": "Láda, fa, nagy",
+      "size": 8,
+      "price": 5,
+      "type": "container",
+      "capacity": 8
+    },
+    {
+      "id": "lada_fem_kicsi",
+      "nev": "Láda, fém, kicsi",
+      "size": 1,
+      "price": 10,
+      "type": "container",
+      "capacity": 1
+    },
+    {
+      "id": "lada_fem_nagy",
+      "nev": "Láda, fém, nagy",
+      "size": 8,
+      "price": 30,
+      "type": "container",
+      "capacity": 8
+    },
+    {
+      "id": "zsak",
+      "nev": "Zsák",
+      "size": 1,
+      "price": 0.1,
+      "type": "container",
+      "capacity": 4
+    }
+  ],
+  "items": [
+    {
+      "id": "acel_es_kova",
+      "nev": "Acél és kova",
+      "size": 0,
+      "price": 0.1,
+      "type": "items"
+    },
+    {
+      "id": "aso",
+      "nev": "Ásó",
+      "size": 1,
+      "price": 1,
+      "type": "items"
+    },
+    {
+      "id": "bogracs",
+      "nev": "Bogrács, vas",
+      "size": 1,
+      "price": 0.5,
+      "type": "items"
+    },
+    {
+      "id": "borostomlo",
+      "nev": "Borostömlő",
+      "size": 1,
+      "price": 1,
+      "type": "items"
+    },
+    {
+      "id": "csakany",
+      "nev": "Csákány",
+      "size": 1,
+      "price": 5,
+      "type": "items"
+    },
+    {
+      "id": "doboz",
+      "nev": "Doboz",
+      "size": 1,
+      "price": 2,
+      "type": "items"
+    },
+    {
+      "id": "elelem",
+      "nev": "Élelem, egy napra",
+      "size": 0.25,
+      "price": 0.5,
+      "type": "items"
+    },
+    {
+      "id": "faklya",
+      "nev": "Fáklya (1 óráig ég)",
+      "size": 0.2,
+      "price": 0.1,
+      "type": "items"
+    },
+    {
+      "id": "farud",
+      "nev": "Farúd, 10'",
+      "size": 1,
+      "price": 0.5,
+      "type": "items"
+    },
+    {
+      "id": "feszitovas",
+      "nev": "Feszítővas",
+      "size": 1,
+      "price": 2,
+      "type": "items"
+    },
+    {
+      "id": "fustolo",
+      "nev": "Füstölő, rúd",
+      "size": 0,
+      "price": 1,
+      "type": "items"
+    },
+    {
+      "id": "gyertya",
+      "nev": "Gyertya, viasz (1 óráig ég)",
+      "size": 0.1,
+      "price": 0.1,
+      "type": "items"
+    },
+    {
+      "id": "halasz_halo",
+      "nev": "Háló, halász",
+      "size": 1,
+      "price": 4,
+      "type": "items"
+    },
+    {
+      "id": "hangszer_kicsi",
+      "nev": "Hangszer, kisebb (pl. doromb)",
+      "size": 0,
+      "price": 5,
+      "type": "items"
+    },
+    {
+      "id": "hangszer_osszetett",
+      "nev": "Hangszer, összetett (pl. lant)",
+      "size": 1,
+      "price": 40,
+      "type": "items"
+    },
+    {
+      "id": "hangszer_nagyobb",
+      "nev": "Hangszer, nagyobb (pl. hárfa)",
+      "size": 4,
+      "price": 80,
+      "type": "items"
+    },
+    {
+      "id": "hordo_kicsi",
+      "nev": "Hordó, kicsi",
+      "size": 1,
+      "price": 2,
+      "type": "items"
+    },
+    {
+      "id": "illatszer",
+      "nev": "Illatszer",
+      "size": 0,
+      "price": 5,
+      "type": "items"
+    },
+    {
+      "id": "kalapacs",
+      "nev": "Kalapács",
+      "size": 1,
+      "price": 0.5,
+      "type": "items"
+    },
+    {
+      "id": "konyv_kisebb",
+      "nev": "Könyv, kisebb",
+      "size": 0.5,
+      "price": 20,
+      "type": "items"
+    },
+    {
+      "id": "konyv_nagyobb",
+      "nev": "Könyv, nagyobb",
+      "size": 1,
+      "price": 40,
+      "type": "items"
+    },
+    {
+      "id": "konyv_folians",
+      "nev": "Könyv, fóliáns",
+      "size": 2,
+      "price": 80,
+      "type": "items"
+    },
+    {
+      "id": "kotel_kender",
+      "nev": "Kötés, kender, 50'",
+      "size": 1,
+      "price": 1,
+      "type": "items"
+    },
+    {
+      "id": "kotel_selyem",
+      "nev": "Kötés, selyem, 50'",
+      "size": 0,
+      "price": 10,
+      "type": "items"
+    },
+    {
+      "id": "kreta",
+      "nev": "Kréta",
+      "size": 0,
+      "price": 0.1,
+      "type": "items"
+    },
+    {
+      "id": "lakat_egyszeru",
+      "nev": "Lakat, egyszerű",
+      "size": 1,
+      "price": 20,
+      "type": "items"
+    },
+    {
+      "id": "lakat_oszetett",
+      "nev": "Lakat, összetett",
+      "size": 1,
+      "price": 80,
+      "type": "items"
+    },
+    {
+      "id": "lampas_olaj_mecses",
+      "nev": "Lámpás, olaj, mécses (2 óráig ég)",
+      "size": 0,
+      "price": 0.1,
+      "type": "items"
+    },
+    {
+      "id": "lampas_olaj_vedett",
+      "nev": "Lámpás, olaj, védett (2 óráig ég)",
+      "size": 1,
+      "price": 10,
+      "type": "items"
+    },
+    {
+      "id": "lampas_olaj_nagy",
+      "nev": "Lámpás, olaj, nagy (2 óráig ég)",
+      "size": 1,
+      "price": 20,
+      "type": "items"
+    },
+    {
+      "id": "lanc",
+      "nev": "Lánc, 10'",
+      "size": 1,
+      "price": 5,
+      "type": "items"
+    },
+    {
+      "id": "letra_kotel",
+      "nev": "Létra, kötlél, 50'",
+      "size": 2,
+      "price": 5,
+      "type": "items"
+    },
+    {
+      "id": "maszovas",
+      "nev": "Mászóvas",
+      "size": 1,
+      "price": 10,
+      "type": "items"
+    },
+    {
+      "id": "olaj_palack",
+      "nev": "Olaj, palack",
+      "size": 0.25,
+      "price": 2,
+      "type": "items"
+    },
+    {
+      "id": "palack_cserep",
+      "nev": "Palack, cserép",
+      "size": 0.5,
+      "price": 0.2,
+      "type": "items"
+    },
+    {
+      "id": "palack_uveg",
+      "nev": "Palack, üveg",
+      "size": 0.5,
+      "price": 2,
+      "type": "items"
+    },
+    {
+      "id": "papirusz_lap",
+      "nev": "Papirusz, lap",
+      "size": 0,
+      "price": 0.2,
+      "type": "items"
+    },
+    {
+      "id": "pecset_gyuru",
+      "nev": "Pecsétgűrű",
+      "size": 0,
+      "price": 8,
+      "type": "items"
+    },
+    {
+      "id": "pecsetviasz",
+      "nev": "Pecsétviasz",
+      "size": 0,
+      "price": 1,
+      "type": "items"
+    },
+    {
+      "id": "pergamen_lap",
+      "nev": "Pergamen, lap",
+      "size": 0,
+      "price": 0.5,
+      "type": "items"
+    },
+    {
+      "id": "sator_2",
+      "nev": "Sátor, 2 fős",
+      "size": 2,
+      "price": 10,
+      "type": "items"
+    },
+    {
+      "id": "szapan",
+      "nev": "Szappan",
+      "size": 1,
+      "price": 0.5,
+      "type": "items"
+    },
+    {
+      "id": "szog",
+      "nev": "Szög",
+      "size": 0.1,
+      "price": 0.1,
+      "type": "items"
+    },
+    {
+      "id": "takaro",
+      "nev": "Takaró",
+      "size": 1,
+      "price": 0.2,
+      "type": "items"
+    },
+    {
+      "id": "tarsoly",
+      "nev": "Tarsoly",
+      "size": 0,
+      "price": 1,
+      "type": "items"
+    },
+    {
+      "id": "tegez",
+      "nev": "Tegez",
+      "size": 1,
+      "price": 2,
+      "type": "items"
+    },
+    {
+      "id": "tekercs",
+      "nev": "Tekercs",
+      "size": 1,
+      "price": 8,
+      "type": "items"
+    },
+    {
+      "id": "tekercs_tarto",
+      "nev": "Tekercs tartó",
+      "size": 1,
+      "price": 5,
+      "type": "items"
+    },
+    {
+      "id": "tinta",
+      "nev": "Tinta",
+      "size": 0,
+      "price": 8,
+      "type": "items"
+    },
+    {
+      "id": "tukor_ezust",
+      "nev": "Tükör, ezüst",
+      "size": 0,
+      "price": 10,
+      "type": "items"
+    },
+    {
+      "id": "tu_es_cerna",
+      "nev": "Tű és cérna",
+      "size": 0,
+      "price": 0.1,
+      "type": "items"
+    },
+    {
+      "id": "uvegcse",
+      "nev": "üvegcse",
+      "size": 0.25,
+      "price": 1,
+      "type": "items"
+    },
+    {
+      "id": "vodor",
+      "nev": "Vödör",
+      "size": 1,
+      "price": 0.5,
+      "type": "items"
+    }
+  ],
+  "clothes": [
+    {
+      "id": "ruha_elokelo",
+      "nev": "Előkelő",
+      "size": 1,
+      "price": 75,
+      "type": "clothes"
+    },
+    {
+      "id": "ruha_diszes",
+      "nev": "Díszes",
+      "size": 1,
+      "price": 12,
+      "type": "clothes"
+    },
+    {
+      "id": "ruha_kozrendu",
+      "nev": "Közrendű",
+      "size": 1,
+      "price": 0.5,
+      "type": "clothes"
+    },
+    {
+      "id": "ruha_nagyuri",
+      "nev": "Nagyúri",
+      "size": 1,
+      "price": 200,
+      "type": "clothes"
+    },
+    {
+      "id": "ruha_papi",
+      "nev": "Papi",
+      "size": 1,
+      "price": 12,
+      "type": "clothes"
+    },
+    {
+      "id": "ruha_patricius",
+      "nev": "Patrícius",
+      "size": 1,
+      "price": 30,
+      "type": "clothes"
+    },
+    {
+      "id": "ruha_plebejus",
+      "nev": "Plebejus",
+      "size": 1,
+      "price": 2,
+      "type": "clothes"
+    },
+    {
+      "id": "ruha_szormek",
+      "nev": "Szőrmék",
+      "size": 2,
+      "price": 12,
+      "type": "clothes"
+    },
+    {
+      "id": "ruha_utazo",
+      "nev": "Utazó",
+      "size": 1,
+      "price": 2,
+      "type": "clothes"
+    }
+  ],
+  "specialis": [
+    {
+      "id": "alkimista_labor",
+      "nev": "Alkimista labor",
+      "size": 4,
+      "price": 500,
+      "type": "spec"
+    },
+    {
+      "id": "csapda_medve",
+      "nev": "Csapda, medve",
+      "size": 1,
+      "price": 6,
+      "type": "spec"
+    },
+    {
+      "id": "gorogtuz",
+      "nev": "gorogtuz",
+      "size": 0.25,
+      "price": 20,
+      "type": "spec"
+    },
+    {
+      "id": "gyogyfu",
+      "nev": "Gyógyfű",
+      "size": 0.1,
+      "price": 10,
+      "type": "spec"
+    },
+    {
+      "id": "homokora",
+      "nev": "Homokóra",
+      "size": 0,
+      "price": 25,
+      "type": "spec"
+    },
+    {
+      "id": "ketrec_kisebb",
+      "nev": "Ketrec, kisebb",
+      "size": 1,
+      "price": 5,
+      "type": "spec"
+    },
+    {
+      "id": "ketrec_nagyobb",
+      "nev": "Ketrec, nagyobb",
+      "size": 8,
+      "price": 40,
+      "type": "spec"
+    },
+    {
+      "id": "merleg",
+      "nev": "Mérleg",
+      "size": 0,
+      "price": 2,
+      "type": "spec"
+    },
+    {
+      "id": "nagyito",
+      "nev": "Nagyító",
+      "size": 0,
+      "price": 100,
+      "type": "spec"
+    },
+    {
+      "id": "orvoslo_keszlet",
+      "nev": "Orvosló készlet",
+      "size": 1,
+      "price": 200,
+      "type": "spec"
+    },
+    {
+      "id": "sav",
+      "nev": "Sav",
+      "size": 0,
+      "price": 10,
+      "type": "spec"
+    },
+    {
+      "id": "szenteltviz",
+      "nev": "Szenteltvíz",
+      "size": 0,
+      "price": 25,
+      "type": "spec"
+    },
+    {
+      "id": "szent_szimbolum",
+      "nev": "Szent szimbólum",
+      "size": 0,
+      "price": 25,
+      "type": "spec"
+    },
+    {
+      "id": "tinta_magikus",
+      "nev": "Tinta, mágikus, 1 szintre",
+      "size": 0,
+      "price": 100,
+      "type": "spec"
+    },
+    {
+      "id": "tolvajszerszamok",
+      "nev": "Tolvajszerszámok",
+      "size": 1,
+      "price": 30,
+      "type": "spec"
+    },
+    {
+      "id": "varazskonyv",
+      "nev": "Varázskönyv, üres",
+      "size": 1,
+      "price": 120,
+      "type": "spec"
+    },
+    {
+      "id": "vizora",
+      "nev": "Vízóra",
+      "size": 1,
+      "price": 500,
+      "type": "spec"
+    }
+  ]
+}
