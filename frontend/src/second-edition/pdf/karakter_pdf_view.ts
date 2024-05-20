@@ -6,7 +6,7 @@ import {Osztaly2E, OsztalyLabel} from "../domain-models/osztaly2E";
 import {CelzoTB, KozelharciTB, MultiClassTamadasBonusz} from "../domain-models/tamadas_bonusz";
 import {Karakter2E} from "../domain-models/karakter2E";
 import {GetJellem} from "../domain-models/jellem";
-import {GetFegyver, GetPajzs, GetPancel} from '../domain-models/felszereles'
+import {GetFegyver, GetFelszereles, GetPajzs, GetPancel} from '../domain-models/felszereles'
 import {
     KarakterTulajdonsagok,
     TulajdonsagModosito
@@ -72,23 +72,57 @@ export function KarakterInputToPdfView(karakter: Karakter2E): KarakterPdfView {
     
     const classLevels = getClassLevels(karakter.szintlepesek)
     
-    let felszereles = [] as string[]
+    let viseltFelszereles = [] as string[]
     if(pancel != null){
-        felszereles = felszereles.concat(FelszerelesToPdfView(pancel))
+        viseltFelszereles = viseltFelszereles.concat(FelszerelesToPdfView(pancel))
     }
     if(pajzs != null){
-        felszereles = felszereles.concat(FelszerelesToPdfView(pajzs))
+        viseltFelszereles = viseltFelszereles.concat(FelszerelesToPdfView(pajzs))
     }
         
-    felszereles = felszereles.concat(karakter.felszereles.fegyverIDk.map(x => {
-        const fegyver = GetFegyver(x)
+    viseltFelszereles = viseltFelszereles.concat(karakter.felszereles.fegyverek.reduce((acc, x) => {
+        const fegyver = GetFegyver(x.id)
         if (fegyver == null) {
             console.error("unknown fegyver: " + x)
-            return []
+            return acc
         }
-        return FelszerelesToPdfView(fegyver)
-    }).reduce((acc, item) => acc.concat(item), [] as string[]))
-    
+        if(fegyver.Size === 0) {
+            return acc
+        }
+        const pdfView = FelszerelesToPdfView({...fegyver, Count: x.count})
+        return acc.concat(pdfView)
+    }, [] as string[]));
+
+    viseltFelszereles = viseltFelszereles.concat(karakter.felszereles.viselt.reduce((acc, item) => {
+        const targy = GetFelszereles(item.id)
+        if (targy == null) {
+            console.error("unknown targy: ", targy)
+            return acc
+        }
+        const pdfView = FelszerelesToPdfView({Name: targy.nev, Size: targy.size, Count: item.count})
+        return acc.concat(pdfView);
+    }, [] as string[]))
+
+    const cipeltFelszereles = karakter.felszereles.cipelt.reduce((acc, item) => {
+        const targy = GetFelszereles(item.id)
+        if (targy == null) {
+            console.error("unknown targy: ", targy)
+            return acc
+        }
+        const pdfView = FelszerelesToPdfView({Name: targy.nev, Size: targy.size, Count: item.count})
+        return acc.concat(pdfView);
+    }, [] as string[])
+
+    const aprosagFelszereles = karakter.felszereles.aprosagok.reduce((acc, item) => {
+        const targy = GetFelszereles(item.id)
+        if (targy == null) {
+            console.error("unknown targy: ", targy)
+            return acc
+        }
+        const pdfView = FelszerelesToPdfView({Name: targy.nev, Size: targy.size, Count: item.count})
+        return acc.concat(pdfView);
+    }, [] as string[])
+
     return {
         Faj: FajLabel(karakter.faj).toLowerCase(),
         Isten: karakter.isten || "",
@@ -123,8 +157,8 @@ export function KarakterInputToPdfView(karakter: Karakter2E): KarakterPdfView {
                 .concat(karakter.tolvajKepzettsegek?.map((k: KepzettsegId) =>
                     mapKepzettsegToPdfView(Kepzettsegek[k], tulajdonsagok, classLevels[Osztaly2E.Tolvaj])) || []),
         
-        Fegyverek: karakter.felszereles.fegyverIDk.slice(0, 4).map(fid => {
-            const fegyver = GetFegyver(fid)
+        Fegyverek: karakter.felszereles.fegyverek.slice(0, 4).map(fid => {
+            const fegyver = GetFegyver(fid.id)
             if (fegyver == null) {
                 console.error("unknown fegyver: " + fid)
                 return ""
@@ -141,19 +175,21 @@ export function KarakterInputToPdfView(karakter: Karakter2E): KarakterPdfView {
                     SignedNumberToText(damageBonus)}` : ''} ${
                 critStart < 20 ? `${critStart}-20` : '20'}x${fegyver.CritMultiplier}`
         }),
-        FelszerelesViselt: felszereles,
-        FelszerelesCipelt: [],
-        FelszerelesAprosagok: []
+        FelszerelesViselt: viseltFelszereles,
+        FelszerelesCipelt: cipeltFelszereles,
+        FelszerelesAprosagok: aprosagFelszereles,
     }
 }
 
 interface FelszerelesPdf {
     Name: string,
     Size: number,
+    Count?: number
 }
 
 function FelszerelesToPdfView(item: FelszerelesPdf): string[] {
-    const ans = [item.Name]
+    const nameWithCount = `${item.Name}${(item?.Count ?? 1) > 1 ? ` x${item.Count}` : ''}`
+    const ans = [nameWithCount]
     for (let i = 1; i < item.Size; i ++) {
         ans.push("+")
     }

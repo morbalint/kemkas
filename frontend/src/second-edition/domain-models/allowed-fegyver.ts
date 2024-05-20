@@ -2,7 +2,13 @@ import {Fegyver} from "./felszereles";
 import fegyverDB from "../data/fegyver.json";
 import {Osztaly2E} from "./osztaly2E";
 
+export const HarcosFegyverforgatok: Set<Osztaly2E> = new Set([Osztaly2E.Harcos, Osztaly2E.Amazon, Osztaly2E.Barbar, Osztaly2E.Ijasz, Osztaly2E.Tengeresz, Osztaly2E.Vandor])
+
 export function AllowedFegyverek(osztalyok: Osztaly2E[]): Fegyver[] {
+    if(osztalyok.some(o => HarcosFegyverforgatok.has(o))){
+        return AllowedFegyver(Osztaly2E.Harcos)
+    }
+
     return [...new Set(osztalyok.flatMap(AllowedFegyver))]
 }
 

@@ -206,14 +206,14 @@
     },
     {
       "id": "kotel_kender",
-      "nev": "Kötés, kender, 50'",
+      "nev": "Kötél, kender, 50'",
       "size": 1,
       "price": 1,
       "type": "items"
     },
     {
       "id": "kotel_selyem",
-      "nev": "Kötés, selyem, 50'",
+      "nev": "Kötél, selyem, 50'",
       "size": 0,
       "price": 10,
       "type": "items"

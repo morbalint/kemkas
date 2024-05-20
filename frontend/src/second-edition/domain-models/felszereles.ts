@@ -89,20 +89,25 @@ export const AllFelszereles : FelszerelesDto[] = [
     ...(felszereles.specialis as FelszerelesItem[])
 ]
 
+export interface IdAndCount {
+    id: string
+    count: number
+}
+
 export interface KarakterFelszereles {
     pancelID?: string
     pajzsID?: string
-    fegyverIDk: string[]
-    viseltFelszerelesIDk: string[]
-    cipeltFelszerelesIDk: string[]
-    aprosagFelszerelesIDk: string[]
+    fegyverek: IdAndCount[]
+    viselt: IdAndCount[]
+    cipelt: IdAndCount[]
+    aprosagok: IdAndCount[]
 }
 
 export const DefaultFelszereles: KarakterFelszereles = {
-    fegyverIDk: [],
-    viseltFelszerelesIDk: [],
-    cipeltFelszerelesIDk: [],
-    aprosagFelszerelesIDk: [],
+    fegyverek: [],
+    viselt: [],
+    cipelt: [],
+    aprosagok: [],
 }
 
 export function ViseltSize(felszereles: KarakterFelszereles): number {
@@ -110,8 +115,8 @@ export function ViseltSize(felszereles: KarakterFelszereles): number {
     sum += GetPajzs(felszereles.pajzsID)?.Size ?? 0;
     sum += GetPancel(felszereles.pancelID)?.Size ?? 0;
 
-    sum += felszereles.fegyverIDk.map(GetFegyver).reduce((acc, item) => acc + (item?.Size ?? 0),0)
-    sum += felszereles.viseltFelszerelesIDk.map(GetFelszereles).reduce((acc, item) => acc + (item?.size ?? 0),0)
+    sum += felszereles.fegyverek.map(({id}) => GetFegyver(id)).reduce((acc, item) => acc + Math.ceil(item?.Size ?? 0),0)
+    sum += felszereles.viselt.map(({id}) => GetFelszereles(id)).reduce((acc, item) => acc + Math.ceil(item?.size ?? 0),0)
 
     return sum;
 }
