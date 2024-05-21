@@ -1,7 +1,7 @@
 import React from "react";
 import {
     AllFelszereles,
-    Fegyver, FelszerelesDto,
+    Fegyver, FelszerelesDto, FelszerelesErtekeAranyban,
     GetFegyver, GetFelszereles, GetPajzs, GetPancel,
     KarakterFelszereles,
     PancelTypeLabel, Teherbiras, ViseltSize
@@ -35,6 +35,12 @@ function ItemMaxCount(targy?: FelszerelesDto): number {
 function FegyverMaxCount(fegyver?: Fegyver): number {
     const fegyverSize = fegyver?.Size ?? 1
     return (fegyverSize < 1 && fegyverSize > 0) ? Math.round(1/fegyver!.Size) : 1;
+}
+
+function FormatCoins(gold: number): string {
+    const at = Math.floor(gold)
+    const et = Math.round((gold-at) * 10);
+    return `${at} at${et > 0 ? ` ${et} et` : ''}`
 }
 
 export function FelszerelesView(props: {felszereles: KarakterFelszereles, changeFelszereles: (felszereles: KarakterFelszereles) => void, osztalyok: Osztaly2E[], teherbiras: number}) {
@@ -244,10 +250,6 @@ export function FelszerelesView(props: {felszereles: KarakterFelszereles, change
         });
     }).filter(x => x.targy != null);
     const cipeltSize = cipeltFelszereles.reduce((acc, item) => acc + Math.ceil(item.targy?.size ?? 1), 0)
-
-    console.log('teherbiras: ', teherbiras)
-    console.log('cipelt size: ', cipeltSize)
-    console.log('viselt size: ', viseltSize)
 
     const allowedCipelt = (selected?: FelszerelesDto) => AllFelszereles.filter(x => x.size > 0
         && Math.ceil(x.size) + cipeltSize - Math.ceil(selected?.size ?? 0) <= cipeltCapacity)
@@ -493,14 +495,14 @@ export function FelszerelesView(props: {felszereles: KarakterFelszereles, change
                         </button>
                     </div>}
                 </div>
-        ))}
-        {cipeltSize < cipeltCapacity && (viseltSize + cipeltSize < teherbiras) && (<button
-            className='btn btn-outline-dark btn ms-2'
-            type='button'
-            onClick={addCipelt}
-        >
-            Cipelt felszerelés hozzáadása
-        </button>)}</>}
+            ))}
+            {cipeltSize < cipeltCapacity && (viseltSize + cipeltSize < teherbiras) && (<button
+                className='btn btn-outline-dark btn ms-2'
+                type='button'
+                onClick={addCipelt}
+            >
+                Cipelt felszerelés hozzáadása
+            </button>)}</>}
         <div className='row mt-4'>
             <h6 className='col align-self-center'>Apróságok</h6>
         </div>
@@ -544,6 +546,12 @@ export function FelszerelesView(props: {felszereles: KarakterFelszereles, change
         >
             Apróság hozzáadása
         </button>)}
+        <div className='row mt-4'>
+            <h6 className='col align-self-center'>Pénz</h6>
+        </div>
+        <div className='row m-2'>
+            Felszerelés értéke: {FormatCoins(FelszerelesErtekeAranyban(felszereles))}
+        </div>
     </>
 }
 

@@ -121,6 +121,19 @@ export function ViseltSize(felszereles: KarakterFelszereles): number {
     return sum;
 }
 
+export function FelszerelesErtekeAranyban(felszereles: KarakterFelszereles): number {
+    let sum = 0;
+    sum += GetPajzs(felszereles.pajzsID)?.Price ?? 0;
+    sum += GetPancel(felszereles.pancelID)?.Price ?? 0;
+
+    sum += felszereles.fegyverek.map(({id, count}) => ({fegyver: GetFegyver(id), count})).reduce((acc, {fegyver, count}) => acc + ((fegyver?.Price ?? 0) * count),0)
+    sum += felszereles.viselt.map(({id, count}) => ({targy: GetFelszereles(id), count})).reduce((acc, {targy, count}) => acc + (targy?.price ?? 0) * count,0)
+    sum += felszereles.cipelt.map(({id, count}) => ({targy: GetFelszereles(id), count})).reduce((acc, {targy, count}) => acc + (targy?.price ?? 0) * count,0)
+    sum += felszereles.aprosagok.map(({id, count}) => ({targy: GetFelszereles(id), count})).reduce((acc, {targy, count}) => acc + (targy?.price ?? 0) * count,0)
+
+    return sum;
+}
+
 export function PancelTypeLabel(type: PancelType): string {
     let result: string
     switch(type) {
