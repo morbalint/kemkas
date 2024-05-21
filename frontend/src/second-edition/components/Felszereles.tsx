@@ -4,7 +4,7 @@ import {
     Fegyver, FelszerelesDto,
     GetFegyver, GetFelszereles, GetPajzs, GetPancel,
     KarakterFelszereles,
-    PancelTypeLabel, ViseltSize
+    PancelTypeLabel, Teherbiras, ViseltSize
 } from "../domain-models/felszereles";
 import {Osztaly2E} from '../domain-models/osztaly2E'
 import {AllowedPajzsTypes, AllowedPancelTypes} from '../domain-models/allowed-pancel-types'
@@ -17,12 +17,13 @@ import {characterSelector, setFelszereles} from "../domain-models/characterSlice
 import FelszerlesSelector from "../display-components/FelszerelesSelector";
 
 export function Felszereles(){
-    const character = useSelector.withTypes<RootState>()(characterSelector)
+    const karakter = useSelector.withTypes<RootState>()(characterSelector)
     const dispatch = useDispatch.withTypes<AppDispatch>()()
-    const felszereles = character.felszereles
-    const osztalyok = character.szintlepesek.map(x => x.osztaly)
+    const felszereles = karakter.felszereles
+    const osztalyok = karakter.szintlepesek.map(x => x.osztaly)
     const changeFelszereles = (f: KarakterFelszereles) => dispatch(setFelszereles(f))
-    return <FelszerelesView felszereles={felszereles} changeFelszereles={changeFelszereles} osztalyok={osztalyok} />
+    const teherbiras = Teherbiras(karakter);
+    return <FelszerelesView felszereles={felszereles} changeFelszereles={changeFelszereles} osztalyok={osztalyok} teherbiras={teherbiras} />
 }
 
 function ItemMaxCount(targy?: FelszerelesDto): number {
@@ -36,8 +37,8 @@ function FegyverMaxCount(fegyver?: Fegyver): number {
     return (fegyverSize < 1 && fegyverSize > 0) ? Math.round(1/fegyver!.Size) : 1;
 }
 
-export function FelszerelesView(props: {felszereles: KarakterFelszereles, changeFelszereles: (felszereles: KarakterFelszereles) => void, osztalyok: Osztaly2E[]}) {
-    const {felszereles, changeFelszereles, osztalyok} = props;
+export function FelszerelesView(props: {felszereles: KarakterFelszereles, changeFelszereles: (felszereles: KarakterFelszereles) => void, osztalyok: Osztaly2E[], teherbiras: number}) {
+    const {felszereles, changeFelszereles, osztalyok, teherbiras} = props;
     const viseltSize = ViseltSize(felszereles)
     const allowedPancel = AllowedPancelTypes(osztalyok)
         .filter(x => felszereles.pancelID === x.Id || x.Size + viseltSize - (GetPancel(felszereles.pancelID)?.Size ?? 0) <= 8)
@@ -244,6 +245,10 @@ export function FelszerelesView(props: {felszereles: KarakterFelszereles, change
     }).filter(x => x.targy != null);
     const cipeltSize = cipeltFelszereles.reduce((acc, item) => acc + Math.ceil(item.targy?.size ?? 1), 0)
 
+    console.log('teherbiras: ', teherbiras)
+    console.log('cipelt size: ', cipeltSize)
+    console.log('viselt size: ', viseltSize)
+
     const allowedCipelt = (selected?: FelszerelesDto) => AllFelszereles.filter(x => x.size > 0
         && Math.ceil(x.size) + cipeltSize - Math.ceil(selected?.size ?? 0) <= cipeltCapacity)
 
@@ -384,7 +389,7 @@ export function FelszerelesView(props: {felszereles: KarakterFelszereles, change
                 </div>}
             </div>
         ))}
-        {viseltSize < 8 && (<button
+        {viseltSize < 8 && (viseltSize + cipeltSize < teherbiras) && (<button
             className='btn btn-outline-dark btn ms-2'
             type='button'
             onClick={addFegyver}
@@ -436,7 +441,7 @@ export function FelszerelesView(props: {felszereles: KarakterFelszereles, change
                 </div>}
             </div>
         ))}
-        {viseltSize < 8 && (<button
+        {viseltSize < 8 && viseltSize + cipeltSize < teherbiras && (<button
             className='btn btn-outline-dark btn ms-2'
             type='button'
             onClick={addViselt}
@@ -489,7 +494,7 @@ export function FelszerelesView(props: {felszereles: KarakterFelszereles, change
                     </div>}
                 </div>
         ))}
-        {cipeltSize < cipeltCapacity && (<button
+        {cipeltSize < cipeltCapacity && (viseltSize + cipeltSize < teherbiras) && (<button
             className='btn btn-outline-dark btn ms-2'
             type='button'
             onClick={addCipelt}

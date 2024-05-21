@@ -77,7 +77,7 @@ export interface FelszerelesItem {
 
 export type FelszerelesDto = FelszerelesItem | FelszerelesContainer;
 
-export function NumberOfSizedItems(karakter: Pick<Karakter2E, "tulajdonsagok" | "faj" | "szintlepesek">) {
+export function Teherbiras(karakter: Pick<Karakter2E, "tulajdonsagok" | "faj" | "szintlepesek">) {
     const tulajdonsagok = TulajdonsagokTotal(karakter)
     return 13 + Modifier(tulajdonsagok.t_ero)
 }
