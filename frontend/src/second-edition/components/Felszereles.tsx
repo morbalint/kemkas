@@ -76,7 +76,7 @@ export function FelszerelesView(props: {felszereles: KarakterFelszereles, change
 
     const osztalyAllowedFegyverek = AllowedFegyverek(osztalyok)
     const allowedFegyverek = (selected?: Fegyver) => ([
-        ...osztalyAllowedFegyverek.filter(x => x.Size + viseltSize - (selected?.Size ?? 1 > 1 ? selected!.Size : 1) <= 8),
+        ...osztalyAllowedFegyverek.filter(x => x.Size + viseltSize - ((selected?.Size ?? 1) > 1 ? selected!.Size : 1) <= 8),
         ...valasztottFegyverek.filter(({idx,fegyver}) => !osztalyAllowedFegyverek.map(f => f.Id).includes(fegyver.Id))
             .map(({fegyver}) => fegyver)])
 
@@ -549,8 +549,59 @@ export function FelszerelesView(props: {felszereles: KarakterFelszereles, change
         <div className='row mt-4'>
             <h6 className='col align-self-center'>Pénz</h6>
         </div>
-        <div className='row m-2'>
-            Felszerelés értéke: {FormatCoins(FelszerelesErtekeAranyban(felszereles))}
+        <div className='row m-2 gx-lg-5 gx-1'>
+            <div className='col-md-4 col-sm-12'>
+                <div className="row">
+                    <label className='col col-form-label'>Arany</label>
+                    <div className='col m-2'>
+                        <input
+                            className='form-control'
+                            type='number'
+                            value={felszereles.at}
+                            onChange={e => changeFelszereles({...felszereles, at: Number(e.target.value)})}
+                            data-testid='felszereles-at'
+                        />
+                    </div>
+                </div>
+            </div>
+            <div className='col-md-4 col-sm-12'>
+                <div className="row">
+                    <label className='col col-form-label'>Elektrum</label>
+                    <div className='col m-2'>
+                        <input
+                            className='form-control'
+                            type='number'
+                            value={felszereles.el}
+                            onChange={e => changeFelszereles({...felszereles, el: Number(e.target.value)})}
+                            data-testid='felszereles-el'
+                        />
+                    </div>
+                </div>
+            </div>
+            <div className='col-md-4 col-sm-12'>
+                <div className="row">
+                    <label className='col col-form-label'>Ezüst</label>
+                    <div className='col m-2'>
+                        <input
+                            className='form-control'
+                            type='number'
+                            value={felszereles.et}
+                            onChange={e => changeFelszereles({...felszereles, et: Number(e.target.value)})}
+                            data-testid='felszereles-et'
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div className='row m-2 gx-lg-5 gx-1'>
+            <div className='col'>
+                <p className='col-form-label'>Felszerelés
+                    értéke: {FormatCoins(FelszerelesErtekeAranyban(felszereles))}</p>
+            </div>
+            <div className='col'>
+                <p className='col-form-label'>Teljes vagyon
+                    értéke: {FormatCoins(FelszerelesErtekeAranyban(felszereles) + felszereles.at + (felszereles.el * 0.5) + (felszereles.et * 0.1))}</p>
+            </div>
         </div>
     </>
 }

@@ -50,6 +50,9 @@ export interface KarakterPdfView {
     FelszerelesViselt: string[],
     FelszerelesCipelt: string[],
     FelszerelesAprosagok: string[],
+    et: number
+    el: number
+    at: number
 }
 
 export function KarakterInputToPdfView(karakter: Karakter2E): KarakterPdfView {
@@ -178,6 +181,9 @@ export function KarakterInputToPdfView(karakter: Karakter2E): KarakterPdfView {
         FelszerelesViselt: viseltFelszereles,
         FelszerelesCipelt: cipeltFelszereles,
         FelszerelesAprosagok: aprosagFelszereles,
+        et: karakter.felszereles.et,
+        el: karakter.felszereles.el,
+        at: karakter.felszereles.at,
     }
 }
 

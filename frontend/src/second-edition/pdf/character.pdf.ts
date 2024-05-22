@@ -82,7 +82,11 @@ export async function CreatePDF(karakter: KarakterPdfView) {
     for (let i = 0; i < karakter.FelszerelesAprosagok.length && i < 8; i++) {
         form.getTextField(`aprosagok_${i}`).setText(karakter.FelszerelesAprosagok[i])
     }
-    
+
+    form.getTextField('arany').setText(karakter.at.toString())
+    form.getTextField('elektrum').setText(karakter.el.toString())
+    form.getTextField('ezust').setText(karakter.et.toString())
+
     form.updateFieldAppearances(pdfFont)
 
     const pdfBytes = await pdfDoc.save();

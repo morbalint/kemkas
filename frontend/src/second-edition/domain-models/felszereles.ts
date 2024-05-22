@@ -101,6 +101,9 @@ export interface KarakterFelszereles {
     viselt: IdAndCount[]
     cipelt: IdAndCount[]
     aprosagok: IdAndCount[]
+    et: number
+    el: number
+    at: number
 }
 
 export const DefaultFelszereles: KarakterFelszereles = {
@@ -108,6 +111,9 @@ export const DefaultFelszereles: KarakterFelszereles = {
     viselt: [],
     cipelt: [],
     aprosagok: [],
+    et: 0,
+    el: 0,
+    at: 0,
 }
 
 export function ViseltSize(felszereles: KarakterFelszereles): number {
