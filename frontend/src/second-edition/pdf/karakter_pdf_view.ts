@@ -126,6 +126,12 @@ export function KarakterInputToPdfView(karakter: Karakter2E): KarakterPdfView {
         return acc.concat(pdfView);
     }, [] as string[])
 
+    const tolvajExtraKepzettsegek = karakter.szintlepesek
+        .map(sz => sz.tolvajExtraKepzettseg)
+        .filter(k => k != null)
+        .map(k => k as KepzettsegId)
+        .map((k: KepzettsegId) => mapKepzettsegToPdfView(Kepzettsegek[k], tulajdonsagok, classLevels[Osztaly2E.Tolvaj]))
+
     return {
         Faj: FajLabel(karakter.faj).toLowerCase(),
         Isten: karakter.isten || "",
@@ -153,12 +159,14 @@ export function KarakterInputToPdfView(karakter: Karakter2E): KarakterPdfView {
         PajzsVO: SignedNumberToText(pajzs?.VO),
         PancelVO: SignedNumberToText(pancel?.VO),
         EgyebVO: SignedNumberToText(VOegyeb(karakter)),
-        
+
         Kepzettsegek: 
             karakter.kepzettsegek.map((k : KepzettsegId) =>
                 mapKepzettsegToPdfView(Kepzettsegek[k], tulajdonsagok, karakter.szint))
                 .concat(karakter.tolvajKepzettsegek?.map((k: KepzettsegId) =>
-                    mapKepzettsegToPdfView(Kepzettsegek[k], tulajdonsagok, classLevels[Osztaly2E.Tolvaj])) || []),
+                    mapKepzettsegToPdfView(Kepzettsegek[k], tulajdonsagok, classLevels[Osztaly2E.Tolvaj])) || [])
+                .concat(tolvajExtraKepzettsegek)
+                .slice(0, 12), // TODO: Ember, Tolvaj, 18 INT, 9 szinten 13 kepzettseget kap
         
         Fegyverek: karakter.felszereles.fegyverek.slice(0, 4).map(fid => {
             const fegyver = GetFegyver(fid.id)
