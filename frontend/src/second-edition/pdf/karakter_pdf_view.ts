@@ -2,7 +2,7 @@ import {Modifier, TulajdonsagokTotal} from "../domain-models/tulajdonsag2E";
 import {Mentok, MentoModositok, MultiClassMentokAlap} from "../domain-models/mentok";
 import {CalculateMasodlagosErtekek, VOegyeb} from "../domain-models/masodlagos_ertekek";
 import {FajLabel} from "../domain-models/faj2E";
-import {Osztaly2E, OsztalyLabel} from "../domain-models/osztaly2E";
+import {Osztaly2E, OsztalyLabel, OsztalySpecialSkills} from "../domain-models/osztaly2E";
 import {CelzoTB, KozelharciTB, MultiClassTamadasBonusz} from "../domain-models/tamadas_bonusz";
 import {Karakter2E} from "../domain-models/karakter2E";
 import {GetJellem} from "../domain-models/jellem";
@@ -53,6 +53,7 @@ export interface KarakterPdfView {
     et: number
     el: number
     at: number
+    SpecialisKepessegek: string[],
 }
 
 export function KarakterInputToPdfView(karakter: Karakter2E): KarakterPdfView {
@@ -132,6 +133,8 @@ export function KarakterInputToPdfView(karakter: Karakter2E): KarakterPdfView {
         .map(k => k as KepzettsegId)
         .map((k: KepzettsegId) => mapKepzettsegToPdfView(Kepzettsegek[k], tulajdonsagok, classLevels[Osztaly2E.Tolvaj]))
 
+    const specialisKepessegek = osztalyok.flatMap(o => OsztalySpecialSkills(o).map(s => s.Name));
+
     return {
         Faj: FajLabel(karakter.faj).toLowerCase(),
         Isten: karakter.isten || "",
@@ -165,8 +168,7 @@ export function KarakterInputToPdfView(karakter: Karakter2E): KarakterPdfView {
                 mapKepzettsegToPdfView(Kepzettsegek[k], tulajdonsagok, karakter.szint))
                 .concat(karakter.tolvajKepzettsegek?.map((k: KepzettsegId) =>
                     mapKepzettsegToPdfView(Kepzettsegek[k], tulajdonsagok, classLevels[Osztaly2E.Tolvaj])) || [])
-                .concat(tolvajExtraKepzettsegek)
-                .slice(0, 12), // TODO: Ember, Tolvaj, 18 INT, 9 szinten 13 kepzettseget kap
+                .concat(tolvajExtraKepzettsegek),
         
         Fegyverek: karakter.felszereles.fegyverek.slice(0, 4).map(fid => {
             const fegyver = GetFegyver(fid.id)
@@ -192,6 +194,7 @@ export function KarakterInputToPdfView(karakter: Karakter2E): KarakterPdfView {
         et: karakter.felszereles.et,
         el: karakter.felszereles.el,
         at: karakter.felszereles.at,
+        SpecialisKepessegek: specialisKepessegek,
     }
 }
 

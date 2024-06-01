@@ -62,7 +62,7 @@ export async function CreatePDF(karakter: KarakterPdfView) {
     form.getTextField("tamadas_bonusz_ugy").setText("  " + SignedNumberToText(karakter.TulajdonsagModositok.t_ugy))
     form.getTextField("tamadas_bonusz_tavolsagi").setText(karakter.CelzoTB.join("/"))
     
-    for (let i = 0; i < karakter.Kepzettsegek.length; i++) {
+    for (let i = 0; i < karakter.Kepzettsegek.length && i < 12; i++) {
         const kepzettseg = karakter.Kepzettsegek[i]
         form.getTextField(`kepzettseg_${i}_nev`).setText(kepzettseg.nev)
         form.getTextField(`kepzettseg_${i}_alap`).setText(kepzettseg.alap)
@@ -86,6 +86,13 @@ export async function CreatePDF(karakter: KarakterPdfView) {
     form.getTextField('arany').setText(karakter.at.toString())
     form.getTextField('elektrum').setText(karakter.el.toString())
     form.getTextField('ezust').setText(karakter.et.toString())
+
+    for (let i = 0; i < karakter.SpecialisKepessegek.length && i < 14; i+=2){
+        const text = i+1 < karakter.SpecialisKepessegek.length
+            ? `${karakter.SpecialisKepessegek[i]}, ${karakter.SpecialisKepessegek[i+1]}`
+            : karakter.SpecialisKepessegek[i]
+        form.getTextField(`specialis_kepessegek_${Math.floor(i/2)}`).setText(text)
+    }
 
     form.updateFieldAppearances(pdfFont)
 
