@@ -9998,12 +9998,19 @@ workbox-background-sync@6.6.1, workbox-background-sync@^6.5.4:
     idb "^7.0.1"
     workbox-core "6.6.1"
 
-workbox-broadcast-update@6.6.1, workbox-broadcast-update@^6.5.4:
+workbox-broadcast-update@6.6.1:
   version "6.6.1"
   resolved "https://registry.yarnpkg.com/workbox-broadcast-update/-/workbox-broadcast-update-6.6.1.tgz#0fad9454cf8e4ace0c293e5617c64c75d8a8c61e"
   integrity sha512-fBhffRdaANdeQ1V8s692R9l/gzvjjRtydBOvR6WCSB0BNE2BacA29Z4r9/RHd9KaXCPl6JTdI9q0bR25YKP8TQ==
   dependencies:
     workbox-core "6.6.1"
+
+workbox-broadcast-update@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/workbox-broadcast-update/-/workbox-broadcast-update-7.1.0.tgz#fe21c491cc70f1e037898bba63de0752ef59bd82"
+  integrity sha512-O36hIfhjej/c5ar95pO67k1GQw0/bw5tKP7CERNgK+JdxBANQhDmIuOXZTNvwb2IHBx9hj2kxvcDyRIh5nzOgQ==
+  dependencies:
+    workbox-core "7.1.0"
 
 workbox-build@6.6.1:
   version "6.6.1"
