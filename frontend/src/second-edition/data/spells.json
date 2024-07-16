@@ -3,43 +3,49 @@
     "tomor": [
       {
         "szint": 0,
-        "nev": "\u00C9lelem \u00E9s v\u00EDz megtiszt\u00EDt\u00E1sa / \u00C9lelem \u00E9s v\u00EDz beszennyez\u00E9se",
-        "leiras": "tiszt\u00E1v\u00E1 \u00E9s fogyaszthat\u00F3v\u00E1 teszi vagy beszennyezi az \u00E9lelmet \u00E9s vizet",
+        "id": "elelem_es_viz_megtisztitasa_/_elelem_es_viz_beszennyezese",
+        "nev": "Élelem és víz megtisztítása / Élelem és víz beszennyezése",
+        "leiras": "tisztává és fogyaszthatóvá teszi vagy beszennyezi az élelmet és vizet",
         "megfordithato": true,
         "variabilis": false
       },
       {
         "szint": 0,
-        "nev": "F\u00E9ny",
-        "leiras": "f\u00E1kly\u00E1nak megfelel\u0151 f\u00E9nyt ad 60 \u002B 10/szint percig",
+        "id": "Feny",
+        "nev": "Fény",
+        "leiras": "fáklyának megfelelő fényt ad 60 + 10/szint percig",
         "megfordithato": false,
         "variabilis": false
       },
       {
         "szint": 0,
-        "nev": "M\u00E1gia \u00E9rz\u00E9kel\u00E9se",
-        "leiras": "10 percig \u00E9rz\u00E9keli a m\u00E1gikus er\u0151ket \u00E9s var\u00E1zst\u00E1rgyakat",
+        "id": "Magia_erzekelese",
+        "nev": "Mágia érzékelése",
+        "leiras": "10 percig érzékeli a mágikus erőket és varázstárgyakat",
         "megfordithato": false,
         "variabilis": false
       },
       {
         "szint": 0,
-        "nev": "M\u00E1gia olvas\u00E1sa",
-        "leiras": "10/szint percig k\u00E9pess\u00E9 tesz a m\u00E1gikus sz\u00F6vegek elolvas\u00E1s\u00E1ra",
+        "id": "Magia_olvasasa",
+        "nev": "Mágia olvasása",
+        "leiras": "10/szint percig képessé tesz a mágikus szövegek elolvasására",
         "megfordithato": false,
         "variabilis": false
       },
       {
         "szint": 0,
-        "nev": "M\u00E9reg \u00E9rz\u00E9kel\u00E9se",
-        "leiras": "\u00E9rz\u00E9keli a m\u00E9rgeket",
+        "id": "Mereg_erzekelese",
+        "nev": "Méreg érzékelése",
+        "leiras": "érzékeli a mérgeket",
         "megfordithato": false,
         "variabilis": false
       },
       {
         "szint": 0,
-        "nev": "V\u00EDz teremt\u00E9se",
-        "leiras": "5/szint liter vizet hoz l\u00E9tre",
+        "id": "Viz_teremtese",
+        "nev": "Víz teremtése",
+        "leiras": "5/szint liter vizet hoz létre",
         "megfordithato": false,
         "variabilis": false
       },
@@ -47,8 +53,9 @@
         "szint": 1,
         "d100_start": 1,
         "d100_end": 15,
-        "nev": "\u00C1ld\u00E1s / Ront\u00E1s",
-        "leiras": "6 k\u00F6rig \u002B1 t\u00E1mad\u00E1st \u00E9s ment\u0151dob\u00E1st ad minden sz\u00F6vets\u00E9gesnek, vagy -1-et az ellenfeleknek",
+        "id": "aldas_/_Rontas",
+        "nev": "Áldás / Rontás",
+        "leiras": "6 körig +1 támadást és mentődobást ad minden szövetségesnek, vagy -1-et az ellenfeleknek",
         "megfordithato": true,
         "variabilis": false
       },
@@ -56,8 +63,9 @@
         "szint": 1,
         "d100_start": 16,
         "d100_end": 20,
-        "nev": "\u00C9l\u0151holtak \u00E9rz\u00E9kel\u00E9se",
-        "leiras": "1 \u00F3r\u00E1ig \u00E9rz\u00E9keli az \u00E9l\u0151holt sz\u00F6rnyek jelenl\u00E9t\u00E9t",
+        "id": "eloholtak_erzekelese",
+        "nev": "Élőholtak érzékelése",
+        "leiras": "1 óráig érzékeli az élőholt szörnyek jelenlétét",
         "megfordithato": false,
         "variabilis": false
       },
@@ -65,8 +73,9 @@
         "szint": 1,
         "d100_start": 21,
         "d100_end": 25,
-        "nev": "F\u00E9lelem okoz\u00E1sa",
-        "leiras": "egy 5. szint alatti l\u00E9ny elmenek\u00FCl 10 percig",
+        "id": "Felelem_okozasa",
+        "nev": "Félelem okozása",
+        "leiras": "egy 5. szint alatti lény elmenekül 10 percig",
         "megfordithato": false,
         "variabilis": false
       },
@@ -74,8 +83,9 @@
         "szint": 1,
         "d100_start": 26,
         "d100_end": 35,
-        "nev": "Gonosz \u00E9rz\u00E9kel\u00E9se / J\u00F3 \u00E9rz\u00E9kel\u00E9se",
-        "leiras": "1 \u00F3r\u00E1ig \u00E9rz\u00E9keli a gonosz vagy j\u00F3 er\u0151k jelenl\u00E9t\u00E9t",
+        "id": "Gonosz_erzekelese_/_Jo_erzekelese",
+        "nev": "Gonosz érzékelése / Jó érzékelése",
+        "leiras": "1 óráig érzékeli a gonosz vagy jó erők jelenlétét",
         "megfordithato": true,
         "variabilis": false
       },
@@ -83,8 +93,9 @@
         "szint": 1,
         "d100_start": 36,
         "d100_end": 55,
-        "nev": "Kisebb sebek gy\u00F3gy\u00EDt\u00E1sa / Kisebb sebek okoz\u00E1sa",
-        "leiras": "1d8 \u002B 1/szint Hp-t gy\u00F3gy\u00EDt vagy sebez",
+        "id": "Kisebb_sebek_gyogyitasa_/_Kisebb_sebek_okozasa",
+        "nev": "Kisebb sebek gyógyítása / Kisebb sebek okozása",
+        "leiras": "1d8 + 1/szint Hp-t gyógyít vagy sebez",
         "megfordithato": true,
         "variabilis": false
       },
@@ -92,8 +103,9 @@
         "szint": 1,
         "d100_start": 56,
         "d100_end": 60,
-        "nev": "Mened\u00E9k",
-        "leiras": "2 \u002B 1/szint k\u00F6rig mened\u00E9ket ny\u00FAjt a t\u00E1mad\u00E1sok ellen, de nem lehet bel\u0151le t\u00E1madni",
+        "id": "Menedek",
+        "nev": "Menedék",
+        "leiras": "2 + 1/szint körig menedéket nyújt a támadások ellen, de nem lehet belőle támadni",
         "megfordithato": false,
         "variabilis": false
       },
@@ -101,8 +113,9 @@
         "szint": 1,
         "d100_start": 61,
         "d100_end": 75,
-        "nev": "Parancsvar\u00E1zs",
-        "leiras": "a c\u00E9lpont teljes\u00EDt egy sz\u00F3beli parancsot, 5. szintt\u0151l ment\u0151 dobhat\u00F3",
+        "id": "Parancsvarazs",
+        "nev": "Parancsvarázs",
+        "leiras": "a célpont teljesít egy szóbeli parancsot, 5. szinttől mentő dobható",
         "megfordithato": false,
         "variabilis": false
       },
@@ -110,28 +123,31 @@
         "szint": 1,
         "d100_start": 76,
         "d100_end": 90,
-        "nev": "Szenteltv\u00EDz teremt\u00E9se",
+        "id": "Szenteltviz_teremtese",
+        "nev": "Szenteltvíz teremtése",
         "leiras": "szenteltvizet teremt",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "25 at ez\u00FCstpor"
+        "komponens": "25 at ezüstpor"
       },
       {
         "szint": 1,
         "d100_start": 91,
         "d100_end": 95,
-        "nev": "V\u00E9delem a gonoszt\u00F3l / V\u00E9delem a j\u00F3t\u00F3l",
-        "leiras": "10/szint percig \u002B2 VO-t \u00E9s \u002B2 var\u00E1zslatok elleni ment\u0151dob\u00E1st ad, megakad\u00E1lyozza a term\u00E9szetfeletti l\u00E9nyek t\u00E1mad\u00E1sait",
+        "id": "Vedelem_a_gonosztol_/_Vedelem_a_jotol",
+        "nev": "Védelem a gonosztól / Védelem a jótól",
+        "leiras": "10/szint percig +2 VO-t és +2 varázslatok elleni mentődobást ad, megakadályozza a természetfeletti lények támadásait",
         "megfordithato": true,
         "variabilis": false,
-        "komponens": "szenteltv\u00EDz"
+        "komponens": "szenteltvíz"
       },
       {
         "szint": 1,
         "d100_start": 96,
         "d100_end": 100,
-        "nev": "V\u00E9delem az elemekt\u0151l",
-        "leiras": "1/szint \u00F3r\u00E1ig immunit\u00E1st ad egy elem hat\u00E1sai ellen, er\u0151s \u00E1rt\u00F3 hat\u00E1sb\u00F3l felfog 10 Hp-t, majd megsz\u0171nik.",
+        "id": "Vedelem_az_elemektol",
+        "nev": "Védelem az elemektől",
+        "leiras": "1/szint óráig immunitást ad egy elem hatásai ellen, erős ártó hatásból felfog 10 Hp-t, majd megszűnik.",
         "megfordithato": false,
         "variabilis": true
       },
@@ -139,8 +155,9 @@
         "szint": 2,
         "d100_start": 1,
         "d100_end": 10,
-        "nev": "B\u00E9n\u00EDt\u00E1s / B\u00E9n\u00EDt\u00E1s megsz\u00FCntet\u00E9se",
-        "leiras": "1-3 humanoid leb\u00E9n\u00EDt\u00E1sa 4 \u002B 1/szint k\u00F6rre (-2/-1/0 levon\u00E1s\u00FA ment\u0151vel), vagy feloldja a b\u00E9nults\u00E1got",
+        "id": "Benitas_/_Benitas_megszuntetese",
+        "nev": "Bénítás / Bénítás megszüntetése",
+        "leiras": "1-3 humanoid lebénítása 4 + 1/szint körre (-2/-1/0 levonású mentővel), vagy feloldja a bénultságot",
         "megfordithato": true,
         "variabilis": false
       },
@@ -148,8 +165,9 @@
         "szint": 2,
         "d100_start": 11,
         "d100_end": 15,
-        "nev": "B\u0171v\u00F6l\u00E9s \u00E9rz\u00E9kel\u00E9se / B\u0171v\u00F6l\u00E9s elfed\u00E9se",
-        "leiras": "\u00E9rz\u00E9keli, ha a c\u00E9lpont term\u00E9szetfeletti befoly\u00E1s vagy \u00E1tok alatt \u00E1ll, vagy permanensen elrejt az ilyen \u00E9rz\u00E9kel\u00E9s el\u0151l",
+        "id": "Buvoles_erzekelese_/_Buvoles_elfedese",
+        "nev": "Bűvölés érzékelése / Bűvölés elfedése",
+        "leiras": "érzékeli, ha a célpont természetfeletti befolyás vagy átok alatt áll, vagy permanensen elrejt az ilyen érzékelés elől",
         "megfordithato": false,
         "variabilis": true
       },
@@ -157,8 +175,9 @@
         "szint": 2,
         "d100_start": 16,
         "d100_end": 25,
-        "nev": "Csendvar\u00E1zs",
-        "leiras": "2/szint k\u00F6rig megsz\u00FCnteti a hangokat egy 15\u0027 sugar\u00FA k\u00F6rben",
+        "id": "Csendvarazs",
+        "nev": "Csendvarázs",
+        "leiras": "2/szint körig megszünteti a hangokat egy 15' sugarú körben",
         "megfordithato": false,
         "variabilis": false
       },
@@ -166,8 +185,9 @@
         "szint": 2,
         "d100_start": 26,
         "d100_end": 40,
-        "nev": "K\u00F6zepes sebek gy\u00F3gy\u00EDt\u00E1sa / K\u00F6zepes sebek okoz\u00E1sa",
-        "leiras": "2d8 \u002B 1/szint Hp-t gy\u00F3gy\u00EDt vagy sebez",
+        "id": "Kozepes_sebek_gyogyitasa_/_Kozepes_sebek_okozasa",
+        "nev": "Közepes sebek gyógyítása / Közepes sebek okozása",
+        "leiras": "2d8 + 1/szint Hp-t gyógyít vagy sebez",
         "megfordithato": true,
         "variabilis": false
       },
@@ -175,8 +195,9 @@
         "szint": 2,
         "d100_start": 41,
         "d100_end": 50,
-        "nev": "Megbabon\u00E1z\u00E1s",
-        "leiras": "sz\u00F3noklattal 1 \u00F3r\u00E1ig megbabon\u00E1z egy t\u00F6meget",
+        "id": "Megbabonazas",
+        "nev": "Megbabonázás",
+        "leiras": "szónoklattal 1 óráig megbabonáz egy tömeget",
         "megfordithato": false,
         "variabilis": false
       },
@@ -184,8 +205,9 @@
         "szint": 2,
         "d100_start": 51,
         "d100_end": 60,
-        "nev": "M\u00E9reg lelass\u00EDt\u00E1sa",
-        "leiras": "1/szint \u00F3r\u00E1ig megakad\u00E1lyozza a m\u00E9rgek m\u0171k\u00F6d\u00E9s\u00E9t",
+        "id": "Mereg_lelassitasa",
+        "nev": "Méreg lelassítása",
+        "leiras": "1/szint óráig megakadályozza a mérgek működését",
         "megfordithato": false,
         "variabilis": false
       },
@@ -193,8 +215,9 @@
         "szint": 2,
         "d100_start": 61,
         "d100_end": 65,
-        "nev": "Nyelvek besz\u00E9l\u00E9se",
-        "leiras": "1/szint f\u0151 1/szint \u00F3r\u00E1ig meg\u00E9rti az idegen nyelveket",
+        "id": "Nyelvek_beszelese",
+        "nev": "Nyelvek beszélése",
+        "leiras": "1/szint fő 1/szint óráig megérti az idegen nyelveket",
         "megfordithato": false,
         "variabilis": false
       },
@@ -202,18 +225,20 @@
         "szint": 2,
         "d100_start": 66,
         "d100_end": 80,
-        "nev": "\u00D3men",
-        "leiras": "70% \u002B 1%/szint es\u00E9llyel kisebb j\u00F3sjelet k\u00FCld",
+        "id": "omen",
+        "nev": "Ómen",
+        "leiras": "70% + 1%/szint eséllyel kisebb jósjelet küld",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "25 at f\u00FCst\u00F6l\u0151"
+        "komponens": "25 at füstölő"
       },
       {
         "szint": 2,
         "d100_start": 81,
         "d100_end": 85,
-        "nev": "Por\u00F6rd\u00F6g",
-        "leiras": "2/szint k\u00F6rig kisebb, gyenge l\u00E9g\u00F6rv\u00E9nyt id\u00E9z",
+        "id": "Porordog",
+        "nev": "Porördög",
+        "leiras": "2/szint körig kisebb, gyenge légörvényt idéz",
         "megfordithato": false,
         "variabilis": false
       },
@@ -221,8 +246,9 @@
         "szint": 2,
         "d100_start": 86,
         "d100_end": 90,
-        "nev": "Reverzi\u00F3",
-        "leiras": "visszatart egy 6. szint alatti c\u00E9lpontot 2/szint k\u00F6rig",
+        "id": "Reverzio",
+        "nev": "Reverzió",
+        "leiras": "visszatart egy 6. szint alatti célpontot 2/szint körig",
         "megfordithato": false,
         "variabilis": false
       },
@@ -230,8 +256,9 @@
         "szint": 2,
         "d100_start": 91,
         "d100_end": 95,
+        "id": "Szellemfegyver",
         "nev": "Szellemfegyver",
-        "leiras": "1/szint k\u00F6rig tart\u00F3 m\u00E1gikus energiafegyver, t\u00E1mad\u00E1s 2/3 szint, sebz\u00E9s 1d8 Hp",
+        "leiras": "1/szint körig tartó mágikus energiafegyver, támadás 2/3 szint, sebzés 1d8 Hp",
         "megfordithato": false,
         "variabilis": false
       },
@@ -239,18 +266,20 @@
         "szint": 2,
         "d100_start": 96,
         "d100_end": 100,
-        "nev": "Wyvern\u0151r",
-        "leiras": "8 \u00F3r\u00E1ig \u0151rt \u00E1ll\u00F3, testetlen er\u0151, b\u00E9nul\u00E1s 10/szint k\u00F6rre",
+        "id": "Wyvernor",
+        "nev": "Wyvernőr",
+        "leiras": "8 óráig őrt álló, testetlen erő, bénulás 10/szint körre",
         "megfordithato": false,
         "variabilis": false,
-        "opcionalis_komponens": "1000 at wyvern-csonttal kevert f\u00FCst\u00F6l\u0151vel permanens"
+        "opcionalis_komponens": "1000 at wyvern-csonttal kevert füstölővel permanens"
       },
       {
         "szint": 3,
         "d100_start": 1,
         "d100_end": 10,
-        "nev": "\u00C1tok / \u00C1tok elt\u00E1vol\u00EDt\u00E1sa",
-        "leiras": "meg\u00E1tkoz egy l\u00E9nyt, vagy megsz\u00FCntet egy \u00E1tkot",
+        "id": "atok_/_atok_eltavolitasa",
+        "nev": "Átok / Átok eltávolítása",
+        "leiras": "megátkoz egy lényt, vagy megszüntet egy átkot",
         "megfordithato": true,
         "variabilis": false
       },
@@ -258,8 +287,9 @@
         "szint": 3,
         "d100_start": 11,
         "d100_end": 20,
-        "nev": "Besz\u00E9d a holtakkal",
-        "leiras": "egy holttest szelleme k\u00E9t szintenk\u00E9nt egy k\u00E9rd\u00E9sre v\u00E1laszol",
+        "id": "Beszed_a_holtakkal",
+        "nev": "Beszéd a holtakkal",
+        "leiras": "egy holttest szelleme két szintenként egy kérdésre válaszol",
         "megfordithato": false,
         "variabilis": false
       },
@@ -267,8 +297,9 @@
         "szint": 3,
         "d100_start": 21,
         "d100_end": 25,
-        "nev": "Betegs\u00E9g / Betegs\u00E9g gy\u00F3gy\u00EDt\u00E1sa",
-        "leiras": "betegs\u00E9ggel s\u00FAjtja a c\u00E9lpontot, vagy k\u00E9zr\u00E1t\u00E9ttel kigy\u00F3gy\u00EDtja abb\u00F3l",
+        "id": "Betegseg_/_Betegseg_gyogyitasa",
+        "nev": "Betegség / Betegség gyógyítása",
+        "leiras": "betegséggel sújtja a célpontot, vagy kézrátéttel kigyógyítja abból",
         "megfordithato": true,
         "variabilis": false
       },
@@ -276,19 +307,21 @@
         "szint": 3,
         "d100_start": 26,
         "d100_end": 30,
-        "nev": "Gonoszt\u00F3l v\u00E9d\u0151 k\u00F6r / J\u00F3t\u00F3l v\u00E9d\u0151 k\u00F6r",
-        "leiras": "f\u00F6ldre rajzolt v\u00E9delmez\u0151 k\u00F6rrel t\u00E1voltartja vagy beb\u00F6rt\u00F6nzi a term\u00E9szetfeletti gonosz vagy megid\u00E9zett l\u00E9nyeket",
+        "id": "Gonosztol_vedo_kor_/_Jotol_vedo_kor",
+        "nev": "Gonosztól védő kör / Jótól védő kör",
+        "leiras": "földre rajzolt védelmező körrel távoltartja vagy bebörtönzi a természetfeletti gonosz vagy megidézett lényeket",
         "megfordithato": true,
         "variabilis": false,
-        "komponens": "szenteltv\u00EDz",
-        "opcionalis_komponens": "200 at ez\u00FCstporral permanens"
+        "komponens": "szenteltvíz",
+        "opcionalis_komponens": "200 at ezüstporral permanens"
       },
       {
         "szint": 3,
         "d100_start": 31,
         "d100_end": 40,
-        "nev": "Holtak anim\u00E1l\u00E1sa",
-        "leiras": "megeleven\u00EDt szint*2 szintnyi \u00E9l\u0151halottat",
+        "id": "Holtak_animalasa",
+        "nev": "Holtak animálása",
+        "leiras": "megelevenít szint*2 szintnyi élőhalottat",
         "megfordithato": false,
         "variabilis": false
       },
@@ -296,8 +329,9 @@
         "szint": 3,
         "d100_start": 41,
         "d100_end": 45,
+        "id": "Ima",
         "nev": "Ima",
-        "leiras": "1/szint k\u00F6rig \u002B1-et ad a sz\u00F6vets\u00E9gesek, -1-et az ellens\u00E9gek dob\u00E1saira",
+        "leiras": "1/szint körig +1-et ad a szövetségesek, -1-et az ellenségek dobásaira",
         "megfordithato": false,
         "variabilis": false
       },
@@ -305,8 +339,9 @@
         "szint": 3,
         "d100_start": 46,
         "d100_end": 55,
-        "nev": "M\u00E1gia megsz\u00FCntet\u00E9se",
-        "leiras": "megsz\u00FCnteti a m\u00E1gikus hat\u00E1sokat \u00E9s var\u00E1zslatokat",
+        "id": "Magia_megszuntetese",
+        "nev": "Mágia megszüntetése",
+        "leiras": "megszünteti a mágikus hatásokat és varázslatokat",
         "megfordithato": false,
         "variabilis": false
       },
@@ -314,8 +349,9 @@
         "szint": 3,
         "d100_start": 56,
         "d100_end": 60,
-        "nev": "\u00D6r\u00F6k f\u00E9ny / \u00D6r\u00F6k s\u00F6t\u00E9ts\u00E9g",
-        "leiras": "30\u0027 sugar\u00FA k\u00F6rben \u00F6r\u00F6k f\u00E9nyt vagy s\u00F6t\u00E9ts\u00E9get teremt",
+        "id": "orok_feny_/_orok_sotetseg",
+        "nev": "Örök fény / Örök sötétség",
+        "leiras": "30' sugarú körben örök fényt vagy sötétséget teremt",
         "megfordithato": true,
         "variabilis": false
       },
@@ -323,8 +359,9 @@
         "szint": 3,
         "d100_start": 61,
         "d100_end": 65,
-        "nev": "Perzsel\u0151 f\u00E9ny",
-        "leiras": "2 szintenk\u00E9nt 1d8 Hp sebz\u00E9s, \u00E9l\u0151holtakon 1d6 Hp/szint",
+        "id": "Perzselo_feny",
+        "nev": "Perzselő fény",
+        "leiras": "2 szintenként 1d8 Hp sebzés, élőholtakon 1d6 Hp/szint",
         "megfordithato": false,
         "variabilis": false
       },
@@ -332,8 +369,9 @@
         "szint": 3,
         "d100_start": 66,
         "d100_end": 75,
-        "nev": "S\u00FAlyos sebek gy\u00F3gy\u00EDt\u00E1sa / S\u00FAlyos sebek okoz\u00E1sa",
-        "leiras": "3d8 \u002B 1/szint Hp-t gy\u00F3gy\u00EDt vagy sebez",
+        "id": "Sulyos_sebek_gyogyitasa_/_Sulyos_sebek_okozasa",
+        "nev": "Súlyos sebek gyógyítása / Súlyos sebek okozása",
+        "leiras": "3d8 + 1/szint Hp-t gyógyít vagy sebez",
         "megfordithato": true,
         "variabilis": false
       },
@@ -341,8 +379,9 @@
         "szint": 3,
         "d100_start": 76,
         "d100_end": 80,
-        "nev": "Sz\u00E9lfal",
-        "leiras": "1/szint k\u00F6rig tart\u00F3 sz\u00E9lfallal t\u00E1voltartja a g\u00E1zokat, ny\u00EDlvessz\u0151ket \u00E9s \u00E1tl\u00E9p\u0151ket (Er\u0151pr\u00F3ba)",
+        "id": "Szelfal",
+        "nev": "Szélfal",
+        "leiras": "1/szint körig tartó szélfallal távoltartja a gázokat, nyílvesszőket és átlépőket (Erőpróba)",
         "megfordithato": false,
         "variabilis": false
       },
@@ -350,18 +389,20 @@
         "szint": 3,
         "d100_start": 81,
         "d100_end": 85,
-        "nev": "T\u00E1rgy meglel\u00E9se / T\u00E1rgy elrejt\u00E9se",
-        "leiras": "1/szint k\u00F6rig \u00E9rz\u00E9keli egy bizonyos/\u00E1ltal\u00E1nos t\u00E1rgy jelenl\u00E9t\u00E9t, vagy v\u00E9d a m\u00E1gikus \u00E9rz\u00E9kel\u00E9st\u0151l",
+        "id": "Targy_meglelese_/_Targy_elrejtese",
+        "nev": "Tárgy meglelése / Tárgy elrejtése",
+        "leiras": "1/szint körig érzékeli egy bizonyos/általános tárgy jelenlétét, vagy véd a mágikus érzékeléstől",
         "megfordithato": true,
         "variabilis": false,
-        "komponens": "ekkor 50 at m\u00FAmiapor-\u00F3lom-f\u0171szer kever\u00E9k"
+        "komponens": "ekkor 50 at múmiapor-ólom-fűszer keverék"
       },
       {
         "szint": 3,
         "d100_start": 86,
         "d100_end": 90,
-        "nev": "Vaks\u00E1g/s\u00FCkets\u00E9g / Vaks\u00E1g/s\u00FCkets\u00E9g gy\u00F3gy\u00EDt\u00E1sa",
-        "leiras": "megvak\u00EDt vagy megs\u00FCket\u00EDt egy \u00E1ldozatot, vagy kigy\u00F3gy\u00EDtja ezekb\u0151l",
+        "id": "Vaksag/suketseg_/_Vaksag/suketseg_gyogyitasa",
+        "nev": "Vakság/süketség / Vakság/süketség gyógyítása",
+        "leiras": "megvakít vagy megsüketít egy áldozatot, vagy kigyógyítja ezekből",
         "megfordithato": false,
         "variabilis": true
       },
@@ -369,18 +410,20 @@
         "szint": 3,
         "d100_start": 91,
         "d100_end": 95,
-        "nev": "V\u00E9d\u0151r\u00FAna",
-        "leiras": "v\u00E9delmez\u0151 r\u00FAn\u00E1val l\u00E1t el egy helyet vagy t\u00E1rgyat, k\u00E9t szintenk\u00E9nt 1d8 Hp vagy 1-3. szint\u0171 var\u00E1zslat",
+        "id": "Vedoruna",
+        "nev": "Védőrúna",
+        "leiras": "védelmező rúnával lát el egy helyet vagy tárgyat, két szintenként 1d8 Hp vagy 1-3. szintű varázslat",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "200 at dr\u00E1gak\u0151por"
+        "komponens": "200 at drágakőpor"
       },
       {
         "szint": 3,
         "d100_start": 96,
         "d100_end": 100,
-        "nev": "V\u00EDzalatti l\u00E9gz\u00E9s",
-        "leiras": "1/szint \u00F3r\u00E1ig k\u00E9pess\u00E9 tesz a v\u00EDzalatti l\u00E9gz\u00E9sre",
+        "id": "Vizalatti_legzes",
+        "nev": "Vízalatti légzés",
+        "leiras": "1/szint óráig képessé tesz a vízalatti légzésre",
         "megfordithato": false,
         "variabilis": false
       },
@@ -388,8 +431,9 @@
         "szint": 4,
         "d100_start": 1,
         "d100_end": 10,
-        "nev": "Botb\u00F3l k\u00EDgy\u00F3k",
-        "leiras": "1/szintnyi bot k\u00EDgy\u00F3v\u00E1 v\u00E1ltoztat\u00E1sa, 5%/szint es\u00E9llyel hal\u00E1los m\u00E9rg\u0171ek",
+        "id": "Botbol_kigyok",
+        "nev": "Botból kígyók",
+        "leiras": "1/szintnyi bot kígyóvá változtatása, 5%/szint eséllyel halálos mérgűek",
         "megfordithato": false,
         "variabilis": false
       },
@@ -397,8 +441,9 @@
         "szint": 4,
         "d100_start": 11,
         "d100_end": 20,
-        "nev": "Felruh\u00E1z\u00E1s",
-        "leiras": "papi var\u00E1zslatokat ad \u00E1t egy kijel\u00F6lt szem\u00E9lynek",
+        "id": "Felruhazas",
+        "nev": "Felruházás",
+        "leiras": "papi varázslatokat ad át egy kijelölt személynek",
         "megfordithato": false,
         "variabilis": false
       },
@@ -406,18 +451,20 @@
         "szint": 4,
         "d100_start": 21,
         "d100_end": 45,
-        "nev": "J\u00F3sl\u00E1s",
-        "leiras": "60% \u002B 1%/szint es\u00E9llyel kriptikus v\u00E1laszt ad egy k\u00E9rd\u00E9sre",
+        "id": "Joslas",
+        "nev": "Jóslás",
+        "leiras": "60% + 1%/szint eséllyel kriptikus választ ad egy kérdésre",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "100 at \u00E1ldozati j\u00F3sz\u00E1g \u00E9s f\u00FCst\u00F6l\u0151"
+        "komponens": "100 at áldozati jószág és füstölő"
       },
       {
         "szint": 4,
         "d100_start": 46,
         "d100_end": 60,
-        "nev": "Kritikus sebek gy\u00F3gy\u00EDt\u00E1sa / Kritikus sebek okoz\u00E1sa",
-        "leiras": "4d8 \u002B 1/szint Hp-t gy\u00F3gy\u00EDt vagy sebez",
+        "id": "Kritikus_sebek_gyogyitasa_/_Kritikus_sebek_okozasa",
+        "nev": "Kritikus sebek gyógyítása / Kritikus sebek okozása",
+        "leiras": "4d8 + 1/szint Hp-t gyógyít vagy sebez",
         "megfordithato": true,
         "variabilis": false
       },
@@ -425,18 +472,20 @@
         "szint": 4,
         "d100_start": 61,
         "d100_end": 70,
-        "nev": "Megid\u00E9z\u00E9s",
-        "leiras": "megid\u00E9z egy isteni k\u00FCld\u00F6ttet egy feladat teljes\u00EDt\u00E9s\u00E9re",
+        "id": "Megidezes",
+        "nev": "Megidézés",
+        "leiras": "megidéz egy isteni küldöttet egy feladat teljesítésére",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "v\u00E1ltoz\u00F3 p\u00E9nzbeli fizets\u00E9g"
+        "komponens": "változó pénzbeli fizetség"
       },
       {
         "szint": 4,
         "d100_start": 71,
         "d100_end": 85,
-        "nev": "M\u00E9reg / M\u00E9reg semleges\u00EDt\u00E9se",
-        "leiras": "\u00E9rint\u00E9ssel 2d6/2d6 Eg\u00E9szs\u00E9g t\u00EDpus\u00FA m\u00E9rgez\u00E9st okoz, vagy megsz\u00FCnteti a m\u00E9rgez\u00E9st",
+        "id": "Mereg_/_Mereg_semlegesitese",
+        "nev": "Méreg / Méreg semlegesítése",
+        "leiras": "érintéssel 2d6/2d6 Egészség típusú mérgezést okoz, vagy megszünteti a mérgezést",
         "megfordithato": true,
         "variabilis": false
       },
@@ -444,8 +493,9 @@
         "szint": 4,
         "d100_start": 86,
         "d100_end": 90,
-        "nev": "\u00D6rd\u00F6g\u0171z\u00E9s",
-        "leiras": "megsz\u00FCnteti a d\u00E9moni, m\u00E1gikus, \u00E1tok \u00E1ltali \u00E9s m\u00E1s megsz\u00E1llotts\u00E1got",
+        "id": "ordoguzes",
+        "nev": "Ördögűzés",
+        "leiras": "megszünteti a démoni, mágikus, átok általi és más megszállottságot",
         "megfordithato": false,
         "variabilis": false
       },
@@ -453,8 +503,9 @@
         "szint": 4,
         "d100_start": 91,
         "d100_end": 95,
-        "nev": "\u00DCzenetek k\u00FCld\u00E9se",
-        "leiras": "r\u00F6vid elmebeli \u00FCzenetet k\u00FCld korl\u00E1tlan t\u00E1vols\u00E1gra, v\u00E1lasz lehets\u00E9ges",
+        "id": "uzenetek_kuldese",
+        "nev": "Üzenetek küldése",
+        "leiras": "rövid elmebeli üzenetet küld korlátlan távolságra, válasz lehetséges",
         "megfordithato": false,
         "variabilis": false
       },
@@ -462,8 +513,9 @@
         "szint": 4,
         "d100_start": 96,
         "d100_end": 100,
-        "nev": "V\u00EDz ir\u00E1ny\u00EDt\u00E1sa",
-        "leiras": "10/szint percig 10%/szinttel emelhet\u0151/s\u00FCllyeszthet\u0151 a vizek szintje",
+        "id": "Viz_iranyitasa",
+        "nev": "Víz irányítása",
+        "leiras": "10/szint percig 10%/szinttel emelhető/süllyeszthető a vizek szintje",
         "megfordithato": false,
         "variabilis": false
       },
@@ -471,8 +523,9 @@
         "szint": 5,
         "d100_start": 1,
         "d100_end": 10,
-        "nev": "Eggy\u00E9v\u00E1l\u00E1s",
-        "leiras": "az isten szintenk\u00E9nt egy k\u00E9rd\u00E9sre v\u00E1laszol",
+        "id": "Eggyevalas",
+        "nev": "Eggyéválás",
+        "leiras": "az isten szintenként egy kérdésre válaszol",
         "megfordithato": false,
         "variabilis": false
       },
@@ -480,8 +533,9 @@
         "szint": 5,
         "d100_start": 11,
         "d100_end": 15,
-        "nev": "Felt\u00E1maszt\u00E1s",
-        "leiras": "felt\u00E1maszt egy frissen meghalt l\u00E9nyt",
+        "id": "Feltamasztas",
+        "nev": "Feltámasztás",
+        "leiras": "feltámaszt egy frissen meghalt lényt",
         "megfordithato": false,
         "variabilis": false
       },
@@ -489,8 +543,9 @@
         "szint": 5,
         "d100_start": 16,
         "d100_end": 20,
-        "nev": "Gonosz megsz\u00FCntet\u00E9se / J\u00F3 megsz\u00FCntet\u00E9se",
-        "leiras": "saj\u00E1t s\u00EDkjukra k\u00FCldi vissza a term\u00E9szetfeletti gonosz/j\u00F3 vagy megid\u00E9zett l\u00E9nyeket",
+        "id": "Gonosz_megszuntetese_/_Jo_megszuntetese",
+        "nev": "Gonosz megszüntetése / Jó megszüntetése",
+        "leiras": "saját síkjukra küldi vissza a természetfeletti gonosz/jó vagy megidézett lényeket",
         "megfordithato": true,
         "variabilis": false
       },
@@ -498,8 +553,9 @@
         "szint": 5,
         "d100_start": 21,
         "d100_end": 30,
-        "nev": "Hal\u00E1los ujj",
-        "leiras": "a hal\u00E1lvar\u00E1zs meg\u00F6li az \u00E1ldozatot vagy 3d8 Hp-t sebez rajta",
+        "id": "Halalos_ujj",
+        "nev": "Halálos ujj",
+        "leiras": "a halálvarázs megöli az áldozatot vagy 3d8 Hp-t sebez rajta",
         "megfordithato": false,
         "variabilis": false
       },
@@ -507,8 +563,9 @@
         "szint": 5,
         "d100_start": 31,
         "d100_end": 40,
-        "nev": "Igazl\u00E1t\u00E1s",
-        "leiras": "a maguk val\u00F3j\u00E1ban l\u00E1ttatja a dolgokat",
+        "id": "Igazlatas",
+        "nev": "Igazlátás",
+        "leiras": "a maguk valójában láttatja a dolgokat",
         "megfordithato": false,
         "variabilis": false
       },
@@ -516,8 +573,9 @@
         "szint": 5,
         "d100_start": 41,
         "d100_end": 45,
+        "id": "Az_istenek_ereje",
         "nev": "Az istenek ereje",
-        "leiras": "10 percig 18-as Er\u0151t \u00E9s Eg\u00E9szs\u00E9get, \u002B4 VO-t \u00E9s egy kateg\u00F3ri\u00E1val jobb sebz\u00E9st ad a papnak",
+        "leiras": "10 percig 18-as Erőt és Egészséget, +4 VO-t és egy kategóriával jobb sebzést ad a papnak",
         "megfordithato": false,
         "variabilis": false
       },
@@ -525,8 +583,9 @@
         "szint": 5,
         "d100_start": 46,
         "d100_end": 50,
-        "nev": "A k\u0151 szolg\u00E1lata",
-        "leiras": "botba z\u00E1r egy nagyhatalm\u00FA szellemet; \u002B13 t\u00E1mad\u00E1s, 2d12\u002B3 sebz\u00E9s",
+        "id": "A_ko_szolgalata",
+        "nev": "A kő szolgálata",
+        "leiras": "botba zár egy nagyhatalmú szellemet; +13 támadás, 2d12+3 sebzés",
         "megfordithato": false,
         "variabilis": false
       },
@@ -534,8 +593,9 @@
         "szint": 5,
         "d100_start": 51,
         "d100_end": 65,
-        "nev": "K\u00FCldet\u00E9s",
-        "leiras": "k\u00FCldet\u00E9sre k\u00FCld egy l\u00E9nyt",
+        "id": "Kuldetes",
+        "nev": "Küldetés",
+        "leiras": "küldetésre küld egy lényt",
         "megfordithato": false,
         "variabilis": false
       },
@@ -543,8 +603,9 @@
         "szint": 5,
         "d100_start": 66,
         "d100_end": 75,
-        "nev": "S\u00EDkok k\u00F6z\u00F6tti utaz\u00E1s",
-        "leiras": "legfeljebb h\u00E9t alany egy m\u00E1sik s\u00EDkra vagy az Alvil\u00E1gba utazhat, egyetlen ellenkez\u0151 l\u00E9nyre is elmondhat\u00F3",
+        "id": "Sikok_kozotti_utazas",
+        "nev": "Síkok közötti utazás",
+        "leiras": "legfeljebb hét alany egy másik síkra vagy az Alvilágba utazhat, egyetlen ellenkező lényre is elmondható",
         "megfordithato": false,
         "variabilis": false
       },
@@ -552,8 +613,9 @@
         "szint": 5,
         "d100_start": 76,
         "d100_end": 90,
-        "nev": "T\u0171zcsap\u00E1s",
-        "leiras": "10\u0027 sugar\u00FA k\u00F6rben 6d8 Hp",
+        "id": "Tuzcsapas",
+        "nev": "Tűzcsapás",
+        "leiras": "10' sugarú körben 6d8 Hp",
         "megfordithato": false,
         "variabilis": false
       },
@@ -561,8 +623,9 @@
         "szint": 5,
         "d100_start": 91,
         "d100_end": 100,
-        "nev": "Vezekl\u00E9s",
-        "leiras": "feloldoz\u00E1st ad egy b\u0171n al\u00F3l",
+        "id": "Vezekles",
+        "nev": "Vezeklés",
+        "leiras": "feloldozást ad egy bűn alól",
         "megfordithato": false,
         "variabilis": false
       }
@@ -572,1258 +635,1160 @@
     "tomor": [
       {
         "szint": 0,
-        "nev": "F\u00E9ny",
-        "leiras": "f\u00E1kly\u00E1nak megfelel\u0151 f\u00E9nyt ad 60 \u002B 10/szint percig",
+        "id": "Feny",
+        "nev": "Fény",
+        "leiras": "fáklyának megfelelő fényt ad 60 + 10/szint percig",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 0,
-        "nev": "M\u00E1gia \u00E9rz\u00E9kel\u00E9se",
-        "leiras": "10 percig \u00E9rz\u00E9keli a m\u00E1gikus er\u0151ket \u00E9s var\u00E1zst\u00E1rgyakat",
+        "id": "Magia_erzekelese",
+        "nev": "Mágia érzékelése",
+        "leiras": "10 percig érzékeli a mágikus erőket és varázstárgyakat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 0,
-        "nev": "M\u00E1gia olvas\u00E1sa",
-        "leiras": "10/szint percig k\u00E9pess\u00E9 tesz a m\u00E1gikus sz\u00F6vegek elolvas\u00E1s\u00E1ra",
+        "id": "Magia_olvasasa",
+        "nev": "Mágia olvasása",
+        "leiras": "10/szint percig képessé tesz a mágikus szövegek elolvasására",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 0,
-        "nev": "T\u00E1ncol\u00F3 f\u00E9nyek",
-        "leiras": "2/szint k\u00F6rig 1d6 kicsiny, mozgathat\u00F3 f\u00E9nyforr\u00E1st teremt",
+        "id": "Tancolo_fenyek",
+        "nev": "Táncoló fények",
+        "leiras": "2/szint körig 1d6 kicsiny, mozgatható fényforrást teremt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 0,
-        "nev": "Tr\u00FCkk\u00F6k",
-        "leiras": "1/szint k\u00F6rig kisebb var\u00E1zstr\u00FCkk\u00F6ket alkalmazhat",
+        "id": "Trukkok",
+        "nev": "Trükkök",
+        "leiras": "1/szint körig kisebb varázstrükköket alkalmazhat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 1,
         "d100_end": 10,
-        "nev": "Altat\u00E1s",
-        "leiras": "elaltat 2d4 szintnyi teremtm\u00E9nyt, 5. szintt\u0151l ment\u0151dob\u00E1s dobhat\u00F3",
+        "id": "Altatas",
+        "nev": "Altatás",
+        "leiras": "elaltat 2d4 szintnyi teremtményt, 5. szinttől mentődobás dobható",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 11,
         "d100_end": 18,
-        "nev": "Azonos\u00EDt\u00E1s",
-        "leiras": "meg\u00E1llap\u00EDtja egy t\u00E1rgy m\u00E1gikus funkci\u00F3it, 1 pr\u00F3b\u00E1lkoz\u00E1s/szint",
+        "id": "Azonositas",
+        "nev": "Azonosítás",
+        "leiras": "megállapítja egy tárgy mágikus funkcióit, 1 próbálkozás/szint",
         "megfordithato": false,
         "variabilis": true,
-        "komponens": "100 at gy\u00F6ngy",
-        "opcionalis_komponens": ""
+        "komponens": "100 at gyöngy"
       },
       {
         "szint": 1,
         "d100_start": 19,
         "d100_end": 23,
-        "nev": "F\u00E9lelem okoz\u00E1sa",
-        "leiras": "egy 5. szint alatti l\u00E9ny elmenek\u00FCl 10 percig",
+        "id": "Felelem_okozasa",
+        "nev": "Félelem okozása",
+        "leiras": "egy 5. szint alatti lény elmenekül 10 percig",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 24,
         "d100_end": 28,
-        "nev": "Hasbesz\u00E9l\u00E9s",
-        "leiras": "ir\u00E1ny\u00EDtja a haszn\u00E1l\u00F3 hangj\u00E1t 20 percig",
+        "id": "Hasbeszeles",
+        "nev": "Hasbeszélés",
+        "leiras": "irányítja a használó hangját 20 percig",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 29,
         "d100_end": 36,
-        "nev": "L\u00E1ngol\u00F3 kezek",
-        "leiras": "szintenk\u00E9nt 2 Hp-t sebez, ment\u0151dob\u00E1ssal \u00BD",
+        "id": "Langolo_kezek",
+        "nev": "Lángoló kezek",
+        "leiras": "szintenként 2 Hp-t sebez, mentődobással ½",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 37,
         "d100_end": 42,
-        "nev": "L\u00E1thatatlan szolga",
-        "leiras": "60 \u002B 10/szint percig tart\u00F3 testetlen seg\u00EDt\u0151 er\u0151",
+        "id": "Lathatatlan_szolga",
+        "nev": "Láthatatlan szolga",
+        "leiras": "60 + 10/szint percig tartó testetlen segítő erő",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 43,
         "d100_end": 45,
-        "nev": "L\u00E1thatatlans\u00E1g \u00E9rz\u00E9kel\u00E9se",
-        "leiras": "30 percig \u00E9rz\u00E9keli a l\u00E1thatatlans\u00E1got",
+        "id": "Lathatatlansag_erzekelese",
+        "nev": "Láthatatlanság érzékelése",
+        "leiras": "30 percig érzékeli a láthatatlanságot",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 46,
         "d100_end": 50,
-        "nev": "N\u00F6vel\u00E9s / Zsugor\u00EDt\u00E1s",
-        "leiras": "10/szint percig szintenk\u00E9nt 20%-kal megn\u00F6veli vagy \u00F6sszezsugor\u00EDtja az \u00E9l\u0151l\u00E9nyeket \u00E9s 10%-kal a t\u00E1rgyakat",
+        "id": "Noveles_/_Zsugoritas",
+        "nev": "Növelés / Zsugorítás",
+        "leiras": "10/szint percig szintenként 20%-kal megnöveli vagy összezsugorítja az élőlényeket és 10%-kal a tárgyakat",
         "megfordithato": true,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 51,
         "d100_end": 54,
-        "nev": "Nyxalon m\u00E1gikus aur\u00E1ja",
-        "leiras": "1/szint napig hamis m\u00E1gikus aur\u00E1t ad egy t\u00E1rgynak",
+        "id": "Nyxalon_magikus_auraja",
+        "nev": "Nyxalon mágikus aurája",
+        "leiras": "1/szint napig hamis mágikus aurát ad egy tárgynak",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 55,
         "d100_end": 60,
-        "nev": "Pajzsvar\u00E1zs: 5/szint k\u00F6rig 18-as VO, elnyeli a var\u00E1zsl\u00F6ved\u00E9keket, \u002B2 ment\u0151 m\u00E1gia ellen, 1",
-        "leiras": "3 elnyeli a sugarakat",
+        "id": "Pajzsvarazs",
+        "nev": "Pajzsvarázs",
+        "leiras": "5/szint körig 18-as VO, elnyeli a varázslövedékeket, +2 mentő mágia ellen, elnyeli a sugarakat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 61,
         "d100_end": 63,
-        "nev": "P\u00F3km\u00E1sz\u00E1s",
-        "leiras": "1 \u002B 1/szint k\u00F6rig p\u00F3kszer\u0171 m\u00E1sz\u00E1st tesz lehet\u0151v\u00E9",
+        "id": "Pokmaszas",
+        "nev": "Pókmászás",
+        "leiras": "1 + 1/szint körig pókszerű mászást tesz lehetővé",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 64,
         "d100_end": 67,
-        "nev": "Sokkol\u00F3 \u00E9rint\u00E9s",
-        "leiras": "1d8 \u002B 2/szint Hp sebz\u00E9st okoz, f\u00E9mp\u00E1nc\u00E9lt visel\u0151k\u00F6n 1d8 \u002B 3/szint Hp",
+        "id": "Sokkolo_erintes",
+        "nev": "Sokkoló érintés",
+        "leiras": "1d8 + 2/szint Hp sebzést okoz, fémpáncélt viselőkön 1d8 + 3/szint Hp",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 68,
         "d100_end": 74,
-        "nev": "Szem\u00E9lyi b\u0171b\u00E1j",
-        "leiras": "Intelligenci\u00E1t\u00F3l f\u00FCgg\u0151 ideig elb\u00E1jol egy humanoid l\u00E9nyt",
+        "id": "Szemelyi_bubaj",
+        "nev": "Személyi bűbáj",
+        "leiras": "Intelligenciától függő ideig elbájol egy humanoid lényt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 75,
         "d100_end": 80,
-        "nev": "Tellark lebeg\u0151 korongja",
-        "leiras": "30 \u002B 10/szint percig tart\u00F3 m\u00E1gikus korong 8/szint t\u00E1rgy sz\u00E1ll\u00EDt\u00E1s\u00E1ra",
+        "id": "Tellark_lebego_korongja",
+        "nev": "Tellark lebegő korongja",
+        "leiras": "30 + 10/szint percig tartó mágikus korong 8/szint tárgy szállítására",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 81,
         "d100_end": 84,
-        "nev": "Trollhull\u00E1s",
-        "leiras": "a c\u00E9lpont 1 percig olyan k\u00F6nny\u0171 lesz, mint egy tollpihe",
+        "id": "Trollhullas",
+        "nev": "Trollhullás",
+        "leiras": "a célpont 1 percig olyan könnyű lesz, mint egy tollpihe",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 85,
         "d100_end": 88,
-        "nev": "Ugr\u00E1s",
-        "leiras": "10 percig 30\u0027 t\u00E1vols\u00E1g\u00FA, 10\u0027 magas ugr\u00E1sokat tesz lehet\u0151v\u00E9, 1 \u002B tov\u00E1bbi 2 szintenk\u00E9nt 1 ugr\u00E1s",
+        "id": "Ugras",
+        "nev": "Ugrás",
+        "leiras": "10 percig 30' távolságú, 10' magas ugrásokat tesz lehetővé, 1 + további 2 szintenként 1 ugrás",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 89,
         "d100_end": 96,
-        "nev": "Var\u00E1zsl\u00F6ved\u00E9k",
-        "leiras": "p\u00E1ratlan szintenk\u00E9nt egy biztosan tal\u00E1l\u00F3, 1d4\u002B1 Hp sebz\u00E9s\u0171 l\u00F6ved\u00E9k",
+        "id": "Varazslovedek",
+        "nev": "Varázslövedék",
+        "leiras": "páratlan szintenként egy biztosan találó, 1d4+1 Hp sebzésű lövedék",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 97,
         "d100_end": 100,
-        "nev": "V\u00E9delem a gonoszt\u00F3l / V\u00E9delem a j\u00F3t\u00F3l",
-        "leiras": "10/szint percig \u002B2 VO-t \u00E9s \u002B2 var\u00E1zslatok elleni ment\u0151dob\u00E1st ad, megakad\u00E1lyozza a term\u00E9szetfeletti l\u00E9nyek t\u00E1mad\u00E1sait",
+        "id": "Vedelem_a_gonosztol_/_Vedelem_a_jotol",
+        "nev": "Védelem a gonosztól / Védelem a jótól",
+        "leiras": "10/szint percig +2 VO-t és +2 varázslatok elleni mentődobást ad, megakadályozza a természetfeletti lények támadásait",
         "megfordithato": true,
         "variabilis": false,
-        "komponens": "szenteltv\u00EDz",
-        "opcionalis_komponens": ""
+        "komponens": "szenteltvíz"
       },
       {
         "szint": 2,
         "d100_start": 1,
         "d100_end": 4,
-        "nev": "Er\u0151",
-        "leiras": "18-as Er\u0151t ad 10/szint percig",
+        "id": "Ero",
+        "nev": "Erő",
+        "leiras": "18-as Erőt ad 10/szint percig",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 5,
         "d100_end": 7,
-        "nev": "Fantomk\u00E9z",
-        "leiras": "k\u00F6zepes t\u00E1vra el\u00E9r\u0151 testetlen kezet teremt 30 percig",
+        "id": "Fantomkez",
+        "nev": "Fantomkéz",
+        "leiras": "közepes távra elérő testetlen kezet teremt 30 percig",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 8,
         "d100_end": 15,
-        "nev": "Gondolatok \u00E9rz\u00E9kel\u00E9se",
-        "leiras": "\u00E9rz\u00E9keli az aktu\u00E1lis gondolatokat, 1 pr\u00F3b\u00E1lkoz\u00E1s/szint",
+        "id": "Gondolatok_erzekelese",
+        "nev": "Gondolatok érzékelése",
+        "leiras": "érzékeli az aktuális gondolatokat, 1 próbálkozás/szint",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 16,
         "d100_end": 19,
-        "nev": "Gyeng\u00EDt\u0151 sug\u00E1r",
-        "leiras": "2d6-tal cs\u00F6kkenti a c\u00E9lpont Erej\u00E9t",
+        "id": "Gyengito_sugar",
+        "nev": "Gyengítő sugár",
+        "leiras": "2d6-tal csökkenti a célpont Erejét",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 20,
         "d100_end": 27,
+        "id": "Hipnotikus_minta",
         "nev": "Hipnotikus minta",
-        "leiras": "fogvatart 6 \u002B 1/szint szintnyi teremtm\u00E9nyt",
+        "leiras": "fogvatart 6 + 1/szint szintnyi teremtményt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 28,
         "d100_end": 31,
-        "nev": "K\u00E9sleltetett kimer\u00FCl\u00E9s",
-        "leiras": "\u00F3lmos f\u00E1radts\u00E1got okoz 10 perc \u00E9s 1/szint \u00F3ra k\u00F6z\u00F6tti v\u00E1lasztott id\u0151pontban",
+        "id": "Kesleltetett_kimerules",
+        "nev": "Késleltetett kimerülés",
+        "leiras": "ólmos fáradtságot okoz 10 perc és 1/szint óra közötti választott időpontban",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 32,
         "d100_end": 38,
-        "nev": "Kopogtat\u00E1s / Kapu lez\u00E1r\u00E1sa",
-        "leiras": "felt\u00E1rja a bez\u00E1rt ajt\u00F3kat, vagy 1 \u00F3r\u00E1ig lez\u00E1rja azokat",
+        "id": "Kopogtatas_/_Kapu_lezarasa",
+        "nev": "Kopogtatás / Kapu lezárása",
+        "leiras": "feltárja a bezárt ajtókat, vagy 1 óráig lezárja azokat",
         "megfordithato": true,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 39,
         "d100_end": 46,
-        "nev": "L\u00E1ngol\u00F3 g\u00F6mb",
-        "leiras": "1d6\u002B 3/szint Hp sebz\u00E9s\u0171 g\u00F6mb, 1/szint k\u00F6rig",
+        "id": "Langolo_gomb",
+        "nev": "Lángoló gömb",
+        "leiras": "1d6+ 3/szint Hp sebzésű gömb, 1/szint körig",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 47,
         "d100_end": 53,
-        "nev": "Levit\u00E1ci\u00F3",
-        "leiras": "10/szint percig f\u00FCgg\u0151leges mozg\u00E1st tesz lehet\u0151v\u00E9, m\u00E1sokon legfeljebb 30\u0027",
+        "id": "Levitacio",
+        "nev": "Levitáció",
+        "leiras": "10/szint percig függőleges mozgást tesz lehetővé, másokon legfeljebb 30'",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 54,
         "d100_end": 59,
-        "nev": "Mjoln savas l\u00F6ved\u00E9ke",
-        "leiras": "p\u00E1ratlan szintenk\u00E9nt 1 k\u00F6rig 2d4 Hp, 3. k\u00F6rt\u0151l k\u00F6nny\u0171, 4. k\u00F6rt\u0151l neh\u00E9z v\u00E9rtekre is vesz\u00E9lyes",
+        "id": "Mjoln_savas_lovedeke",
+        "nev": "Mjoln savas lövedéke",
+        "leiras": "páratlan szintenként 1 körig 2d4 Hp, 3. körtől könnyű, 4. körtől nehéz vértekre is veszélyes",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 60,
         "d100_end": 62,
-        "nev": "Nyelvek besz\u00E9l\u00E9se",
-        "leiras": "1/szint f\u0151 1/szint \u00F3r\u00E1ig meg\u00E9rti az idegen nyelveket",
+        "id": "Nyelvek_beszelese",
+        "nev": "Nyelvek beszélése",
+        "leiras": "1/szint fő 1/szint óráig megérti az idegen nyelveket",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 63,
         "d100_end": 65,
-        "nev": "\u00D6r\u00F6k f\u00E9ny / \u00D6r\u00F6k s\u00F6t\u00E9ts\u00E9g",
-        "leiras": "30\u0027 sugar\u00FA k\u00F6rben \u00F6r\u00F6k f\u00E9nyt vagy s\u00F6t\u00E9ts\u00E9get teremt",
+        "id": "orok_feny_/_orok_sotetseg",
+        "nev": "Örök fény / Örök sötétség",
+        "leiras": "30' sugarú körben örök fényt vagy sötétséget teremt",
         "megfordithato": true,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 66,
         "d100_end": 69,
-        "nev": "P\u00F3kh\u00E1l\u00F3",
-        "leiras": "20/szint percig tart\u00F3 p\u00F3kh\u00E1l\u00F3, szabadul\u00E1s Neh\u00E9z Er\u0151pr\u00F3b\u00E1val vagy Neh\u00E9z Szabadul\u00F3m\u0171v\u00E9szettel",
+        "id": "Pokhalo",
+        "nev": "Pókháló",
+        "leiras": "20/szint percig tartó pókháló, szabadulás Nehéz Erőpróbával vagy Nehéz Szabadulóművészettel",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 70,
         "d100_end": 72,
-        "nev": "Reverzi\u00F3",
-        "leiras": "visszatart egy 6. szint alatti c\u00E9lpontot 2/szint k\u00F6rig",
+        "id": "Reverzio",
+        "nev": "Reverzió",
+        "leiras": "visszatart egy 6. szint alatti célpontot 2/szint körig",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 73,
         "d100_end": 77,
-        "nev": "Sz\u00E9lroham",
-        "leiras": "sz\u00E9ll\u00F6k\u00E9ssel kioltja a l\u00E1ngokat \u00E9s led\u00F6nti vagy elf\u00FAjja az ellenfeleket",
+        "id": "Szelroham",
+        "nev": "Szélroham",
+        "leiras": "széllökéssel kioltja a lángokat és ledönti vagy elfújja az ellenfeleket",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 78,
         "d100_end": 80,
-        "nev": "Tar-Narog rettent\u0151 nevet\u00E9se",
-        "leiras": "1/szint k\u00F6rre harck\u00E9ptelenn\u00E9 tesz egy l\u00E9nyt",
+        "id": "Tar-Narog_rettento_nevetese",
+        "nev": "Tar-Narog rettentő nevetése",
+        "leiras": "1/szint körre harcképtelenné tesz egy lényt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 81,
         "d100_end": 84,
-        "nev": "T\u00E1rgy meglel\u00E9se / T\u00E1rgy elrejt\u00E9se",
-        "leiras": "1/szint k\u00F6rig \u00E9rz\u00E9keli egy bizonyos/\u00E1ltal\u00E1nos t\u00E1rgy jelenl\u00E9t\u00E9t, vagy v\u00E9d a m\u00E1gikus \u00E9rz\u00E9kel\u00E9st\u0151l",
+        "id": "Targy_meglelese_/_Targy_elrejtese",
+        "nev": "Tárgy meglelése / Tárgy elrejtése",
+        "leiras": "1/szint körig érzékeli egy bizonyos/általános tárgy jelenlétét, vagy véd a mágikus érzékeléstől",
         "megfordithato": true,
         "variabilis": false,
-        "komponens": "ut\u00F3bbira  50 at m\u00FAmiapor-\u00F3lom-f\u0171szer kever\u00E9k",
-        "opcionalis_komponens": ""
+        "komponens": "utóbbira  50 at múmiapor-ólom-fűszer keverék"
       },
       {
         "szint": 2,
         "d100_start": 85,
         "d100_end": 88,
-        "nev": "T\u00E1rgyak \u00E1talak\u00EDt\u00E1sa",
-        "leiras": "m\u00E1s t\u00E1rggy\u00E1 alak\u00EDt 1/3 szintnyi k\u00F6z\u00F6ns\u00E9ges t\u00E1rgyat",
+        "id": "Targyak_atalakitasa",
+        "nev": "Tárgyak átalakítása",
+        "leiras": "más tárggyá alakít 1/3 szintnyi közönséges tárgyat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 89,
         "d100_end": 95,
-        "nev": "T\u00FCk\u00F6rk\u00E9pm\u00E1s",
-        "leiras": "2/szint k\u00F6rig 1d4 \u002B 1/3 szintnyi ill\u00FAzi\u00F3k\u00E9pm\u00E1st teremt",
+        "id": "Tukorkepmas",
+        "nev": "Tükörképmás",
+        "leiras": "2/szint körig 1d4 + 1/3 szintnyi illúzióképmást teremt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 96,
         "d100_end": 100,
-        "nev": "Var\u00E1zssz\u00E1j",
-        "leiras": "bizonyos felt\u00E9telek teljes\u00FCl\u00E9sekor megsz\u00F3lal\u00F3 testetlen sz\u00E1j",
+        "id": "Varazsszaj",
+        "nev": "Varázsszáj",
+        "leiras": "bizonyos feltételek teljesülésekor megszólaló testetlen száj",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "10 at j\u00E1depor",
-        "opcionalis_komponens": "200 at j\u00E1deporral permanens"
+        "komponens": "10 at jádepor",
+        "opcionalis_komponens": "200 at jádeporral permanens"
       },
       {
         "szint": 3,
         "d100_start": 1,
         "d100_end": 4,
-        "nev": "B\u00E9n\u00EDt\u00E1s",
-        "leiras": "1-3 humanoid leb\u00E9n\u00EDt\u00E1sa 4 \u002B 1/szint k\u00F6rre (-2/-1/0 levon\u00E1s\u00FA ment\u0151vel)",
+        "id": "Benitas",
+        "nev": "Bénítás",
+        "leiras": "1-3 humanoid lebénítása 4 + 1/szint körre (-2/-1/0 levonású mentővel)",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 5,
         "d100_end": 7,
-        "nev": "Ellinger eml\u00E9kezetveszt\u00E9se",
-        "leiras": "a c\u00E9lpont 2/szint k\u00F6rig k\u00F6r\u00F6nk\u00E9nt elvesz\u00EDti egy memoriz\u00E1lt var\u00E1zslat\u00E1t, vagy cselekv\u00E9s\u00E9t",
+        "id": "Ellinger_emlekezetvesztese",
+        "nev": "Ellinger emlékezetvesztése",
+        "leiras": "a célpont 2/szint körig körönként elveszíti egy memorizált varázslatát, vagy cselekvését",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 8,
         "d100_end": 11,
-        "nev": "G\u00E1zforma",
-        "leiras": "az alany g\u00E1zz\u00E1 alakul 1/szint percig",
+        "id": "Gazforma",
+        "nev": "Gázforma",
+        "leiras": "az alany gázzá alakul 1/szint percig",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 12,
         "d100_end": 15,
-        "nev": "Gonoszt\u00F3l v\u00E9d\u0151 k\u00F6r / J\u00F3t\u00F3l v\u00E9d\u0151 k\u00F6r",
-        "leiras": "f\u00F6ldre rajzolt v\u00E9delmez\u0151 k\u00F6rrel t\u00E1voltartja vagy beb\u00F6rt\u00F6nzi a term\u00E9szetfeletti gonosz vagy megid\u00E9zett l\u00E9nyeket",
+        "id": "Gonosztol_vedo_kor_/_Jotol_vedo_kor",
+        "nev": "Gonosztól védő kör / Jótól védő kör",
+        "leiras": "földre rajzolt védelmező körrel távoltartja vagy bebörtönzi a természetfeletti gonosz vagy megidézett lényeket",
         "megfordithato": true,
         "variabilis": false,
-        "komponens": "szenteltv\u00EDz",
-        "opcionalis_komponens": "200 at ez\u00FCstporral permanens"
+        "komponens": "szenteltvíz",
+        "opcionalis_komponens": "200 at ezüstporral permanens"
       },
       {
         "szint": 3,
         "d100_start": 16,
         "d100_end": 20,
-        "nev": "Gyors\u00EDt\u00E1s / Lass\u00EDt\u00E1s",
-        "leiras": "3 \u002B 1/szint k\u00F6rig extra mozg\u00E1st \u00E9s t\u00E1mad\u00E1st ad, vagy fel\u00E9re lass\u00EDtja, megterheli \u00E9s egy t\u00E1mad\u00E1sra reduk\u00E1lja \u00E1ldozatait",
+        "id": "Gyorsitas_/_Lassitas",
+        "nev": "Gyorsítás / Lassítás",
+        "leiras": "3 + 1/szint körig extra mozgást és támadást ad, vagy felére lassítja, megterheli és egy támadásra redukálja áldozatait",
         "megfordithato": true,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 21,
         "d100_end": 25,
-        "nev": "Holtak anim\u00E1l\u00E1sa",
-        "leiras": "megeleven\u00EDt szint*2 szintnyi \u00E9l\u0151halottat",
+        "id": "Holtak_animalasa",
+        "nev": "Holtak animálása",
+        "leiras": "megelevenít szint*2 szintnyi élőhalottat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 26,
         "d100_end": 28,
-        "nev": "A k\u00EDgy\u00F3 jele",
-        "leiras": "az \u00EDr\u00E1sokban elrejtett v\u00E9d\u0151jel 1d4 \u002B 1/szint h\u00E9tig megb\u00E9n\u00EDtja \u00E1ldozat\u00E1t",
+        "id": "A_kigyo_jele",
+        "nev": "A kígyó jele",
+        "leiras": "az írásokban elrejtett védőjel 1d4 + 1/szint hétig megbénítja áldozatát",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "200 at egzotikus gyantapor",
-        "opcionalis_komponens": ""
+        "komponens": "200 at egzotikus gyantapor"
       },
       {
         "szint": 3,
         "d100_start": 29,
         "d100_end": 32,
-        "nev": "Kisebb ill\u00FAzi\u00F3",
-        "leiras": "egyszer\u0171 k\u00E9pi ill\u00FAzi\u00F3kat teremt",
+        "id": "Kisebb_illuzio",
+        "nev": "Kisebb illúzió",
+        "leiras": "egyszerű képi illúziókat teremt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 33,
         "d100_end": 35,
-        "nev": "L\u00E1thatatlans\u00E1g",
-        "leiras": "10/szint percig l\u00E1thatatlann\u00E1 teszi a c\u00E9lpontot, t\u00E1mad\u00E1ssal megsz\u0171nik",
+        "id": "Lathatatlansag",
+        "nev": "Láthatatlanság",
+        "leiras": "10/szint percig láthatatlanná teszi a célpontot, támadással megszűnik",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 36,
         "d100_end": 41,
-        "nev": "M\u00E1gia megsz\u00FCntet\u00E9se",
-        "leiras": "megsz\u00FCnteti a m\u00E1gikus hat\u00E1sokat \u00E9s var\u00E1zslatokat",
+        "id": "Magia_megszuntetese",
+        "nev": "Mágia megszüntetése",
+        "leiras": "megszünteti a mágikus hatásokat és varázslatokat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 42,
         "d100_end": 45,
-        "nev": "Mjoln multiplik\u00E1lt l\u00F6ved\u00E9kei",
-        "leiras": "1/szint apr\u00F3 t\u0171zg\u00F6mb\u00F6t haj\u00EDthat el, sebz\u00E9s\u00FCk 1d4 \u002B szint/2 Hp",
+        "id": "Mjoln_multiplikalt_lovedekei",
+        "nev": "Mjoln multiplikált lövedékei",
+        "leiras": "1/szint apró tűzgömböt hajíthat el, sebzésük 1d4 + szint/2 Hp",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 46,
         "d100_end": 49,
-        "nev": "Rep\u00FCl\u00E9s",
-        "leiras": "1d6*10 \u002B 10/szint percig tart\u00F3 rep\u00FCl\u00E9s",
+        "id": "Repules",
+        "nev": "Repülés",
+        "leiras": "1d6*10 + 10/szint percig tartó repülés",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 50,
         "d100_end": 52,
-        "nev": "Robban\u00F3 r\u00FAn\u00E1k",
-        "leiras": "elolvasva 6d6 Hp-t sebz\u0151 m\u00E1gikus \u00EDr\u00E1sjelek",
+        "id": "Robbano_runak",
+        "nev": "Robbanó rúnák",
+        "leiras": "elolvasva 6d6 Hp-t sebző mágikus írásjelek",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 53,
         "d100_end": 56,
+        "id": "Sugallat",
         "nev": "Sugallat",
-        "leiras": "1 \u002B 1/szint \u00F3r\u00E1n bel\u00FCl aktiv\u00E1l\u00F3d\u00F3 sugallatot \u00FCltet a c\u00E9lpont fej\u00E9be",
+        "leiras": "1 + 1/szint órán belül aktiválódó sugallatot ültet a célpont fejébe",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 57,
         "d100_end": 58,
-        "nev": "Sz\u00E9lfal",
-        "leiras": "1/szint k\u00F6rig tart\u00F3 sz\u00E9lfallal t\u00E1voltartja a g\u00E1zokat, ny\u00EDlvessz\u0151ket \u00E9s \u00E1tl\u00E9p\u0151ket (Er\u0151pr\u00F3ba)",
+        "id": "Szelfal",
+        "nev": "Szélfal",
+        "leiras": "1/szint körig tartó szélfallal távoltartja a gázokat, nyílvesszőket és átlépőket (Erőpróba)",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 59,
         "d100_end": 62,
-        "nev": "Sz\u00F6rnyid\u00E9z\u00E9s I.",
-        "leiras": "1d6 els\u0151 szint\u0171 sz\u00F6rnyet id\u00E9z 10 percre",
+        "id": "Szornyidezes_I.",
+        "nev": "Szörnyidézés I.",
+        "leiras": "1d6 első szintű szörnyet idéz 10 percre",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 63,
         "d100_end": 65,
-        "nev": "Tar-Narog t\u00E9bolyult tarantell\u00E1ja",
-        "leiras": "3d6 k\u00F6rig tart\u00F3 \u00F6nk\u00E9ntelen t\u00E1ncra \u00F6szt\u00F6k\u00E9l egy c\u00E9lpontot, 1d4 Hp/k\u00F6r",
+        "id": "Tar-Narog_tebolyult_tarantellaja",
+        "nev": "Tar-Narog tébolyult tarantellája",
+        "leiras": "3d6 körig tartó önkéntelen táncra ösztökél egy célpontot, 1d4 Hp/kör",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 66,
         "d100_end": 71,
-        "nev": "T\u00E1voll\u00E1t\u00E1s/hall\u00E1s",
-        "leiras": "t\u00E1voli helyek 10 percig tart\u00F3 megfigyel\u00E9se",
+        "id": "Tavollatas/hallas",
+        "nev": "Távollátás/hallás",
+        "leiras": "távoli helyek 10 percig tartó megfigyelése",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 72,
         "d100_end": 78,
-        "nev": "T\u0171zgoly\u00F3",
-        "leiras": "1d6/szint Hp sebz\u00E9st okoz\u00F3 t\u00FCzes robban\u00E1s 20\u0027 k\u00F6rben, ment\u0151dob\u00E1ssal \u00BD",
+        "id": "Tuzgolyo",
+        "nev": "Tűzgolyó",
+        "leiras": "1d6/szint Hp sebzést okozó tüzes robbanás 20' körben, mentődobással ½",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 79,
         "d100_end": 83,
-        "nev": "V\u00E1mpirikus \u00E9rint\u00E9s",
-        "leiras": "1d6 Hp/k\u00E9t szint sebz\u00E9s, ami a var\u00E1zsl\u00F3t gy\u00F3gy\u00EDtja",
+        "id": "Vampirikus_erintes",
+        "nev": "Vámpirikus érintés",
+        "leiras": "1d6 Hp/két szint sebzés, ami a varázslót gyógyítja",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 84,
         "d100_end": 87,
-        "nev": "V\u00E9delem a k\u00F6z\u00F6ns\u00E9ges l\u00F6ved\u00E9kekt\u0151l",
-        "leiras": "1 \u00F3r\u00E1ig megv\u00E9d a norm\u00E1lis m\u00E9ret\u0171 l\u00F6ved\u00E9kekt\u0151l, a nagyokra kock\u00E1nk\u00E9nt -2 Hp",
+        "id": "Vedelem_a_kozonseges_lovedekektol",
+        "nev": "Védelem a közönséges lövedékektől",
+        "leiras": "1 óráig megvéd a normális méretű lövedékektől, a nagyokra kockánként -2 Hp",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 88,
         "d100_end": 93,
-        "nev": "Vill\u00E1m",
-        "leiras": "1d6/szint Hp sebz\u00E9st okoz\u00F3 vill\u00E1mnyal\u00E1b, ment\u0151dob\u00E1ssal \u00BD",
+        "id": "Villam",
+        "nev": "Villám",
+        "leiras": "1d6/szint Hp sebzést okozó villámnyaláb, mentődobással ½",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 94,
         "d100_end": 96,
-        "nev": "V\u00EDzalatti l\u00E9gz\u00E9s",
-        "leiras": "1/szint \u00F3r\u00E1ig k\u00E9pess\u00E9 tesz a v\u00EDzalatti l\u00E9gz\u00E9sre",
+        "id": "Vizalatti_legzes",
+        "nev": "Vízalatti légzés",
+        "leiras": "1/szint óráig képessé tesz a vízalatti légzésre",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 97,
         "d100_end": 100,
-        "nev": "Yeloun \u00E9rint\u00E9se",
-        "leiras": "t\u00E1volb\u00F3l 10%/k\u00F6r kumulat\u00EDv es\u00E9llyel megfojtja a c\u00E9lpontot; 5%/k\u00F6r kumulat\u00EDv es\u00E9llyel a var\u00E1zsl\u00F3t",
+        "id": "Yeloun_erintese",
+        "nev": "Yeloun érintése",
+        "leiras": "távolból 10%/kör kumulatív eséllyel megfojtja a célpontot; 5%/kör kumulatív eséllyel a varázslót",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 1,
         "d100_end": 8,
-        "nev": "\u00C1tok / \u00C1tok elt\u00E1vol\u00EDt\u00E1sa",
-        "leiras": "meg\u00E1tkoz egy l\u00E9nyt, vagy megsz\u00FCntet egy \u00E1tkot",
+        "id": "atok_/_atok_eltavolitasa",
+        "nev": "Átok / Átok eltávolítása",
+        "leiras": "megátkoz egy lényt, vagy megszüntet egy átkot",
         "megfordithato": true,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 9,
         "d100_end": 13,
-        "nev": "Dimenzi\u00F3ajt\u00F3",
-        "leiras": "teleport\u00E1ci\u00F3s var\u00E1zslat 100\u0027 hat\u00F3t\u00E1von bel\u00FCl, \u002B8 t\u00E1rgy/szintet vihet mag\u00E1val",
+        "id": "Dimenzioajto",
+        "nev": "Dimenzióajtó",
+        "leiras": "teleportációs varázslat 100' hatótávon belül, +8 tárgy/szintet vihet magával",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 14,
         "d100_end": 18,
-        "nev": "F\u00E9lelem",
-        "leiras": "1/szint k\u00F6rig p\u00E1nikszer\u0171 retteg\u00E9st okoz a c\u00E9lpontokban",
+        "id": "Felelem",
+        "nev": "Félelem",
+        "leiras": "1/szint körig pánikszerű rettegést okoz a célpontokban",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 19,
         "d100_end": 21,
-        "nev": "Ill\u00FAzi\u00F3fal",
-        "leiras": "permanens ill\u00FAzi\u00F3falat teremt",
+        "id": "Illuziofal",
+        "nev": "Illúziófal",
+        "leiras": "permanens illúziófalat teremt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 22,
         "d100_end": 27,
-        "nev": "J\u00E9gfal",
-        "leiras": "15 \u002B 2 Hp/szint er\u0151ss\u00E9g\u0171 fal, \u00E1tt\u00F6r\u00E9skor 2 Hp/szint sebz\u00E9ssel, led\u00F6ntve j\u00E9gvihar",
+        "id": "Jegfal",
+        "nev": "Jégfal",
+        "leiras": "15 + 2 Hp/szint erősségű fal, áttöréskor 2 Hp/szint sebzéssel, ledöntve jégvihar",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 28,
         "d100_end": 34,
-        "nev": "J\u00E9gvihar",
-        "leiras": "3d10 Hp sebz\u00E9s\u0171 j\u00E9gz\u00E1por",
+        "id": "Jegvihar",
+        "nev": "Jégvihar",
+        "leiras": "3d10 Hp sebzésű jégzápor",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 35,
         "d100_end": 37,
-        "nev": "Ki\u00E1lt\u00E1s",
-        "leiras": "5d6 Hp sebz\u00E9st \u00E9s 1d6\u002B6 k\u00F6rig s\u00FCkets\u00E9get okoz",
+        "id": "Kialtas",
+        "nev": "Kiáltás",
+        "leiras": "5d6 Hp sebzést és 1d6+6 körig süketséget okoz",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 38,
         "d100_end": 40,
-        "nev": "A k\u0151 szolg\u00E1lata",
-        "leiras": "botba z\u00E1r egy nagyhatalm\u00FA szellemet; \u002B13 t\u00E1mad\u00E1s, 2d12\u002B3 sebz\u00E9s",
+        "id": "A_ko_szolgalata",
+        "nev": "A kő szolgálata",
+        "leiras": "botba zár egy nagyhatalmú szellemet; +13 támadás, 2d12+3 sebzés",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 41,
         "d100_end": 43,
-        "nev": "M\u00E1gikus fegyver",
-        "leiras": "1 \u00F3r\u00E1ig \u002B1-es m\u00E1gi\u00E1val l\u00E1t el 1 \u002B \u00BD szint fegyvert, fel\u00E9re koncentr\u00E1lva \u002B2-es",
+        "id": "Magikus_fegyver",
+        "nev": "Mágikus fegyver",
+        "leiras": "1 óráig +1-es mágiával lát el 1 + ½ szint fegyvert, felére koncentrálva +2-es",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": "ekkor 300 at ritkaf\u00E9m hangvilla"
+        "opcionalis_komponens": "ekkor 300 at ritkafém hangvilla"
       },
       {
         "szint": 4,
         "d100_start": 44,
         "d100_end": 49,
-        "nev": "\u00D6sszezavar\u00E1s",
-        "leiras": "2d4 l\u00E9ny 10 percig v\u00E9letlenszer\u0171en cselekszik",
+        "id": "osszezavaras",
+        "nev": "Összezavarás",
+        "leiras": "2d4 lény 10 percig véletlenszerűen cselekszik",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 50,
         "d100_end": 56,
-        "nev": "Polimorfiz\u00E1ci\u00F3",
-        "leiras": "szem\u00E9lyek \u00E1tv\u00E1ltoztat\u00E1sa m\u00E1s teremtm\u00E9nyekk\u00E9, var\u00E1zsl\u00F3n 2 \u00F3ra, m\u00E1sokon v\u00E9gleges",
+        "id": "Polimorfizacio",
+        "nev": "Polimorfizáció",
+        "leiras": "személyek átváltoztatása más teremtményekké, varázslón 2 óra, másokon végleges",
         "megfordithato": false,
-        "variabilis": true,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": true
       },
       {
         "szint": 4,
         "d100_start": 57,
         "d100_end": 62,
-        "nev": "A sebezhetetlens\u00E9g kisebb g\u00F6mbje",
-        "leiras": "10 percig megv\u00E9d a 3. vagy alacsonyabb szint\u0171 var\u00E1zslatokt\u00F3l",
+        "id": "A_sebezhetetlenseg_kisebb_gombje",
+        "nev": "A sebezhetetlenség kisebb gömbje",
+        "leiras": "10 percig megvéd a 3. vagy alacsonyabb szintű varázslatoktól",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 63,
         "d100_end": 67,
-        "nev": "Sz\u00F6rnyek elb\u0171v\u00F6l\u00E9se",
-        "leiras": "Intelligenci\u00E1t\u00F3l f\u00FCgg\u0151 ideig elb\u00E1jol egy tetsz\u0151leges l\u00E9nyt",
+        "id": "Szornyek_elbuvolese",
+        "nev": "Szörnyek elbűvölése",
+        "leiras": "Intelligenciától függő ideig elbájol egy tetszőleges lényt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 68,
         "d100_end": 72,
-        "nev": "Sz\u00F6rnyid\u00E9z\u00E9s II.",
-        "leiras": "1d6 m\u00E1sodik vagy 2d6 els\u0151 szint\u0171 sz\u00F6rnyet id\u00E9z 20 percre",
+        "id": "Szornyidezes_II.",
+        "nev": "Szörnyidézés II.",
+        "leiras": "1d6 második vagy 2d6 első szintű szörnyet idéz 20 percre",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 73,
         "d100_end": 74,
-        "nev": "A t\u00F6k\u00E9letlen tart\u00F3s\u00EDt\u00E1s",
-        "leiras": "5 \u00E9vig tart\u00F3 transzba helyezi a c\u00E9lpontot",
+        "id": "A_tokeletlen_tartositas",
+        "nev": "A tökéletlen tartósítás",
+        "leiras": "5 évig tartó transzba helyezi a célpontot",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "500\u002B at \u00E9rt\u00E9k\u0171 op\u00E1l",
-        "opcionalis_komponens": ""
+        "komponens": "500+ at értékű opál"
       },
       {
         "szint": 4,
         "d100_start": 75,
         "d100_end": 77,
-        "nev": "T\u00F6meges \u00E1tv\u00E1ltoztat\u00E1s",
-        "leiras": "megsz\u00FCntet\u00E9sig f\u00E1nak \u00E1lc\u00E1z 10/szintnyi humanoidot",
+        "id": "Tomeges_atvaltoztatas",
+        "nev": "Tömeges átváltoztatás",
+        "leiras": "megszüntetésig fának álcáz 10/szintnyi humanoidot",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 78,
         "d100_end": 81,
-        "nev": "T\u0171zb\u0171b\u00E1j",
-        "leiras": "3 \u00F3r\u00E1ig elb\u00E1jolja a m\u00E1gikus t\u0171zbe tekint\u0151ket, \u00E9rz\u00E9kenny\u00E9 tesz a sugallatokra",
+        "id": "Tuzbubaj",
+        "nev": "Tűzbűbáj",
+        "leiras": "3 óráig elbájolja a mágikus tűzbe tekintőket, érzékennyé tesz a sugallatokra",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "",
         "opcionalis_komponens": "500 at szentelt viasszal permanens"
       },
       {
         "szint": 4,
         "d100_start": 82,
         "d100_end": 86,
-        "nev": "T\u0171zcsapda",
-        "leiras": "t\u00E1rgyakra helyezett csapda, 1d4 \u002B 2 Hp/szint, Reflex \u00BD",
+        "id": "Tuzcsapda",
+        "nev": "Tűzcsapda",
+        "leiras": "tárgyakra helyezett csapda, 1d4 + 2 Hp/szint, Reflex ½",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "25 at aranypor",
-        "opcionalis_komponens": ""
+        "komponens": "25 at aranypor"
       },
       {
         "szint": 4,
         "d100_start": 87,
         "d100_end": 92,
-        "nev": "T\u0171zfal",
-        "leiras": "10 percig tart\u00F3 t\u0171zfalat emel, \u00E1tl\u00E9pve 4d4 \u002B 2/szint Hp, 5\u0027 k\u00F6zelben 2d4 Hp/k\u00F6r, 10\u0027 k\u00F6zelben 1d4 Hp/k\u00F6r",
+        "id": "Tuzfal",
+        "nev": "Tűzfal",
+        "leiras": "10 percig tartó tűzfalat emel, átlépve 4d4 + 2/szint Hp, 5' közelben 2d4 Hp/kör, 10' közelben 1d4 Hp/kör",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 93,
         "d100_end": 97,
-        "nev": "T\u0171zpajzs / Fagypajzs",
-        "leiras": "megv\u00E9d a t\u0171zt\u0151l/fagyt\u00F3l \u00E9s megdupl\u00E1zva visszaveri a k\u00F6zelharci sebz\u00E9st",
+        "id": "Tuzpajzs_/_Fagypajzs",
+        "nev": "Tűzpajzs / Fagypajzs",
+        "leiras": "megvéd a tűztől/fagytól és megduplázva visszaveri a közelharci sebzést",
         "megfordithato": true,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 98,
         "d100_end": 100,
-        "nev": "Var\u00E1zsszem",
-        "leiras": "10 percig ir\u00E1ny\u00EDthat\u00F3 m\u00E1gikus szem",
+        "id": "Varazsszem",
+        "nev": "Varázsszem",
+        "leiras": "10 percig irányítható mágikus szem",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 1,
         "d100_end": 5,
-        "nev": "\u00C1lom",
-        "leiras": "\u00E1lmot vagy 1d10 Hp-t sebz\u0151 r\u00E9m\u00E1lmokat k\u00FCld egy kiv\u00E1lasztott \u00E1lmod\u00F3nak",
+        "id": "alom",
+        "nev": "Álom",
+        "leiras": "álmot vagy 1d10 Hp-t sebző rémálmokat küld egy kiválasztott álmodónak",
         "megfordithato": false,
-        "variabilis": true,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": true
       },
       {
         "szint": 5,
         "d100_start": 6,
         "d100_end": 8,
-        "nev": "\u00C1rnyak megid\u00E9z\u00E9se",
-        "leiras": "minden 5. f\u00F6l\u00F6tti szint\u00E9rt megid\u00E9z egy \u00E1rnyat 10/szint percig",
+        "id": "arnyak_megidezese",
+        "nev": "Árnyak megidézése",
+        "leiras": "minden 5. fölötti szintért megidéz egy árnyat 10/szint percig",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 9,
         "d100_end": 11,
-        "nev": "Bel-Naz\u00EDr v\u00E9delmez\u0151 keze",
-        "leiras": "a var\u00E1zsl\u00F3val azonos Hp-j\u0171, hatalmas k\u00E9z megakad\u00E1lyozza a k\u00F6zel\u00EDt\u00E9st \u00E9s fizikai t\u00E1mad\u00E1sokat",
+        "id": "Bel-Nazir_vedelmezo_keze",
+        "nev": "Bel-Nazír védelmező keze",
+        "leiras": "a varázslóval azonos Hp-jű, hatalmas kéz megakadályozza a közelítést és fizikai támadásokat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 12,
         "d100_end": 14,
-        "nev": "Element\u00E1l megid\u00E9z\u00E9se",
-        "leiras": "2 \u00F3r\u00E1ig megid\u00E9z egy 12. szint\u0171 element\u00E1lt",
+        "id": "Elemental_megidezese",
+        "nev": "Elementál megidézése",
+        "leiras": "2 óráig megidéz egy 12. szintű elementált",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "nagy mennyis\u00E9g\u0171 elemi anyag",
-        "opcionalis_komponens": ""
+        "komponens": "nagy mennyiségű elemi anyag"
       },
       {
         "szint": 5,
         "d100_start": 15,
         "d100_end": 17,
-        "nev": "Ellinger elmet\u00F6rl\u00E9se",
-        "leiras": "megsemmis\u00EDti egy szem\u00E9ly elm\u00E9j\u00E9t",
+        "id": "Ellinger_elmetorlese",
+        "nev": "Ellinger elmetörlése",
+        "leiras": "megsemmisíti egy személy elméjét",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 18,
         "d100_end": 21,
-        "nev": "Er\u0151fal",
-        "leiras": "20 percig \u00E1thatolhatatlan, \u00E1tl\u00E1tsz\u00F3 energiafalat emel",
+        "id": "Erofal",
+        "nev": "Erőfal",
+        "leiras": "20 percig áthatolhatatlan, átlátszó energiafalat emel",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 22,
         "d100_end": 27,
-        "nev": "Fagyos k\u00FAp",
-        "leiras": "szintenk\u00E9nt 1d4\u002B1 Hp sebz\u00E9s\u0171 fagymez\u0151",
+        "id": "Fagyos_kup",
+        "nev": "Fagyos kúp",
+        "leiras": "szintenként 1d4+1 Hp sebzésű fagymező",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": "500 at krist\u00E1lyprizm\u00E1val vagy 1000 at tiszta dr\u00E1gak\u0151vel 1d4\u002B2 Hp/szint"
+        "opcionalis_komponens": "500 at kristályprizmával vagy 1000 at tiszta drágakővel 1d4+2 Hp/szint"
       },
       {
         "szint": 5,
         "d100_start": 28,
         "d100_end": 29,
-        "nev": "Falon \u00E1tl\u00E9p\u00E9s",
-        "leiras": "1/szint f\u0151 \u00E1tl\u00E9phet egy falon",
+        "id": "Falon_atlepes",
+        "nev": "Falon átlépés",
+        "leiras": "1/szint fő átléphet egy falon",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 30,
         "d100_end": 34,
-        "nev": "Gyilkos felh\u0151",
-        "leiras": "a felh\u0151 meg\u00F6li az 1-4. szint\u0171 l\u00E9nyeket, f\u00F6l\u00F6tte 10 Hp/szint",
+        "id": "Gyilkos_felho",
+        "nev": "Gyilkos felhő",
+        "leiras": "a felhő megöli az 1-4. szintű lényeket, fölötte 10 Hp/szint",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 35,
         "d100_end": 36,
-        "nev": "Kiterjeszt\u00E9s",
-        "leiras": "50%-kal meghosszabb\u00EDtja az 1-4. szint\u0171 var\u00E1zslatok id\u0151tartam\u00E1t",
+        "id": "Kiterjesztes",
+        "nev": "Kiterjesztés",
+        "leiras": "50%-kal meghosszabbítja az 1-4. szintű varázslatok időtartamát",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 37,
         "d100_end": 38,
-        "nev": "K\u0151b\u0151l iszap / Iszapb\u00F3l k\u0151",
-        "leiras": "iszapp\u00E1 v\u00E1ltoztat 20\u0027*20\u0027/szint k\u0151felsz\u00EDnt, vagy ford\u00EDtva",
+        "id": "Kobol_iszap_/_Iszapbol_ko",
+        "nev": "Kőből iszap / Iszapból kő",
+        "leiras": "iszappá változtat 20'*20'/szint kőfelszínt, vagy fordítva",
         "megfordithato": true,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 39,
         "d100_end": 43,
-        "nev": "K\u0151fal",
-        "leiras": "permanens k\u0151falat emel",
+        "id": "Kofal",
+        "nev": "Kőfal",
+        "leiras": "permanens kőfalat emel",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 44,
         "d100_end": 46,
-        "nev": "K\u0151form\u00E1z\u00E1s",
-        "leiras": "tetsz\u00E9s szerint form\u00E1zhat 10\u0027*10\u0027*10\u0027 mennyis\u00E9g\u0171 k\u00F6vet",
+        "id": "Koformazas",
+        "nev": "Kőformázás",
+        "leiras": "tetszés szerint formázhat 10'*10'*10' mennyiségű követ",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 47,
         "d100_end": 52,
-        "nev": "K\u00FCldet\u00E9s",
-        "leiras": "k\u00FCldet\u00E9sre k\u00FCld egy l\u00E9nyt",
+        "id": "Kuldetes",
+        "nev": "Küldetés",
+        "leiras": "küldetésre küld egy lényt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 53,
         "d100_end": 54,
-        "nev": "L\u00E9gies v\u00EDz",
-        "leiras": "6 \u00F3r\u00E1ig l\u00E9gnem\u0171v\u00E9 v\u00E1ltoztatja a var\u00E1zsl\u00F3 k\u00F6r\u00FCl a vizet",
+        "id": "Legies_viz",
+        "nev": "Légies víz",
+        "leiras": "6 óráig légneművé változtatja a varázsló körül a vizet",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 55,
         "d100_end": 58,
-        "nev": "Mu-Aradon besti\u00E1ja",
-        "leiras": "k\u00F6zel\u00EDt\u00E9sre aktiv\u00E1l\u00F3d\u00F3, majd 10/szint percig akt\u00EDv \u0151rz\u0151bestia",
+        "id": "Mu-Aradon_bestiaja",
+        "nev": "Mu-Aradon bestiája",
+        "leiras": "közelítésre aktiválódó, majd 10/szint percig aktív őrzőbestia",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": "800 at porf\u00EDridollal permanens"
+        "opcionalis_komponens": "800 at porfíridollal permanens"
       },
       {
         "szint": 5,
         "d100_start": 59,
         "d100_end": 62,
+        "id": "Oolar_ideje",
         "nev": "Oolar ideje",
-        "leiras": "1/szint napig tart\u00F3 ideiglenes felt\u00E1maszt\u00E1s",
+        "leiras": "1/szint napig tartó ideiglenes feltámasztás",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 63,
         "d100_end": 64,
-        "nev": "A rettenetes m\u00E9lys\u00E9gi var\u00E1zslat",
-        "leiras": "f\u00F6ldm\u00E9lyi b\u00F6rt\u00F6nbe k\u00FCld egy c\u00E9lpontot",
+        "id": "A_rettenetes_melysegi_varazslat",
+        "nev": "A rettenetes mélységi varázslat",
+        "leiras": "földmélyi börtönbe küld egy célpontot",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "3000 at dr\u00E1gak\u0151 a f\u00F6ld legm\u00E9ly\u00E9r\u0151l",
-        "opcionalis_komponens": ""
+        "komponens": "3000 at drágakő a föld legmélyéről"
       },
       {
         "szint": 5,
         "d100_start": 65,
         "d100_end": 67,
-        "nev": "S\u00EDkok k\u00F6z\u00F6tti utaz\u00E1s",
-        "leiras": "legfeljebb h\u00E9t alany egy m\u00E1sik s\u00EDkra vagy az Alvil\u00E1gba utazhat, egyetlen ellenkez\u0151 l\u00E9nyre is elmondhat\u00F3",
+        "id": "Sikok_kozotti_utazas",
+        "nev": "Síkok közötti utazás",
+        "leiras": "legfeljebb hét alany egy másik síkra vagy az Alvilágba utazhat, egyetlen ellenkező lényre is elmondható",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 68,
         "d100_end": 72,
-        "nev": "S\u00EDkokon t\u00FAli kontaktus",
-        "leiras": "kapcsolatba l\u00E9p egy s\u00EDkokon t\u00FAli intellektussal",
+        "id": "Sikokon_tuli_kontaktus",
+        "nev": "Síkokon túli kontaktus",
+        "leiras": "kapcsolatba lép egy síkokon túli intellektussal",
         "megfordithato": false,
-        "variabilis": true,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": true
       },
       {
         "szint": 5,
         "d100_start": 73,
         "d100_end": 77,
-        "nev": "Sz\u00F6rnyek megb\u00E9n\u00EDt\u00E1sa",
-        "leiras": "1-4 tetsz\u0151leges l\u00E9ny leb\u00E9n\u00EDt\u00E1sa 10 percre (-3/-2/-1/0 levon\u00E1s\u00FA ment\u0151vel)",
+        "id": "Szornyek_megbenitasa",
+        "nev": "Szörnyek megbénítása",
+        "leiras": "1-4 tetszőleges lény lebénítása 10 percre (-3/-2/-1/0 levonású mentővel)",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 78,
         "d100_end": 80,
-        "nev": "Sz\u00F6rnyid\u00E9z\u00E9s III.",
-        "leiras": "1d6 harmadik, 2d6 m\u00E1sodik vagy 4d6 els\u0151 szint\u0171 sz\u00F6rnyet id\u00E9z 30 percre",
+        "id": "Szornyidezes_III.",
+        "nev": "Szörnyidézés III.",
+        "leiras": "1d6 harmadik, 2d6 második vagy 4d6 első szintű szörnyet idéz 30 percre",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 81,
         "d100_end": 86,
-        "nev": "Telekin\u00E9zis",
-        "leiras": "10 percig k\u00E9pes szintenk\u00E9nt 4 t\u00E1rgy fokozatosan gyorsul\u00F3 mozgat\u00E1s\u00E1ra",
+        "id": "Telekinezis",
+        "nev": "Telekinézis",
+        "leiras": "10 percig képes szintenként 4 tárgy fokozatosan gyorsuló mozgatására",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 87,
         "d100_end": 90,
+        "id": "Teleport",
         "nev": "Teleport",
-        "leiras": "teleport\u00E1ci\u00F3s var\u00E1zslat, \u002B120 t\u00E1rgyat vihet mag\u00E1val",
+        "leiras": "teleportációs varázslat, +120 tárgyat vihet magával",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 91,
         "d100_end": 93,
-        "nev": "T\u00E9rtorz\u00EDt\u00E1s",
-        "leiras": "egy megid\u00E9zett f\u00F6ldelement\u00E1l seg\u00EDts\u00E9g\u00E9vel eltorz\u00EDtja a teret",
+        "id": "Tertorzitas",
+        "nev": "Tértorzítás",
+        "leiras": "egy megidézett földelementál segítségével eltorzítja a teret",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 94,
         "d100_end": 97,
-        "nev": "Var\u00E1zskancs\u00F3",
-        "leiras": "egy \u00E9rt\u00E9kes t\u00E1rgyban t\u00E1rolja a var\u00E1zsl\u00F3 elm\u00E9j\u00E9t",
+        "id": "Varazskancso",
+        "nev": "Varázskancsó",
+        "leiras": "egy értékes tárgyban tárolja a varázsló elméjét",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "5000 at t\u00E1rgy",
-        "opcionalis_komponens": ""
+        "komponens": "5000 at tárgy"
       },
       {
         "szint": 5,
         "d100_start": 98,
         "d100_end": 100,
+        "id": "Vasfal",
         "nev": "Vasfal",
-        "leiras": "permanens vasfalat emel, eld\u00F6ntve hal\u00E1los",
+        "leiras": "permanens vasfalat emel, eldöntve halálos",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       }
     ]
   },
@@ -1831,730 +1796,676 @@
     "tomor": [
       {
         "szint": 0,
-        "nev": "F\u00E9ny",
-        "leiras": "f\u00E1kly\u00E1nak megfelel\u0151 f\u00E9nyt ad 60 \u002B 10/szint percig",
+        "id": "Feny",
+        "nev": "Fény",
+        "leiras": "fáklyának megfelelő fényt ad 60 + 10/szint percig",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 0,
-        "nev": "Ill\u00FAzi\u00F3 \u00E9rz\u00E9kel\u00E9se",
-        "leiras": "\u00E9rz\u00E9keli az ill\u00FAzi\u00F3kat",
+        "id": "Illuzio_erzekelese",
+        "nev": "Illúzió érzékelése",
+        "leiras": "érzékeli az illúziókat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 0,
-        "nev": "L\u00E1thatatlans\u00E1g \u00E9rz\u00E9kel\u00E9se",
-        "leiras": "30 percig \u00E9rz\u00E9keli a l\u00E1thatatlans\u00E1got",
+        "id": "Lathatatlansag_erzekelese",
+        "nev": "Láthatatlanság érzékelése",
+        "leiras": "30 percig érzékeli a láthatatlanságot",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 0,
-        "nev": "T\u00E1ncol\u00F3 f\u00E9nyek",
-        "leiras": "2/szint k\u00F6rig 1d6 kicsiny, mozgathat\u00F3 f\u00E9nyforr\u00E1st teremt",
+        "id": "Tancolo_fenyek",
+        "nev": "Táncoló fények",
+        "leiras": "2/szint körig 1d6 kicsiny, mozgatható fényforrást teremt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 0,
-        "nev": "Tr\u00FCkk\u00F6k",
-        "leiras": "1/szint k\u00F6rig kisebb var\u00E1zstr\u00FCkk\u00F6ket alkalmazhat",
+        "id": "Trukkok",
+        "nev": "Trükkök",
+        "leiras": "1/szint körig kisebb varázstrükköket alkalmazhat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 1,
         "d100_end": 10,
-        "nev": "Hangill\u00FAzi\u00F3",
-        "leiras": "30 percig emberek, 4. szintt\u0151l besti\u00E1k, 8. szintt\u0151l term\u00E9szeti er\u0151k hangj\u00E1t kelti",
+        "id": "Hangilluzio",
+        "nev": "Hangillúzió",
+        "leiras": "30 percig emberek, 4. szinttől bestiák, 8. szinttől természeti erők hangját kelti",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 11,
         "d100_end": 30,
-        "nev": "Hipn\u00F3zis",
-        "leiras": "1/szint k\u00F6rig hipnotiz\u00E1l 1d6 l\u00E9nyt, akik hajlamosak  a sugallatokra",
+        "id": "Hipnozis",
+        "nev": "Hipnózis",
+        "leiras": "1/szint körig hipnotizál 1d6 lényt, akik hajlamosak  a sugallatokra",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 31,
         "d100_end": 50,
-        "nev": "Kisebb ill\u00FAzi\u00F3",
-        "leiras": "egyszer\u0171 k\u00E9pi ill\u00FAzi\u00F3kat teremt",
+        "id": "Kisebb_illuzio",
+        "nev": "Kisebb illúzió",
+        "leiras": "egyszerű képi illúziókat teremt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 51,
         "d100_end": 55,
-        "nev": "Nyxalon m\u00E1gikus aur\u00E1ja",
-        "leiras": "1/szint napig hamis m\u00E1gikus aur\u00E1t ad egy t\u00E1rgynak",
+        "id": "Nyxalon_magikus_auraja",
+        "nev": "Nyxalon mágikus aurája",
+        "leiras": "1/szint napig hamis mágikus aurát ad egy tárgynak",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 56,
         "d100_end": 65,
-        "nev": "K\u00F6dfal",
-        "leiras": "10/szint percig tart\u00F3 k\u00F6dfal, a bel\u00E9t\u00E9ved\u0151k egy k\u00F6rig elvesznek, Akarater\u0151vel szabadulhatnak",
+        "id": "Kodfal",
+        "nev": "Ködfal",
+        "leiras": "10/szint percig tartó ködfal, a belétévedők egy körig elvesznek, Akaraterővel szabadulhatnak",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 66,
         "d100_end": 70,
-        "nev": "M\u00E1gia \u00E9rz\u00E9kel\u00E9se",
-        "leiras": "10 percig \u00E9rz\u00E9keli a m\u00E1gikus er\u0151ket \u00E9s var\u00E1zst\u00E1rgyakat",
+        "id": "Magia_erzekelese",
+        "nev": "Mágia érzékelése",
+        "leiras": "10 percig érzékeli a mágikus erőket és varázstárgyakat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 71,
         "d100_end": 75,
-        "nev": "M\u00E1gia olvas\u00E1sa",
-        "leiras": "10/szint percig k\u00E9pess\u00E9 tesz a m\u00E1gikus sz\u00F6vegek elolvas\u00E1s\u00E1ra",
+        "id": "Magia_olvasasa",
+        "nev": "Mágia olvasása",
+        "leiras": "10/szint percig képessé tesz a mágikus szövegek elolvasására",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 76,
         "d100_end": 85,
-        "nev": "\u00D6nmegv\u00E1ltoztat\u00E1s",
-        "leiras": "1 \u00F3r\u00E1ig megv\u00E1ltoztatja az illuzionista kin\u00E9zet\u00E9t",
+        "id": "onmegvaltoztatas",
+        "nev": "Önmegváltoztatás",
+        "leiras": "1 óráig megváltoztatja az illuzionista kinézetét",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 86,
         "d100_end": 95,
-        "nev": "Sz\u00EDnes permet",
-        "leiras": "1d6 l\u00E9ny el\u00E1jul vagy 1d4 k\u00F6rig megvakul, 6. szintt\u0151l ment\u0151 dobhat\u00F3",
+        "id": "Szines_permet",
+        "nev": "Színes permet",
+        "leiras": "1d6 lény elájul vagy 1d4 körig megvakul, 6. szinttől mentő dobható",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 96,
         "d100_end": 100,
-        "nev": "Tekintett\u00FCkr\u00F6z\u00E9s: 1 \u00F3r\u00E1ig visszat\u00FCkr\u00F6zi a m\u00E1gikus tekinteteket \u00E9s 2",
-        "leiras": "3 es\u00E9llyel a sugarakat is",
+        "id": "Tekintettukrozes:_1_oraig_visszatukrozi_a_magikus_tekinteteket_es_2",
+        "nev": "Tekintettükrözés: 1 óráig visszatükrözi a mágikus tekinteteket és 2",
+        "leiras": "3 eséllyel a sugarakat is",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 1,
         "d100_end": 7,
-        "nev": "Azonos\u00EDt\u00E1s",
-        "leiras": "8 \u00F3r\u00E1s transzba mer\u00FClve meg\u00E1llap\u00EDtja egy t\u00E1rgy m\u00E1gikus funkci\u00F3it, 1 pr\u00F3ba/szint",
+        "id": "Azonositas",
+        "nev": "Azonosítás",
+        "leiras": "8 órás transzba merülve megállapítja egy tárgy mágikus funkcióit, 1 próba/szint",
         "megfordithato": false,
         "variabilis": true,
-        "komponens": "200 at f\u00FCst\u00F6l\u0151 \u00E9s olaj",
-        "opcionalis_komponens": ""
+        "komponens": "200 at füstölő és olaj"
       },
       {
         "szint": 2,
         "d100_start": 8,
         "d100_end": 12,
-        "nev": "Elt\u00E9r\u00EDt\u00E9s",
-        "leiras": "egy m\u00E1sik c\u00E9lpontra ir\u00E1ny\u00EDtja az \u00E9rz\u00E9kel\u0151 var\u00E1zslatokat 1 \u00F3r\u00E1ig",
+        "id": "Elterites",
+        "nev": "Eltérítés",
+        "leiras": "egy másik célpontra irányítja az érzékelő varázslatokat 1 óráig",
         "megfordithato": false,
-        "variabilis": true,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": true
       },
       {
         "szint": 2,
         "d100_start": 13,
         "d100_end": 16,
-        "nev": "H\u00E1bor\u00EDtatlans\u00E1g",
-        "leiras": "egy napig elhagyatottnak \u00E1lc\u00E1z egy ter\u00FCletet",
+        "id": "Haboritatlansag",
+        "nev": "Háborítatlanság",
+        "leiras": "egy napig elhagyatottnak álcáz egy területet",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": "150 at m\u00FAmiaporral permanens"
+        "opcionalis_komponens": "150 at múmiaporral permanens"
       },
       {
         "szint": 2,
         "d100_start": 17,
         "d100_end": 23,
-        "nev": "Hasbesz\u00E9l\u00E9s",
-        "leiras": "ir\u00E1ny\u00EDtja a haszn\u00E1l\u00F3 hangj\u00E1t 20 percig",
+        "id": "Hasbeszeles",
+        "nev": "Hasbeszélés",
+        "leiras": "irányítja a használó hangját 20 percig",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 24,
         "d100_end": 33,
+        "id": "Hipnotikus_minta",
         "nev": "Hipnotikus minta",
-        "leiras": "fogvatart 6 \u002B 1/szint szintnyi teremtm\u00E9nyt",
+        "leiras": "fogvatart 6 + 1/szint szintnyi teremtményt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 34,
         "d100_end": 58,
-        "nev": "Ill\u00FAzi\u00F3",
-        "leiras": "k\u00E9pi \u00E9s hangeffektusokat elegy\u00EDt\u0151 ill\u00FAzi\u00F3kat teremt",
+        "id": "Illuzio",
+        "nev": "Illúzió",
+        "leiras": "képi és hangeffektusokat elegyítő illúziókat teremt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 59,
         "d100_end": 66,
-        "nev": "K\u00F6dfelh\u0151",
-        "leiras": "10/szint k\u00F6rig tart\u00F3 k\u00F6dfelh\u0151 40\u0027*40\u0027 ter\u00FCleten, a bel\u00E9t\u00E9ved\u0151k egy k\u00F6r ut\u00E1n Akarater\u0151vel szabadulhatnak",
+        "id": "Kodfelho",
+        "nev": "Ködfelhő",
+        "leiras": "10/szint körig tartó ködfelhő 40'*40' területen, a belétévedők egy kör után Akaraterővel szabadulhatnak",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": "k\u00E1b\u00EDt\u00F3 vagy m\u00E9rgez\u0151 anyagokkal d\u00FAs\u00EDthat\u00F3"
+        "opcionalis_komponens": "kábító vagy mérgező anyagokkal dúsítható"
       },
       {
         "szint": 2,
         "d100_start": 67,
         "d100_end": 72,
-        "nev": "L\u00E1thatatlans\u00E1g",
-        "leiras": "10/szint percig l\u00E1thatatlann\u00E1 teszi a c\u00E9lpontot, t\u00E1mad\u00E1ssal megsz\u0171nik",
+        "id": "Lathatatlansag",
+        "nev": "Láthatatlanság",
+        "leiras": "10/szint percig láthatatlanná teszi a célpontot, támadással megszűnik",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 73,
         "d100_end": 77,
-        "nev": "Om\u00E1r k\u00EDnos t\u00E9ved\u00E9se",
-        "leiras": "jobb err\u0151l nem is besz\u00E9lni",
+        "id": "Omar_kinos_tevedese",
+        "nev": "Omár kínos tévedése",
+        "leiras": "jobb erről nem is beszélni",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 78,
         "d100_end": 87,
-        "nev": "T\u00FCk\u00F6rk\u00E9pm\u00E1s",
-        "leiras": "2/szint k\u00F6rig 1d4 \u002B 1/3 szintnyi ill\u00FAzi\u00F3k\u00E9pm\u00E1st teremt",
+        "id": "Tukorkepmas",
+        "nev": "Tükörképmás",
+        "leiras": "2/szint körig 1d4 + 1/3 szintnyi illúzióképmást teremt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 88,
         "d100_end": 93,
-        "nev": "Vaks\u00E1g / s\u00FCkets\u00E9g",
-        "leiras": "megvak\u00EDt vagy megs\u00FCket\u00EDt egy \u00E1ldozatot",
+        "id": "Vaksag_/_suketseg",
+        "nev": "Vakság / süketség",
+        "leiras": "megvakít vagy megsüketít egy áldozatot",
         "megfordithato": false,
-        "variabilis": true,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": true
       },
       {
         "szint": 2,
         "d100_start": 94,
         "d100_end": 100,
-        "nev": "Var\u00E1zssz\u00E1j",
-        "leiras": "bizonyos felt\u00E9telek teljes\u00FCl\u00E9sekor megsz\u00F3lal\u00F3 testetlen sz\u00E1j",
+        "id": "Varazsszaj",
+        "nev": "Varázsszáj",
+        "leiras": "bizonyos feltételek teljesülésekor megszólaló testetlen száj",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "10 at j\u00E1depor",
-        "opcionalis_komponens": "200 at j\u00E1deporral permanens"
+        "komponens": "10 at jádepor",
+        "opcionalis_komponens": "200 at jádeporral permanens"
       },
       {
         "szint": 3,
         "d100_start": 1,
         "d100_end": 5,
-        "nev": "\u00C1rny\u00E9kajt\u00F3",
-        "leiras": "ajt\u00F3 ill\u00FAzi\u00F3j\u00E1t teremti, mik\u00F6zben a karakter l\u00E1thatatlann\u00E1 v\u00E1lik \u00E9s elmenek\u00FCl",
+        "id": "arnyekajto",
+        "nev": "Árnyékajtó",
+        "leiras": "ajtó illúzióját teremti, miközben a karakter láthatatlanná válik és elmenekül",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 6,
         "d100_end": 12,
-        "nev": "F\u00E9lelem",
-        "leiras": "1/szint k\u00F6rig p\u00E1nikszer\u0171 retteg\u00E9st okoz a c\u00E9lpontokban",
+        "id": "Felelem",
+        "nev": "Félelem",
+        "leiras": "1/szint körig pánikszerű rettegést okoz a célpontokban",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 13,
         "d100_end": 20,
-        "nev": "Hallucin\u00E1ci\u00F3 ter\u00FClete",
-        "leiras": "\u00E9rint\u00E9sig k\u00E1pr\u00E1zattal helyettes\u00EDt egy ter\u00FCletet",
+        "id": "Hallucinacio_terulete",
+        "nev": "Hallucináció területe",
+        "leiras": "érintésig káprázattal helyettesít egy területet",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 21,
         "d100_end": 25,
-        "nev": "Ill\u00FAzi\u00F3fal",
-        "leiras": "permanens ill\u00FAzi\u00F3falat teremt",
+        "id": "Illuziofal",
+        "nev": "Illúziófal",
+        "leiras": "permanens illúziófalat teremt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 26,
         "d100_end": 29,
-        "nev": "Ill\u00FAzi\u00F3\u00EDr\u00E1s",
-        "leiras": "csak a kiv\u00E1lasztottak \u00E1ltal olvashat\u00F3 m\u00E1gikus \u00EDr\u00E1s",
+        "id": "Illuzioiras",
+        "nev": "Illúzióírás",
+        "leiras": "csak a kiválasztottak által olvasható mágikus írás",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "50 at \u00F3lomalap\u00FA tinta",
-        "opcionalis_komponens": ""
+        "komponens": "50 at ólomalapú tinta"
       },
       {
         "szint": 3,
         "d100_start": 30,
         "d100_end": 34,
-        "nev": "Ill\u00FAzi\u00F3 megsz\u00FCntet\u00E9se",
-        "leiras": "megsz\u00FCnteti az ill\u00FAzi\u00F3kat",
+        "id": "Illuzio_megszuntetese",
+        "nev": "Illúzió megszüntetése",
+        "leiras": "megszünteti az illúziókat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 35,
         "d100_end": 38,
-        "nev": "Inf\u00FAzi\u00F3",
-        "leiras": "egy kiv\u00E1lasztott c\u00E9lpont v\u00E9letlenszer\u0171 tulajdons\u00E1gaival ruh\u00E1z f\u00F6l egy adag folyad\u00E9kot",
+        "id": "Infuzio",
+        "nev": "Infúzió",
+        "leiras": "egy kiválasztott célpont véletlenszerű tulajdonságaival ruház föl egy adag folyadékot",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 39,
         "d100_end": 43,
-        "nev": "IOUN k\u00F6vei",
-        "leiras": "h\u00E1romf\u00E9le m\u00E1gikus v\u00E9delem (\u002B1 ment\u0151, \u002B1 VO, egy var\u00E1zslat felfog\u00E1sa)",
+        "id": "IOUN_kovei",
+        "nev": "IOUN kövei",
+        "leiras": "háromféle mágikus védelem (+1 mentő, +1 VO, egy varázslat felfogása)",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 44,
         "d100_end": 48,
-        "nev": "A legy\u0151zhetetlen k\u00E9pm\u00E1s",
-        "leiras": "2/szint k\u00F6rig legy\u0151zhetetlen ill\u00FAzi\u00F3harcost teremt",
+        "id": "A_legyozhetetlen_kepmas",
+        "nev": "A legyőzhetetlen képmás",
+        "leiras": "2/szint körig legyőzhetetlen illúzióharcost teremt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 49,
         "d100_end": 68,
-        "nev": "Nagyobb ill\u00FAzi\u00F3",
-        "leiras": "b\u00E1rmelyik \u00E9rz\u00E9kszervre hat\u00F3 ill\u00FAzi\u00F3kat teremt",
+        "id": "Nagyobb_illuzio",
+        "nev": "Nagyobb illúzió",
+        "leiras": "bármelyik érzékszervre ható illúziókat teremt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 69,
         "d100_end": 73,
-        "nev": "\u00D6r\u00F6k f\u00E9ny / \u00D6r\u00F6k s\u00F6t\u00E9ts\u00E9g",
-        "leiras": "30\u0027 sugar\u00FA k\u00F6rben \u00F6r\u00F6k f\u00E9nyt vagy s\u00F6t\u00E9ts\u00E9get teremt",
+        "id": "orok_feny_/_orok_sotetseg",
+        "nev": "Örök fény / Örök sötétség",
+        "leiras": "30' sugarú körben örök fényt vagy sötétséget teremt",
         "megfordithato": true,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 74,
         "d100_end": 80,
-        "nev": "Paral\u00EDzis",
-        "leiras": "permanens b\u00E9nul\u00E1st okoz",
+        "id": "Paralizis",
+        "nev": "Paralízis",
+        "leiras": "permanens bénulást okoz",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 81,
         "d100_end": 95,
+        "id": "Sugallat",
         "nev": "Sugallat",
-        "leiras": "1 \u002B 1/szint \u00F3r\u00E1n bel\u00FCl aktiv\u00E1l\u00F3d\u00F3 sugallatot \u00FCltet a c\u00E9lpont fej\u00E9be",
+        "leiras": "1 + 1/szint órán belül aktiválódó sugallatot ültet a célpont fejébe",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 96,
         "d100_end": 100,
-        "nev": "Ylam-Ylam v\u00F6r\u00F6s var\u00E1zslata",
-        "leiras": "a c\u00E9lpont 7 napig t\u00E9bolyult gy\u0171l\u00F6letet \u00E9rez a v\u00F6r\u00F6s sz\u00EDn ellen, sebes\u00FCl\u00E9sei nem gy\u00F3gyulnak",
+        "id": "Ylam-Ylam_voros_varazslata",
+        "nev": "Ylam-Ylam vörös varázslata",
+        "leiras": "a célpont 7 napig tébolyult gyűlöletet érez a vörös szín ellen, sebesülései nem gyógyulnak",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 1,
         "d100_end": 10,
-        "nev": "\u00C1lom",
-        "leiras": "\u00E1lmot vagy 1d10 Hp-t sebz\u0151 r\u00E9m\u00E1lmokat k\u00FCld egy kiv\u00E1lasztott \u00E1lmod\u00F3nak",
+        "id": "alom",
+        "nev": "Álom",
+        "leiras": "álmot vagy 1d10 Hp-t sebző rémálmokat küld egy kiválasztott álmodónak",
         "megfordithato": false,
-        "variabilis": true,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": true
       },
       {
         "szint": 4,
         "d100_start": 11,
         "d100_end": 20,
-        "nev": "\u00C1rny\u00E9ksz\u00F6rnyek",
-        "leiras": "szintenk\u00E9nt 1 szintnyi gyeng\u00E9bb ill\u00FAzi\u00F3l\u00E9ny el\u0151\u00E1ll\u00EDt\u00E1sa 1 \u00F3r\u00E1ig",
+        "id": "arnyekszornyek",
+        "nev": "Árnyékszörnyek",
+        "leiras": "szintenként 1 szintnyi gyengébb illúziólény előállítása 1 óráig",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": "50\u002B at f\u00FCst\u00F6l\u0151vel er\u0151sebb"
+        "opcionalis_komponens": "50+ at füstölővel erősebb"
       },
       {
         "szint": 4,
         "d100_start": 21,
         "d100_end": 25,
-        "nev": "\u00C9rzelmek vihara",
-        "leiras": "v\u00E9letlenszer\u0171 \u00E9rzelmek vihar\u00E1t bocs\u00E1tja a c\u00E9lpontokra 10 percig",
+        "id": "erzelmek_vihara",
+        "nev": "Érzelmek vihara",
+        "leiras": "véletlenszerű érzelmek viharát bocsátja a célpontokra 10 percig",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 26,
         "d100_end": 35,
-        "nev": "Fant\u00E1ziagyilkos",
-        "leiras": "megeleven\u00EDti a c\u00E9lpont legsz\u00F6rny\u0171bb f\u00E9lelmeit",
+        "id": "Fantaziagyilkos",
+        "nev": "Fantáziagyilkos",
+        "leiras": "megeleveníti a célpont legszörnyűbb félelmeit",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 36,
         "d100_end": 40,
-        "nev": "Fejlesztett l\u00E1thatatlans\u00E1g",
-        "leiras": "30 percig tart\u00F3 l\u00E1thatatlans\u00E1g, az alany t\u00E1madhat is",
+        "id": "Fejlesztett_lathatatlansag",
+        "nev": "Fejlesztett láthatatlanság",
+        "leiras": "30 percig tartó láthatatlanság, az alany támadhat is",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 41,
         "d100_end": 43,
-        "nev": "A j\u00F6vedelmez\u0151 szem",
-        "leiras": "3d6*10 percig ez\u00FCstt\u00E1rgyakat emelhet el a tekintet\u00E9vel",
+        "id": "A_jovedelmezo_szem",
+        "nev": "A jövedelmező szem",
+        "leiras": "3d6*10 percig ezüsttárgyakat emelhet el a tekintetével",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 44,
         "d100_end": 48,
-        "nev": "Kimer\u00FClts\u00E9g megsz\u00FCntet\u00E9se",
-        "leiras": "a frissess\u00E9g \u00E9s energia ill\u00FAzi\u00F3j\u00E1t adja (Er\u0151, Eg\u00E9szs\u00E9g 18), 2 \u00F3r\u00E1val k\u00E9s\u0151bb ugyanannyival gyeng\u00FClnek, amennyivel er\u0151s\u00F6dtek",
+        "id": "Kimerultseg_megszuntetese",
+        "nev": "Kimerültség megszüntetése",
+        "leiras": "a frissesség és energia illúzióját adja (Erő, Egészség 18), 2 órával később ugyanannyival gyengülnek, amennyivel erősödtek",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 49,
         "d100_end": 56,
-        "nev": "Kisebb teremt\u00E9s",
-        "leiras": "szintenk\u00E9nt egy k\u00F6z\u00F6ns\u00E9ges t\u00E1rgyat teremt",
+        "id": "Kisebb_teremtes",
+        "nev": "Kisebb teremtés",
+        "leiras": "szintenként egy közönséges tárgyat teremt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 57,
         "d100_end": 63,
+        "id": "Lankwiler_nagyobb_krisztalogenezise",
         "nev": "Lankwiler nagyobb krisztalogenezise",
-        "leiras": "30 percig tart\u00F3 penge\u00E9les krist\u00E1lymez\u0151t teremt egy 40\u0027 sugar\u00FA k\u00F6rben, mozg\u00E1s eset\u00E9n k\u00F6r\u00F6nk\u00E9nt 2d4 Hp",
+        "leiras": "30 percig tartó pengeéles kristálymezőt teremt egy 40' sugarú körben, mozgás esetén körönként 2d4 Hp",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 64,
         "d100_end": 69,
-        "nev": "M\u00E1gia megsz\u00FCntet\u00E9se",
-        "leiras": "megsz\u00FCnteti a m\u00E1gikus hat\u00E1sokat \u00E9s var\u00E1zslatokat",
+        "id": "Magia_megszuntetese",
+        "nev": "Mágia megszüntetése",
+        "leiras": "megszünteti a mágikus hatásokat és varázslatokat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 70,
         "d100_end": 76,
-        "nev": "Sz\u00EDnek h\u00E1l\u00F3ja",
-        "leiras": "1/szint k\u00F6rig tart\u00F3 h\u00E1l\u00F3t dob egy emberszer\u0171 l\u00E9nyre, 1d4 Eg\u00E9szs\u00E9g/k\u00F6r",
+        "id": "Szinek_haloja",
+        "nev": "Színek hálója",
+        "leiras": "1/szint körig tartó hálót dob egy emberszerű lényre, 1d4 Egészség/kör",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "200 at prizmatikus agyag",
-        "opcionalis_komponens": ""
+        "komponens": "200 at prizmatikus agyag"
       },
       {
         "szint": 4,
         "d100_start": 77,
         "d100_end": 86,
-        "nev": "Sziv\u00E1rv\u00E1nysz\u00EDn\u0171 minta",
-        "leiras": "20 percig fogvatart 24 szintnyi teremtm\u00E9nyt, k\u00F6r\u00F6nk\u00E9nt 30\u0027-nyit mozgathat\u00F3",
+        "id": "Szivarvanyszinu_minta",
+        "nev": "Szivárványszínű minta",
+        "leiras": "20 percig fogvatart 24 szintnyi teremtményt, körönként 30'-nyit mozgatható",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 87,
         "d100_end": 90,
+        "id": "Tolvajok_alkonya",
         "nev": "Tolvajok alkonya",
-        "leiras": "1 \u002B \u00BD szint \u00F3r\u00E1ig 1 Sztd sugar\u00FA k\u00F6rben elm\u00E9ly\u00EDti egy nagy ter\u00FClet \u00E1rny\u00E9kait",
+        "leiras": "1 + ½ szint óráig 1 Sztd sugarú körben elmélyíti egy nagy terület árnyékait",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": "900 at fekete esszenci\u00E1val permanens"
+        "opcionalis_komponens": "900 at fekete esszenciával permanens"
       },
       {
         "szint": 4,
         "d100_start": 91,
         "d100_end": 93,
-        "nev": "T\u00F6meges \u00E1tv\u00E1ltoztat\u00E1s",
-        "leiras": "megsz\u00FCntet\u00E9sig f\u00E1knak \u00E1lc\u00E1z 10/szintnyi humanoidot",
+        "id": "Tomeges_atvaltoztatas",
+        "nev": "Tömeges átváltoztatás",
+        "leiras": "megszüntetésig fáknak álcáz 10/szintnyi humanoidot",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 94,
         "d100_end": 100,
-        "nev": "Ylam-Ylam csengetty\u0171i",
-        "leiras": "10 k\u00F6rig leveg\u0151be emeli \u00E9s elb\u00F3d\u00EDtja a c\u00E9lpontot, addikt\u00EDv",
+        "id": "Ylam-Ylam_csengettyui",
+        "nev": "Ylam-Ylam csengettyűi",
+        "leiras": "10 körig levegőbe emeli és elbódítja a célpontot, addiktív",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 1,
         "d100_end": 10,
-        "nev": "\u00C1rnyak megid\u00E9z\u00E9se",
-        "leiras": "minden 5. f\u00F6l\u00F6tti szint\u00E9rt megid\u00E9z egy \u00E1rnyat 10/szint percig",
+        "id": "arnyak_megidezese",
+        "nev": "Árnyak megidézése",
+        "leiras": "minden 5. fölötti szintért megidéz egy árnyat 10/szint percig",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 11,
         "d100_end": 15,
-        "nev": "\u00C1rny\u00E9km\u00E1gia",
-        "leiras": "kv\u00E1zire\u00E1lis t\u0171zgoly\u00F3, vill\u00E1m, var\u00E1zsl\u00F6ved\u00E9k vagy fagyos k\u00FAp, sikeres ment\u0151 eset\u00E9n csak 1 Hp/szint",
+        "id": "arnyekmagia",
+        "nev": "Árnyékmágia",
+        "leiras": "kvázireális tűzgolyó, villám, varázslövedék vagy fagyos kúp, sikeres mentő esetén csak 1 Hp/szint",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 16,
         "d100_end": 25,
-        "nev": "F\u00E9l\u00E1rny\u00E9ksz\u00F6rnyek",
-        "leiras": "szintenk\u00E9nt 1 szintnyi er\u0151sebb ill\u00FAzi\u00F3l\u00E9ny el\u0151\u00E1ll\u00EDt\u00E1sa 2 \u00F3r\u00E1ig, legy\u0151zve 1:2 es\u00E9llyel \u00FAjraalakulnak",
+        "id": "Felarnyekszornyek",
+        "nev": "Félárnyékszörnyek",
+        "leiras": "szintenként 1 szintnyi erősebb illúziólény előállítása 2 óráig, legyőzve 1:2 eséllyel újraalakulnak",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": "100\u002B at f\u00FCst\u00F6l\u0151vel er\u0151sebb"
+        "opcionalis_komponens": "100+ at füstölővel erősebb"
       },
       {
         "szint": 5,
         "d100_start": 26,
         "d100_end": 35,
-        "nev": "Hipnopol\u00E1ris fal",
-        "leiras": "a 20 percig tart\u00F3 fal sz\u00EDnei megbabon\u00E1zz\u00E1k a r\u00E1n\u00E9z\u0151ket, hidege 2 Hp/k\u00F6r, \u00E1tt\u00F6rve 12 Hp",
+        "id": "Hipnopolaris_fal",
+        "nev": "Hipnopoláris fal",
+        "leiras": "a 20 percig tartó fal színei megbabonázzák a ránézőket, hidege 2 Hp/kör, áttörve 12 Hp",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "1000 at gy\u00E9m\u00E1nt",
-        "opcionalis_komponens": ""
+        "komponens": "1000 at gyémánt"
       },
       {
         "szint": 5,
         "d100_start": 36,
         "d100_end": 45,
-        "nev": "Igazl\u00E1t\u00E1s",
-        "leiras": "a maguk val\u00F3j\u00E1ban l\u00E1ttatja a dolgokat",
+        "id": "Igazlatas",
+        "nev": "Igazlátás",
+        "leiras": "a maguk valójában láttatja a dolgokat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 46,
         "d100_end": 55,
-        "nev": "Lankwiler prizmatikus l\u00F6ved\u00E9ke",
-        "leiras": "automatikusan tal\u00E1l\u00F3, v\u00E9letlen hat\u00E1s\u00FA energial\u00F6ved\u00E9k",
+        "id": "Lankwiler_prizmatikus_lovedeke",
+        "nev": "Lankwiler prizmatikus lövedéke",
+        "leiras": "automatikusan találó, véletlen hatású energialövedék",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 56,
         "d100_end": 60,
-        "nev": "Meg\u00E1lmod\u00E1s",
-        "leiras": "a val\u00F3s\u00E1got megv\u00E1ltoztat\u00F3 \u00E1lom",
+        "id": "Megalmodas",
+        "nev": "Megálmodás",
+        "leiras": "a valóságot megváltoztató álom",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "1000 at f\u00FCst\u00F6l\u0151 \u00E9s illatszer",
-        "opcionalis_komponens": ""
+        "komponens": "1000 at füstölő és illatszer"
       },
       {
         "szint": 5,
         "d100_start": 61,
         "d100_end": 75,
-        "nev": "Permanens ill\u00FAzi\u00F3",
-        "leiras": "permanens ill\u00FAzi\u00F3t teremt",
+        "id": "Permanens_illuzio",
+        "nev": "Permanens illúzió",
+        "leiras": "permanens illúziót teremt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 76,
         "d100_end": 85,
-        "nev": "Programozott ill\u00FAzi\u00F3",
-        "leiras": "meghat\u00E1rozott felt\u00E9telek eset\u00E9n aktiv\u00E1l\u00F3d\u00F3 ill\u00FAzi\u00F3",
+        "id": "Programozott_illuzio",
+        "nev": "Programozott illúzió",
+        "leiras": "meghatározott feltételek esetén aktiválódó illúzió",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": "600 at lepkeh\u00EDmporral permanens"
+        "opcionalis_komponens": "600 at lepkehímporral permanens"
       },
       {
         "szint": 5,
         "d100_start": 86,
         "d100_end": 95,
-        "nev": "S\u00EDkokon t\u00FAli kontaktus",
-        "leiras": "kapcsolatba l\u00E9p egy s\u00EDkokon t\u00FAli intellektussal",
+        "id": "Sikokon_tuli_kontaktus",
+        "nev": "Síkokon túli kontaktus",
+        "leiras": "kapcsolatba lép egy síkokon túli intellektussal",
         "megfordithato": false,
-        "variabilis": true,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": true
       },
       {
         "szint": 5,
         "d100_start": 96,
         "d100_end": 100,
-        "nev": "\u00DAtveszt\u0151",
-        "leiras": "extradimenzion\u00E1lis labirintusba z\u00E1r egy l\u00E9nyt, Intelligenci\u00E1t\u00F3l f\u00FCgg\u0151 kijut\u00E1s",
+        "id": "utveszto",
+        "nev": "Útvesztő",
+        "leiras": "extradimenzionális labirintusba zár egy lényt, Intelligenciától függő kijutás",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       }
     ]
   },
@@ -2562,503 +2473,458 @@
     "tomor": [
       {
         "szint": 0,
-        "nev": "F\u00E9ny",
-        "leiras": "f\u00E1kly\u00E1nak megfelel\u0151 f\u00E9nyt ad 60 \u002B 10/szint percig",
+        "id": "Feny",
+        "nev": "Fény",
+        "leiras": "fáklyának megfelelő fényt ad 60 + 10/szint percig",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 0,
-        "nev": "M\u00E1gia \u00E9rz\u00E9kel\u00E9se",
-        "leiras": "10 percig \u00E9rz\u00E9keli a m\u00E1gikus er\u0151ket \u00E9s var\u00E1zst\u00E1rgyakat",
+        "id": "Magia_erzekelese",
+        "nev": "Mágia érzékelése",
+        "leiras": "10 percig érzékeli a mágikus erőket és varázstárgyakat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 0,
-        "nev": "Tr\u00FCkk\u00F6k",
-        "leiras": "1/szint k\u00F6rig kisebb var\u00E1zstr\u00FCkk\u00F6ket alkalmazhat",
+        "id": "Trukkok",
+        "nev": "Trükkök",
+        "leiras": "1/szint körig kisebb varázstrükköket alkalmazhat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 1,
         "d100_end": 5,
-        "nev": "Altat\u00F3 adaggio",
-        "leiras": "egy k\u00F6r k\u00E9sleltet\u00E9ssel elaltat 2d4 szintnyi teremtm\u00E9nyt, ment\u0151dob\u00E1s dobhat\u00F3",
+        "id": "Altato_adaggio",
+        "nev": "Altató adaggio",
+        "leiras": "egy kör késleltetéssel elaltat 2d4 szintnyi teremtményt, mentődobás dobható",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 6,
         "d100_end": 10,
-        "nev": "B\u00E1tor\u00EDt\u00F3 ballada / B\u00E1tortalan ballada",
-        "leiras": "\u002B1-et ad a sz\u00F6vets\u00E9gesek t\u00E1mad\u00E1s\u00E1ra \u00E9s ment\u0151dob\u00E1saira, \u002B2-t mor\u00E1lra, vagy ellenkez\u0151leg, \u00E9s mor\u00E1lpr\u00F3ba doband\u00F3",
+        "id": "Batorito_ballada_/_Batortalan_ballada",
+        "nev": "Bátorító ballada / Bátortalan ballada",
+        "leiras": "+1-et ad a szövetségesek támadására és mentődobásaira, +2-t morálra, vagy ellenkezőleg, és morálpróba dobandó",
         "megfordithato": true,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 11,
         "d100_end": 14,
-        "nev": "Boz\u00F3tos ballada",
-        "leiras": "s\u0171r\u0171 t\u00FCskeboz\u00F3ttal bor\u00EDtja el a ter\u00FCletet, 1 Hp/k\u00F6r \u00E1tkel\u0151k\u00F6n, 1/szint \u00F3r\u00E1ig marad fenn",
+        "id": "Bozotos_ballada",
+        "nev": "Bozótos ballada",
+        "leiras": "sűrű tüskebozóttal borítja el a területet, 1 Hp/kör átkelőkön, 1/szint óráig marad fenn",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 15,
         "d100_end": 19,
-        "nev": "Er\u0151s\u00EDt\u0151 et\u0171d",
-        "leiras": "1/szint k\u00F6rig tart\u00F3 s\u00FCkets\u00E9get okoz",
+        "id": "Erosito_etud",
+        "nev": "Erősítő etűd",
+        "leiras": "1/szint körig tartó süketséget okoz",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 20,
         "d100_end": 25,
-        "nev": "Felt\u00E1r\u00F3 f\u00FAga: 1",
-        "leiras": "6/szint es\u00E9llyel megtal\u00E1lja az elrejtett t\u00E1rgyakat, titkosajt\u00F3kat \u00E9s csapd\u00E1kat",
+        "id": "Feltaro_fuga:_1",
+        "nev": "Feltáró fúga: 1",
+        "leiras": "6/szint eséllyel megtalálja az elrejtett tárgyakat, titkosajtókat és csapdákat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 26,
         "d100_end": 32,
-        "nev": "Hasbesz\u00E9l\u0151 hangzat",
-        "leiras": "ir\u00E1ny\u00EDtja a dalnok \u00E9nekhangj\u00E1t",
+        "id": "Hasbeszelo_hangzat",
+        "nev": "Hasbeszélő hangzat",
+        "leiras": "irányítja a dalnok énekhangját",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 33,
         "d100_end": 37,
-        "nev": "Kebelbar\u00E1t k\u00F3rus",
-        "leiras": "az egy\u00FCtt \u00E9nekl\u0151k r\u00E9gi j\u00F3bar\u00E1tokk\u00E9nt viselkednek",
+        "id": "Kebelbarat_korus",
+        "nev": "Kebelbarát kórus",
+        "leiras": "az együtt éneklők régi jóbarátokként viselkednek",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 38,
         "d100_end": 40,
+        "id": "Kehely_kadencia",
         "nev": "Kehely kadencia",
-        "leiras": "meger\u0151s\u00EDti egy ital erej\u00E9t \u00E9s nemes tulajdons\u00E1gait, elt\u00E1vol\u00EDtja a tiszt\u00E1talans\u00E1gokat",
+        "leiras": "megerősíti egy ital erejét és nemes tulajdonságait, eltávolítja a tisztátalanságokat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 41,
         "d100_end": 44,
-        "nev": "K\u00E9tball\u00E1bas ballada: a c\u00E9lpontok 1d6 \u00DCgyess\u00E9get vesztenek, k\u00F6r\u00F6nk\u00E9nt 1",
-        "leiras": "6 elejtik t\u00E1rgyaikat",
+        "id": "Ketballabas_ballada",
+        "nev": "Kétballábas ballada",
+        "leiras": "a célpontok 1d6 Ügyességet vesztenek, körönként 1/6 eséllyel elejtik tárgyaikat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 45,
         "d100_end": 48,
-        "nev": "K\u0151sz\u00E1li kardal",
-        "leiras": "gyors \u00E9s \u00FCgyes M\u00E1sz\u00E1s (\u002B4)",
+        "id": "Koszali_kardal",
+        "nev": "Kőszáli kardal",
+        "leiras": "gyors és ügyes Mászás (+4)",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 49,
         "d100_end": 55,
-        "nev": "Mad\u00E1rbar\u00E1t trilla",
-        "leiras": "a k\u00F6rny\u00E9kbeli \u00E9nekesmadarak a dalnok seg\u00EDts\u00E9g\u00E9re sietnek",
+        "id": "Madarbarat_trilla",
+        "nev": "Madárbarát trilla",
+        "leiras": "a környékbeli énekesmadarak a dalnok segítségére sietnek",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 56,
         "d100_end": 59,
-        "nev": "M\u00E1gia olvas\u00E1sa",
-        "leiras": "10/szint percig k\u00E9pess\u00E9 tesz a m\u00E1gikus sz\u00F6vegek elolvas\u00E1s\u00E1ra",
+        "id": "Magia_olvasasa",
+        "nev": "Mágia olvasása",
+        "leiras": "10/szint percig képessé tesz a mágikus szövegek elolvasására",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 60,
         "d100_end": 66,
-        "nev": "A n\u00E9v k\u00F6telez",
-        "leiras": "10/szint percig el\u0151kel\u0151nek \u00E9s jelent\u0151snek l\u00E1ttat 1/szint f\u0151t",
+        "id": "A_nev_kotelez",
+        "nev": "A név kötelez",
+        "leiras": "10/szint percig előkelőnek és jelentősnek láttat 1/szint főt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 67,
         "d100_end": 71,
-        "nev": "Nyugalmas \u00E1ria",
-        "leiras": "b\u00E9ke \u00E9s nyugalom \u00E9rzet\u00E9t bor\u00EDtja a ter\u00FCletre",
+        "id": "Nyugalmas_aria",
+        "nev": "Nyugalmas ária",
+        "leiras": "béke és nyugalom érzetét borítja a területre",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 72,
         "d100_end": 76,
+        "id": "Pajzsfal_pavane",
         "nev": "Pajzsfal pavane",
-        "leiras": "\u002B2 VO-t ad\u00F3 pajzsfalat teremt",
+        "leiras": "+2 VO-t adó pajzsfalat teremt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 77,
         "d100_end": 80,
-        "nev": "Szell\u0151 szvit",
-        "leiras": "er\u0151s, tiszta szell\u0151t id\u00E9z",
+        "id": "Szello_szvit",
+        "nev": "Szellő szvit",
+        "leiras": "erős, tiszta szellőt idéz",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 81,
         "d100_end": 84,
-        "nev": "Szuny\u00F3k\u00E1l\u00F3 nokt\u00FCrn",
-        "leiras": "20 \u002B 10/szint percig tart\u00F3 pihen\u00E9s, 30 percenk\u00E9nt 1 Hp gy\u00F3gyul\u00E1s, m\u00E9reg \u00E9s betegs\u00E9g nem hat",
+        "id": "Szunyokalo_nokturn",
+        "nev": "Szunyókáló noktürn",
+        "leiras": "20 + 10/szint percig tartó pihenés, 30 percenként 1 Hp gyógyulás, méreg és betegség nem hat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 85,
         "d100_end": 90,
-        "nev": "T\u0151rvet\u0151 t\u00E9tel",
-        "leiras": "1/szint k\u00F6rig k\u00F6r\u00F6nk\u00E9nt 1 t\u0151rt eleven\u00EDt meg, sebz\u00E9s\u00FCk 1d4 \u002B 1/3 szint Hp",
+        "id": "Torveto_tetel",
+        "nev": "Tőrvető tétel",
+        "leiras": "1/szint körig körönként 1 tőrt elevenít meg, sebzésük 1d4 + 1/3 szint Hp",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 91,
         "d100_end": 95,
-        "nev": "\u00DAti \u00E9nek",
-        "leiras": "1/szint \u00F3r\u00E1ig szintenk\u00E9nt \u002B10% halad\u00E1st ad\u00F3, f\u00E1rads\u00E1g n\u00E9lk\u00FCli menetel\u00E9s",
+        "id": "uti_enek",
+        "nev": "Úti ének",
+        "leiras": "1/szint óráig szintenként +10% haladást adó, fáradság nélküli menetelés",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 96,
         "d100_end": 100,
-        "nev": "Vir\u00E1gz\u00F3 vok\u00E1l",
-        "leiras": "5/szint percig vir\u00E1gokat fakaszthat",
+        "id": "Viragzo_vokal",
+        "nev": "Virágzó vokál",
+        "leiras": "5/szint percig virágokat fakaszthat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 1,
         "d100_end": 12,
-        "nev": "D\u00E1rdavet\u0151 dal",
-        "leiras": "1/szint k\u00F6rig k\u00F6r\u00F6nk\u00E9nt 2 dob\u00F3fegyvert eleven\u00EDt meg, sebz\u00E9se Er\u0151b\u00F3nusz helyett \u002B1 Hp/szint",
+        "id": "Dardaveto_dal",
+        "nev": "Dárdavető dal",
+        "leiras": "1/szint körig körönként 2 dobófegyvert elevenít meg, sebzése Erőbónusz helyett +1 Hp/szint",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 13,
         "d100_end": 29,
-        "nev": "D\u00E9lib\u00E1bos dallam",
-        "leiras": "egyszer\u0171bb k\u00E9pi ill\u00FAzi\u00F3kat teremt",
+        "id": "Delibabos_dallam",
+        "nev": "Délibábos dallam",
+        "leiras": "egyszerűbb képi illúziókat teremt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 30,
         "d100_end": 37,
-        "nev": "Emelked\u0151 men\u00FCett",
-        "leiras": "1 k\u00F6r/szintig a leveg\u0151be emel \u00BD szint c\u00E9lpontot",
+        "id": "Emelkedo_menuett",
+        "nev": "Emelkedő menüett",
+        "leiras": "1 kör/szintig a levegőbe emel ½ szint célpontot",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 38,
         "d100_end": 44,
-        "nev": "Energikus et\u0171d",
-        "leiras": "felfriss\u00EDt\u0151 hat\u00E1s\u00FA \u00E9nekkel megsz\u00FCnteti a m\u00E1gikus \u00E1lmot, kimer\u00FClts\u00E9get, \u00E9s 1-1 pont tulajdons\u00E1gveszt\u00E9st",
+        "id": "Energikus_etud",
+        "nev": "Energikus etűd",
+        "leiras": "felfrissítő hatású énekkel megszünteti a mágikus álmot, kimerültséget, és 1-1 pont tulajdonságvesztést",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 45,
         "d100_end": 51,
-        "nev": "K\u00F6t\u00E9lk\u00FAsz\u00F3 szeren\u00E1d",
-        "leiras": "megeleven\u00EDt egy k\u00F6telet vagy ind\u00E1t",
+        "id": "Kotelkuszo_szerenad",
+        "nev": "Kötélkúszó szerenád",
+        "leiras": "megelevenít egy kötelet vagy indát",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 52,
         "d100_end": 61,
-        "nev": "Mened\u00E9k men\u00FCett",
-        "leiras": "10/szint percig tart\u00F3, \u00FCld\u00F6z\u0151k \u00E9s term\u00E9szeti er\u0151k elleni v\u00E9delmet ad\u00F3 mened\u00E9ket teremt:",
+        "id": "Menedek_menuett",
+        "nev": "Menedék menüett",
+        "leiras": "10/szint percig tartó, üldözők és természeti erők elleni védelmet adó menedéket teremt:",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 62,
         "d100_end": 68,
-        "nev": "R\u00E9gi \u00FAtjaink refr\u00E9nje",
-        "leiras": "visszak\u00F6veti egy szem\u00E9ly l\u00E9p\u00E9seit",
+        "id": "Regi_utjaink_refrenje",
+        "nev": "Régi útjaink refrénje",
+        "leiras": "visszaköveti egy személy lépéseit",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "a szem\u00E9ly cip\u0151je",
-        "opcionalis_komponens": ""
+        "komponens": "a személy cipője"
       },
       {
         "szint": 2,
         "d100_start": 69,
         "d100_end": 78,
-        "nev": "Reverz\u00EDv refr\u00E9n",
-        "leiras": "az \u00E9nek id\u0151tartam\u00E1nak k\u00E9tszeres\u00E9ig megb\u00E9n\u00EDt egy 6. szint alatti c\u00E9lpontot",
+        "id": "Reverziv_refren",
+        "nev": "Reverzív refrén",
+        "leiras": "az ének időtartamának kétszereséig megbénít egy 6. szint alatti célpontot",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 79,
         "d100_end": 86,
-        "nev": "Tisztal\u00E9g taktus",
-        "leiras": "az \u00E9nek v\u00E9g\u00E9ig \u002B10/szint percig 20\u0027 sugar\u00FA k\u00F6rben v\u00E9d a l\u00E9gz\u00E9sk\u00E1rosod\u00E1s ellen",
+        "id": "Tisztaleg_taktus",
+        "nev": "Tisztalég taktus",
+        "leiras": "az ének végéig +10/szint percig 20' sugarú körben véd a légzéskárosodás ellen",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 87,
         "d100_end": 93,
-        "nev": "Tollk\u00F6nny\u0171 toccata",
-        "leiras": "1/szint l\u00E9ny tollpihe k\u00F6nnyeds\u00E9g\u00E9vel mozoghat",
+        "id": "Tollkonnyu_toccata",
+        "nev": "Tollkönnyű toccata",
+        "leiras": "1/szint lény tollpihe könnyedségével mozoghat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 94,
         "d100_end": 100,
-        "nev": "T\u00F6vishoz\u00F3 ballada",
-        "leiras": "1/szint k\u00F6rig k\u00F6r\u00F6nk\u00E9nt 20\u0027*20\u0027 t\u00F6visboz\u00F3t (2d4 Hp/k\u00F6r), 1/szint \u00F3r\u00E1ig",
+        "id": "Tovishozo_ballada",
+        "nev": "Tövishozó ballada",
+        "leiras": "1/szint körig körönként 20'*20' tövisbozót (2d4 Hp/kör), 1/szint óráig",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 1,
         "d100_end": 10,
-        "nev": "\u00C1rnyj\u00E1t\u00E9k trilla",
-        "leiras": "1/szint \u00E1rnyalakot teremt, amelyek elvonj\u00E1k a figyelmesek tekintet\u00E9t, egy szem\u00E9lyre mondva -4-et ad a c\u00E9lz\u00E1sra",
+        "id": "arnyjatek_trilla",
+        "nev": "Árnyjáték trilla",
+        "leiras": "1/szint árnyalakot teremt, amelyek elvonják a figyelmesek tekintetét, egy személyre mondva -4-et ad a célzásra",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 11,
         "d100_end": 18,
-        "nev": "Elrettent\u0151 ellenpont",
-        "leiras": "szintenk\u00E9nt 10 szintnyi ellenf\u00E9l elmenek\u00FCl",
+        "id": "Elrettento_ellenpont",
+        "nev": "Elrettentő ellenpont",
+        "leiras": "szintenként 10 szintnyi ellenfél elmenekül",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 19,
         "d100_end": 26,
-        "nev": "Fejf\u00E1jd\u00EDt\u00F3 fin\u00E1l\u00E9",
-        "leiras": "1/szint k\u00F6rig megakad\u00E1lyozza a var\u00E1zsl\u00E1st vagy koncentr\u00E1ci\u00F3t",
+        "id": "Fejfajdito_finale",
+        "nev": "Fejfájdító finálé",
+        "leiras": "1/szint körig megakadályozza a varázslást vagy koncentrációt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 27,
         "d100_end": 36,
-        "nev": "K\u00F6dlepel k\u00E1non",
-        "leiras": "1/szint \u00F3r\u00E1ig tart\u00F3, nagy ter\u00FCletre hat\u00F3 k\u00F6dlepel",
+        "id": "Kodlepel_kanon",
+        "nev": "Ködlepel kánon",
+        "leiras": "1/szint óráig tartó, nagy területre ható ködlepel",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 37,
         "d100_end": 42,
-        "nev": "Lament\u00E1l\u00F3 \u00E1ria",
-        "leiras": "a hallgat\u00F3k 1/szint k\u00F6rig s\u00E9relmek \u00E1ldozat\u00E1nak v\u00E9lik a dalnokot, \u00E9s igyekeznek ezen seg\u00EDteni",
+        "id": "Lamentalo_aria",
+        "nev": "Lamentáló ária",
+        "leiras": "a hallgatók 1/szint körig sérelmek áldozatának vélik a dalnokot, és igyekeznek ezen segíteni",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 43,
         "d100_end": 50,
-        "nev": "M\u00E1glya men\u00FCett",
-        "leiras": "m\u00E1gly\u00E1nyi t\u00FCzet teremt egy 20\u0027 sugar\u00FA k\u00F6rben, 1d6 Hp/k\u00F6r",
+        "id": "Maglya_menuett",
+        "nev": "Máglya menüett",
+        "leiras": "máglyányi tüzet teremt egy 20' sugarú körben, 1d6 Hp/kör",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 51,
         "d100_end": 56,
-        "nev": "Menetel\u0151 mars",
-        "leiras": "lelass\u00EDtja 10/szint szem\u00E9ly menetel\u00E9s\u00E9t, \u00E9s megterheli \u0151ket",
+        "id": "Menetelo_mars",
+        "nev": "Menetelő mars",
+        "leiras": "lelassítja 10/szint személy menetelését, és megterheli őket",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 57,
         "d100_end": 70,
-        "nev": "Ny\u00EDlz\u00E1por \u00E1ria",
-        "leiras": "1/szint k\u00F6rig k\u00F6r\u00F6nk\u00E9nt 6 ny\u00EDlvessz\u0151t eleven\u00EDt meg, sebz\u00E9s\u00FCk 1d6\u002B1 Hp",
+        "id": "Nyilzapor_aria",
+        "nev": "Nyílzápor ária",
+        "leiras": "1/szint körig körönként 6 nyílvesszőt elevenít meg, sebzésük 1d6+1 Hp",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 71,
         "d100_end": 80,
-        "nev": "T\u00E1ncol\u00F3 taktus",
-        "leiras": "1/szint l\u00E9ny vad t\u00E1ncba kezd, 2 szintenk\u00E9nt -1 pr\u00F3badob\u00E1sokra",
+        "id": "Tancolo_taktus",
+        "nev": "Táncoló taktus",
+        "leiras": "1/szint lény vad táncba kezd, 2 szintenként -1 próbadobásokra",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 81,
         "d100_end": 86,
-        "nev": "Toborz\u00F3 temp\u00F3",
-        "leiras": "10/szint f\u0151b\u0151l \u00E1ll\u00F3 seg\u00EDt\u0151k\u00E9sz t\u00F6meget vonz, katon\u00E1kon \u002B1 t\u00E1mad\u00E1s, ment\u0151, kiv\u00E1l\u00F3 mor\u00E1l",
+        "id": "Toborzo_tempo",
+        "nev": "Toborzó tempó",
+        "leiras": "10/szint főből álló segítőkész tömeget vonz, katonákon +1 támadás, mentő, kiváló morál",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 87,
         "d100_end": 92,
-        "nev": "Var\u00E1zsp\u00E1lca vers",
-        "leiras": "egy botba vagy p\u00E1lc\u00E1ba t\u00F6lt 5 db 1-2. szint\u0171 var\u00E1zslatot",
+        "id": "Varazspalca_vers",
+        "nev": "Varázspálca vers",
+        "leiras": "egy botba vagy pálcába tölt 5 db 1-2. szintű varázslatot",
         "megfordithato": false,
-        "variabilis": true,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": true
       },
       {
         "szint": 3,
         "d100_start": 93,
         "d100_end": 100,
-        "nev": "Virtu\u00F3z brav\u00FAra",
-        "leiras": "10/szint percig \u002B2-t ad a k\u00E9pzetts\u00E9gpr\u00F3b\u00E1kra",
+        "id": "Virtuoz_bravura",
+        "nev": "Virtuóz bravúra",
+        "leiras": "10/szint percig +2-t ad a képzettségpróbákra",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       }
     ]
   },
@@ -3066,666 +2932,610 @@
     "tomor": [
       {
         "szint": 0,
-        "nev": "\u00C9lelem \u00E9s v\u00EDz megtiszt\u00EDt\u00E1sa / \u00C9lelem \u00E9s v\u00EDz beszennyez\u00E9se",
-        "leiras": "tiszt\u00E1v\u00E1 \u00E9s fogyaszthat\u00F3v\u00E1 teszi, vagy beszennyezi az \u00E9lelmet \u00E9s vizet",
+        "id": "elelem_es_viz_megtisztitasa_/_elelem_es_viz_beszennyezese",
+        "nev": "Élelem és víz megtisztítása / Élelem és víz beszennyezése",
+        "leiras": "tisztává és fogyaszthatóvá teszi, vagy beszennyezi az élelmet és vizet",
         "megfordithato": true,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 0,
-        "nev": "F\u00E9ny",
-        "leiras": "f\u00E1kly\u00E1nak megfelel\u0151 f\u00E9nyt ad 60 \u002B 10/szint percig",
+        "id": "Feny",
+        "nev": "Fény",
+        "leiras": "fáklyának megfelelő fényt ad 60 + 10/szint percig",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 0,
-        "nev": "M\u00E9reg \u00E9rz\u00E9kel\u00E9se",
-        "leiras": "\u00E9rz\u00E9keli a m\u00E9rgeket",
+        "id": "Mereg_erzekelese",
+        "nev": "Méreg érzékelése",
+        "leiras": "érzékeli a mérgeket",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 0,
-        "nev": "T\u00E1ncol\u00F3 f\u00E9nyek",
-        "leiras": "2/szint k\u00F6rig 1d6 kicsiny, mozgathat\u00F3 f\u00E9nyforr\u00E1st teremt",
+        "id": "Tancolo_fenyek",
+        "nev": "Táncoló fények",
+        "leiras": "2/szint körig 1d6 kicsiny, mozgatható fényforrást teremt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 1,
         "d100_end": 15,
-        "nev": "\u00C1llatok bar\u00E1tja",
-        "leiras": "h\u0171s\u00E9ges \u00E1llati k\u00F6vet\u0151ket szerez a druid\u00E1nak",
+        "id": "allatok_baratja",
+        "nev": "Állatok barátja",
+        "leiras": "hűséges állati követőket szerez a druidának",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 16,
         "d100_end": 25,
-        "nev": "J\u00F3bogy\u00F3 / Rosszbogy\u00F3",
-        "leiras": "2d4 bogy\u00F3t teremt, 1-1 napi \u00E9lelem \u00E9s 2 Hp gy\u00F3gy\u00EDt\u00E1s, vagy egy napig -2 dob\u00E1sokra",
+        "id": "Jobogyo_/_Rosszbogyo",
+        "nev": "Jóbogyó / Rosszbogyó",
+        "leiras": "2d4 bogyót teremt, 1-1 napi élelem és 2 Hp gyógyítás, vagy egy napig -2 dobásokra",
         "megfordithato": true,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 26,
         "d100_end": 35,
-        "nev": "K\u00F6dfal",
-        "leiras": "10/szint percig tart\u00F3 k\u00F6dfal, a bel\u00E9t\u00E9ved\u0151k egy k\u00F6r ut\u00E1n Akarater\u0151vel szabadulhatnak",
+        "id": "Kodfal",
+        "nev": "Ködfal",
+        "leiras": "10/szint percig tartó ködfal, a belétévedők egy kör után Akaraterővel szabadulhatnak",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 36,
         "d100_end": 45,
-        "nev": "K\u00F6r\u00FClfon\u00E1s",
-        "leiras": "10 k\u00F6rig megk\u00F6t\u00F6zi a 20\u0027 sugar\u00FA k\u00F6rben \u00E1ll\u00F3 c\u00E9lpontokat",
+        "id": "Korulfonas",
+        "nev": "Körülfonás",
+        "leiras": "10 körig megkötözi a 20' sugarú körben álló célpontokat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 46,
         "d100_end": 50,
-        "nev": "M\u00E1gia \u00E9rz\u00E9kel\u00E9se",
-        "leiras": "10 percig \u00E9rz\u00E9keli a m\u00E1gikus er\u0151ket \u00E9s var\u00E1zst\u00E1rgyakat",
+        "id": "Magia_erzekelese",
+        "nev": "Mágia érzékelése",
+        "leiras": "10 percig érzékeli a mágikus erőket és varázstárgyakat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 51,
         "d100_end": 55,
-        "nev": "M\u00E1gia olvas\u00E1sa",
-        "leiras": "10/szint percig k\u00E9pess\u00E9 tesz a m\u00E1gikus sz\u00F6vegek elolvas\u00E1s\u00E1ra",
+        "id": "Magia_olvasasa",
+        "nev": "Mágia olvasása",
+        "leiras": "10/szint percig képessé tesz a mágikus szövegek elolvasására",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 56,
         "d100_end": 65,
-        "nev": "Mened\u00E9k",
-        "leiras": "2 \u002B 1/szint k\u00F6rig mened\u00E9ket ny\u00FAjt a t\u00E1mad\u00E1sok ellen, de nem lehet bel\u0151le t\u00E1madni",
+        "id": "Menedek",
+        "nev": "Menedék",
+        "leiras": "2 + 1/szint körig menedéket nyújt a támadások ellen, de nem lehet belőle támadni",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 66,
         "d100_end": 75,
-        "nev": "N\u00F6vel\u00E9s / Zsugor\u00EDt\u00E1s",
-        "leiras": "10/szint percig szintenk\u00E9nt 20%-kal megn\u00F6veli vagy \u00F6sszezsugor\u00EDtja az \u00E9l\u0151l\u00E9nyeket \u00E9s 10%-kal a t\u00E1rgyakat",
+        "id": "Noveles_/_Zsugoritas",
+        "nev": "Növelés / Zsugorítás",
+        "leiras": "10/szint percig szintenként 20%-kal megnöveli vagy összezsugorítja az élőlényeket és 10%-kal a tárgyakat",
         "megfordithato": true,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 76,
         "d100_end": 85,
-        "nev": "T\u00FCnd\u00E9rt\u0171z",
-        "leiras": "4/szint percig 20\u0027 sugar\u00FA k\u00F6rben var\u00E1zsf\u00E9nnyel veszi k\u00F6r\u00FCl a c\u00E9lpontjait",
+        "id": "Tundertuz",
+        "nev": "Tündértűz",
+        "leiras": "4/szint percig 20' sugarú körben varázsfénnyel veszi körül a célpontjait",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 86,
         "d100_end": 95,
-        "nev": "Var\u00E1zsfurk\u00F3s",
-        "leiras": "10/szint k\u00F6rig 2d4\u002B1-re n\u00F6veli \u00E9s m\u00E1gikuss\u00E1 teszi egy bot vagy bunk\u00F3 sebz\u00E9s\u00E9t",
+        "id": "Varazsfurkos",
+        "nev": "Varázsfurkós",
+        "leiras": "10/szint körig 2d4+1-re növeli és mágikussá teszi egy bot vagy bunkó sebzését",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 1,
         "d100_start": 96,
         "d100_end": 100,
-        "nev": "V\u00E9delem az elemekt\u0151l",
-        "leiras": "1/szint \u00F3r\u00E1ig immunit\u00E1st ad egy elem hat\u00E1sai ellen, er\u0151s \u00E1rt\u00F3 hat\u00E1sb\u00F3l felfog 10 Hp-t, majd megsz\u0171nik.",
+        "id": "Vedelem_az_elemektol",
+        "nev": "Védelem az elemektől",
+        "leiras": "1/szint óráig immunitást ad egy elem hatásai ellen, erős ártó hatásból felfog 10 Hp-t, majd megszűnik.",
         "megfordithato": false,
-        "variabilis": true,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": true
       },
       {
         "szint": 2,
         "d100_start": 1,
         "d100_end": 5,
-        "nev": "\u00C1llati h\u00EDrn\u00F6k",
-        "leiras": "\u00FCzenetet k\u00FCld egy k\u00F6z\u00F6ns\u00E9ges \u00E1llattal egy ismert helyre",
+        "id": "allati_hirnok",
+        "nev": "Állati hírnök",
+        "leiras": "üzenetet küld egy közönséges állattal egy ismert helyre",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 6,
         "d100_end": 15,
-        "nev": "\u00C1llatok \u00E9s n\u00F6v\u00E9nyek meglel\u00E9se",
-        "leiras": "\u00E9szleli a k\u00EDv\u00E1nt fajta \u00E1llatok vagy n\u00F6v\u00E9nyek jelenl\u00E9t\u00E9t",
+        "id": "allatok_es_novenyek_meglelese",
+        "nev": "Állatok és növények meglelése",
+        "leiras": "észleli a kívánt fajta állatok vagy növények jelenlétét",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 16,
         "d100_end": 20,
-        "nev": "\u00C1llatok megbabon\u00E1z\u00E1sa",
-        "leiras": "sz\u00F3noklattal 1 \u00F3r\u00E1ig megbabon\u00E1z egy \u00E1llatokb\u00F3l \u00E1ll\u00F3 t\u00F6meget",
+        "id": "allatok_megbabonazasa",
+        "nev": "Állatok megbabonázása",
+        "leiras": "szónoklattal 1 óráig megbabonáz egy állatokból álló tömeget",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 21,
         "d100_end": 30,
-        "nev": "Besz\u00E9d az \u00E1llatokkal",
-        "leiras": "2/szint k\u00F6rig besz\u00E9dbe elegyedhet az \u00E1llatokkal",
+        "id": "Beszed_az_allatokkal",
+        "nev": "Beszéd az állatokkal",
+        "leiras": "2/szint körig beszédbe elegyedhet az állatokkal",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 31,
         "d100_end": 35,
-        "nev": "Faform\u00E1z\u00E1s",
-        "leiras": "\u00E1tform\u00E1l vagy elg\u00F6rb\u00EDt 1/szint fat\u00E1rgyat, n\u00F6v\u00E9nysz\u00F6rnyeken 1d8 Hp/2 szint",
+        "id": "Faformazas",
+        "nev": "Faformázás",
+        "leiras": "átformál vagy elgörbít 1/szint fatárgyat, növényszörnyeken 1d8 Hp/2 szint",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 36,
         "d100_end": 45,
-        "nev": "F\u00E9mhev\u00EDt\u00E9s",
-        "leiras": "7 k\u00F6rig t\u0171zforr\u00F3ra hev\u00EDt egy f\u00E9mt\u00E1rgyat, 2. k\u00F6rt\u0151l 1d6 Hp/k\u00F6r, nagy t\u00E1rgyakon 3. k\u00F6rt\u0151l 2d6 Hp/k\u00F6r, kis t\u00E1rgyakon azonnal 1-2 Hp/k\u00F6r",
+        "id": "Femhevites",
+        "nev": "Fémhevítés",
+        "leiras": "7 körig tűzforróra hevít egy fémtárgyat, 2. körtől 1d6 Hp/kör, nagy tárgyakon 3. körtől 2d6 Hp/kör, kis tárgyakon azonnal 1-2 Hp/kör",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 46,
         "d100_end": 50,
-        "nev": "K\u00E9regb\u0151r",
-        "leiras": "16-os VO-t, 4 szintenk\u00E9nt \u002B1-et ad 10/szint percig",
+        "id": "Keregbor",
+        "nev": "Kéregbőr",
+        "leiras": "16-os VO-t, 4 szintenként +1-et ad 10/szint percig",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 51,
         "d100_end": 65,
-        "nev": "Kisebb sebek gy\u00F3gy\u00EDt\u00E1sa / Kisebb sebek okoz\u00E1sa",
-        "leiras": "1d8 \u002B 1/szint Hp-t gy\u00F3gy\u00EDt vagy sebez",
+        "id": "Kisebb_sebek_gyogyitasa_/_Kisebb_sebek_okozasa",
+        "nev": "Kisebb sebek gyógyítása / Kisebb sebek okozása",
+        "leiras": "1d8 + 1/szint Hp-t gyógyít vagy sebez",
         "megfordithato": true,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 66,
         "d100_end": 70,
-        "nev": "K\u00F6dfelh\u0151",
-        "leiras": "10/szint k\u00F6rig tart\u00F3 k\u00F6dfelh\u0151 40\u0027*40\u0027 ter\u00FCleten, a bel\u00E9t\u00E9ved\u0151k egy k\u00F6r ut\u00E1n Akarater\u0151vel szabadulhatnak",
+        "id": "Kodfelho",
+        "nev": "Ködfelhő",
+        "leiras": "10/szint körig tartó ködfelhő 40'*40' területen, a belétévedők egy kör után Akaraterővel szabadulhatnak",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 71,
         "d100_end": 75,
-        "nev": "L\u00E1ngpenge",
-        "leiras": "4 \u002B 1/szint k\u00F6rig tart\u00F3 m\u00E1gikus l\u00E1ngnyelv, sebz\u00E9se 1d6\u002B2 \u002B1/2 szint, elv\u00E9tett Reflex eset\u00E9n felgy\u00FAjt",
+        "id": "Langpenge",
+        "nev": "Lángpenge",
+        "leiras": "4 + 1/szint körig tartó mágikus lángnyelv, sebzése 1d6+2 +1/2 szint, elvétett Reflex esetén felgyújt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 76,
         "d100_end": 85,
-        "nev": "M\u00E9reg lelass\u00EDt\u00E1sa",
-        "leiras": "1/szint \u00F3r\u00E1ig megakad\u00E1lyozza a m\u00E9rgek m\u0171k\u00F6d\u00E9s\u00E9t",
+        "id": "Mereg_lelassitasa",
+        "nev": "Méreg lelassítása",
+        "leiras": "1/szint óráig megakadályozza a mérgek működését",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 86,
         "d100_end": 90,
-        "nev": "\u00D3men",
-        "leiras": "70% \u002B 1%/szint es\u00E9llyel kisebb j\u00F3sjelet k\u00FCld",
+        "id": "omen",
+        "nev": "Ómen",
+        "leiras": "70% + 1%/szint eséllyel kisebb jósjelet küld",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "25 at f\u00FCst\u00F6l\u0151",
-        "opcionalis_komponens": ""
+        "komponens": "25 at füstölő"
       },
       {
         "szint": 2,
         "d100_start": 91,
         "d100_end": 95,
-        "nev": "Por\u00F6rd\u00F6g",
-        "leiras": "2/szint k\u00F6rig kisebb, gyenge l\u00E9g\u00F6rv\u00E9nyt id\u00E9z",
+        "id": "Porordog",
+        "nev": "Porördög",
+        "leiras": "2/szint körig kisebb, gyenge légörvényt idéz",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 2,
         "d100_start": 96,
         "d100_end": 100,
-        "nev": "Sz\u00E9lroham",
-        "leiras": "sz\u00E9ll\u00F6k\u00E9ssel kioltja a l\u00E1ngokat \u00E9s led\u00F6nti vagy elf\u00FAjja az ellenfeleket",
+        "id": "Szelroham",
+        "nev": "Szélroham",
+        "leiras": "széllökéssel kioltja a lángokat és ledönti vagy elfújja az ellenfeleket",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 1,
         "d100_end": 8,
-        "nev": "\u00C1llatok megid\u00E9z\u00E9se I.",
-        "leiras": "1d6 els\u0151 szint\u0171 term\u00E9szeti l\u00E9nyt id\u00E9z 10 percre",
+        "id": "allatok_megidezese_I.",
+        "nev": "Állatok megidézése I.",
+        "leiras": "1d6 első szintű természeti lényt idéz 10 percre",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 9,
         "d100_end": 16,
-        "nev": "\u00C1tok / \u00C1tok elt\u00E1vol\u00EDt\u00E1sa",
-        "leiras": "meg\u00E1tkoz egy l\u00E9nyt, vagy megsz\u00FCntet egy \u00E1tkot",
+        "id": "atok_/_atok_eltavolitasa",
+        "nev": "Átok / Átok eltávolítása",
+        "leiras": "megátkoz egy lényt, vagy megszüntet egy átkot",
         "megfordithato": true,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 17,
         "d100_end": 21,
-        "nev": "Azonos\u00EDt\u00E1s",
-        "leiras": "meg\u00E1llap\u00EDtja egy, druidikus szent helyen hagyott t\u00E1rgy m\u00E1gikus funkci\u00F3it, 1 pr\u00F3ba/szint",
+        "id": "Azonositas",
+        "nev": "Azonosítás",
+        "leiras": "megállapítja egy, druidikus szent helyen hagyott tárgy mágikus funkcióit, 1 próba/szint",
         "megfordithato": false,
         "variabilis": true,
-        "komponens": "100 at \u00E1ldozati aj\u00E1nd\u00E9k",
-        "opcionalis_komponens": ""
+        "komponens": "100 at áldozati ajándék"
       },
       {
         "szint": 3,
         "d100_start": 22,
         "d100_end": 27,
-        "nev": "Besz\u00E9d a n\u00F6v\u00E9nyekkel",
-        "leiras": "egy n\u00F6v\u00E9ny k\u00E9t szintenk\u00E9nt egy k\u00E9rd\u00E9sre v\u00E1laszol",
+        "id": "Beszed_a_novenyekkel",
+        "nev": "Beszéd a növényekkel",
+        "leiras": "egy növény két szintenként egy kérdésre válaszol",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 28,
         "d100_end": 33,
-        "nev": "Betegs\u00E9g / Betegs\u00E9g gy\u00F3gy\u00EDt\u00E1sa",
-        "leiras": "betegs\u00E9ggel s\u00FAjtja a c\u00E9lpontot, vagy k\u00E9zr\u00E1t\u00E9ttel kigy\u00F3gy\u00EDtja abb\u00F3l",
+        "id": "Betegseg_/_Betegseg_gyogyitasa",
+        "nev": "Betegség / Betegség gyógyítása",
+        "leiras": "betegséggel sújtja a célpontot, vagy kézrátéttel kigyógyítja abból",
         "megfordithato": true,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 34,
         "d100_end": 39,
-        "nev": "K\u0151alak",
-        "leiras": "k\u0151szikl\u00E1v\u00E1 dermeszti a druid\u00E1t",
+        "id": "Koalak",
+        "nev": "Kőalak",
+        "leiras": "kősziklává dermeszti a druidát",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 40,
         "d100_end": 49,
-        "nev": "K\u00F6zepes sebek gy\u00F3gy\u00EDt\u00E1sa / K\u00F6zepes sebek okoz\u00E1sa",
-        "leiras": "2d8 \u002B 1/szint Hp-t gy\u00F3gy\u00EDt vagy sebez",
+        "id": "Kozepes_sebek_gyogyitasa_/_Kozepes_sebek_okozasa",
+        "nev": "Közepes sebek gyógyítása / Közepes sebek okozása",
+        "leiras": "2d8 + 1/szint Hp-t gyógyít vagy sebez",
         "megfordithato": true,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 50,
         "d100_end": 57,
-        "nev": "M\u00E9reg / M\u00E9reg semleges\u00EDt\u00E9se",
-        "leiras": "\u00E9rint\u00E9ssel 2d6/2d6 Eg\u00E9szs\u00E9g t\u00EDpus\u00FA m\u00E9rgez\u00E9st okoz, vagy megsz\u00FCnteti a m\u00E9rgez\u00E9st",
+        "id": "Mereg_/_Mereg_semlegesitese",
+        "nev": "Méreg / Méreg semlegesítése",
+        "leiras": "érintéssel 2d6/2d6 Egészség típusú mérgezést okoz, vagy megszünteti a mérgezést",
         "megfordithato": true,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 58,
         "d100_end": 65,
-        "nev": "N\u00F6v\u00E9nyn\u00F6veszt\u00E9s",
-        "leiras": "1/szint napig s\u0171r\u0171 n\u00F6v\u00E9nyzettel bor\u00EDt egy 5 Sztd sugar\u00FA vadonb\u00E9li ter\u00FCletet",
+        "id": "Novenynovesztes",
+        "nev": "Növénynövesztés",
+        "leiras": "1/szint napig sűrű növényzettel borít egy 5 Sztd sugarú vadonbéli területet",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": "ember\u00E1ldozattal v\u00E9gleges \u00E9s veszedelmes"
+        "opcionalis_komponens": "emberáldozattal végleges és veszedelmes"
       },
       {
         "szint": 3,
         "d100_start": 66,
         "d100_end": 73,
-        "nev": "Perzsel\u0151 f\u00E9ny",
-        "leiras": "2 szintenk\u00E9nt 1d8 Hp sebz\u00E9s, \u00E9l\u0151holtakon 1d6 Hp/szint",
+        "id": "Perzselo_feny",
+        "nev": "Perzselő fény",
+        "leiras": "2 szintenként 1d8 Hp sebzés, élőholtakon 1d6 Hp/szint",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 74,
         "d100_end": 81,
-        "nev": "Sz\u00E9lfal",
-        "leiras": "1/szint k\u00F6rig tart\u00F3 sz\u00E9lfallal t\u00E1voltartja a g\u00E1zokat, ny\u00EDlvessz\u0151ket \u00E9s \u00E1tl\u00E9p\u0151ket (Er\u0151pr\u00F3ba)",
+        "id": "Szelfal",
+        "nev": "Szélfal",
+        "leiras": "1/szint körig tartó szélfallal távoltartja a gázokat, nyílvesszőket és átlépőket (Erőpróba)",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 82,
         "d100_end": 87,
-        "nev": "Vaks\u00E1g/s\u00FCkets\u00E9g / Vaks\u00E1g/s\u00FCkets\u00E9g gy\u00F3gy\u00EDt\u00E1sa",
-        "leiras": "megvak\u00EDt vagy megs\u00FCket\u00EDt egy \u00E1ldozatot, vagy kigy\u00F3gy\u00EDtja ezekb\u0151l",
+        "id": "Vaksag/suketseg_/_Vaksag/suketseg_gyogyitasa",
+        "nev": "Vakság/süketség / Vakság/süketség gyógyítása",
+        "leiras": "megvakít vagy megsüketít egy áldozatot, vagy kigyógyítja ezekből",
         "megfordithato": false,
-        "variabilis": true,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": true
       },
       {
         "szint": 3,
         "d100_start": 88,
         "d100_end": 95,
-        "nev": "Vill\u00E1m sz\u00F3l\u00EDt\u00E1sa",
-        "leiras": "10/szint k\u00F6r\u00F6n bel\u00FCl 1/szint vill\u00E1m h\u00EDvhat\u00F3, 3d10 Hp, ment\u0151dob\u00E1ssal \u00BD",
+        "id": "Villam_szolitasa",
+        "nev": "Villám szólítása",
+        "leiras": "10/szint körön belül 1/szint villám hívható, 3d10 Hp, mentődobással ½",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 3,
         "d100_start": 96,
         "d100_end": 100,
-        "nev": "V\u00EDzalatti l\u00E9gz\u00E9s",
-        "leiras": "1/szint \u00F3r\u00E1ig k\u00E9pess\u00E9 tesz a v\u00EDzalatti l\u00E9gz\u00E9sre",
+        "id": "Vizalatti_legzes",
+        "nev": "Vízalatti légzés",
+        "leiras": "1/szint óráig képessé tesz a vízalatti légzésre",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 1,
         "d100_end": 10,
-        "nev": "\u00C1llatok megid\u00E9z\u00E9se II.",
-        "leiras": "1d6 m\u00E1sodik vagy 2d6 els\u0151 szint\u0171 term\u00E9szeti l\u00E9nyt id\u00E9z 20 percre",
+        "id": "allatok_megidezese_II.",
+        "nev": "Állatok megidézése II.",
+        "leiras": "1d6 második vagy 2d6 első szintű természeti lényt idéz 20 percre",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 11,
         "d100_end": 20,
-        "nev": "Az erd\u0151k kapuja",
-        "leiras": "\u00E1tl\u00E9phet k\u00E9t, 1 Sztd/szint t\u00E1vols\u00E1g\u00FA fa k\u00F6z\u00F6tt (szent f\u00E1kn\u00E1l 10 Sztd/szint), vagy 1/szint \u00F3r\u00E1ig a f\u00E1ban rejt\u0151zhet",
+        "id": "Az_erdok_kapuja",
+        "nev": "Az erdők kapuja",
+        "leiras": "átléphet két, 1 Sztd/szint távolságú fa között (szent fáknál 10 Sztd/szint), vagy 1/szint óráig a fában rejtőzhet",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 21,
         "d100_end": 40,
-        "nev": "J\u00F3sl\u00E1s",
-        "leiras": "60% \u002B 1%/szint es\u00E9llyel kriptikus v\u00E1laszt ad egy k\u00E9rd\u00E9sre",
+        "id": "Joslas",
+        "nev": "Jóslás",
+        "leiras": "60% + 1%/szint eséllyel kriptikus választ ad egy kérdésre",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "100 at \u00E1ldozati j\u00F3sz\u00E1g \u00E9s f\u00FCst\u00F6l\u0151",
-        "opcionalis_komponens": ""
+        "komponens": "100 at áldozati jószág és füstölő"
       },
       {
         "szint": 4,
         "d100_start": 41,
         "d100_end": 50,
-        "nev": "A k\u0151 szolg\u00E1lata",
-        "leiras": "botba z\u00E1r egy nagyhatalm\u00FA szellemet; \u002B13 t\u00E1mad\u00E1s, 2d12\u002B3 sebz\u00E9s",
+        "id": "A_ko_szolgalata",
+        "nev": "A kő szolgálata",
+        "leiras": "botba zár egy nagyhatalmú szellemet; +13 támadás, 2d12+3 sebzés",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 51,
         "d100_end": 60,
-        "nev": "M\u00E1gia megsz\u00FCntet\u00E9se",
-        "leiras": "megsz\u00FCnteti a m\u00E1gikus hat\u00E1sokat \u00E9s var\u00E1zslatokat",
+        "id": "Magia_megszuntetese",
+        "nev": "Mágia megszüntetése",
+        "leiras": "megszünteti a mágikus hatásokat és varázslatokat",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 61,
         "d100_end": 70,
-        "nev": "Rovarv\u00E9sz",
-        "leiras": "10/szint percig megid\u00E9z 1d3\u002B2 rovarrajt",
+        "id": "Rovarvesz",
+        "nev": "Rovarvész",
+        "leiras": "10/szint percig megidéz 1d3+2 rovarrajt",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 71,
         "d100_end": 80,
-        "nev": "Sziv\u00E1rv\u00E1ny",
-        "leiras": "1/szint k\u00F6rig tart\u00F3 sziv\u00E1rv\u00E1nyhidat teremt, vagy m\u00E1gikus sziv\u00E1rv\u00E1ny\u00EDjat id\u00E9z",
+        "id": "Szivarvany",
+        "nev": "Szivárvány",
+        "leiras": "1/szint körig tartó szivárványhidat teremt, vagy mágikus szivárványíjat idéz",
         "megfordithato": false,
-        "variabilis": true,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": true
       },
       {
         "szint": 4,
         "d100_start": 81,
         "d100_end": 90,
-        "nev": "T\u00F6meges \u00E1tv\u00E1ltoztat\u00E1s",
-        "leiras": "megsz\u00FCntet\u00E9sig f\u00E1knak \u00E1lc\u00E1z 10/szintnyi humanoidot",
+        "id": "Tomeges_atvaltoztatas",
+        "nev": "Tömeges átváltoztatás",
+        "leiras": "megszüntetésig fáknak álcáz 10/szintnyi humanoidot",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 4,
         "d100_start": 91,
         "d100_end": 100,
-        "nev": "V\u00EDz ir\u00E1ny\u00EDt\u00E1sa",
-        "leiras": "10/szint percig 10%/szinttel emelhet\u0151/s\u00FCllyeszthet\u0151 a vizek szintje",
+        "id": "Viz_iranyitasa",
+        "nev": "Víz irányítása",
+        "leiras": "10/szint percig 10%/szinttel emelhető/süllyeszthető a vizek szintje",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 1,
         "d100_end": 10,
-        "nev": "\u00C1llatok megid\u00E9z\u00E9se III.",
-        "leiras": "1d6 harmadik, 2d6 m\u00E1sodik vagy 4d6 els\u0151 szint\u0171 term\u00E9szeti l\u00E9nyt id\u00E9z 30 percre",
+        "id": "allatok_megidezese_III.",
+        "nev": "Állatok megidézése III.",
+        "leiras": "1d6 harmadik, 2d6 második vagy 4d6 első szintű természeti lényt idéz 30 percre",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 11,
         "d100_end": 20,
-        "nev": "Eggy\u00E9v\u00E1l\u00E1s",
-        "leiras": "a term\u00E9szet er\u0151i szintenk\u00E9nt egy k\u00E9rd\u00E9sre v\u00E1laszolnak",
+        "id": "Eggyevalas",
+        "nev": "Eggyéválás",
+        "leiras": "a természet erői szintenként egy kérdésre válaszolnak",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 21,
         "d100_end": 30,
-        "nev": "Element\u00E1l megid\u00E9z\u00E9se",
-        "leiras": "2 \u00F3r\u00E1ig megid\u00E9z egy 12. szint\u0171 element\u00E1lt",
+        "id": "Elemental_megidezese",
+        "nev": "Elementál megidézése",
+        "leiras": "2 óráig megidéz egy 12. szintű elementált",
         "megfordithato": false,
         "variabilis": false,
-        "komponens": "nagy mennyis\u00E9g\u0171 elemi anyag",
-        "opcionalis_komponens": ""
+        "komponens": "nagy mennyiségű elemi anyag"
       },
       {
         "szint": 5,
         "d100_start": 31,
         "d100_end": 45,
-        "nev": "K\u0151b\u0151l iszap / Iszapb\u00F3l k\u0151",
-        "leiras": "iszapp\u00E1 v\u00E1ltoztat 20\u0027*20\u0027/szint k\u0151felsz\u00EDnt, vagy ford\u00EDtva",
+        "id": "Kobol_iszap_/_Iszapbol_ko",
+        "nev": "Kőből iszap / Iszapból kő",
+        "leiras": "iszappá változtat 20'*20'/szint kőfelszínt, vagy fordítva",
         "megfordithato": true,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 46,
         "d100_end": 55,
-        "nev": "K\u0151form\u00E1z\u00E1s",
-        "leiras": "tetsz\u00E9s szerint form\u00E1zhat 10\u0027*10\u0027*10\u0027 mennyis\u00E9g\u0171 k\u00F6vet",
+        "id": "Koformazas",
+        "nev": "Kőformázás",
+        "leiras": "tetszés szerint formázhat 10'*10'*10' mennyiségű követ",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 56,
         "d100_end": 65,
+        "id": "A_szelek_ura",
         "nev": "A szelek ura",
-        "leiras": "3 \u00F3r\u00E1ig uralja a szeleket 1 Sztd sugar\u00FA k\u00F6rben",
+        "leiras": "3 óráig uralja a szeleket 1 Sztd sugarú körben",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 66,
         "d100_end": 75,
-        "nev": "T\u00F6visfal",
-        "leiras": "3 \u00F3r\u00E1ig tart\u00F3 t\u00F6visfalat teremt, k\u00F6r\u00F6nk\u00E9nt 28  - VO Hp sebz\u00E9s",
+        "id": "Tovisfal",
+        "nev": "Tövisfal",
+        "leiras": "3 óráig tartó tövisfalat teremt, körönként 28  - VO Hp sebzés",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 76,
         "d100_end": 90,
-        "nev": "T\u0171zfal",
-        "leiras": "10 percig tart\u00F3 t\u0171zfalat emel, \u00E1tl\u00E9pve 4d4 \u002B 2/szint Hp, 5\u0027 k\u00F6zelben 2d4 Hp/k\u00F6r, 10\u0027 k\u00F6zelben 1d4 Hp/k\u00F6r",
+        "id": "Tuzfal",
+        "nev": "Tűzfal",
+        "leiras": "10 percig tartó tűzfalat emel, átlépve 4d4 + 2/szint Hp, 5' közelben 2d4 Hp/kör, 10' közelben 1d4 Hp/kör",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       },
       {
         "szint": 5,
         "d100_start": 91,
         "d100_end": 100,
-        "nev": "T\u0171zmagvak",
-        "leiras": "1/szint t\u0171zmagot teremt, sebz\u00E9se eldobva 2d8 Hp",
+        "id": "Tuzmagvak",
+        "nev": "Tűzmagvak",
+        "leiras": "1/szint tűzmagot teremt, sebzése eldobva 2d8 Hp",
         "megfordithato": false,
-        "variabilis": false,
-        "komponens": "",
-        "opcionalis_komponens": ""
+        "variabilis": false
       }
     ]
   }

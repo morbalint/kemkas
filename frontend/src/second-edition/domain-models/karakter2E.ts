@@ -8,6 +8,7 @@ import {Szintlepes} from "./szintlepes";
 import {AllowedFegyver} from "./allowed-fegyver";
 import {BaseHP} from "./masodlagos_ertekek";
 import {dAny} from "../../shared/domain-models/kockak";
+import {Varazslat} from "./varazslat";
 
 export interface Karakter2E {
     id?: string,
@@ -24,7 +25,9 @@ export interface Karakter2E {
     tolvajKepzettsegek?: KepzettsegId[]
     szint: number,
     felszereles: KarakterFelszereles,
-    szintlepesek: Szintlepes[]
+    szintlepesek: Szintlepes[],
+    ismertVarazslatok: Varazslat[],
+    memorizaltVarazslatok: Varazslat[],
 }
 
 export const DefaultKarakter: Karakter2E = {
@@ -45,7 +48,9 @@ export const DefaultKarakter: Karakter2E = {
     szintlepesek: [{
         osztaly: Osztaly2E.Tengeresz,
         HProll: 10,
-    }]
+    }],
+    ismertVarazslatok: [],
+    memorizaltVarazslatok: []
 }
 
 function setOsztalyForSzintLepes(szintlepesek: Szintlepes[], osztaly: Osztaly2E, szint: number): Szintlepes[] {
