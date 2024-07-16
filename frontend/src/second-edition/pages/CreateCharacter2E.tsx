@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useLoaderData, useNavigate, useParams} from "react-router-dom";
-import {OverlayTrigger, Toast, ToastContainer} from "react-bootstrap";
+import {OverlayTrigger, Spinner, Toast, ToastContainer} from "react-bootstrap";
 import {Karakter2E} from "../domain-models/karakter2E";
 import Tulajdonsagok2E from "../components/Tulajdonsagok2E";
 import OsztalySelector2E from "../components/OsztalySelector2E";
@@ -40,6 +40,8 @@ function CreateCharacter2E(props: {
     let [showSaveModal, setShowSaveModal] = useState(false);
     let [newId, setNewId] = useState(null as string | null)
     let [showSaved, setShowSaved] = useState(false);
+    let [isPDFRendering, setIsPDFRendering] = useState<boolean>(false)
+    let [isSaving, setIsSaving] = useState<boolean>(false)
     let [isPublic, setIsPublic] = useState(initialIsPublic);
     const newCharacterUrl = () => `${window.location.origin}/2e/karakter/${newId}`
 
@@ -54,6 +56,7 @@ function CreateCharacter2E(props: {
     }
     const hideSaved = () => setShowSaved(false);
     const onSaveClicked = async () => {
+        setIsSaving(true);
         faro?.api.pushEvent('character_stored', {
             osztaly: karakter.szintlepesek[0].osztaly.toString(),
             szint: karakter.szint.toString(),
@@ -64,16 +67,18 @@ function CreateCharacter2E(props: {
         if (id == null) {
             let recievedId = await StoreNewCharacter2E(karakter, isPublic);
             setNewId(recievedId)
+            setIsSaving(false)
             setShowSaveModal(true);
         } else {
             await UpdateCharacter2E(id, karakter, isPublic);
+            setIsSaving(false)
             setShowSaved(true);
             setTimeout(() => {
                 hideSaved();
             }, 5000)
         }
     }
-    
+
     return <div>
         <div className='container-fluid p-5 bg-black text-white text-center'>
             <h1>Karakter {!!id ? "szerkesztése" : "létrehozása"}</h1>
@@ -157,30 +162,34 @@ function CreateCharacter2E(props: {
                                         className='btn btn-danger btn-lg'
                                         type='button'
                                         onClick={onSaveClicked}
+                                        disabled={isSaving}
                                     >
-                                        Mentés
+                                        Mentés {isSaving ? <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" /> : ""}
                                     </button>
                                 </OverlayTrigger>
                                 : <button
                                     className='btn btn-danger btn-lg'
                                     type='button'
                                     onClick={onSaveClicked}
+                                    disabled={isSaving}
                                 >
-                                    Mentés
+                                    Mentés {isSaving ? <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" /> : ""}
                                 </button>
                             }
                         </div>
                     </div>
                     <div className="col-6">
                         <div className='d-grid gap-2 m-5'>
-                            <button className='btn btn-danger btn-lg' type='button' onClick={async () => {
+                            <button className='btn btn-danger btn-lg' type='button' disabled={isPDFRendering} onClick={async () => {
                                 faro?.api.pushEvent('character_created', {
                                     osztaly: karakter.szintlepesek[0].osztaly,
                                     szint: karakter.szint.toString(),
                                     faj: karakter.faj.toString(),
                                 })
+                                setIsPDFRendering(true)
                                 await CreatePDF(KarakterInputToPdfView(karakter))
-                            }}>PDF
+                                setIsPDFRendering(false)
+                            }}>PDF {isPDFRendering ? <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" /> : ""}
                             </button>
                         </div>
                     </div>
