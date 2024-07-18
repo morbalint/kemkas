@@ -37,6 +37,18 @@ export interface OsztalySzintVarazslat extends MagasabbSzintuVarazslat {
 
 export type OsztalyVarazslat = OsztalyCantrip | OsztalySzintVarazslat;
 
+export interface KarakterCantrip {
+    id: string
+    bekeszitve: boolean
+}
+
+export interface KarakterSzintVarazslat {
+    id: string
+    bekeszitve: boolean
+}
+
+export type KarakterVarazslat = KarakterCantrip | KarakterSzintVarazslat
+
 export function GetCantrips(osztaly: Osztaly2E): Cantrip[] {
     switch (osztaly) {
         case Osztaly2E.Pap:
