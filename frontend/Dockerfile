@@ -1,4 +1,4 @@
-FROM node:21.4-bookworm as builder
+FROM node:20.15.1-bookworm as builder
 
 WORKDIR "/src"
 
