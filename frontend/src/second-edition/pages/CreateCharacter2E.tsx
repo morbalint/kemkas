@@ -22,6 +22,7 @@ import {userSelector} from "../../shared/domain-models/userSlice";
 import {SaveModal} from "../../shared/components/SaveModal";
 import {characterSelector, setCharacter} from "../domain-models/characterSlice";
 import Szarmazas from "../components/Szarmazas";
+import Varazslatok from "../components/Varazslatok";
 
 function CreateCharacter2E(props: {
     faro?: Faro
@@ -128,6 +129,8 @@ function CreateCharacter2E(props: {
                 </div>
                 <hr/>
                 <Felszereles />
+
+                <Varazslatok />
 
                 <hr/>
                 <div className='row'>

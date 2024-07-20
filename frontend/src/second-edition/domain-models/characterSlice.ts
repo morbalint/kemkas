@@ -14,6 +14,7 @@ import {
 } from  "./kepzettsegek2E.data"
 import {BaseHP} from "./masodlagos_ertekek";
 import {KarakterFelszereles} from "./felszereles";
+import {KarakterVarazslat} from "./varazslat";
 
 export const characterSlice = createSlice({
     name: "character2E",
@@ -95,7 +96,13 @@ export const characterSlice = createSlice({
         },
         setFelszereles: (state, action: {payload: KarakterFelszereles}) => {
             state.felszereles = action.payload;
-        }
+        },
+        setVarazslatok: (state, action: {payload: KarakterVarazslat[]}) => {
+            state.varazslatok = action.payload;
+        },
+        addVarazslat: (state, action: {payload: KarakterVarazslat}) => {
+            state.varazslatok = [...state.varazslatok, action.payload];
+        },
     }
 })
 
@@ -150,6 +157,8 @@ export const {
     setKepzettsegek,
     setTolvajKepzettsegek,
     setFelszereles,
+    setVarazslatok,
+    addVarazslat,
 } = characterSlice.actions
 
 export const characterSelector = characterSlice.selectSlice
