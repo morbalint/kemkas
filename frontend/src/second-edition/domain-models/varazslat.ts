@@ -75,3 +75,21 @@ export function GetLeveledSpells(osztaly: Osztaly2E): MagasabbSzintuVarazslat[] 
             return []
     }
 }
+
+export function ClassSpells(osztaly: Osztaly2E): Varazslat[] {
+    switch (osztaly) {
+        case Osztaly2E.Vandor:
+        case Osztaly2E.Varazslo:
+            return spells.varazslo.tomor as Varazslat[]
+        case Osztaly2E.Illuzionista:
+            return spells.illuzionista.tomor as Varazslat[]
+        case Osztaly2E.Dalnok:
+            return spells.dalnok.tomor as Varazslat[]
+        case Osztaly2E.Druida:
+            return spells.druida.tomor as Varazslat[]
+        case Osztaly2E.Pap:
+            return spells.pap.tomor as Varazslat[]
+        default:
+            return [];
+    }
+}
