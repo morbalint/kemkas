@@ -3,11 +3,11 @@ import {KarakterVarazslat, Varazslat} from "../domain-models/varazslat";
 import {getClassLevels} from "../domain-models/szintlepes";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../store";
-import {addVarazslat, characterSelector, setVarazslatok} from "../domain-models/characterSlice";
+import {addVarazslat, characterSelector, setVarazslat} from "../domain-models/characterSlice";
 import {Osztaly2E} from "../domain-models/osztaly2E";
 import spells from "../data/spells.json";
 import VarazslatSelector from "../display-components/VarazslatSelector";
-import {arraySetN} from "../../util";
+
 //
 // function VarazslatSzint(props: {
 //     szint: number,
@@ -44,8 +44,8 @@ import {arraySetN} from "../../util";
 //
 // }
 
-function Varazskonyv(props: {osztaly: Osztaly2E, varazsloSzint: number, varazslatok: KarakterVarazslat[] }) {
-    const {osztaly, varazsloSzint, varazslatok } = props;
+function Varazskonyv(props: {osztaly: Osztaly2E, varazslatok: KarakterVarazslat[] }) {
+    const {osztaly, varazslatok } = props;
 
     const dispatch = useDispatch.withTypes<AppDispatch>()()
 
@@ -71,29 +71,26 @@ function Varazskonyv(props: {osztaly: Osztaly2E, varazsloSzint: number, varazsla
     }
 
     const firstLevel = classSpells.filter(v => v.szint === 1)
-    const firstLevelSelected = firstLevel.filter(v => varazslatok.some(x => x.id === v.id))
+    const firstLevelSelected = varazslatok.map(v => {
+        return firstLevel.find(x => x.id === v.id)
+    }).filter(x => !!x)
     const firstLevelAvailable = firstLevel.filter(v => varazslatok.every(x => x.id !== v.id))
 
-    const createOnChange = (idx: number, allSelected: string[]) => (selected: string) => {
-        const nextVarazslatok: KarakterVarazslat[] = arraySetN(allSelected, idx, selected).map(x => ({
-            id: x,
-            bekeszitve: false,
-        }))
-        dispatch(setVarazslatok(nextVarazslatok))
-    }
-
     return <>
-        <h3>Varazsloi Varazskonyv</h3>
-        <h5>1. Szintu varazslatok</h5>
+        <h3>Varázslói Varázskönyv</h3>
+        <h5>1. Szintű varázslatok</h5>
         {firstLevelSelected.map((v, i) => (
             <VarazslatSelector
+                key={`${i}VarazslatSelector`}
                 selected={v.id}
                 available={[v, ...firstLevelAvailable]}
                 dataTestId={`varazskonyv_varazslo_1_${v.id}`}
-                onChange={createOnChange(i, varazslatok.map(x => x.id))}
-            />)) }
-        {firstLevelSelected.length < varazsloSzint &&
-            <button className='btn btn-outline-dark' onClick={() => dispatch(addVarazslat({id: firstLevelAvailable[0].id, bekeszitve: false}))} >Uj varazslat hozzadasa</button>}
+                onChange={(nextId) => dispatch(setVarazslat({prev: v.id, next: nextId}))}
+            />))}
+        <button className='btn btn-outline-dark'
+                onClick={() => dispatch(addVarazslat(firstLevelAvailable[0].id))}>
+            Új varázslat hozzáadása
+        </button>
     </>;
 }
 
@@ -103,7 +100,7 @@ function Varazslatok() {
 
 
     return <>
-        {classLevels[Osztaly2E.Varazslo] > 0 && <Varazskonyv osztaly={Osztaly2E.Varazslo} varazsloSzint={classLevels[Osztaly2E.Varazslo]} varazslatok={karakter.varazslatok} />}
+        {classLevels[Osztaly2E.Varazslo] > 0 && <Varazskonyv osztaly={Osztaly2E.Varazslo} varazslatok={karakter.varazslatok} />}
     </>
 }
 

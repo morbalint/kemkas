@@ -14,7 +14,6 @@ import {
 } from  "./kepzettsegek2E.data"
 import {BaseHP} from "./masodlagos_ertekek";
 import {KarakterFelszereles} from "./felszereles";
-import {KarakterVarazslat} from "./varazslat";
 
 export const characterSlice = createSlice({
     name: "character2E",
@@ -97,11 +96,14 @@ export const characterSlice = createSlice({
         setFelszereles: (state, action: {payload: KarakterFelszereles}) => {
             state.felszereles = action.payload;
         },
-        setVarazslatok: (state, action: {payload: KarakterVarazslat[]}) => {
-            state.varazslatok = action.payload;
+        setVarazslat: (state, action: {payload: {prev: string, next: string}}) => {
+            let spell = state.varazslatok.find(x => x.id === action.payload.prev)
+            if (spell !== undefined) {
+                spell.id = action.payload.next
+            }
         },
-        addVarazslat: (state, action: {payload: KarakterVarazslat}) => {
-            state.varazslatok = [...state.varazslatok, action.payload];
+        addVarazslat: (state, action: {payload: string}) => {
+            state.varazslatok = [...state.varazslatok, {id: action.payload, bekeszitve: false}];
         },
     }
 })
@@ -157,7 +159,7 @@ export const {
     setKepzettsegek,
     setTolvajKepzettsegek,
     setFelszereles,
-    setVarazslatok,
+    setVarazslat,
     addVarazslat,
 } = characterSlice.actions
 
