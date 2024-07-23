@@ -44,7 +44,7 @@ function LevelUp(props: {
     
     return <div>
         <div className='row mt-3'>
-            <h5 className='col align-self-center'>{szint}. Szint</h5>
+            <h4 className='col align-self-center'>{szint}. Szint</h4>
         </div>
         {osztaly !== Osztaly2E.Druida && 
             <MultiClassOsztalySelector2E 

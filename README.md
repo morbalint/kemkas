@@ -14,13 +14,14 @@ See deployment repo at: [https://github.com/morbalint/kemkas-deployment](https:/
 
 ## Coding readmes
 
-For frontend only see: [Frontend README](./Kemkas.Web/frontend/README.md)
+For frontend only see: [Frontend README](./frontend/README.md)
 
-To start development, spin up the docker-compose.yaml file and use the launchSettings.json to start the backend and frontend dev servers.
+To start development, spin up the docker-compose.yaml file and use yarn to start frontend dev server.
 
 For the first time setup:
-1. start the DB from the docker compose (required for the backend)
-2. launch the project with the launchSettings file (will generate SSL certs)
-3. spin up the proxy from docker compose (needs the SSL certs)
+```shell
+dotnet dev-certs https --clean && \
+dotnet dev-certs https --format PEM --no-password -ep ~/.aspnet/https/kemkas.pem --trust
+```
 
-Later start the docker compose first and the project launch settings after the DB is up and running. 
+Later start the docker compose first and the project launch settings after the DB is up and running.

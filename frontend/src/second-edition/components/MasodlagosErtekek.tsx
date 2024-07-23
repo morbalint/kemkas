@@ -37,7 +37,7 @@ export function MasodlagosErtekekPresenter(props: MasodlagosErtekekView) {
 
     return <>
         <div className='row'>
-            <h5 className='col align-self-center'>Másodlagos értékek</h5>
+            <h4 className='col align-self-center'>Másodlagos értékek (első szinten)</h4>
         </div>
         <div className='row'>
             <div className='col-lg-6'>

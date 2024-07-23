@@ -29,7 +29,7 @@ function Tulajdonsagok(props: {
     const tulajdonsagok = props.tulajdonsagok ?? karakter.tulajdonsagok
     return <>
         <div className='row'>
-            <h5 className='col-lg-2 col-sm-4 align-self-center'>Tulajdonságok</h5>
+            <h4 className='col-lg-2 col-sm-4 align-self-center'>Tulajdonságok</h4>
             <div className='col-sm-2 m-2'>
                 <button className='btn btn-dark' type='button' data-testid="tulajdonsag-dobas"
                         onClick={() => dispatch(rollAbilities())}>Dobás

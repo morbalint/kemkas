@@ -99,14 +99,14 @@ function CreateCharacter2E(props: {
         <div className='p-3'>
             <form onSubmit={async (event) => event.preventDefault()}>
                 <div className='row'>
-                    <h5 className='col align-self-center'>Származás</h5>
+                    <h4 className='col align-self-center'>Származás</h4>
                 </div>
                 <Szarmazas/>
                 <hr/>
                 <Tulajdonsagok2E/>
                 <hr/>
                 <div className='row'>
-                    <h5 className='col align-self-center'>Tanult</h5>
+                    <h4 className='col align-self-center'>Tanult</h4>
                 </div>
                 <OsztalySelector2E />
                 {karakter.szintlepesek[0].osztaly === Osztaly2E.Harcos && <HarcosFegyverSpecializacio szint={1}/>}

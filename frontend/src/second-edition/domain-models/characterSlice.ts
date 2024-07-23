@@ -96,14 +96,17 @@ export const characterSlice = createSlice({
         setFelszereles: (state, action: {payload: KarakterFelszereles}) => {
             state.felszereles = action.payload;
         },
+        addVarazslat: (state, action: {payload: string}) => {
+            state.varazslatok = [...state.varazslatok, {id: action.payload, bekeszitve: false}];
+        },
         setVarazslat: (state, action: {payload: {prev: string, next: string}}) => {
             let spell = state.varazslatok.find(x => x.id === action.payload.prev)
             if (spell !== undefined) {
                 spell.id = action.payload.next
             }
         },
-        addVarazslat: (state, action: {payload: string}) => {
-            state.varazslatok = [...state.varazslatok, {id: action.payload, bekeszitve: false}];
+        removeVarazslat: (state, action: {payload: string}) => {
+            state.varazslatok = [...state.varazslatok.filter(x => x.id !== action.payload)];
         },
     }
 })
@@ -159,8 +162,9 @@ export const {
     setKepzettsegek,
     setTolvajKepzettsegek,
     setFelszereles,
-    setVarazslat,
     addVarazslat,
+    setVarazslat,
+    removeVarazslat,
 } = characterSlice.actions
 
 export const characterSelector = characterSlice.selectSlice
