@@ -15,12 +15,23 @@ import {SignedNumberToText} from "../../shared/components/Helpers";
 import {Kepzettseg, KepzettsegId, Kepzettsegek} from "../domain-models/kepzettsegek2E.data";
 import {getClassLevels} from "../domain-models/szintlepes";
 import {FegyverFlags} from "../domain-models/fegyver";
+import {GetSpellDetails} from "../domain-models/varazslat";
 
 interface KepzettsegPdfView {
     nev: string,
     alap: string,
     bonusz: string,
     osszes: string
+}
+
+interface VarazskonyvVarazslatPdfView {
+    nev: string,
+    szint?: string,
+    hatoido?: string,
+    tav?: string,
+    terulet?: string,
+    mento?: string,
+    leiras: string[],
 }
 
 export interface KarakterPdfView {
@@ -54,6 +65,7 @@ export interface KarakterPdfView {
     el: number
     at: number
     SpecialisKepessegek: string[],
+    Varazskonyv: VarazskonyvVarazslatPdfView[],
 }
 
 export function KarakterInputToPdfView(karakter: Karakter2E): KarakterPdfView {
@@ -135,6 +147,23 @@ export function KarakterInputToPdfView(karakter: Karakter2E): KarakterPdfView {
 
     const specialisKepessegek = osztalyok.flatMap(o => OsztalySpecialSkills(o).map(s => s.Name));
 
+    const varazskonyv : VarazskonyvVarazslatPdfView[] = karakter.varazslatok.map(x => {
+        const spell = GetSpellDetails(x.id);
+        if (spell == null) {
+            return null;
+        }
+        const szint = spell.osztaly_szint.find(y => y.osztaly === x.osztaly)?.szint ?? 999;
+        return {
+            nev: spell?.nev,
+            szint: szint.toString(),
+            leiras: spell?.leiras,
+            mento: spell?.mentodobas,
+            tav: spell?.tavolsag,
+            hatoido: spell?.hatoido,
+            terulet: spell?.terulet,
+        } as VarazskonyvVarazslatPdfView
+    }).filter(x => x != null)
+
     return {
         Faj: FajLabel(karakter.faj).toLowerCase(),
         Isten: karakter.isten || "",
@@ -195,6 +224,7 @@ export function KarakterInputToPdfView(karakter: Karakter2E): KarakterPdfView {
         el: karakter.felszereles.el,
         at: karakter.felszereles.at,
         SpecialisKepessegek: specialisKepessegek,
+        Varazskonyv: varazskonyv
     }
 }
 

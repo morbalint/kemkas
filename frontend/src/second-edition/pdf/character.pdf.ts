@@ -94,6 +94,36 @@ export async function CreatePDF(karakter: KarakterPdfView) {
         form.getTextField(`specialis_kepessegek_${Math.floor(i/2)}`).setText(text)
     }
 
+    if (karakter.Varazskonyv.length > 0) {
+        form.getTextField('varazskonyv_nev_faj_osztaly_szint').setText(`${karakter.Nev}, ${karakter.Faj} ${osztalyok}`)
+    }
+
+    for (let i = 0; i < karakter.Varazskonyv.length && i < 6; i++) {
+        const spell = karakter.Varazskonyv[i];
+        form.getTextField(`varazskonyv_page1_spell${i}_nev`).setText(spell.nev)
+        form.getTextField(`varazskonyv_page1_spell${i}_szint`).setText(spell.szint)
+        form.getTextField(`varazskonyv_page1_spell${i}_hatoido`).setText(spell.hatoido)
+        form.getTextField(`varazskonyv_page1_spell${i}_tav`).setText(spell.tav)
+        form.getTextField(`varazskonyv_page1_spell${i}_terulet`).setText(spell.terulet)
+        form.getTextField(`varazskonyv_page1_spell${i}_mento`).setText(spell.mento)
+        for (let j = 0; j < spell.leiras.length && j < 5; j++) {
+            form.getTextField(`varazskonyv_page1_spell${i}_leiras_${j}`).setText(spell.leiras[j])
+        }
+    }
+
+    for (let i = 0; (i+6) < karakter.Varazskonyv.length && i < 7; i++){
+        const spell = karakter.Varazskonyv[i+6];
+        form.getTextField(`varazskonyv_page2_spell${i}_nev`).setText(spell.nev)
+        form.getTextField(`varazskonyv_page2_spell${i}_szint`).setText(spell.szint)
+        form.getTextField(`varazskonyv_page2_spell${i}_hatoido`).setText(spell.hatoido)
+        form.getTextField(`varazskonyv_page2_spell${i}_tav`).setText(spell.tav)
+        form.getTextField(`varazskonyv_page2_spell${i}_terulet`).setText(spell.terulet)
+        form.getTextField(`varazskonyv_page2_spell${i}_mento`).setText(spell.mento)
+        for (let j = 0; j < spell.leiras.length && j < 5; j++) {
+            form.getTextField(`varazskonyv_page2_spell${i}_leiras_${j}`).setText(spell.leiras[j])
+        }
+    }
+
     form.updateFieldAppearances(pdfFont)
 
     const pdfBytes = await pdfDoc.save();

@@ -1,5 +1,6 @@
 import {Osztaly2E} from "./osztaly2E";
 import spells from "../data/spells.json";
+import spell_details from "../data/spell_details.json"
 
 export interface Cantrip {
     szint: 0,
@@ -93,4 +94,29 @@ export function ClassSpells(osztaly: Osztaly2E): Varazslat[] {
         default:
             return [];
     }
+}
+
+export interface VarazslatOsztalySzint {
+    osztaly: Osztaly2E,
+    szint: number,
+}
+
+export interface SpellDetails {
+    id: string,
+    nev: string,
+    megfordithato: boolean,
+    kell_komponens: boolean,
+    extra_komponens: boolean,
+    variabilis: boolean,
+    osztaly_szint: VarazslatOsztalySzint[],
+    tavolsag: string,
+    hatoido: string,
+    terulet: string,
+    mentodobas: string,
+    leiras: string[],
+    tablazat: string[][],
+}
+
+export function GetSpellDetails(id: string): SpellDetails | undefined {
+    return spell_details.details.find(x => x.id === id) as SpellDetails | undefined
 }
