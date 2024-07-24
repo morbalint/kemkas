@@ -96,17 +96,20 @@ export const characterSlice = createSlice({
         setFelszereles: (state, action: {payload: KarakterFelszereles}) => {
             state.felszereles = action.payload;
         },
-        addVarazslat: (state, action: {payload: string}) => {
-            state.varazslatok = [...state.varazslatok, {id: action.payload, bekeszitve: false}];
+        addVarazslat: (state, action: {payload: {id: string, osztaly: Osztaly2E}}) => {
+            state.varazslatok = [...state.varazslatok, {id: action.payload.id, osztaly: action.payload.osztaly, bekeszitve: false}];
         },
-        setVarazslat: (state, action: {payload: {prev: string, next: string}}) => {
-            let spell = state.varazslatok.find(x => x.id === action.payload.prev)
+        setVarazslat: (state, action: {payload: {prev: {id: string, osztaly: Osztaly2E}, next_id: string}}) => {
+            let spell = state.varazslatok.find(x =>
+                x.id === action.payload.prev.id
+                && x.osztaly === action.payload.prev.osztaly)
             if (spell !== undefined) {
-                spell.id = action.payload.next
+                spell.id = action.payload.next_id
             }
         },
-        removeVarazslat: (state, action: {payload: string}) => {
-            state.varazslatok = [...state.varazslatok.filter(x => x.id !== action.payload)];
+        removeVarazslat: (state, action: {payload: {id: string, osztaly: Osztaly2E}}) => {
+            state.varazslatok = [...state.varazslatok.filter(x =>
+                x.id !== action.payload.id && x.osztaly !== action.payload.osztaly)];
         },
     }
 })

@@ -28,13 +28,13 @@ function VarazskonyvSzint(props: { osztaly: Osztaly2E, level: number, varazslato
                         selected={v.id}
                         available={[v, ...availableSpells]}
                         dataTestId={`varazskonyv_varazslo_1_${v.id}`}
-                        onChange={(nextId) => dispatch(setVarazslat({prev: v.id, next: nextId}))}
+                        onChange={(next_id) => dispatch(setVarazslat({prev: {id: v.id, osztaly }, next_id: next_id}))}
                     />
                     <div className="col-lg-2 col-md-3 col-sm-4">
                         <button
                             className='btn btn-outline-dark w-100'
                             type='button'
-                            onClick={() => dispatch(removeVarazslat(v.id))}>Elvesz
+                            onClick={() => dispatch(removeVarazslat({id: v.id, osztaly} ))}>Elvesz
                         </button>
                     </div>
                 </div>
@@ -46,7 +46,7 @@ function VarazskonyvSzint(props: { osztaly: Osztaly2E, level: number, varazslato
                 </div>
             </React.Fragment>))}
         {availableSpells.length > 0 && <button className='btn btn-outline-dark ms-2'
-                                               onClick={() => dispatch(addVarazslat(availableSpells[0].id))}>
+                                               onClick={() => dispatch(addVarazslat({id: availableSpells[0].id, osztaly}))}>
             Új varázslat hozzáadása
         </button>}
     </>;

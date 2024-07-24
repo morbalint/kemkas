@@ -40,6 +40,7 @@ export type OsztalyVarazslat = OsztalyCantrip | OsztalySzintVarazslat;
 export interface KarakterVarazslat {
     id: string
     bekeszitve: boolean
+    osztaly: Osztaly2E
 }
 
 export function GetCantrips(osztaly: Osztaly2E): Cantrip[] {

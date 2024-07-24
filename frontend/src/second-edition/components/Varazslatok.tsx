@@ -11,8 +11,10 @@ function Varazslatok() {
     const classLevels = getClassLevels(karakter.szintlepesek)
 
     return <>
-        {classLevels[Osztaly2E.Varazslo] > 0 && <Varazskonyv osztaly={Osztaly2E.Varazslo} varazslatok={karakter.varazslatok} />}
-        {classLevels[Osztaly2E.Illuzionista] > 0 && <Varazskonyv osztaly={Osztaly2E.Illuzionista} varazslatok={karakter.varazslatok} />}
+        {classLevels[Osztaly2E.Varazslo] > 0 && <Varazskonyv osztaly={Osztaly2E.Varazslo} varazslatok={karakter.varazslatok.filter(x => x.osztaly === Osztaly2E.Varazslo)} />}
+        {classLevels[Osztaly2E.Illuzionista] > 0 && <Varazskonyv osztaly={Osztaly2E.Illuzionista} varazslatok={karakter.varazslatok.filter(x => x.osztaly === Osztaly2E.Illuzionista)} />}
+        {classLevels[Osztaly2E.Vandor] > 0 && <Varazskonyv osztaly={Osztaly2E.Vandor} varazslatok={karakter.varazslatok.filter(x => x.osztaly === Osztaly2E.Vandor)} />}
+        {classLevels[Osztaly2E.Dalnok] > 0 && <Varazskonyv osztaly={Osztaly2E.Dalnok} varazslatok={karakter.varazslatok.filter(x => x.osztaly === Osztaly2E.Dalnok)} />}
     </>
 }
 
