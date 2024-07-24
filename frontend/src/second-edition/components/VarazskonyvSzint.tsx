@@ -34,7 +34,7 @@ function VarazskonyvSzint(props: { osztaly: Osztaly2E, level: number, varazslato
                         <button
                             className='btn btn-outline-dark w-100'
                             type='button'
-                            onClick={() => dispatch(removeVarazslat({id: v.id, osztaly} ))}>Elvesz
+                            onClick={() => dispatch(removeVarazslat({id: v.id, osztaly}))}>Elvesz
                         </button>
                     </div>
                 </div>

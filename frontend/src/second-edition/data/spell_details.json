@@ -13,7 +13,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "6 kör",
       "terulet": "szövetségesek",
       "mentodobas": "–",
@@ -35,7 +35,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1 nap/szint",
       "terulet": "egy apró állat",
       "mentodobas": "–",
@@ -57,7 +57,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "permanens",
       "terulet": "egy közönséges állat",
       "mentodobas": "Akaraterő",
@@ -101,7 +101,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "1 óra",
       "terulet": "akárhány közönséges állat",
       "mentodobas": "Akaraterő",
@@ -123,7 +123,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "10 perc",
       "terulet": "–",
       "mentodobas": "–",
@@ -145,7 +145,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "20 perc",
       "terulet": "–",
       "mentodobas": "–",
@@ -167,7 +167,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "30 perc",
       "terulet": "–",
       "mentodobas": "–",
@@ -193,7 +193,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "korlátlan",
+      "tavolsag": "∞",
       "hatoido": "speciális",
       "terulet": "–",
       "mentodobas": "Akaraterő",
@@ -215,12 +215,14 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "ébredésig",
       "terulet": "2d4 szintnyi lény",
       "mentodobas": "–",
       "leiras": [
-        "A varázsló 2d4 szintnyi teremtményt altat el a varázslatával, akik ezzel teljesen magatehetetlenné válnak és szabadon megölhetők. Bizonyos lények ellen nem hatásos, és ha vegyes csapatra alkalmazzák, akkor először mindig a leggyengébbeket altatja el. 5. szinttől mentődobás dobható ellene."
+        "A varázsló 2d4 szintnyi teremtményt altat el a varázslatával, akik ezzel teljesen magatehetetlenné válnak és ",
+        "szabadon megölhetők. Bizonyos lények ellen nem hatásos, és ha vegyes csapatra alkalmazzák, akkor először ",
+        "mindig a leggyengébbeket altatja el. 5. szinttől mentődobás dobható ellene."
       ],
       "tablazat": []
     },
@@ -237,7 +239,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "ébredésig",
       "terulet": "2d4 szintnyi lény",
       "mentodobas": "Akaraterő",
@@ -263,7 +265,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "10 perc/szint",
       "terulet": "–",
       "mentodobas": "–",
@@ -285,7 +287,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "10 perc/szint",
       "terulet": "speciális",
       "mentodobas": "–",
@@ -307,7 +309,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "ének",
       "terulet": "hatótávolságon belül",
       "mentodobas": "–",
@@ -329,7 +331,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "speciális",
       "terulet": "speciális",
       "mentodobas": "Akaraterő",
@@ -351,7 +353,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "1 óra",
       "terulet": "–",
       "mentodobas": "–",
@@ -381,7 +383,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "permanens",
       "terulet": "egy lény, tárgy vagy terület",
       "mentodobas": "Akaraterő",
@@ -435,7 +437,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "ének",
       "terulet": "szövetségesek / ellenfelek",
       "mentodobas": "Kitartás",
@@ -462,7 +464,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "4 + 1 kör/szint ",
       "terulet": "1-3 lény",
       "mentodobas": "Akaraterő (speciális)",
@@ -506,7 +508,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "speciális",
       "terulet": "hatótávolságon belül",
       "mentodobas": "–",
@@ -528,7 +530,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "2 kör/szint",
       "terulet": "egy állat",
       "mentodobas": "–",
@@ -554,7 +556,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "–",
       "terulet": "egy lény",
       "mentodobas": "Kitartás",
@@ -576,7 +578,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "20 perc",
       "terulet": "–",
       "mentodobas": "–",
@@ -598,7 +600,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "20 perc",
       "terulet": "botok",
       "mentodobas": "–",
@@ -620,7 +622,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1 kör/szint, majd 1 óra/szint",
       "terulet": "körönként 10’x10’",
       "mentodobas": "–",
@@ -642,7 +644,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "10 perc",
       "terulet": "egy célpont/perc",
       "mentodobas": "–",
@@ -664,7 +666,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "2 kör/szint",
       "terulet": "15’ sugarú kör",
       "mentodobas": "–",
@@ -686,7 +688,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "1 kör/szint",
       "terulet": "hatótávolságon belül",
       "mentodobas": "speciális",
@@ -708,7 +710,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "ének",
       "terulet": "20’ sugarú kör",
       "mentodobas": "Akaraterő",
@@ -730,7 +732,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "–",
       "terulet": "varázsló és mások",
       "mentodobas": "speciális",
@@ -808,7 +810,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "2 óra",
       "terulet": "–",
       "mentodobas": "–",
@@ -830,7 +832,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "2 kör/szint",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő",
@@ -852,7 +854,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "permanens",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő",
@@ -874,7 +876,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "1 óra",
       "terulet": "hatótávolságon belül",
       "mentodobas": "–",
@@ -896,7 +898,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "azonnali",
       "terulet": "hatótávolságon belül",
       "mentodobas": "Kitartás",
@@ -918,7 +920,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1 óra",
       "terulet": "1 fő / 3 szint",
       "mentodobas": "Akaraterő",
@@ -940,7 +942,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1 kör/szint",
       "terulet": "egy fő/2 szint",
       "mentodobas": "Reflex",
@@ -962,7 +964,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "speciális",
       "terulet": "egy fő/szint",
       "mentodobas": "–",
@@ -1006,7 +1008,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "10 perc/szint",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -1028,7 +1030,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "20 perc",
       "terulet": "100’*100’ alapterület",
       "mentodobas": "–",
@@ -1050,7 +1052,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1 kör/szint",
       "terulet": "hatótávolságon belül",
       "mentodobas": "Reflex",
@@ -1072,7 +1074,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "10 perc",
       "terulet": "20’ sugarú kör",
       "mentodobas": "Akaraterő",
@@ -1126,7 +1128,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "permanens",
       "terulet": "1 kicsi, ½ közepes vagy ¼ nagy fatárgy/szint",
       "mentodobas": "– vagy Reflex",
@@ -1148,7 +1150,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "–",
       "terulet": "kúp",
       "mentodobas": "Reflex ½",
@@ -1170,7 +1172,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "10 perc",
       "terulet": "1 fő/szint",
       "mentodobas": "–",
@@ -1192,7 +1194,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "1 kör/szint",
       "terulet": "egy lény",
       "mentodobas": "speciális",
@@ -1214,7 +1216,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "30 perc",
       "terulet": "–",
       "mentodobas": "–",
@@ -1236,7 +1238,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1 kör/szint",
       "terulet": "hatótávolságon belül",
       "mentodobas": "Akaraterő",
@@ -1258,7 +1260,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "30 perc",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -1280,7 +1282,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "2 óra",
       "terulet": "hatótávolságon belül",
       "mentodobas": "–",
@@ -1306,7 +1308,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1 kör/szint",
       "terulet": "hatótávolságon belül",
       "mentodobas": "Akaraterő",
@@ -1332,7 +1334,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "10 perc",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő",
@@ -1354,7 +1356,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "speciális",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -1376,7 +1378,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "permanens",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -1398,7 +1400,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "10 perc",
       "terulet": "hatótávolságon belül",
       "mentodobas": "–",
@@ -1420,7 +1422,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "7 kör",
       "terulet": "egy fémtárgy",
       "mentodobas": "–",
@@ -1458,12 +1460,13 @@
           "szint": 0
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "60+10 perc/szint",
       "terulet": "–",
       "mentodobas": "–",
       "leiras": [
-        "Fáklyának megfelelő fényt ad a hatóidőig vagy amíg a varázshasználó egy szóval ki nem oltja. A fény lehet egy mozgó gömb, de mondható helyre, tárgyra és személyre is."
+        "Fáklyának megfelelő fényt ad a hatóidőig vagy amíg a varázshasználó egy szóval ki nem oltja.",
+        "A fény lehet egy mozgó gömb, de mondható helyre, tárgyra és személyre is."
       ],
       "tablazat": []
     },
@@ -1480,7 +1483,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "1 perc/szint",
       "terulet": "egy lény",
       "mentodobas": "speciális",
@@ -1502,7 +1505,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "1 kör/szint",
       "terulet": "próbálkozásonként egy teremtmény",
       "mentodobas": "Akaraterő",
@@ -1524,7 +1527,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "1 óra",
       "terulet": "önmaga előtt",
       "mentodobas": "–",
@@ -1546,7 +1549,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "permanens és 1 kör/szint",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő",
@@ -1597,7 +1600,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "egy óra",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -1619,7 +1622,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1 kör/szint",
       "terulet": "20’ sugarú kör",
       "mentodobas": "Kitartás",
@@ -1641,7 +1644,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "3+1 kör/szint",
       "terulet": "egy lény/szint",
       "mentodobas": "Reflex",
@@ -1663,7 +1666,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "egy nap vagy permanens",
       "terulet": "hatóterületen belül",
       "mentodobas": "Akaraterő",
@@ -1685,7 +1688,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "–",
       "terulet": "egy lény",
       "mentodobas": "Kitartás",
@@ -1707,7 +1710,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "speciális",
       "terulet": "hatótávolságon belül",
       "mentodobas": "Akaraterő",
@@ -1729,7 +1732,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "30 perc",
       "terulet": "hallótávolság",
       "mentodobas": "Akaraterő",
@@ -1755,7 +1758,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "20 perc",
       "terulet": "–",
       "mentodobas": "–",
@@ -1777,7 +1780,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "ének",
       "terulet": "hatótávolságon belül",
       "mentodobas": "–",
@@ -1799,7 +1802,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "20 perc",
       "terulet": "100’ hosszú, 20’ magas",
       "mentodobas": "Akaraterő",
@@ -1825,7 +1828,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "koncentráció",
       "terulet": "20’*20’ terület",
       "mentodobas": "Akaraterő",
@@ -1847,7 +1850,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1 kör/szint",
       "terulet": "1d6 lény",
       "mentodobas": "Akaraterő",
@@ -1873,7 +1876,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "permanens",
       "terulet": "speciális",
       "mentodobas": "–",
@@ -1921,7 +1924,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "koncentráció + 3 kör",
       "terulet": "speciális",
       "mentodobas": "Akaraterő",
@@ -1948,7 +1951,9 @@
       "terulet": "hatótávolságon belül",
       "mentodobas": "–",
       "leiras": [
-        "Az illuzionista érzékeli valamiről, ha az illúzió, és Nehéz Okkultizmus próbával homályosan valódi mibenlétét is érzékeli. Ez a látás másoknak is átadható, ha a határidő alatt kezét a homlokukra helyezi. Vastag faréteg vagy kőfal, egy erős fémlap, vagy egy vékony ólomlemez blokkolja."
+        "Az illuzionista érzékeli valamiről, ha az illúzió, és Nehéz Okkultizmus próbával homályosan valódi mibenlétét is ",
+        "érzékeli. Ez a látás másoknak is átadható, ha a határidő alatt kezét a homlokukra helyezi. Vastag faréteg vagy ",
+        "kőfal, egy erős fémlap, vagy egy vékony ólomlemez blokkolja."
       ],
       "tablazat": []
     },
@@ -1969,7 +1974,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "permanens",
       "terulet": "10’x10’ területű, 1’ vastag",
       "mentodobas": "Akaraterő",
@@ -2013,7 +2018,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "permanens",
       "terulet": "30’ átmérőjű kör",
       "mentodobas": "speciális",
@@ -2035,7 +2040,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "1 kör/szint",
       "terulet": "szövetségesek és ellenfelek",
       "mentodobas": "–",
@@ -2057,7 +2062,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "permanens",
       "terulet": "speciális",
       "mentodobas": "speciális",
@@ -2165,7 +2170,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "3 óra",
       "terulet": "legfeljebb 10’/szint széles és 30’ magas",
       "mentodobas": "–",
@@ -2187,7 +2192,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "1 kör",
       "terulet": "30’ sugarú kör",
       "mentodobas": "–",
@@ -2209,7 +2214,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "1 nap",
       "terulet": "2d4 friss bogyó",
       "mentodobas": "– vagy Kitartás",
@@ -2257,7 +2262,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "3d6*10 perc",
       "terulet": "speciális",
       "mentodobas": "–",
@@ -2279,7 +2284,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "ének",
       "terulet": "hatótávolságon belül",
       "mentodobas": "Akaraterő",
@@ -2323,7 +2328,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "10 perc/szint",
       "terulet": "egy élőlény",
       "mentodobas": "–",
@@ -2345,7 +2350,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "speciális",
       "terulet": "egy célpont",
       "mentodobas": "Kitartás",
@@ -2367,7 +2372,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "ének",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő",
@@ -2389,7 +2394,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "–",
       "terulet": "kúp",
       "mentodobas": "Kitartás",
@@ -2411,7 +2416,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "aktiválásig",
       "terulet": "egy irat",
       "mentodobas": "Reflex",
@@ -2433,7 +2438,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "2 óra",
       "terulet": "1-4 lény (csak humanoidok)",
       "mentodobas": "speciális",
@@ -2459,7 +2464,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "koncentráció",
       "terulet": "speciális",
       "mentodobas": "Akaraterő",
@@ -2485,7 +2490,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "–",
       "terulet": "érintés",
       "mentodobas": "–",
@@ -2507,7 +2512,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "1 óra/szint",
       "terulet": "speciális",
       "mentodobas": "–",
@@ -2551,7 +2556,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "10 perc / 1 óra",
       "terulet": "egy ajtó",
       "mentodobas": "–",
@@ -2629,7 +2634,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "permanens",
       "terulet": "20’*20’ terület/szint, mélység 10’",
       "mentodobas": "–",
@@ -2655,7 +2660,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "10 perc/szint",
       "terulet": "20’/szint hosszú egyenes fal, 20’ vastag",
       "mentodobas": "speciális",
@@ -2681,7 +2686,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "10 perc/szint",
       "terulet": "40’*40’",
       "mentodobas": "speciális",
@@ -2703,7 +2708,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "1 óra/szint",
       "terulet": "hatótávolságon belül",
       "mentodobas": "–",
@@ -2725,7 +2730,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "permanens",
       "terulet": "legfeljebb 10’/szint széles, 2’ vastag és 30’ magas",
       "mentodobas": "–",
@@ -2751,7 +2756,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "permanens",
       "terulet": "10’*10’*10’ mennyiségű kő",
       "mentodobas": "–",
@@ -2773,7 +2778,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "10 perc",
       "terulet": "20’ sugarú kör",
       "mentodobas": "Reflex és speciális",
@@ -2817,7 +2822,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "ének",
       "terulet": "hatótávolságon belül",
       "mentodobas": "Reflex (speciális)",
@@ -2843,7 +2848,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "–",
       "terulet": "érintés",
       "mentodobas": "–",
@@ -2865,7 +2870,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "–",
       "terulet": "érintés",
       "mentodobas": "–",
@@ -2891,7 +2896,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "amíg nem teljesítik",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő",
@@ -2913,7 +2918,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1 kör/szint",
       "terulet": "hatótávolságon belül",
       "mentodobas": "Akaraterő",
@@ -2935,7 +2940,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "1 kör/szint",
       "terulet": "5’ átmérőjű gömb",
       "mentodobas": "Reflex ½",
@@ -2957,7 +2962,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1 kör",
       "terulet": "15’ félkör vagy 30’ csóva",
       "mentodobas": "Reflex ½",
@@ -3001,7 +3006,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "30 perc",
       "terulet": "40’ sugarú kör",
       "mentodobas": "–",
@@ -3023,7 +3028,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "–",
       "terulet": "egy lény",
       "mentodobas": "speciális",
@@ -3095,7 +3100,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "60 + 10 perc/szint",
       "terulet": "hatótávolságon belül",
       "mentodobas": "–",
@@ -3121,7 +3126,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "10 perc/szint",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -3147,12 +3152,13 @@
           "szint": 0
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "30 perc",
       "terulet": "önmaga előtt",
       "mentodobas": "–",
       "leiras": [
-        "Érzékeli a varázshasználó környékén mágikusan rejtett – tehát láthatatlan, más, de közeli síkon tartózkodó stb. lényeket és tárgyakat."
+        "Érzékeli a varázshasználó környékén mágikusan rejtett – tehát láthatatlan, más, de közeli síkon tartózkodó stb. ",
+        "lényeket és tárgyakat."
       ],
       "tablazat": []
     },
@@ -3191,7 +3197,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "2 kör/szint",
       "terulet": "hatótávolságon belül",
       "mentodobas": "speciális",
@@ -3213,7 +3219,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "10 perc/szint",
       "terulet": "egy lény vagy tárgy",
       "mentodobas": "Akaraterő",
@@ -3273,12 +3279,14 @@
           "szint": 1
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "10 perc",
       "terulet": "hatótávolságon belül",
       "mentodobas": "–",
       "leiras": [
-        "Érzékeli a mágiát és a varázstárgyakat a hatóterületen, Nehéz Okkultizmus próbával pedig hozzávetőleges erejükről és természetükről (pl. „gyenge védelmező mágia”, „erős átalakító mágia”) is ad valami korlátozott információt. Vastag faréteg vagy kőfal, egy erős fémlap, vagy egy vékony ólomlemez blokkolja."
+        "Érzékeli a mágiát és a varázstárgyakat a hatóterületen, Nehéz Okkultizmus próbával pedig hozzávetőleges ",
+        "erejükről és természetükről (pl. „gyenge védelmező mágia”, „erős átalakító mágia”) is ad valami korlátozott ",
+        "információt. Vastag faréteg vagy kőfal, egy erős fémlap, vagy egy vékony ólomlemez blokkolja."
       ],
       "tablazat": []
     },
@@ -3307,7 +3315,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "permanens/ideiglenes",
       "terulet": "30’ átmérőjű kör",
       "mentodobas": "speciális",
@@ -3367,7 +3375,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "1 óra",
       "terulet": "1 + két szintenként 1 fegyver",
       "mentodobas": "–",
@@ -3389,7 +3397,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "1 óra/szint",
       "terulet": "20’ sugarú kör",
       "mentodobas": "–",
@@ -3433,7 +3441,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "egy óra",
       "terulet": "akárhány intelligens lény",
       "mentodobas": "Akaraterő",
@@ -3481,7 +3489,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "2 + 1 kör/szint",
       "terulet": "érintés",
       "mentodobas": "Akaraterő",
@@ -3503,7 +3511,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "10 perc/szint",
       "terulet": "hatótávolságon belül",
       "mentodobas": "–",
@@ -3525,7 +3533,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "ének + 1 kör/szint",
       "terulet": "10 fő/szint",
       "mentodobas": "speciális",
@@ -3551,7 +3559,7 @@
           "szint": 0
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "–",
       "terulet": "tárgy, lény vagy 5’*5’ terület",
       "mentodobas": "–",
@@ -3577,7 +3585,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "1 óra/szint",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -3603,7 +3611,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "–",
       "terulet": "egy lény vagy 1 tárgynyi anyag/szint",
       "mentodobas": "Kitartás",
@@ -3625,7 +3633,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "speciális",
       "terulet": "alkalmanként egy célpont",
       "mentodobas": "–",
@@ -3647,7 +3655,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "1 kör/páratlan szint",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -3669,7 +3677,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "aktiválásig, majd 10 perc/szint",
       "terulet": "speciális",
       "mentodobas": "–",
@@ -3691,7 +3699,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "koncentráció + 3 kör",
       "terulet": "speciális",
       "mentodobas": "Akaraterő",
@@ -3739,7 +3747,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "10 perc/szint",
       "terulet": "egy lény vagy tárgy",
       "mentodobas": "Kitartás",
@@ -3787,7 +3795,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "1 nap/szint",
       "terulet": "–",
       "mentodobas": "Akaraterő",
@@ -3813,7 +3821,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1 óra/szint",
       "terulet": "1 fő/szint",
       "mentodobas": "–",
@@ -3835,7 +3843,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "1 kör/szint",
       "terulet": "speciális",
       "mentodobas": "–",
@@ -3857,7 +3865,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "ének",
       "terulet": "hatótávolságon belül",
       "mentodobas": "Akaraterő",
@@ -3879,7 +3887,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "1d6 nap",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő",
@@ -3927,7 +3935,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "1 nap/szint",
       "terulet": "egy holttest",
       "mentodobas": "–",
@@ -3971,7 +3979,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "70 perc/permanens",
       "terulet": "egy lény vagy tárgy",
       "mentodobas": "–",
@@ -4001,7 +4009,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "permanens",
       "terulet": "30’ sugarú kör",
       "mentodobas": "–",
@@ -4023,7 +4031,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "10 perc",
       "terulet": "2d4 lény",
       "mentodobas": "Akaraterő",
@@ -4078,7 +4086,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "ének",
       "terulet": "szövetségesek",
       "mentodobas": "–",
@@ -4122,7 +4130,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "speciális",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő",
@@ -4144,7 +4152,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1 kör",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő (speciális)",
@@ -4166,7 +4174,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "permanens",
       "terulet": "speciális",
       "mentodobas": "Akaraterő",
@@ -4192,7 +4200,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "–",
       "terulet": "egy célpont",
       "mentodobas": "–",
@@ -4214,7 +4222,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "20 perc/szint",
       "terulet": "hatótávolságon belül",
       "mentodobas": "Reflex",
@@ -4236,7 +4244,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1+1 kör/szint",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -4258,7 +4266,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "permanens/2 óra",
       "terulet": "egy lény/varázsló",
       "mentodobas": "Kitartás/Akaraterő",
@@ -4284,7 +4292,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "2 kör/szint",
       "terulet": "–",
       "mentodobas": "–",
@@ -4306,7 +4314,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "aktiválásig + 10 perc",
       "terulet": "speciális",
       "mentodobas": "Akaraterő",
@@ -4328,7 +4336,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "ének (legfeljebb 1 óra/szint)",
       "terulet": "speciális",
       "mentodobas": "–",
@@ -4350,7 +4358,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1d6*10 + 10 perc/szint",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -4372,7 +4380,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "100 év",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő",
@@ -4398,7 +4406,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "2 kör / szint",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő",
@@ -4420,7 +4428,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "ének, és még annyi",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő",
@@ -4442,7 +4450,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "aktiválásig",
       "terulet": "10’ sugarú kör",
       "mentodobas": "Reflex ½",
@@ -4464,7 +4472,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "10 perc/szint",
       "terulet": "hatótávolságon belül ",
       "mentodobas": "–",
@@ -4512,7 +4520,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "permanens",
       "terulet": "1-7 lény",
       "mentodobas": "Akaraterő",
@@ -4560,7 +4568,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "–",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -4586,7 +4594,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1 + 1 óra/szint",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő",
@@ -4608,7 +4616,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "–",
       "terulet": "érintés",
       "mentodobas": "–",
@@ -4660,7 +4668,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "1 kör/szint",
       "terulet": "10’/szint hosszú, 5’ vastag fal",
       "mentodobas": "–",
@@ -4682,7 +4690,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1 kör/szint",
       "terulet": "egy ellenfél",
       "mentodobas": "–",
@@ -4704,7 +4712,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "ének + speciális",
       "terulet": "hatótávolságon belül",
       "mentodobas": "–",
@@ -4730,7 +4738,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "1 kör",
       "terulet": "10’ széles sáv",
       "mentodobas": "speciális",
@@ -4752,7 +4760,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "speciális",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő",
@@ -4811,7 +4819,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "permanens",
       "terulet": "egy üvegcse víz",
       "mentodobas": "–",
@@ -4833,7 +4841,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1 kör/szint",
       "terulet": "egy emberméretű lény",
       "mentodobas": "Reflex",
@@ -4855,7 +4863,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "speciális",
       "terulet": "1d6 lény",
       "mentodobas": "speciális – Akaraterő",
@@ -4877,7 +4885,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "1 kör/szint",
       "terulet": "–",
       "mentodobas": "–",
@@ -4946,7 +4954,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "20 perc",
       "terulet": "20’ sugarú kör",
       "mentodobas": "Akaraterő",
@@ -4968,7 +4976,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "speciális",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő",
@@ -4990,7 +4998,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "10 perc",
       "terulet": "1-4 lény",
       "mentodobas": "Akaraterő",
@@ -5012,7 +5020,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "10 perc",
       "terulet": "–",
       "mentodobas": "–",
@@ -5034,7 +5042,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "20 perc",
       "terulet": "–",
       "mentodobas": "–",
@@ -5056,7 +5064,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "30 perc",
       "terulet": "–",
       "mentodobas": "–",
@@ -5078,7 +5086,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "20 + 10 perc/szint",
       "terulet": "hatóterületen belül",
       "mentodobas": "–",
@@ -5108,12 +5116,14 @@
           "szint": 0
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "2 kör/szint",
       "terulet": "hatótávolságon belül",
       "mentodobas": "–",
       "leiras": [
-        "A varázshasználó puszta kézmozdulataival 1d6 fényforrást teremt, amelyeket kedve szerint mozgathat. A fények hasonlíthatnak bolyongó fáklyákra és lidércfényekre, illetve létrehozható belőlük egyetlen többé-kevésbé emberszerű forma is."
+        "A varázshasználó puszta kézmozdulataival 1d6 fényforrást teremt, amelyeket kedve szerint mozgathat.",
+        "A fények hasonlíthatnak bolyongó fáklyákra és lidércfényekre, illetve létrehozható belőlük egyetlen ",
+        "többé-kevésbé emberszerű forma is."
       ],
       "tablazat": []
     },
@@ -5130,7 +5140,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "ének (legfeljebb 10 perc/szint)",
       "terulet": "1 lény / szint",
       "mentodobas": "Akaraterő",
@@ -5152,7 +5162,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "1 kör / szint",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő",
@@ -5174,7 +5184,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "3d6 kör",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő",
@@ -5200,7 +5210,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "1 kör / szint",
       "terulet": "hatótávolságon belül",
       "mentodobas": "–",
@@ -5222,7 +5232,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "permanens",
       "terulet": "egy tárgy",
       "mentodobas": "–",
@@ -5244,7 +5254,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "korlátlan",
+      "tavolsag": "∞",
       "hatoido": "10 perc",
       "terulet": "speciális",
       "mentodobas": "–",
@@ -5288,7 +5298,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "10 perc",
       "terulet": "speciális",
       "mentodobas": "–",
@@ -5310,7 +5320,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "–",
       "terulet": "–",
       "mentodobas": "–",
@@ -5380,7 +5390,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "30 + 10 perc/szint",
       "terulet": "–",
       "mentodobas": "–",
@@ -5402,7 +5412,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "permanens",
       "terulet": "hatótávolságon belüli tér",
       "mentodobas": "–",
@@ -5446,7 +5456,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "ének",
       "terulet": "hatótávolságon belül",
       "mentodobas": "Akaraterő",
@@ -5468,7 +5478,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "5 év",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő",
@@ -5490,7 +5500,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "ének",
       "terulet": "1 lény/szint",
       "mentodobas": "–",
@@ -5542,7 +5552,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "speciális",
       "terulet": "10 fő/szint",
       "mentodobas": "–",
@@ -5564,7 +5574,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1 kör/szint",
       "terulet": "hatótávolságon belül",
       "mentodobas": "Akaraterő",
@@ -5586,7 +5596,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "3 óra",
       "terulet": "20’ vastag, legfeljebb 10’/szint széles és 20’ magas",
       "mentodobas": "Reflex",
@@ -5608,7 +5618,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "1 kör/szint, majd 1 óra/szint",
       "terulet": "körönként 20’*20’ növeszthető",
       "mentodobas": "–",
@@ -5630,7 +5640,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "1 perc",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -5660,12 +5670,14 @@
           "szint": 0
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "1 kör/szint",
       "terulet": "10’ sugarú kör",
       "mentodobas": "Akaraterő",
       "leiras": [
-        "A trükkök kisebb, ártalmatlan illúziók, elsősorban szórakoztatásra. Időtartama alatt a varázshasználó színes, érintésre szétpukkanó fénybuborékokat idézhet, kékre színezhet egy macskát, a levegőbe emelhet egy ezüstpénzt stb."
+        "A trükkök kisebb, ártalmatlan illúziók, elsősorban szórakoztatásra. Időtartama alatt a varázshasználó színes, ",
+        "érintésre szétpukkanó fénybuborékokat idézhet, kékre színezhet egy macskát, a levegőbe emelhet egy ",
+        "ezüstpénzt stb."
       ],
       "tablazat": []
     },
@@ -5686,7 +5698,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "2 kör/szint",
       "terulet": "–",
       "mentodobas": "–",
@@ -5708,7 +5720,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "4 perc/szint",
       "terulet": "20’ sugarú kör",
       "mentodobas": "–",
@@ -5730,7 +5742,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "3 óra",
       "terulet": "30’ sugarú kör",
       "mentodobas": "Akaraterő",
@@ -5752,7 +5764,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "–",
       "terulet": "10’ sugarú kör",
       "mentodobas": "Reflex ½",
@@ -5774,7 +5786,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "aktiválásig",
       "terulet": "egy tárgy",
       "mentodobas": "Reflex ½",
@@ -5800,7 +5812,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "10 perc vagy koncentráció",
       "terulet": "legfeljebb 10’/szint széles és 30’ magas",
       "mentodobas": "–",
@@ -5822,7 +5834,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "–",
       "terulet": "20’ sugarú gömb",
       "mentodobas": "Reflex ½",
@@ -5844,7 +5856,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "10 kör/szint",
       "terulet": "10’ sugarú kör",
       "mentodobas": "Reflex ½ (speciális)",
@@ -5888,7 +5900,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "10 perc",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -5910,7 +5922,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "1 óra/szint",
       "terulet": "hatótávolságon belül",
       "mentodobas": "–",
@@ -5932,7 +5944,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "speciális",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -5991,7 +6003,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "korlátlan",
+      "tavolsag": "∞",
       "hatoido": "–",
       "terulet": "–",
       "mentodobas": "–",
@@ -6045,7 +6057,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "–",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -6089,7 +6101,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "speciális",
       "terulet": "varázsló",
       "mentodobas": "Akaraterő",
@@ -6111,7 +6123,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "–",
       "terulet": "egy  vagy több lény",
       "mentodobas": "–",
@@ -6181,7 +6193,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "10 perc",
       "terulet": "speciális",
       "mentodobas": "–",
@@ -6203,7 +6215,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "permanens",
       "terulet": "legfeljebb 10’/szint hosszú, 1’ vastag és 30’ magas",
       "mentodobas": "Reflex",
@@ -6229,7 +6241,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "10 perc/szint",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -6255,7 +6267,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "1 óra/szint",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -6277,7 +6289,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "1 óra",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -6299,7 +6311,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "permanens aktiválásig",
       "terulet": "10’ sugarú kör",
       "mentodobas": "Reflex/speciális",
@@ -6321,7 +6333,7 @@
           "szint": 5
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "permanens",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -6343,7 +6355,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "–",
       "terulet": "5’ széles, 20’ hosszú nyaláb",
       "mentodobas": "Reflex ½",
@@ -6365,7 +6377,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "hosszú",
+      "tavolsag": "H",
       "hatoido": "10 kör/szint",
       "terulet": "–",
       "mentodobas": "Reflex ½ ",
@@ -6387,7 +6399,7 @@
           "szint": 1
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "5 perc/szint",
       "terulet": "hatótávolságon belül",
       "mentodobas": "–",
@@ -6409,7 +6421,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "10 perc/szint",
       "terulet": "hatótávolságon belül",
       "mentodobas": "–",
@@ -6439,7 +6451,7 @@
           "szint": 3
         }
       ],
-      "tavolsag": "érintés",
+      "tavolsag": "érint",
       "hatoido": "1 óra/szint",
       "terulet": "egy lény",
       "mentodobas": "–",
@@ -6461,7 +6473,7 @@
           "szint": 0
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "permanens",
       "terulet": "–",
       "mentodobas": "–",
@@ -6487,7 +6499,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "10 perc/szint",
       "terulet": "hatótávolságon belül",
       "mentodobas": "–",
@@ -6509,7 +6521,7 @@
           "szint": 2
         }
       ],
-      "tavolsag": "rövid",
+      "tavolsag": "R",
       "hatoido": "8 óra vagy aktiválásig",
       "terulet": "egy adott átjáró, terem stb.",
       "mentodobas": "Reflex",
@@ -6553,7 +6565,7 @@
           "szint": 4
         }
       ],
-      "tavolsag": "közepes",
+      "tavolsag": "K",
       "hatoido": "10 kör",
       "terulet": "egy lény",
       "mentodobas": "Akaraterő",

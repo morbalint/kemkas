@@ -109,7 +109,7 @@ export const characterSlice = createSlice({
         },
         removeVarazslat: (state, action: {payload: {id: string, osztaly: Osztaly2E}}) => {
             state.varazslatok = [...state.varazslatok.filter(x =>
-                x.id !== action.payload.id && x.osztaly !== action.payload.osztaly)];
+                (x.id !== action.payload.id || x.osztaly !== action.payload.osztaly))];
         },
     }
 })
