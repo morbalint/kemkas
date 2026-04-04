@@ -27,7 +27,7 @@ jobs:
     - name: Yarn Install
       run: |
         cd ./frontend
-        yarn install
+        yarn install --frozen-lockfile
     - name: Yarn Test
       run: |
         cd ./frontend

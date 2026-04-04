@@ -1,5 +1,5 @@
 import * as React from "react";
-import {useLoaderData} from "react-router-dom";
+import {Link, useLoaderData} from "react-router-dom";
 import CharacterListItem from "../components/CharacterListItem";
 import {Faj, FajLabel as FajLabel1E} from "../../first-edition/domain-models/faj";
 import {Faj2E, FajLabel as FajLabel2E} from "../../second-edition/domain-models/faj2E";
@@ -68,12 +68,12 @@ function CharacterList(props: {}) {
         <div className="row">
             <div className="col-6">
                 <div className="d-grid gap-1 m-3 m-lg-5">
-                    <a className="btn btn-dark btn-lg" href="/2e/karakter/" type="button">Új 2e karakter létrehozása</a>
+                    <Link className="btn btn-dark btn-lg" to="/2e/karakter">Új 2e karakter létrehozása</Link>
                 </div>
             </div>
             <div className="col-6">
                 <div className="d-grid gap-1 m-3 m-lg-5">
-                    <a className="btn btn-dark btn-lg" href="/1e/karakter/" type="button">Új 1e karakter létrehozása</a>
+                    <Link className="btn btn-dark btn-lg" to="/1e/karakter">Új 1e karakter létrehozása</Link>
                 </div>
             </div>
         </div>
