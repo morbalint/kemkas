@@ -1,11 +1,19 @@
 services:
   db:
-    image: postgres:16.1-alpine3.19
+    image: postgres:16.13-alpine3.23
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: "kemkas"
       POSTGRES_PASSWORD: "kemkas-dev42"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kemkas -d postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
 
   backend:
     image: ghcr.io/morbalint/kemkas-backend:b8565f8e
@@ -15,6 +23,9 @@ services:
       ConnectionStrings__DefaultConnection: "Server=db;User Id=kemkas;Password=kemkas-dev42"
       Email__DomainName: "mail.kemkas.hu"
       Email__ApiKey: ""
+    depends_on:
+      db:
+        condition: service_healthy
 
   proxy:
     image: nginx:latest
@@ -24,3 +35,8 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - $HOME/.aspnet/https/kemkas.pem:/etc/nginx/kemkas.pem
       - $HOME/.aspnet/https/kemkas.key:/etc/nginx/kemkas.key
+    depends_on:
+      - backend
+
+volumes:
+  db-data:

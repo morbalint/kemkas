@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => {
       port,
       https,
       strictPort: true,
+      allowedHosts: ['localhost', 'host.docker.internal', 'frontend'],
     },
     test: {
       globals: true,
