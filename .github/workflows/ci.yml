@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Setup Node.js 18.x
+    - name: Setup Node.js 24.x
       uses: actions/setup-node@v4
       with:
-        node-version: 18.x
+        node-version: 24.x
     - name: Cache NPM packages
       uses: actions/cache@v4
       with:
@@ -27,11 +27,10 @@ jobs:
     - name: Yarn Install
       run: |
         cd ./frontend
-        yarn install --frozen-lockfiles
+        yarn install
     - name: Yarn Test
       run: |
         cd ./frontend
-        ./compile-less.sh
         yarn run test
 
   docker-fe-build:
@@ -58,21 +57,22 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository_owner }}/kemkas-frontend:${{ env.GITHUB_SHA_SHORT }}
 
-  deploy-to-beta:
-    runs-on: ubuntu-latest
-    needs:
-      - docker-fe-build
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          repository: ${{ github.repository_owner }}/kemkas-deployment
-          ref: refs/heads/main
-          ssh-key: ${{ secrets.DEPLOYMENT_REPO_DEPLOY_KEY }}
-      - uses: mikefarah/yq@v4
-        with:
-          cmd: yq -i '.spec.template.spec.containers[0].image = "${{ needs.docker-fe-build.outputs.image_tag }}"' ./kemkas-beta/kemkas-fe-deployment.yaml
-      - run: |
-          git config --add user.email "beta-fe-deployment-bot@kemkas.hu"
-          git config --add user.name "Deployment Bot Beta FE"
-          git commit -a -m "deploy ${{ needs.docker-fe-build.outputs.image_tag }}" 
-          git push
+# No longer used, and token expired.
+  # deploy-to-beta:
+  #   runs-on: ubuntu-latest
+  #   needs:
+  #     - docker-fe-build
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         repository: ${{ github.repository_owner }}/kemkas-deployment
+  #         ref: refs/heads/main
+  #         ssh-key: ${{ secrets.DEPLOYMENT_REPO_DEPLOY_KEY }}
+  #     - uses: mikefarah/yq@v4
+  #       with:
+  #         cmd: yq -i '.spec.template.spec.containers[0].image = "${{ needs.docker-fe-build.outputs.image_tag }}"' ./kemkas-beta/kemkas-fe-deployment.yaml
+  #     - run: |
+  #         git config --add user.email "beta-fe-deployment-bot@kemkas.hu"
+  #         git config --add user.name "Deployment Bot Beta FE"
+  #         git commit -a -m "deploy ${{ needs.docker-fe-build.outputs.image_tag }}" 
+  #         git push

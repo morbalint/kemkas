@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './CreateCharacter.css'
+import './CreateCharacter.less'
 import {Faj, TulajdonsagokFajjal} from "../domain-models/faj";
 import {Osztaly, SetFelszerelesForChangedOsztaly} from "../domain-models/osztaly"
 import FajSelector from "../components/FajSelector";
