@@ -19,5 +19,5 @@ vi.mock('react-router-dom', async () => {
 });
 
 test('renders App', () => {
-  render(<App faro={undefined}/>);
+  render(<App />);
 });

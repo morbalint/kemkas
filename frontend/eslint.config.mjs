@@ -5,7 +5,7 @@ export default [
     ignores: ['dist/**', 'build/**', 'node_modules/**'],
   },
   {
-    files: ['src/**/*.{ts,tsx}', 'vite.config.ts', 'vitest.setup.ts'],
+    files: ['src/**/*.{ts,tsx}', 'vite.config.mts', 'vitest.setup.ts'],
     languageOptions: {
       parser: tsParser,
       ecmaVersion: 'latest',

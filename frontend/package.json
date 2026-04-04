@@ -53,7 +53,7 @@
     "dev": "vite",
     "start": "vite",
     "build": "vite build",
-    "lint": "eslint \"src/**/*.{ts,tsx}\" vite.config.ts vitest.setup.ts",
+    "lint": "eslint \"src/**/*.{ts,tsx}\" vite.config.mts vitest.setup.ts",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest"
