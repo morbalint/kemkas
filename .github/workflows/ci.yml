@@ -32,6 +32,10 @@ jobs:
       run: |
         cd ./frontend
         yarn run test
+    - name: Yarn Lint
+      run: |
+        cd ./frontend
+        yarn run lint
 
   docker-fe-build:
     runs-on: ubuntu-latest

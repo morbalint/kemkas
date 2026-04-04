@@ -2,20 +2,20 @@ import * as React from "react";
 import "./App.css";
 import {Faro} from "@grafana/faro-web-sdk";
 import {createBrowserRouter, LoaderFunctionArgs, Navigate, Outlet, redirect, RouterProvider} from "react-router-dom";
-import CreateCharacter from "./first-edition/pages/CreateCharacter";
 import CharacterList, {CharacterListItemDto} from "./shared/pages/CharacterList";
 import ErrorBoundary from "./shared/ErrorBoundary";
 import Header from "./shared/Header";
 import Footer from "./shared/Footer";
-import CreateCharacter2E from "./second-edition/pages/CreateCharacter2E";
 import store, {AppDispatch, RootState} from './store'
 import { Provider } from "react-redux"
 import { useSelector, useDispatch } from 'react-redux'
-import {load, setUser, unsetUser, userSelector} from './shared/domain-models/userSlice'
+import {fetchCurrentUser, userSelector} from './shared/domain-models/userSlice'
 import {setCharacter} from "./second-edition/domain-models/characterSlice";
-import {getJson, getText} from "./shared/api/http";
+import {getJson} from "./shared/api/http";
 import {KarakterInputs} from "./first-edition/domain-models/karakter";
 import {Karakter2E} from "./second-edition/domain-models/karakter2E";
+const CreateCharacter = React.lazy(() => import("./first-edition/pages/CreateCharacter"))
+const CreateCharacter2E = React.lazy(() => import("./second-edition/pages/CreateCharacter2E"))
 
 const FaroContext = React.createContext<Faro | undefined>(undefined)
 
@@ -43,49 +43,28 @@ function IndexRedirect() {
 
 function CreateCharacter1ERoute() {
     const faro = React.useContext(FaroContext)
-    return <CreateCharacter faro={faro} />
+    return (
+        <React.Suspense fallback={<div className="p-3">Betoltes...</div>}>
+            {faro ? <CreateCharacter faro={faro} /> : <CreateCharacter />}
+        </React.Suspense>
+    )
 }
 
 function CreateCharacter2ERoute() {
     const faro = React.useContext(FaroContext)
-    return <CreateCharacter2E faro={faro} />
+    return (
+        <React.Suspense fallback={<div className="p-3">Betoltes...</div>}>
+            {faro ? <CreateCharacter2E faro={faro} /> : <CreateCharacter2E />}
+        </React.Suspense>
+    )
 }
 
 function UserBootstrap() {
     const dispatch = useDispatch.withTypes<AppDispatch>()()
-    const fetchedUser = useSelector.withTypes<RootState>()(userSelector)
 
     React.useEffect(() => {
-        if (fetchedUser.state !== "not-started") {
-            return;
-        }
-
-        let isCancelled = false;
-        dispatch(load())
-        getText("/api/User/me")
-            .then(userNameResponse => {
-                if (isCancelled) {
-                    return;
-                }
-
-                if (userNameResponse && userNameResponse.length  > 0) {
-                    dispatch(setUser(userNameResponse))
-                } else {
-                    dispatch(unsetUser())
-                }
-            })
-            .catch(() => {
-                if (isCancelled) {
-                    return;
-                }
-
-                dispatch(unsetUser())
-            })
-
-        return () => {
-            isCancelled = true;
-        }
-    }, [dispatch, fetchedUser.state])
+        void dispatch(fetchCurrentUser())
+    }, [dispatch])
 
     return null;
 }
