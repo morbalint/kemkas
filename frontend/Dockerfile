@@ -1,17 +1,16 @@
-FROM node:20.15.1-bookworm as builder
+FROM node:24.14.1-trixie AS builder
 
 WORKDIR "/src"
 
 COPY ["package.json", "yarn.lock", "./"]
 
-RUN yarn install --frozen-lockfile
+RUN yarn install
 
 COPY . .
 
-RUN ./compile-less.sh
 RUN yarn build
 
-FROM nginx:latest as proxy
+FROM nginx:1.29.7-alpine3.23 AS proxy
 
-COPY --from=builder "/src/build" "/usr/share/nginx/html"
+COPY --from=builder "/src/dist" "/usr/share/nginx/html"
 COPY ./nginx.conf /etc/nginx/nginx.conf
