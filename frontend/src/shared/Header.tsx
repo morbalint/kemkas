@@ -1,10 +1,10 @@
 import * as React from "react";
-import axios from "axios";
 import {Container, Nav, Navbar} from "react-bootstrap";
 import {unsetUser, userSelector} from "./domain-models/userSlice";
 import {AppDispatch, RootState} from "../store";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
+import {postVoid} from "./api/http";
 
 function Header() {
 
@@ -13,7 +13,7 @@ function Header() {
     const fetchedUser = useSelector.withTypes<RootState>()(userSelector);
 
     const logout = async () => {
-        await axios.post("/Identity/Account/Logout")
+        await postVoid("/Identity/Account/Logout")
         dispatch(unsetUser())
         navigate("/")
     }

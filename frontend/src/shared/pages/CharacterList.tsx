@@ -33,7 +33,7 @@ interface CharacterListItemDto2E {
     edition: "2e"
 }
 
-type CharacterListItemDto = CharacterListItemDto1E | CharacterListItemDto2E;
+export type CharacterListItemDto = CharacterListItemDto1E | CharacterListItemDto2E;
 
 function mapDtoToViewModel(dto: CharacterListItemDto): CharacterListItemViewModel {
     if (dto.edition === "1e") {

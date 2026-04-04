@@ -1,32 +1,18 @@
 import {KarakterInputs} from "../domain-models/karakter";
-import axios from "axios";
+import {postJson} from "../../shared/api/http";
 
 export async function StoreNewCharacter(karakter: KarakterInputs, isPublic: boolean = false) {
-    let response = await axios.post(`${window.location.origin}/api/Character1E/`, karakter, {
-        withCredentials: true,
+    return postJson<KarakterInputs, string>("/api/Character1E/", karakter, {
         params: {
             isPublic,
         }
     })
-    if (response.status < 300){
-        return response.data as string
-    }
-    else {
-        throw Error(response.statusText)
-    }
 }
 
 export async function UpdateCharacter(id: string, karakter: KarakterInputs, isPublic: boolean = false) {
-    let response = await axios.post(`${window.location.origin}/api/Character1E/${id}`, karakter, {
-        withCredentials: true,
+    return postJson<KarakterInputs, string>(`/api/Character1E/${id}`, karakter, {
         params: {
             isPublic,
         }
     })
-    if (response.status < 300){
-        return response.data as string
-    }
-    else {
-        throw Error(response.statusText)
-    }
 }
