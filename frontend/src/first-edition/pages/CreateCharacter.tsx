@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import './CreateCharacter.less'
 import {Faj, TulajdonsagokFajjal} from "../domain-models/faj";
 import {Osztaly, SetFelszerelesForChangedOsztaly} from "../domain-models/osztaly"
@@ -56,15 +56,43 @@ function CreateCharacterPage(props: {
 
     let [karakter, changeKarakter] = useState(initialKarakterInputs)
 
-    const tulajdonsagokFajjal = TulajdonsagokFajjal(karakter.tulajdonsagok, karakter.faj)
+    const tulajdonsagokFajjal = useMemo(() => TulajdonsagokFajjal(karakter.tulajdonsagok, karakter.faj), [karakter.tulajdonsagok, karakter.faj])
 
-    const changeKepzettseg = (k: KepzettsegId[]) => changeKarakter({...karakter, kepzettsegek: k})
-    const changeTolvajKepzettseg = (tk?: KepzettsegId[]) => changeKarakter({...karakter, tolvajKepzettsegek: tk})
-    SetDefaultTolvajKepzettsegek(karakter, changeTolvajKepzettseg)
-    SetDefaultKepzettsegek({...karakter, tulajdonsagok: tulajdonsagokFajjal}, changeKepzettseg)
-    const availableKepzettsegList = AvailableKezpettsegList(karakter.osztaly)
-    const setFelszereles = (f: KarakterFelszereles) => changeKarakter({...karakter, felszereles: f})
-    SetFelszerelesForChangedOsztaly(karakter.osztaly, karakter.felszereles, setFelszereles)
+    const changeKepzettseg = useCallback((k: KepzettsegId[]) => {
+        changeKarakter(prev => ({...prev, kepzettsegek: k}))
+    }, [])
+    const changeTolvajKepzettseg = useCallback((tk?: KepzettsegId[]) => {
+        changeKarakter(prev => ({...prev, tolvajKepzettsegek: tk}))
+    }, [])
+    const availableKepzettsegList = useMemo(() => AvailableKezpettsegList(karakter.osztaly), [karakter.osztaly])
+    const setFelszereles = useCallback((f: KarakterFelszereles) => {
+        changeKarakter(prev => ({...prev, felszereles: f}))
+    }, [])
+
+    const tolvajDefaultsInput = useMemo(() => ({
+        osztaly: karakter.osztaly,
+        tolvajKepzettsegek: karakter.tolvajKepzettsegek,
+    }), [karakter.osztaly, karakter.tolvajKepzettsegek])
+
+    const kepzettsegDefaultsInput = useMemo(() => ({
+        osztaly: karakter.osztaly,
+        faj: karakter.faj,
+        tulajdonsagok: tulajdonsagokFajjal,
+        kepzettsegek: karakter.kepzettsegek,
+        tolvajKepzettsegek: karakter.tolvajKepzettsegek,
+    }), [karakter.osztaly, karakter.faj, tulajdonsagokFajjal, karakter.kepzettsegek, karakter.tolvajKepzettsegek])
+
+    useEffect(() => {
+        SetDefaultTolvajKepzettsegek(tolvajDefaultsInput, changeTolvajKepzettseg)
+    }, [tolvajDefaultsInput, changeTolvajKepzettseg])
+
+    useEffect(() => {
+        SetDefaultKepzettsegek(kepzettsegDefaultsInput, changeKepzettseg)
+    }, [kepzettsegDefaultsInput, changeKepzettseg])
+
+    useEffect(() => {
+        SetFelszerelesForChangedOsztaly(karakter.osztaly, karakter.felszereles, setFelszereles)
+    }, [karakter.osztaly, karakter.felszereles, setFelszereles])
 
     const levelUp = () => LevelUp(karakter, changeKarakter)
     const levelDown = () => LevelDown(karakter, changeKarakter)

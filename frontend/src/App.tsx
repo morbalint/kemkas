@@ -1,7 +1,7 @@
 import * as React from "react";
 import "./App.css";
 import {Faro} from "@grafana/faro-web-sdk";
-import {createBrowserRouter, redirect, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, Outlet, redirect, RouterProvider} from "react-router-dom";
 import CreateCharacter from "./first-edition/pages/CreateCharacter";
 import CharacterList from "./shared/pages/CharacterList";
 import ErrorBoundary from "./shared/ErrorBoundary";
@@ -14,11 +14,28 @@ import { useSelector, useDispatch } from 'react-redux'
 import {load, setUser, unsetUser, userSelector} from './shared/domain-models/userSlice'
 import {setCharacter} from "./second-edition/domain-models/characterSlice";
 
+function RootLayout() {
+    return (
+        <>
+            <Header />
+            <div className='container'>
+                <Outlet />
+            </div>
+            <Footer />
+        </>
+    )
+}
+
 function Router(props: {faro?: Faro}) {
     const dispatch = useDispatch.withTypes<AppDispatch>()()
     const fetchedUser = useSelector.withTypes<RootState>()(userSelector)
 
-    if (fetchedUser.state === "not-started") {
+    React.useEffect(() => {
+        if (fetchedUser.state !== "not-started") {
+            return;
+        }
+
+        let isCancelled = false;
         dispatch(load())
         fetch(`${window.location.origin}/api/User/me`)
             .then(response => {
@@ -28,88 +45,97 @@ function Router(props: {faro?: Faro}) {
                 console.log(response)
             })
             .then(userNameResponse => {
+                if (isCancelled) {
+                    return;
+                }
+
                 if (userNameResponse && userNameResponse.length  > 0) {
                     dispatch(setUser(userNameResponse))
                 } else {
                     dispatch(unsetUser())
                 }
-
             })
             .catch(() => {
+                if (isCancelled) {
+                    return;
+                }
+
                 dispatch(unsetUser())
             })
-    }
 
+        return () => {
+            isCancelled = true;
+        }
+    }, [dispatch, fetchedUser.state])
 
-
-    const router = createBrowserRouter([
+    const router = React.useMemo(() => createBrowserRouter([
         {
             path: "/",
-            loader: () => fetchedUser.email == null ? redirect("/2e/karakter") : redirect("/karaktereim")
+            element: <RootLayout />,
+            children: [
+                {
+                    index: true,
+                    loader: () => fetchedUser.email == null ? redirect("/2e/karakter") : redirect("/karaktereim")
+                },
+                {
+                    path: "karaktereim",
+                    element: <CharacterList />,
+                    loader: () => fetch(`${window.location.origin}/api/Character`),
+                    ErrorBoundary: ErrorBoundary,
+                },
+                {
+                    path: "1e",
+                    loader: () => redirect("/1e/karakter")
+                },
+                {
+                    path: "1e/karakter",
+                    element: <CreateCharacter faro={props.faro} />,
+                    ErrorBoundary: ErrorBoundary,
+                },
+                {
+                    path: "1e/karakter/:id",
+                    element: <CreateCharacter faro={props.faro}/>,
+                    loader: args => fetch(`${window.location.origin}/api/Character1E/${args.params.id}`),
+                    ErrorBoundary: ErrorBoundary,
+                },
+                {
+                    path: "2e",
+                    loader: () => redirect("/2e/karakter")
+                },
+                {
+                    path: "2e/karakter",
+                    element: <CreateCharacter2E faro={props.faro}/>,
+                    ErrorBoundary: ErrorBoundary,
+                },
+                {
+                    path: "2e/karakter/:id",
+                    element: <CreateCharacter2E faro={props.faro}/>,
+                    loader: async args => {
+                        const response = await fetch(`${window.location.origin}/api/Character2E/${args.params.id}`)
+                        if (response.ok) {
+                            const loaded2Echaracter = await response.json()
+                            dispatch(setCharacter(loaded2Echaracter))
+                            return loaded2Echaracter;
+                        }
+                        return {
+                            isPublic: false,
+                            error: response.statusText,
+                        };
+                    },
+                    ErrorBoundary: ErrorBoundary,
+                },
+            ],
         },
-        {
-            path: "/karaktereim",
-            element: <CharacterList />,
-            loader: () => fetch(`${window.location.origin}/api/Character`),
-            ErrorBoundary: ErrorBoundary,
-        },
-        {
-            path: "/1e",
-            loader: () => redirect("/1e/karakter")
-        },
-        {
-            path: "/1e/karakter",
-            element: <CreateCharacter faro={props.faro} />,
-            ErrorBoundary: ErrorBoundary,
-        },
-        {
-            path: "/1e/karakter/:id",
-            element: <CreateCharacter faro={props.faro}/>,
-            loader: args => fetch(`${window.location.origin}/api/Character1E/${args.params.id}`),
-            ErrorBoundary: ErrorBoundary,
-        },
-        {
-            path: "/2e",
-            loader: () => redirect("/2e/karakter")
-        },
-        {
-            path: "/2e/karakter",
-            element: <CreateCharacter2E faro={props.faro}/>,
-            ErrorBoundary: ErrorBoundary,
-        },
-        {
-            path: "/2e/karakter/:id",
-            element: <CreateCharacter2E faro={props.faro}/>,
-            loader: async args => {
-                const response = await fetch(`${window.location.origin}/api/Character2E/${args.params.id}`)
-                if (response.ok) {
-                    const loaded2Echaracter = await response.json()
-                    dispatch(setCharacter(loaded2Echaracter))
-                    return loaded2Echaracter;
-                }
-                return {
-                    isPublic: false,
-                    error: response.statusText,
-                };
-            },
-            ErrorBoundary: ErrorBoundary,
-        },
-    ]);
+    ]), [dispatch, fetchedUser.email, props.faro]);
 
-    return (
-        <div className='container'>
-            <RouterProvider router={router}/>
-        </div>
-    )
+    return <RouterProvider router={router}/>
 }
 
 function App(props: { faro?: Faro }) {
 
     return (
         <Provider store={store}>
-            <Header/>
             <Router faro={props.faro} />
-            <Footer />
         </Provider>
     );
 }
