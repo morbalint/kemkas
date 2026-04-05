@@ -43,14 +43,14 @@ Prerequisites:
 Run:
 
 ```shell
-docker compose -f docker-compose.e2e.yaml up --build --abort-on-container-exit --exit-code-from e2e e2e
+docker compose -f e2e.docker-compose.yaml up --build --abort-on-container-exit --exit-code-from e2e e2e
 ```
 
 Run with a different backend tag:
 
 ```shell
 BACKEND_IMAGE=ghcr.io/morbalint/kemkas-backend:<tag> \
-docker compose -f docker-compose.e2e.yaml up --build --abort-on-container-exit --exit-code-from e2e e2e
+docker compose -f e2e.docker-compose.yaml up --build --abort-on-container-exit --exit-code-from e2e e2e
 ```
 
 The `certs` service generates a local CA and nginx server certificate in a shared volume.
