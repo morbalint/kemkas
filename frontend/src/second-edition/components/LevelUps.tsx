@@ -41,6 +41,8 @@ function LevelUp(props: {
     const kalozSzint = classLevels[Osztaly2E.Tengeresz]
     const tolvajSzint = classLevels[Osztaly2E.Tolvaj]
     const szintlepes = karakter.szintlepesek[szint-1];
+    const tulajdonsagNoveles = szintlepes?.tulajdonsagNoveles;
+    const kalozKritikus = szintlepes?.kalozKritikus;
     
     return <div>
         <div className='row mt-3'>
@@ -54,10 +56,10 @@ function LevelUp(props: {
                 osztalySzint={classLevels[osztaly]}
                 dataTestId={`osztaly-${szint}`}
             />}
-        {szint % 4 === 0 && 
+        {szint % 4 === 0 && tulajdonsagNoveles != null &&
             <TulajdonsagNoveles
                 tulajdonsagok={karakter.tulajdonsagok}
-                tulajdonsagNoveles={karakter.szintlepesek[szint-1].tulajdonsagNoveles!}
+                tulajdonsagNoveles={tulajdonsagNoveles}
                 changeTulajdonsagNoveles={changeTulajdonsagNoveles}
                 dataTestId={`tulajdonsag-${szint}`}
             />}
@@ -69,12 +71,13 @@ function LevelUp(props: {
         />
         {osztaly === Osztaly2E.Harcos && harcosSzint % 2 === 1 &&
             <HarcosFegyverSpecializacio
-                szint={harcosSzint}
+                harcosSzint={harcosSzint}
+                karakterSzint={szint}
             />
         }
-        {osztaly === Osztaly2E.Tengeresz && kalozSzint % 3 === 0 &&
+        {osztaly === Osztaly2E.Tengeresz && kalozSzint % 3 === 0 && kalozKritikus != null &&
             <KalozKritikus
-                kritFegyverId={szintlepes.kalozKritikus!}
+                kritFegyverId={kalozKritikus}
                 existingKrits={karakter.szintlepesek.map(x => x.kalozKritikus)}
                 changeKrit={changeKalozKritikus}
                 szint={kalozSzint}
@@ -82,12 +85,17 @@ function LevelUp(props: {
         }
         {osztaly === Osztaly2E.Tolvaj
             && (tolvajSzint === 5 || tolvajSzint === 9)
-            && szintlepes.tolvajExtraKepzettseg != null &&
+            && szintlepes?.tolvajExtraKepzettseg != null &&
             <div className='row m-2'>
                 <label className='col-md-2 col-sm-3 col-form-label'>Extra képzettség</label>
                 <KepzettsegSelector
-                    selected={Kepzettsegek[szintlepes.tolvajExtraKepzettseg]}
-                    kepzettsegek={[Kepzettsegek[szintlepes.tolvajExtraKepzettseg], ...GetAvailableKepzettsegek(karakter)]}
+                    selected={Kepzettsegek[szintlepes!.tolvajExtraKepzettseg]}
+                    kepzettsegek={[
+                        Kepzettsegek[szintlepes!.tolvajExtraKepzettseg],
+                        ...GetAvailableKepzettsegek(karakter, {
+                            ignoreClassRestrictions: tolvajSzint === 9,
+                        })
+                    ]}
                     dataTestId={`tolvaj-extra-kepzettseg-${szint}`}
                     changeKepzettseg={changeExtraTolvajKepzettseg}
                 />
@@ -100,16 +108,19 @@ export function LevelUps(props: {karakter: Karakter2E, changeKarakter: (inputs: 
     const {karakter, changeKarakter} = props;
 
     const tulajdonsagokAtSzint = (szint: number) => TulajdonsagokTotal({...karakter, szintlepesek: karakter.szintlepesek.slice(0, szint)})
+    const szintlepesAt = (szint: number) => karakter.szintlepesek[szint-1]!
 
     const changeRolledHPAtSzint = (szint: number) => (newHProll: number) => {
-        changeKarakter({...karakter, szintlepesek: arraySetN(karakter.szintlepesek, szint-1, {...karakter.szintlepesek[szint-1], HProll: newHProll})})
+        const szintlepes = szintlepesAt(szint)
+        changeKarakter({...karakter, szintlepesek: arraySetN(karakter.szintlepesek, szint-1, {...szintlepes, HProll: newHProll})})
         console.log(karakter)
     }
     const changeTulajdonsagNovelesAtSzint = (szint: number) => {
         return (t: Tulajdonsag2E) => {
+            const szintlepes = szintlepesAt(szint)
             changeKarakter({...karakter,
                 szintlepesek: arraySetN(karakter.szintlepesek, szint-1, {
-                    ...karakter.szintlepesek[szint-1],
+                    ...szintlepes,
                     tulajdonsagNoveles: t
                 })
             })
@@ -118,10 +129,11 @@ export function LevelUps(props: {karakter: Karakter2E, changeKarakter: (inputs: 
 
     const changeKalozKritikusAtSzint = (szint: number) => {
         return (krit: string) => {
+            const szintlepes = szintlepesAt(szint)
             changeKarakter({
                 ...karakter, 
                 szintlepesek: arraySetN(karakter.szintlepesek, szint-1, {
-                    ...karakter.szintlepesek[szint-1],
+                    ...szintlepes,
                         kalozKritikus: krit
                 })
             })
@@ -130,10 +142,11 @@ export function LevelUps(props: {karakter: Karakter2E, changeKarakter: (inputs: 
 
     const changeExtraTolvajKepzettseg = (szint: number) => {
         return (k: KepzettsegId) => {
+            const szintlepes = szintlepesAt(szint)
             changeKarakter({
                 ...karakter,
                 szintlepesek: arraySetN(karakter.szintlepesek, szint-1, {
-                    ...karakter.szintlepesek[szint-1],
+                    ...szintlepes,
                     tolvajExtraKepzettseg: k,
                 })
             })
@@ -144,10 +157,13 @@ export function LevelUps(props: {karakter: Karakter2E, changeKarakter: (inputs: 
 
     return <>
         {levels.slice(1).map(szint =>
+            {
+                const szintlepes = szintlepesAt(szint)
+                return (
             <LevelUp
                 key={`level-up-${szint}`}
                 szint={szint}
-                osztaly={karakter.szintlepesek[szint-1].osztaly}
+                osztaly={szintlepes.osztaly}
                 karakter={{...karakter, szintlepesek: karakter.szintlepesek.slice(0, szint) ,tulajdonsagok: tulajdonsagokAtSzint(szint)}}
                 changeTulajdonsagNoveles={changeTulajdonsagNovelesAtSzint(szint)}
                 changeRolledHP={changeRolledHPAtSzint(szint)}
@@ -155,6 +171,8 @@ export function LevelUps(props: {karakter: Karakter2E, changeKarakter: (inputs: 
                 changeOsztaly={(o) => changeKarakter(ChangeOsztalyAtSzint(karakter, o, szint))}
                 changeExtraTolvajKepzettseg={changeExtraTolvajKepzettseg(szint)}
             />
+                )
+            }
         )}
     </>
 }

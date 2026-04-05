@@ -8,21 +8,23 @@ import {AppDispatch, RootState} from "../../store";
 import {characterSelector, setHarcosSpecialization} from "../domain-models/characterSlice";
 
 function HarcosFegyverSpecializacio(props: {
-    szint: number
+    harcosSzint: number,
+    karakterSzint: number,
 }) {
     const {
-        szint
+        harcosSzint,
+        karakterSzint,
     } = props
 
     const dispatch = useDispatch.withTypes<AppDispatch>()()
     const character = useSelector.withTypes<RootState>()(characterSelector)
-    const specialization = character.szintlepesek[szint-1].harcosFegyver || 'kard_hosszu'
+    const specialization = character.szintlepesek[karakterSzint-1]?.harcosFegyver || 'kard_hosszu'
     const existingSpecializations = character.szintlepesek.filter(x => x.harcosFegyver != null).map(x => x.harcosFegyver! as string)
-    const changeSpecialization = (specialization: string) => dispatch(setHarcosSpecialization({szint, fegyver: specialization}))
+    const changeSpecialization = (specialization: string) => dispatch(setHarcosSpecialization({szint: karakterSzint, fegyver: specialization}))
 
     const fegyver = GetFegyver(specialization)
     const availableFegyverek = AllowedFegyver(Osztaly2E.Harcos)
-    const pickableFegyverek = availableFegyverek.filter(f => f.Id === specialization || existingSpecializations.filter(x => x === f.Id).length < (szint < 9 ? 1 : 2))
+    const pickableFegyverek = availableFegyverek.filter(f => f.Id === specialization || existingSpecializations.filter(x => x === f.Id).length < (harcosSzint < 9 ? 1 : 2))
 
 
     return <>
@@ -32,7 +34,7 @@ function HarcosFegyverSpecializacio(props: {
                 fegyverek={pickableFegyverek}
                 selectedId={specialization}
                 onChange={changeSpecialization}
-                dataTestId={"harcos-specialization-" + szint}
+                dataTestId={"harcos-specialization-" + karakterSzint}
             />
             {fegyver == null && <span className='form-field-error'>Ismeretlen fegyver: {specialization}</span>}
         </div>

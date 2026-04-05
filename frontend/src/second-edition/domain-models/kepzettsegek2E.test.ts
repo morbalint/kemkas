@@ -106,6 +106,28 @@ describe("Kepzettsegek 2E", () => {
                 const actual = GetAvailableKepzettsegek(karakter)
                 expect(actual).not.toContain(Kepzettsegek.k_meregkeveres)
             })
+
+            test("at Tolvaj level 9 extra skill can include class-restricted non-Tolvaj skills", () => {
+                const karakter = {
+                    ...DefaultKarakter,
+                    szintlepesek: [
+                        { osztaly: Osztaly2E.Tolvaj, HProll: 6, },
+                        { osztaly: Osztaly2E.Tolvaj, HProll: 6, },
+                        { osztaly: Osztaly2E.Tolvaj, HProll: 6, },
+                        { osztaly: Osztaly2E.Tolvaj, HProll: 6, tulajdonsagNoveles: Tulajdonsag2E.Ugyesseg },
+                        { osztaly: Osztaly2E.Tolvaj, HProll: 6, tolvajExtraKepzettseg: Kepzettsegek.k_meregkeveres.Id },
+                        { osztaly: Osztaly2E.Tolvaj, HProll: 6, },
+                        { osztaly: Osztaly2E.Tolvaj, HProll: 6, },
+                        { osztaly: Osztaly2E.Tolvaj, HProll: 6, },
+                    ]
+                }
+
+                const restricted = GetAvailableKepzettsegek(karakter)
+                expect(restricted).not.toContain(Kepzettsegek.k_csillagjoslas)
+
+                const unrestricted = GetAvailableKepzettsegek(karakter, { ignoreClassRestrictions: true })
+                expect(unrestricted).toContain(Kepzettsegek.k_csillagjoslas)
+            })
         })
         test("multiclass characters get access to kepzettsegek from all classes", () => {
             const karakter = {

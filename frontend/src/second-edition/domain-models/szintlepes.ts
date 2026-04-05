@@ -67,7 +67,9 @@ export function LevelUp(karakter: Karakter2E, changeKarakter: (input: Karakter2E
     if (autoPickedOsztaly === Osztaly2E.Tolvaj){
         const tolvajSzint = 1 + karakter.szintlepesek.filter(x => x.osztaly === Osztaly2E.Tolvaj).length
         if (tolvajSzint === 5 || tolvajSzint === 9) {
-            const availableKepzettsegek = GetAvailableKepzettsegek(karakter)
+            const availableKepzettsegek = GetAvailableKepzettsegek(karakter, {
+                ignoreClassRestrictions: tolvajSzint === 9,
+            })
             szintlepes.tolvajExtraKepzettseg = availableKepzettsegek[0].Id;
         }
     }
