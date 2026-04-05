@@ -56,7 +56,11 @@
     "lint": "eslint \"src/**/*.{ts,tsx}\" vite.config.mts vitest.setup.ts",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:e2e": "yarn --cwd ../e2e test",
+    "test:e2e:headed": "yarn --cwd ../e2e test:headed",
+    "test:e2e:ui": "yarn --cwd ../e2e test:ui",
+    "test:e2e:install": "yarn --cwd ../e2e install:browsers"
   },
   "browserslist": {
     "production": [

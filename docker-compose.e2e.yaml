@@ -1,0 +1,82 @@
+services:
+  certs:
+    image: alpine:3.21
+    volumes:
+      - tls-certs:/certs
+      - ./scripts/generate-e2e-certs.sh:/scripts/generate-e2e-certs.sh:ro
+    command: ["sh", "/scripts/generate-e2e-certs.sh"]
+
+  db:
+    image: postgres:16.13-alpine3.23
+    environment:
+      POSTGRES_USER: "kemkas"
+      POSTGRES_PASSWORD: "kemkas-dev42"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kemkas -d postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+
+  backend:
+    image: ${BACKEND_IMAGE:-ghcr.io/morbalint/kemkas-backend:b8565f8e}
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=db;User Id=kemkas;Password=kemkas-dev42"
+      Email__DomainName: "mail.kemkas.hu"
+      Email__ApiKey: ""
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    image: ${FRONTEND_IMAGE:-ghcr.io/morbalint/kemkas-frontend:local}
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+  proxy:
+    image: nginx:1.29.7-alpine3.23
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./nginx.e2e.conf:/etc/nginx/nginx.conf:ro
+      - tls-certs:/etc/nginx/certs:ro
+    depends_on:
+      certs:
+        condition: service_completed_successfully
+      backend:
+        condition: service_started
+      frontend:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider --no-check-certificate https://127.0.0.1:8000 || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+
+  e2e:
+    image: ${E2E_IMAGE:-ghcr.io/morbalint/kemkas-e2e:local}
+    build:
+      context: ./e2e
+      dockerfile: Dockerfile
+    environment:
+      E2E_BASE_URL: https://proxy:8000
+      E2E_USE_WEBSERVER: "false"
+      E2E_TRUSTED_CERT_PATH: /certs/rootCA.pem
+      E2E_WAIT_FOR_URL: https://proxy:8000
+    volumes:
+      - tls-certs:/certs:ro
+      - ./e2e/playwright-report:/work/playwright-report
+      - ./e2e/test-results:/work/test-results
+    depends_on:
+      certs:
+        condition: service_completed_successfully
+      proxy:
+        condition: service_healthy
+
+volumes:
+  db-data:
+  tls-certs:

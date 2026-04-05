@@ -1,13 +1,18 @@
-name: CI compile & test & build
+name: CI
 
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      backend_image: 
+        description: 'Backend image to use in E2E tests (optional, default: ghcr.io/morbalint/kemkas-backend:b8565f8e)'
+        required: false
 
 jobs:
-  ci-fe:
+  unit-test-and-lint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -37,46 +42,136 @@ jobs:
         cd ./frontend
         yarn run lint
 
-  docker-fe-build:
+  build-fe:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
     outputs:
-       image_tag: ${{ steps.get_image_tag.outputs.image_tag }}
+      image_sha_tag: ${{ steps.image-tag.outputs.image_sha_tag }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: docker/setup-buildx-action@v3
-      - name: Log in to GitHub Container Registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-      - id: get_image_tag
-        run: |
-          echo "GITHUB_SHA_SHORT=$(echo ${GITHUB_SHA::8})" >> $GITHUB_ENV
-          echo "ghcr.io/${{ github.repository_owner }}/kemkas-frontend:${GITHUB_SHA::8}"
-          echo "image_tag=ghcr.io/${{ github.repository_owner }}/kemkas-fe:${GITHUB_SHA::8}" >> $GITHUB_OUTPUT
-      - uses: docker/build-push-action@v5
-        with:
-          context: ./frontend/
-          file: ./frontend/Dockerfile
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          push: true
-          tags: |
-            ghcr.io/${{ github.repository_owner }}/kemkas-frontend:${{ env.GITHUB_SHA_SHORT }}
+    - uses: actions/checkout@v4
+    - uses: docker/setup-buildx-action@v3
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Compute frontend image tag
+      id: image-tag
+      run: |
+        image_repo="ghcr.io/${{ github.repository_owner }}/kemkas-frontend"
+        sha_tag="${image_repo}:${GITHUB_SHA::8}"
 
-# No longer used, and token expired.
-  # deploy-to-beta:
-  #   runs-on: ubuntu-latest
-  #   needs:
-  #     - docker-fe-build
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #       with:
-  #         repository: ${{ github.repository_owner }}/kemkas-deployment
-  #         ref: refs/heads/main
-  #         ssh-key: ${{ secrets.DEPLOYMENT_REPO_DEPLOY_KEY }}
-  #     - uses: mikefarah/yq@v4
-  #       with:
-  #         cmd: yq -i '.spec.template.spec.containers[0].image = "${{ needs.docker-fe-build.outputs.image_tag }}"' ./kemkas-beta/kemkas-fe-deployment.yaml
-  #     - run: |
-  #         git config --add user.email "beta-fe-deployment-bot@kemkas.hu"
-  #         git config --add user.name "Deployment Bot Beta FE"
-  #         git commit -a -m "deploy ${{ needs.docker-fe-build.outputs.image_tag }}" 
-  #         git push
+        tags="$sha_tag"
+        if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
+          tags+=$'\n'"${image_repo}:latest"
+        fi
+
+        echo "image_sha_tag=${sha_tag}" >> "$GITHUB_OUTPUT"
+        {
+          echo "tags<<EOF"
+          echo "$tags"
+          echo "EOF"
+        } >> "$GITHUB_OUTPUT"
+    - name: Build and push frontend image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./frontend/
+        file: ./frontend/Dockerfile
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        push: true
+        tags: |
+          ${{ steps.image-tag.outputs.tags }}
+
+  build-e2e:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    outputs:
+      image_sha_tag: ${{ steps.image-tag.outputs.image_sha_tag }}
+    steps:
+    - uses: actions/checkout@v4
+    - uses: docker/setup-buildx-action@v3
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Compute e2e image tag
+      id: image-tag
+      run: |
+        image_repo="ghcr.io/${{ github.repository_owner }}/kemkas-e2e"
+        sha_tag="${image_repo}:${GITHUB_SHA::8}"
+
+        tags="$sha_tag"
+        if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
+          tags+=$'\n'"${image_repo}:latest"
+        fi
+
+        echo "image_sha_tag=${sha_tag}" >> "$GITHUB_OUTPUT"
+        {
+          echo "tags<<EOF"
+          echo "$tags"
+          echo "EOF"
+        } >> "$GITHUB_OUTPUT"
+    - name: Build and push e2e image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./e2e/
+        file: ./e2e/Dockerfile
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        push: true
+        tags: |
+          ${{ steps.image-tag.outputs.tags }}
+
+  run-e2e:
+    runs-on: ubuntu-latest
+    needs:
+      - build-fe
+      - build-e2e
+    permissions:
+      contents: read
+      packages: read
+    env:
+      BACKEND_IMAGE: ${{ github.event.inputs.backend_image || 'ghcr.io/morbalint/kemkas-backend:b8565f8e' }}
+      FRONTEND_IMAGE: ${{ needs.build-fe.outputs.image_sha_tag }}
+      E2E_IMAGE: ${{ needs.build-e2e.outputs.image_sha_tag }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Pull images for test run
+      run: docker compose -f docker-compose.e2e.yaml pull
+    - name: Run Docker Compose E2E tests
+      run: docker compose -f docker-compose.e2e.yaml up --no-build --abort-on-container-exit --exit-code-from e2e e2e
+    - name: Upload Playwright HTML report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: playwright-report
+        path: e2e/playwright-report
+        if-no-files-found: ignore
+    - name: Upload Playwright test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: playwright-test-results
+        path: e2e/test-results
+        if-no-files-found: ignore
+    - name: Tear down Docker Compose stack
+      if: always()
+      run: docker compose -f docker-compose.e2e.yaml down -v --remove-orphans
