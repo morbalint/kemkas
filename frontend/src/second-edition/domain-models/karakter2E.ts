@@ -9,6 +9,7 @@ import {AllowedFegyver} from "./allowed-fegyver";
 import {BaseHP} from "./masodlagos_ertekek";
 import {dAny} from "../../shared/domain-models/kockak";
 import {KarakterVarazslat} from "./varazslat";
+import {GetAvailableKepzettsegek} from "./kepzettsegek2E";
 
 export interface Karakter2E {
     id?: string,
@@ -51,13 +52,15 @@ export const DefaultKarakter: Karakter2E = {
     varazslatok: [],
 }
 
-function setOsztalyForSzintLepes(szintlepesek: Szintlepes[], osztaly: Osztaly2E, szint: number): Szintlepes[] {
+function setOsztalyForSzintLepes(karakter: Karakter2E, osztaly: Osztaly2E, szint: number): Szintlepes[] {
+    const szintlepesek = karakter.szintlepesek
     const prev = szintlepesek.slice(0, szint-1) 
     const current : Szintlepes = {
         ...szintlepesek[szint-1],
         osztaly,
         harcosFegyver: undefined,
-        kalozKritikus: undefined
+        kalozKritikus: undefined,
+        tolvajExtraKepzettseg: undefined,
     }
     const tail = szintlepesek.slice(szint).map(x => {return {...x}})
 
@@ -117,6 +120,37 @@ function setOsztalyForSzintLepes(szintlepesek: Szintlepes[], osztaly: Osztaly2E,
             tail[i].kalozKritikus = kalozKritAtSzint(kalozSzint)
         }
     }
+
+    let tolvajSzint = prev.filter(x => x.osztaly === Osztaly2E.Tolvaj).length
+    const existingTolvajExtraKepzettsegek = szintlepesek
+        .map(x => x.tolvajExtraKepzettseg)
+        .filter(x => x != null) as KepzettsegId[]
+    const tolvajExtraKepzettsegAtSzint = (tSzint: number, atLevelSzintlepesek: Szintlepes[]): (KepzettsegId | undefined) => {
+        if (tSzint !== 5 && tSzint !== 9) {
+            return undefined
+        }
+        const extraIndex = tSzint === 5 ? 0 : 1
+        if (existingTolvajExtraKepzettsegek.length > extraIndex) {
+            return existingTolvajExtraKepzettsegek[extraIndex]
+        }
+        return GetAvailableKepzettsegek({
+            szintlepesek: atLevelSzintlepesek,
+            faj: karakter.faj,
+            kepzettsegek: karakter.kepzettsegek,
+            tolvajKepzettsegek: karakter.tolvajKepzettsegek,
+        })[0]?.Id
+    }
+
+    if (osztaly === Osztaly2E.Tolvaj) {
+        tolvajSzint++
+        current.tolvajExtraKepzettseg = tolvajExtraKepzettsegAtSzint(tolvajSzint, [...prev, current])
+    }
+    for (let i = 0; i < tail.length; i++) {
+        if (tail[i].osztaly === Osztaly2E.Tolvaj) {
+            tolvajSzint++
+            tail[i].tolvajExtraKepzettseg = tolvajExtraKepzettsegAtSzint(tolvajSzint, [...prev, current, ...tail.slice(0, i+1)])
+        }
+    }
     
     const HD = BaseHP(osztaly) 
     if (szint === 1) {
@@ -138,6 +172,6 @@ export function ChangeLvl1Osztaly(karakter: Karakter2E, osztaly: Osztaly2E): Kar
 export function ChangeOsztalyAtSzint(karakter: Karakter2E, osztaly: Osztaly2E, szint: number): Karakter2E {
     return {
         ...karakter,
-        szintlepesek: setOsztalyForSzintLepes(karakter.szintlepesek, osztaly, szint)
+        szintlepesek: setOsztalyForSzintLepes(karakter, osztaly, szint)
     }
 }

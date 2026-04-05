@@ -58,3 +58,49 @@ describe("Harcos specialization in multiclass level-ups", () => {
         expect(thirdHarcosLevelSpec).not.toBe(firstHarcosSpec);
     });
 });
+
+describe("Tolvaj extra skill in multiclass level-ups", () => {
+    it("adds extra skill when Tolvaj class reaches level 5 at higher character level", () => {
+        const karakter: Karakter2E = {
+            ...DefaultKarakter,
+            szint: 5,
+            szintlepesek: [
+                { osztaly: Osztaly2E.Tolvaj, HProll: 6 },
+                { osztaly: Osztaly2E.Harcos, HProll: 10 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 4 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 5 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 3 },
+            ],
+            tolvajKepzettsegek: ["k_alcazas", "k_csapdak", "k_egyensulyozas", "k_hamisitas"],
+            varazslatok: [],
+        };
+
+        const afterLevel6 = applyLevelUp(karakter);
+        const sixthLevel = afterLevel6.szintlepesek[5];
+
+        expect(sixthLevel?.osztaly).toBe(Osztaly2E.Tolvaj);
+        expect(sixthLevel?.tolvajExtraKepzettseg).toBeDefined();
+    });
+
+    it("recomputes missing extra skill when class change makes current level Tolvaj level 5", () => {
+        const karakter: Karakter2E = {
+            ...DefaultKarakter,
+            szint: 5,
+            szintlepesek: [
+                { osztaly: Osztaly2E.Tolvaj, HProll: 6 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 5 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 4 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 3 },
+                { osztaly: Osztaly2E.Harcos, HProll: 8 },
+            ],
+            tolvajKepzettsegek: ["k_alcazas", "k_csapdak", "k_egyensulyozas", "k_hamisitas"],
+            varazslatok: [],
+        };
+
+        const changed = ChangeOsztalyAtSzint(karakter, Osztaly2E.Tolvaj, 5);
+        const fifthLevel = changed.szintlepesek[4];
+
+        expect(fifthLevel?.osztaly).toBe(Osztaly2E.Tolvaj);
+        expect(fifthLevel?.tolvajExtraKepzettseg).toBeDefined();
+    });
+});

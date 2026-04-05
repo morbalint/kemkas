@@ -9,6 +9,7 @@ import {AllowedFegyver} from "../domain-models/allowed-fegyver";
 import {Osztaly2E} from "../domain-models/osztaly2E";
 import {ChangeOsztalyAtSzint, DefaultKarakter, Karakter2E} from "../domain-models/karakter2E";
 import {LevelUp} from "../domain-models/szintlepes";
+import {GetAvailableKepzettsegek} from "../domain-models/kepzettsegek2E";
 
 function applyLevelUp(karakter: Karakter2E): Karakter2E {
     let next: Karakter2E | undefined;
@@ -153,5 +154,51 @@ describe("LevelUps Harcos specialization indexing", () => {
         );
 
         expect(sut.queryByTestId("kaloz-krit-3")).toBeNull();
+    });
+
+    it("shows and updates Tolvaj extra skill on multiclass Tolvaj level 5", async () => {
+        const multiclassTolvaj: Karakter2E = {
+            ...DefaultKarakter,
+            szint: 6,
+            szintlepesek: [
+                { osztaly: Osztaly2E.Tolvaj, HProll: 6 },
+                { osztaly: Osztaly2E.Harcos, HProll: 10 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 4 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 5 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 6 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 3, tolvajExtraKepzettseg: "k_meregkeveres" },
+            ],
+            tolvajKepzettsegek: ["k_alcazas", "k_csapdak", "k_egyensulyozas", "k_hamisitas"],
+            varazslatok: [],
+        };
+
+        const store = configureStore({
+            reducer: {
+                user: userReducer,
+                character2E: characterReducer,
+            },
+        });
+        store.dispatch(setCharacter(multiclassTolvaj));
+
+        const sut = render(
+            <Provider store={store}>
+                <LevelUps
+                    karakter={store.getState().character2E}
+                    changeKarakter={(updated) => store.dispatch(setCharacter(updated))}
+                />
+            </Provider>
+        );
+
+        const selector = await sut.findByTestId("tolvaj-extra-kepzettseg-6");
+        const nextKepzettseg = GetAvailableKepzettsegek(multiclassTolvaj)
+            .map(x => x.Id)
+            .find(id => id !== multiclassTolvaj.szintlepesek[5]?.tolvajExtraKepzettseg);
+
+        expect(nextKepzettseg).toBeDefined();
+        fireEvent.change(selector, {target: {value: nextKepzettseg as string}});
+
+        const stateAfter = store.getState().character2E;
+        expect(stateAfter.szintlepesek[5]?.tolvajExtraKepzettseg).toBe(nextKepzettseg);
+        expect(stateAfter.szintlepesek[4]?.tolvajExtraKepzettseg).toBeUndefined();
     });
 });
