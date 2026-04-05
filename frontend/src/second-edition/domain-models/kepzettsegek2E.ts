@@ -13,7 +13,7 @@ function availableKezpettsegListFajjal(faj: Faj2E, ...osztalyok: Osztaly2E[]): K
 }
 
 export function GetNumberOfKepzettsegek(t_int: number, faj: Faj2E, max: number = 11) {
-    //max = 3 + 1 + 3 + 5 = 12 // 3 base, 1 human, 3 from max ability modifier, 4 from Thief  +1 at 9th level
+    //max = 3 + 1 + 3 + 4 + 2 = 13 // 3 base, 1 human, 3 from max ability modifier, 4 from Thief +1 at 5th and +1 at 9th level
     let numberOfKepzettseg = 3 + Modifier(t_int) + (faj === Faj2E.Ember ? 1 : 0)
 
     if (numberOfKepzettseg < 1) {
