@@ -109,7 +109,7 @@ function CreateCharacter2E(props: {
                     <h4 className='col align-self-center'>Tanult</h4>
                 </div>
                 <OsztalySelector2E />
-                {karakter.szintlepesek[0].osztaly === Osztaly2E.Harcos && <HarcosFegyverSpecializacio szint={1}/>}
+                {karakter.szintlepesek[0].osztaly === Osztaly2E.Harcos && <HarcosFegyverSpecializacio harcosSzint={1} karakterSzint={1}/>}
                 <KarakterKepzettsegek />
                 <hr/>
                 {/* 1. szinten */}

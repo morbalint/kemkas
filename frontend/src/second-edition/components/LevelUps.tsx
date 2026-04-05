@@ -57,7 +57,7 @@ function LevelUp(props: {
         {szint % 4 === 0 && 
             <TulajdonsagNoveles
                 tulajdonsagok={karakter.tulajdonsagok}
-                tulajdonsagNoveles={karakter.szintlepesek[szint-1].tulajdonsagNoveles!}
+                tulajdonsagNoveles={karakter.szintlepesek[szint-1]!.tulajdonsagNoveles!}
                 changeTulajdonsagNoveles={changeTulajdonsagNoveles}
                 dataTestId={`tulajdonsag-${szint}`}
             />}
@@ -69,12 +69,13 @@ function LevelUp(props: {
         />
         {osztaly === Osztaly2E.Harcos && harcosSzint % 2 === 1 &&
             <HarcosFegyverSpecializacio
-                szint={harcosSzint}
+                harcosSzint={harcosSzint}
+                karakterSzint={szint}
             />
         }
         {osztaly === Osztaly2E.Tengeresz && kalozSzint % 3 === 0 &&
             <KalozKritikus
-                kritFegyverId={szintlepes.kalozKritikus!}
+                kritFegyverId={szintlepes!.kalozKritikus!}
                 existingKrits={karakter.szintlepesek.map(x => x.kalozKritikus)}
                 changeKrit={changeKalozKritikus}
                 szint={kalozSzint}
@@ -82,12 +83,12 @@ function LevelUp(props: {
         }
         {osztaly === Osztaly2E.Tolvaj
             && (tolvajSzint === 5 || tolvajSzint === 9)
-            && szintlepes.tolvajExtraKepzettseg != null &&
+            && szintlepes?.tolvajExtraKepzettseg != null &&
             <div className='row m-2'>
                 <label className='col-md-2 col-sm-3 col-form-label'>Extra képzettség</label>
                 <KepzettsegSelector
-                    selected={Kepzettsegek[szintlepes.tolvajExtraKepzettseg]}
-                    kepzettsegek={[Kepzettsegek[szintlepes.tolvajExtraKepzettseg], ...GetAvailableKepzettsegek(karakter)]}
+                    selected={Kepzettsegek[szintlepes!.tolvajExtraKepzettseg]}
+                    kepzettsegek={[Kepzettsegek[szintlepes!.tolvajExtraKepzettseg], ...GetAvailableKepzettsegek(karakter)]}
                     dataTestId={`tolvaj-extra-kepzettseg-${szint}`}
                     changeKepzettseg={changeExtraTolvajKepzettseg}
                 />
