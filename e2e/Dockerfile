@@ -1,5 +1,7 @@
 FROM mcr.microsoft.com/playwright:v1.59.1-noble
 
+LABEL org.opencontainers.image.source = "https://github.com/morbalint/kemkas" 
+
 WORKDIR /work
 
 RUN apt-get update \
