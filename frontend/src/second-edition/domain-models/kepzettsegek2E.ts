@@ -13,7 +13,8 @@ function availableKezpettsegListFajjal(faj: Faj2E, ...osztalyok: Osztaly2E[]): K
 }
 
 export function GetNumberOfKepzettsegek(t_int: number, faj: Faj2E, max: number = 11) {
-    //max = 3 + 1 + 3 + 5 = 12 // 3 base, 1 human, 3 from max ability modifier, 4 from Thief  +1 at 9th level
+    // Default cap is 11. Base calculation is 3 + 1 (human) + 3 (max ability modifier) = 7;
+    // thief-specific extra selections are handled elsewhere and are not part of this default max.
     let numberOfKepzettseg = 3 + Modifier(t_int) + (faj === Faj2E.Ember ? 1 : 0)
 
     if (numberOfKepzettseg < 1) {

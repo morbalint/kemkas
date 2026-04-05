@@ -13,7 +13,7 @@ import {arraySetN} from "../../util";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../store";
 import {characterSelector, setKepzettsegek, setTolvajKepzettsegek} from "../domain-models/characterSlice";
-import {TulajdonsagokFajjal} from "../domain-models/faj2E";
+import {TulajdonsagokTotal} from "../domain-models/tulajdonsag2E";
 
 function InternalKepzettsegekSelector(props: {
     title: string,
@@ -70,8 +70,8 @@ function KarakterKepzettsegek () {
     const karakter = useSelector.withTypes<RootState>()(characterSelector);
     const dispatch = useDispatch.withTypes<AppDispatch>()();
 
-    const tulajdonsagokFajjal = TulajdonsagokFajjal(karakter.tulajdonsagok, karakter.faj)
-    const numberOfKepzettsegek = GetNumberOfKepzettsegek(tulajdonsagokFajjal.t_int, karakter.faj)
+    const tulajdonsagokTotal = TulajdonsagokTotal(karakter)
+    const numberOfKepzettsegek = GetNumberOfKepzettsegek(tulajdonsagokTotal.t_int, karakter.faj)
     const kepzettsegek = karakter.kepzettsegek
     const fajError = karakter.kepzettsegFajError
     const osztalyError = karakter.kepzettsegOsztalyError
