@@ -41,7 +41,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./nginx.e2e.conf:/etc/nginx/nginx.conf:ro
+      - ./e2e.nginx.conf:/etc/nginx/nginx.conf:ro
       - tls-certs:/etc/nginx/certs:ro
     depends_on:
       certs:

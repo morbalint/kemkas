@@ -31,7 +31,7 @@ Later start the docker compose first and the project launch settings after the D
 For a fully containerized end-to-end run (tagged backend image + freshly built frontend/e2e images):
 
 ```shell
-docker compose -f docker-compose.e2e.yaml up --build --abort-on-container-exit --exit-code-from e2e e2e
+docker compose -f e2e.docker-compose.yaml up --build --abort-on-container-exit --exit-code-from e2e e2e
 ```
 
 Use `BACKEND_IMAGE` to select a specific backend tag, and note this compose stack auto-generates TLS certificates for the nginx proxy.
