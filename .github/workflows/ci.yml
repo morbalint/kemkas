@@ -1,4 +1,4 @@
-name: CI compile & test & build
+name: CI
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
         required: false
 
 jobs:
-  ci-fe:
+  unit-test-and-lint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -42,7 +42,7 @@ jobs:
         cd ./frontend
         yarn run lint
 
-  docker-fe-build:
+  build-fe:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -88,7 +88,7 @@ jobs:
         tags: |
           ${{ steps.image-tag.outputs.tags }}
 
-  docker-e2e-build:
+  build-e2e:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -134,18 +134,18 @@ jobs:
         tags: |
           ${{ steps.image-tag.outputs.tags }}
 
-  ci-e2e-docker:
+  run-e2e:
     runs-on: ubuntu-latest
     needs:
-      - docker-fe-build
-      - docker-e2e-build
+      - build-fe
+      - build-e2e
     permissions:
       contents: read
       packages: read
     env:
       BACKEND_IMAGE: ${{ github.event.inputs.backend_image || 'ghcr.io/morbalint/kemkas-backend:b8565f8e' }}
-      FRONTEND_IMAGE: ${{ needs.docker-fe-build.outputs.image_sha_tag }}
-      E2E_IMAGE: ${{ needs.docker-e2e-build.outputs.image_sha_tag }}
+      FRONTEND_IMAGE: ${{ needs.build-fe.outputs.image_sha_tag }}
+      E2E_IMAGE: ${{ needs.build-e2e.outputs.image_sha_tag }}
     steps:
     - uses: actions/checkout@v4
     - name: Log in to GitHub Container Registry
