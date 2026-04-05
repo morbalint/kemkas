@@ -201,4 +201,48 @@ describe("LevelUps Harcos specialization indexing", () => {
         expect(stateAfter.szintlepesek[5]?.tolvajExtraKepzettseg).toBe(nextKepzettseg);
         expect(stateAfter.szintlepesek[4]?.tolvajExtraKepzettseg).toBeUndefined();
     });
+
+    it("at Tolvaj level 9 selector includes class-restricted non-Tolvaj skills", async () => {
+        const tolvajLevel9: Karakter2E = {
+            ...DefaultKarakter,
+            szint: 9,
+            szintlepesek: [
+                { osztaly: Osztaly2E.Tolvaj, HProll: 6 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 5 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 4 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 3 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 2, tolvajExtraKepzettseg: "k_meregkeveres" },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 4 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 5 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 3 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 6, tolvajExtraKepzettseg: "k_alkimia" },
+            ],
+            tolvajKepzettsegek: ["k_alcazas", "k_csapdak", "k_egyensulyozas", "k_hamisitas"],
+            varazslatok: [],
+        };
+
+        const store = configureStore({
+            reducer: {
+                user: userReducer,
+                character2E: characterReducer,
+            },
+        });
+        store.dispatch(setCharacter(tolvajLevel9));
+
+        const sut = render(
+            <Provider store={store}>
+                <LevelUps
+                    karakter={store.getState().character2E}
+                    changeKarakter={(updated) => store.dispatch(setCharacter(updated))}
+                />
+            </Provider>
+        );
+
+        const selector = await sut.findByTestId("tolvaj-extra-kepzettseg-9");
+        const arcaneOption = selector.querySelector('option[value="k_csillagjoslas"]');
+        expect(arcaneOption).not.toBeNull();
+
+        fireEvent.change(selector, {target: {value: "k_csillagjoslas"}});
+        expect(store.getState().character2E.szintlepesek[8]?.tolvajExtraKepzettseg).toBe("k_csillagjoslas");
+    });
 });

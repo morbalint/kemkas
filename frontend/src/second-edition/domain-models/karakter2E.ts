@@ -138,6 +138,8 @@ function setOsztalyForSzintLepes(karakter: Karakter2E, osztaly: Osztaly2E, szint
             faj: karakter.faj,
             kepzettsegek: karakter.kepzettsegek,
             tolvajKepzettsegek: karakter.tolvajKepzettsegek,
+        }, {
+            ignoreClassRestrictions: tSzint === 9,
         })[0]?.Id
     }
 

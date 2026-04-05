@@ -90,7 +90,12 @@ function LevelUp(props: {
                 <label className='col-md-2 col-sm-3 col-form-label'>Extra képzettség</label>
                 <KepzettsegSelector
                     selected={Kepzettsegek[szintlepes!.tolvajExtraKepzettseg]}
-                    kepzettsegek={[Kepzettsegek[szintlepes!.tolvajExtraKepzettseg], ...GetAvailableKepzettsegek(karakter)]}
+                    kepzettsegek={[
+                        Kepzettsegek[szintlepes!.tolvajExtraKepzettseg],
+                        ...GetAvailableKepzettsegek(karakter, {
+                            ignoreClassRestrictions: tolvajSzint === 9,
+                        })
+                    ]}
                     dataTestId={`tolvaj-extra-kepzettseg-${szint}`}
                     changeKepzettseg={changeExtraTolvajKepzettseg}
                 />

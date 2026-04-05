@@ -27,9 +27,15 @@ export function GetNumberOfKepzettsegek(t_int: number, faj: Faj2E, max: number =
     return numberOfKepzettseg;
 }
 
-export function GetAvailableKepzettsegek(karakter: Pick<Karakter2E, 'szintlepesek' | 'faj' | 'kepzettsegek' | 'tolvajKepzettsegek'>): Kepzettseg[] {
+export function GetAvailableKepzettsegek(
+    karakter: Pick<Karakter2E, 'szintlepesek' | 'faj' | 'kepzettsegek' | 'tolvajKepzettsegek'>,
+    options?: { ignoreClassRestrictions?: boolean }
+): Kepzettseg[] {
     const osztalyok = new Set(karakter.szintlepesek.map(x => x.osztaly))
-    const availableKepzettsegek = availableKezpettsegListFajjal(karakter.faj, ...osztalyok)
+    const baseKepzettsegList = options?.ignoreClassRestrictions
+        ? KepzettsegLista
+        : availableKezpettsegListFajjal(karakter.faj, ...osztalyok)
+    const availableKepzettsegek = baseKepzettsegList
         .filter(k => !karakter.kepzettsegek.includes(k.Id))
 
     if (!osztalyok.has(Osztaly2E.Tolvaj)) {

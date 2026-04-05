@@ -103,4 +103,49 @@ describe("Tolvaj extra skill in multiclass level-ups", () => {
         expect(fifthLevel?.osztaly).toBe(Osztaly2E.Tolvaj);
         expect(fifthLevel?.tolvajExtraKepzettseg).toBeDefined();
     });
+
+    it("at Tolvaj class level 9 LevelUp can auto-pick a class-restricted non-Tolvaj skill", () => {
+        const karakter: Karakter2E = {
+            ...DefaultKarakter,
+            szint: 8,
+            szintlepesek: [
+                { osztaly: Osztaly2E.Tolvaj, HProll: 6 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 5 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 4 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 3 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 2, tolvajExtraKepzettseg: "k_meregkeveres" },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 4 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 5 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 3 },
+            ],
+            tolvajKepzettsegek: ["k_alcazas", "k_csapdak", "k_egyensulyozas", "k_hamisitas"],
+            varazslatok: [],
+        };
+
+        const afterLevel9 = applyLevelUp(karakter);
+        expect(afterLevel9.szintlepesek[8]?.tolvajExtraKepzettseg).toBe("k_alkimia");
+    });
+
+    it("at Tolvaj class level 9 class-change recomputation can set non-Tolvaj restricted skill", () => {
+        const karakter: Karakter2E = {
+            ...DefaultKarakter,
+            szint: 9,
+            szintlepesek: [
+                { osztaly: Osztaly2E.Tolvaj, HProll: 6 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 5 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 4 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 3 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 2, tolvajExtraKepzettseg: "k_meregkeveres" },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 4 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 5 },
+                { osztaly: Osztaly2E.Tolvaj, HProll: 3 },
+                { osztaly: Osztaly2E.Harcos, HProll: 8 },
+            ],
+            tolvajKepzettsegek: ["k_alcazas", "k_csapdak", "k_egyensulyozas", "k_hamisitas"],
+            varazslatok: [],
+        };
+
+        const changed = ChangeOsztalyAtSzint(karakter, Osztaly2E.Tolvaj, 9);
+        expect(changed.szintlepesek[8]?.tolvajExtraKepzettseg).toBe("k_alkimia");
+    });
 });
