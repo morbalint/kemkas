@@ -31,7 +31,7 @@ services:
         condition: service_healthy
 
   frontend:
-    image: kemkas/frontend-e2e:local
+    image: ${FRONTEND_IMAGE:-ghcr.io/morbalint/kemkas-frontend:local}
     build:
       context: ./frontend
       dockerfile: Dockerfile
@@ -58,7 +58,7 @@ services:
       start_period: 5s
 
   e2e:
-    image: kemkas/e2e:local
+    image: ${E2E_IMAGE:-ghcr.io/morbalint/kemkas-e2e:local}
     build:
       context: ./e2e
       dockerfile: Dockerfile
