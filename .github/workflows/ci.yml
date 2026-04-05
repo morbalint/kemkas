@@ -57,7 +57,21 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Compute frontend image tag
       id: image-tag
-      run: echo "image_tag=ghcr.io/${{ github.repository_owner }}/kemkas-frontend:${GITHUB_SHA::8}" >> $GITHUB_OUTPUT
+      run: |
+        image_repo="ghcr.io/${{ github.repository_owner }}/kemkas-frontend"
+        sha_tag="${image_repo}:${GITHUB_SHA::8}"
+
+        tags="$sha_tag"
+        if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
+          tags+=$'\n'"${image_repo}:latest"
+        fi
+
+        echo "image_tag=${sha_tag}" >> "$GITHUB_OUTPUT"
+        {
+          echo "tags<<EOF"
+          echo "$tags"
+          echo "EOF"
+        } >> "$GITHUB_OUTPUT"
     - name: Build and push frontend image
       uses: docker/build-push-action@v5
       with:
@@ -67,7 +81,7 @@ jobs:
         cache-to: type=gha,mode=max
         push: true
         tags: |
-          ${{ steps.image-tag.outputs.image_tag }}
+          ${{ steps.image-tag.outputs.tags }}
 
   docker-e2e-build:
     runs-on: ubuntu-latest
@@ -89,7 +103,21 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Compute e2e image tag
       id: image-tag
-      run: echo "image_tag=ghcr.io/${{ github.repository_owner }}/kemkas-e2e:${GITHUB_SHA::8}" >> $GITHUB_OUTPUT
+      run: |
+        image_repo="ghcr.io/${{ github.repository_owner }}/kemkas-e2e"
+        sha_tag="${image_repo}:${GITHUB_SHA::8}"
+
+        tags="$sha_tag"
+        if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
+          tags+=$'\n'"${image_repo}:latest"
+        fi
+
+        echo "image_tag=${sha_tag}" >> "$GITHUB_OUTPUT"
+        {
+          echo "tags<<EOF"
+          echo "$tags"
+          echo "EOF"
+        } >> "$GITHUB_OUTPUT"
     - name: Build and push e2e image
       uses: docker/build-push-action@v5
       with:
@@ -99,7 +127,7 @@ jobs:
         cache-to: type=gha,mode=max
         push: true
         tags: |
-          ${{ steps.image-tag.outputs.image_tag }}
+          ${{ steps.image-tag.outputs.tags }}
 
   ci-e2e-docker:
     runs-on: ubuntu-latest
