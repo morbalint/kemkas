@@ -2901,12 +2901,12 @@ workbox-background-sync@7.1.0, workbox-background-sync@^7.1.0:
     idb "^7.0.1"
     workbox-core "7.1.0"
 
-workbox-broadcast-update@^7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/workbox-broadcast-update/-/workbox-broadcast-update-7.1.0.tgz#fe21c491cc70f1e037898bba63de0752ef59bd82"
-  integrity sha512-O36hIfhjej/c5ar95pO67k1GQw0/bw5tKP7CERNgK+JdxBANQhDmIuOXZTNvwb2IHBx9hj2kxvcDyRIh5nzOgQ==
+workbox-broadcast-update@^7.4.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/workbox-broadcast-update/-/workbox-broadcast-update-7.4.0.tgz#f0ee7d2af51d199e32213a429dff03f14ba76dea"
+  integrity sha512-+eZQwoktlvo62cI0b+QBr40v5XjighxPq3Fzo9AWMiAosmpG5gxRHgTbGGhaJv/q/MFVxwFNGh/UwHZ/8K88lA==
   dependencies:
-    workbox-core "7.1.0"
+    workbox-core "7.4.0"
 
 workbox-cacheable-response@^7.1.0:
   version "7.1.0"
@@ -2915,10 +2915,15 @@ workbox-cacheable-response@^7.1.0:
   dependencies:
     workbox-core "7.1.0"
 
-workbox-core@7.1.0, workbox-core@^7.1.0:
+workbox-core@7.1.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/workbox-core/-/workbox-core-7.1.0.tgz#1867576f994f20d9991b71a7d0b2581af22db170"
   integrity sha512-5KB4KOY8rtL31nEF7BfvU7FMzKT4B5TkbYa2tzkS+Peqj0gayMT9SytSFtNzlrvMaWgv6y/yvP9C0IbpFjV30Q==
+
+workbox-core@7.4.0, workbox-core@^7.1.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/workbox-core/-/workbox-core-7.4.0.tgz#5cb59ae7655f2727423268fb1ba698f37809189d"
+  integrity sha512-6BMfd8tYEnN4baG4emG9U0hdXM4gGuDU3ectXuVHnj71vwxTFI7WOpQJC4siTOlVtGqCUtj0ZQNsrvi6kZZTAQ==
 
 workbox-expiration@^7.1.0:
   version "7.1.0"
