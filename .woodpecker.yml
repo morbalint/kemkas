@@ -1,0 +1,14 @@
+when:
+  - event: [push, pull_request, manual]
+    branch: [main]
+
+steps:
+  unit-test-and-lint:
+    image: node:24
+    commands:
+      - corepack enable
+      - corepack prepare yarn@1.22.22 --activate
+      - cd frontend
+      - yarn install --frozen-lockfile
+      - yarn run test
+      - yarn run lint
