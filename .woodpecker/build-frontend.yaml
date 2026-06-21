@@ -1,0 +1,27 @@
+when:
+  - event: [push, manual]
+    branch: [main]
+
+steps:
+  prepare-fe-image-tags:
+    image: alpine:3.21
+    commands:
+      - SHORT_SHA="$(echo "$CI_COMMIT_SHA" | cut -c1-8)"
+      - printf '%s\n' "$SHORT_SHA" > .fe-tags
+      - printf '%s\n' "latest" >> .fe-tags
+
+  build-and-push-fe-image:
+    image: woodpeckerci/plugin-docker-buildx
+    privileged: true
+    depends_on:
+      - prepare-fe-image-tags
+    settings:
+      registry: git.cluster.lab.kemkas.hu
+      repo: git.cluster.lab.kemkas.hu/${CI_REPO}
+      context: frontend
+      dockerfile: frontend/Dockerfile
+      tags_file: .fe-tags
+      username:
+        from_secret: gitea_packages_username
+      password:
+        from_secret: gitea_packages_token
